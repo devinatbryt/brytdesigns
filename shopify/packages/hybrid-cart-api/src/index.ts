@@ -2,8 +2,8 @@ import * as Effect from "effect/Effect";
 import * as Logger from "effect/Logger";
 import * as Layer from "effect/Layer";
 import * as LogLevel from "effect/LogLevel";
-import * as API from "./effect";
-import * as AjaxRequest from "./effect/services/AjaxRequest";
+import * as API from "./effect/index.js";
+import * as AjaxRequest from "./effect/services/AjaxRequest.js";
 
 export namespace createHybridCartClient {
   export type Options = {

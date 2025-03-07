@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.1.1
+
+### Patch Changes
+
+- Minor path import fix
+
 ## 1.1.0
 
 ### Minor Changes
