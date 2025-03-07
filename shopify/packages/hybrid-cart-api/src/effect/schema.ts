@@ -1,5 +1,5 @@
-import * as Resource from "@repo/shopify-utils/effect/Resource";
-import * as AjaxSections from "@repo/shopify-utils/effect/Ajax/Sections";
+import * as Resource from "@repo/shopify-utils/effect";
+import * as AjaxSections from "@repo/shopify-utils/effect";
 import * as Schema from "effect/Schema";
 
 export type BaseAttributes = Schema.Schema.Type<typeof BaseAttributes>;
@@ -9,7 +9,7 @@ export const BaseAttributes = Schema.Record({
     Schema.Null,
     Schema.String,
     Schema.Boolean,
-    Schema.Number,
+    Schema.Number
   ),
 });
 
@@ -199,7 +199,7 @@ export const LineItem = Schema.Struct({
   unit_price_measurement: Schema.optional(UnitPriceMeasurement),
   selling_plan_allocation: Schema.optionalWith(
     Schema.NullOr(SellingPlanAllocation),
-    { default: () => null },
+    { default: () => null }
   ),
 });
 
@@ -230,7 +230,7 @@ export const makeCartSchema = (sections?: string) => {
       ...Cart.fields,
       sections: Schema.optionalWith(
         Schema.NullOr(AjaxSections.makeResponseSchema(sections)),
-        { default: () => null },
+        { default: () => null }
       ),
     });
   }
@@ -271,7 +271,7 @@ export const UpdateItemRecordInput = Schema.Record({
 export type CartUpdateInput = Schema.Schema.Encoded<typeof CartUpdateInput>;
 export const CartUpdateInput = Schema.Struct({
   updates: Schema.optional(
-    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number)),
+    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number))
   ),
   note: Schema.optional(Schema.NullOr(Schema.String)),
   attributes: Schema.optional(Attributes),
@@ -297,7 +297,7 @@ export const CartChangeItemOptionalInput = Schema.Struct({
     Schema.Record({
       key: Schema.String,
       value: Schema.NullOr(Schema.String),
-    }),
+    })
   ),
   selling_plan: Schema.optional(Schema.NullOr(Resource.ID)),
 }).pipe(BaseInput);
@@ -327,13 +327,13 @@ export const CartChangeInput = Schema.Union(
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       id: Schema.String,
-    }),
+    })
   ),
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       line: Schema.Number,
-    }),
-  ),
+    })
+  )
 );
 
 export type CartChangeOutput = Schema.Schema.Type<typeof CartChangeOutput>;
@@ -353,5 +353,5 @@ export type CartUpdateDiscountsInput = Schema.Schema.Encoded<
   typeof CartUpdateDiscountsInput
 >;
 export const CartUpdateDiscountsInput = Schema.mutable(
-  Schema.Array(Schema.NonEmptyString),
+  Schema.Array(Schema.NonEmptyString)
 );

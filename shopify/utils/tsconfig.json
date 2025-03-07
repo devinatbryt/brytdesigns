@@ -1,8 +1,9 @@
 {
-  "include": [
-    "**/*.ts"
-  ],
+  "include": ["**/*.ts"],
   "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "es2022",
@@ -16,9 +17,6 @@
     "noImplicitOverride": true,
     "module": "preserve",
     "noEmit": true,
-    "lib": [
-      "es2022",
-      "DOM"
-    ]
+    "lib": ["es2022", "DOM"]
   }
 }

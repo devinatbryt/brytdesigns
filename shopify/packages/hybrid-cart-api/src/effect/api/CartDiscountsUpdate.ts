@@ -1,17 +1,31 @@
+import type {
+  StorefrontQueries,
+  StorefrontMutations,
+} from "@solidifront/storefront-client/effect";
+
+import type { Types } from "effect";
+
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 import * as StorefrontClient from "@solidifront/storefront-client/effect";
-import type { Channel, Sink, Stream } from "effect";
-import type { NodeInspectSymbol } from "effect/Inspectable";
 
-import * as Resource from "@repo/shopify-utils/effect/Resource";
-import { StorefrontClientConfig } from "@repo/shopify-utils/effect/Ajax";
+import * as Resource from "@repo/shopify-utils/effect";
+import { StorefrontClientConfig } from "@repo/shopify-utils/effect";
 
 import * as LoggerUtils from "../logger/LoggerUtils.js";
 import * as AjaxClientResponse from "../data/AjaxClientResponse.js";
 import * as CartGet from "./CartGet.js";
 import { CartError } from "../errors.js";
 import { CartUpdateDiscountsInput } from "../schema.js";
+
+export type ExtractOperationNameError = Types.ExtractTag<
+  Effect.Effect.Error<
+    ReturnType<
+      Effect.Effect.Success<ReturnType<typeof StorefrontClient.make>>["query"]
+    >
+  >,
+  "ExtractOperationNameError"
+>;
 
 const updateCartDiscountCodesMutation = `#graphql
   mutation updateCartDiscounts($id: ID!, $discountCodes: [String!]) {
@@ -24,13 +38,23 @@ const updateCartDiscountCodesMutation = `#graphql
   }
 `;
 
-export type Input = CartUpdateDiscountsInput;
+export type UpdateDiscountsInput = CartUpdateDiscountsInput;
 
-export const make = (discountCodes: CartUpdateDiscountsInput) =>
-  Effect.gen(function*() {
+export const make = (
+  discountCodes: CartUpdateDiscountsInput
+): Effect.Effect<
+  Effect.Effect.Success<ReturnType<typeof CartGet.make>>,
+  | Effect.Effect.Error<ReturnType<typeof CartGet.make>>
+  | CartError
+  | ExtractOperationNameError
+> =>
+  Effect.gen(function* () {
     const config = new StorefrontClientConfig();
 
-    const client = yield* StorefrontClient.make({
+    const client = yield* StorefrontClient.make<
+      StorefrontQueries,
+      StorefrontMutations
+    >({
       storeName: config.shopName,
       publicAccessToken: config.accessToken,
       apiVersion: config.apiVersion as any,
@@ -92,5 +116,5 @@ export const make = (discountCodes: CartUpdateDiscountsInput) =>
     return yield* CartGet.make();
   }).pipe(
     LoggerUtils.withNamespacedLogSpan("discounts.update"),
-    Effect.provide(StorefrontClient.layer),
+    Effect.provide(StorefrontClient.Default)
   );

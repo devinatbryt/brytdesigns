@@ -33,53 +33,88 @@ export const createHybridCartApi = ({
   return {
     add: (
       input: API.add.Input,
-      options?: createHybridCartClient.RequestOptions,
+      options?: createHybridCartClient.RequestOptions
     ) =>
-      Effect.runPromise(API.add(input).pipe(Effect.provide(ajaxLayer)), {
-        signal: options?.signal,
-      }),
+      Effect.runPromise(
+        API.add(input).pipe(
+          Logger.withMinimumLogLevel(minimumLogLevel),
+          Effect.provide(ajaxLayer)
+        ),
+        {
+          signal: options?.signal,
+        }
+      ),
     change: (
       input: API.change.Input,
-      options?: createHybridCartClient.RequestOptions,
+      options?: createHybridCartClient.RequestOptions
     ) =>
-      Effect.runPromise(API.change(input).pipe(Effect.provide(ajaxLayer)), {
-        signal: options?.signal,
-      }),
+      Effect.runPromise(
+        API.change(input).pipe(
+          Logger.withMinimumLogLevel(minimumLogLevel),
+          Effect.provide(ajaxLayer)
+        ),
+        {
+          signal: options?.signal,
+        }
+      ),
     clear: (
       input: API.clear.Input,
-      options?: createHybridCartClient.RequestOptions,
+      options?: createHybridCartClient.RequestOptions
     ) =>
-      Effect.runPromise(API.clear(input).pipe(Effect.provide(ajaxLayer)), {
-        signal: options?.signal,
-      }),
+      Effect.runPromise(
+        API.clear(input).pipe(
+          Logger.withMinimumLogLevel(minimumLogLevel),
+          Effect.provide(ajaxLayer)
+        ),
+        {
+          signal: options?.signal,
+        }
+      ),
 
     get: (
       input: API.get.Input,
-      options?: createHybridCartClient.RequestOptions,
+      options?: createHybridCartClient.RequestOptions
     ) =>
-      Effect.runPromise(API.get(input).pipe(Effect.provide(ajaxLayer)), {
-        signal: options?.signal,
-      }),
+      Effect.runPromise(
+        API.get(input).pipe(
+          Logger.withMinimumLogLevel(minimumLogLevel),
+          Effect.provide(ajaxLayer)
+        ),
+        {
+          signal: options?.signal,
+        }
+      ),
 
     update: (
       input: API.update.Input,
-      options?: createHybridCartClient.RequestOptions,
+      options?: createHybridCartClient.RequestOptions
     ) =>
-      Effect.runPromise(API.update(input).pipe(Effect.provide(ajaxLayer)), {
-        signal: options?.signal,
-      }),
+      Effect.runPromise(
+        API.update(input).pipe(
+          Logger.withMinimumLogLevel(minimumLogLevel),
+          Effect.provide(ajaxLayer)
+        ),
+        {
+          signal: options?.signal,
+        }
+      ),
 
-    // discounts: {
-    //   update: (
-    //     input: API.discounts.update["Input"],
-    //     options?: createHybridCartClient.RequestOptions,
-    //   ) =>
-    //     Effect.runPromise(
-    //       API.discounts.update(input).pipe(Effect.provide(baseLayer)),
-    //       {
-    //         signal: options?.signal,
-    //       },
-    //     ),
-    // },
+    discounts: {
+      update: (
+        input: API.discounts.update["Input"],
+        options?: createHybridCartClient.RequestOptions
+      ) =>
+        Effect.runPromise(
+          API.discounts
+            .update(input)
+            .pipe(
+              Logger.withMinimumLogLevel(minimumLogLevel),
+              Effect.provide(baseLayer)
+            ),
+          {
+            signal: options?.signal,
+          }
+        ),
+    },
   };
 };

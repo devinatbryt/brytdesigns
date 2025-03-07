@@ -3,7 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./effect": {
+      "types": "./dist/effect/index.d.ts",
+      "import": "./dist/effect/index.d.js"
+    }
+  },
   "scripts": {
+    "build": "tsup --clean",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "clean": "git clean -xdf .cache .turbo dist node_modules"
   },
@@ -15,5 +26,9 @@
   "license": "ISC",
   "dependencies": {
     "effect": "3.13.4"
+  },
+  "devDependencies": {
+    "dts-bundle-generator": "^9.5.1",
+    "tsup": "^8.4.0"
   }
 }

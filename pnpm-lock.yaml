@@ -38,8 +38,8 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       '@solidifront/storefront-client':
-        specifier: ^0.3.2
-        version: 0.3.2
+        specifier: ^0.3.3
+        version: 0.3.3
       effect:
         specifier: 3.13.4
         version: 3.13.4
@@ -68,6 +68,13 @@ importers:
       effect:
         specifier: 3.13.4
         version: 3.13.4
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
 packages:
 
@@ -759,8 +766,8 @@ packages:
   '@solidifront/codegen@1.0.7':
     resolution: {integrity: sha512-F5v94xF0ZknZuooBve/iTPZL0rW1gb/PcpbhDL4/a/Hsx+Dm096VJJdEtmlqSVtTRICyY0bZxCdRzEeH8Oifng==}
 
-  '@solidifront/storefront-client@0.3.2':
-    resolution: {integrity: sha512-atBkaeGwD8mOoVWSkD/VjwRol3i7gIggRHewRwnfoGg5e8a5f1Aw4i8okjd7OSGECdDgbohEin6RmfWPEreHww==}
+  '@solidifront/storefront-client@0.3.3':
+    resolution: {integrity: sha512-OYHFI/tCMzTiyPkt/ewUnBD5YkGPvZAXicWLGE6h6kDfWa95TRE1jw8n/BJPD2mwpD3AjKd3rD4lQHsTrzJk2g==}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
@@ -3269,7 +3276,7 @@ snapshots:
       - encoding
       - graphql
 
-  '@solidifront/storefront-client@0.3.2':
+  '@solidifront/storefront-client@0.3.3':
     dependencies:
       '@effect/platform': 0.77.4(effect@3.13.4)
       effect: 3.13.4

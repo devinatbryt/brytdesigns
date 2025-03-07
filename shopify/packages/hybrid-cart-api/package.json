@@ -40,7 +40,7 @@
   "dependencies": {
     "@effect/platform": "^0.77.4",
     "@repo/shopify-utils": "workspace:*",
-    "@solidifront/storefront-client": "^0.3.2",
-    "effect": "*"
+    "@solidifront/storefront-client": "^0.3.3",
+    "effect": "0.13.4"
   }
 }

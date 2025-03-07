@@ -1,7 +1,7 @@
-import * as Logging from "@repo/shopify-utils/effect/Logging";
+import * as Logging from "@repo/shopify-utils/effect";
 
 export const withNamespacedLogSpan = Logging.makeNamespacedLogSpan(
-  "[@brytdesigns/shopify-hybrid-cart-client]",
+  "[@brytdesigns/shopify-hybrid-cart-client]"
 );
 
 export const filterLevelOrNever = Logging.filterLevelOrNever;
