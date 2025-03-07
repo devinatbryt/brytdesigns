@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  effect: 3.13.4
-  '@effect/platform': 0.77.4
-  typescript: 5.8.2
-
 importers:
 
   .:
@@ -44,18 +39,18 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       '@effect/platform':
-        specifier: 0.77.4
-        version: 0.77.4(effect@3.13.4)
+        specifier: 0.78.0
+        version: 0.78.0(effect@3.13.7)
       '@solidifront/storefront-client':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: ^0.3.4
+        version: 0.3.4
       effect:
-        specifier: 3.13.4
-        version: 3.13.4
+        specifier: 3.13.7
+        version: 3.13.7
     devDependencies:
       '@effect/vitest':
         specifier: ^0.19.0
-        version: 0.19.2(effect@3.13.4)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))
+        version: 0.19.2(effect@3.13.7)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))
       '@graphql-codegen/cli':
         specifier: ^5.0.5
         version: 5.0.5(@types/node@22.13.8)(enquirer@2.4.1)(graphql@16.10.0)(typescript@5.8.2)
@@ -78,8 +73,8 @@ importers:
   shopify/utils:
     dependencies:
       effect:
-        specifier: 3.13.4
-        version: 3.13.4
+        specifier: 3.13.7
+        version: 3.13.7
     devDependencies:
       '@repo/js-delivr-imports-plugin':
         specifier: workspace:*
@@ -235,15 +230,15 @@ packages:
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
 
-  '@effect/platform@0.77.4':
-    resolution: {integrity: sha512-3jBDn4bAWqRSKARmoMY2NmMxIMM5Py5BqJdUuYJqPyI6jbz7qkOMwgeaF62rWqiqhQLHLTgU4QL/cPwyZl7mVg==}
+  '@effect/platform@0.78.0':
+    resolution: {integrity: sha512-2vGIfBtPO7zPioVy4wmSbeF0VWfj3GLpB9+6JT7K0lZVeYogHF2GTuPDB87xMILw86Ecz9iR98JuA9Co7PgxKQ==}
     peerDependencies:
-      effect: 3.13.4
+      effect: ^3.13.7
 
   '@effect/vitest@0.19.2':
     resolution: {integrity: sha512-PNCVLlgORQSYHlWBzspnJFSEFFr5My3d9OXjzaPzbVf/iVZkLhcF5zuARq+iXhBDfwcpYp+u2Wg0Totl2BjEUw==}
     peerDependencies:
-      effect: 3.13.4
+      effect: ^3.13.4
       vitest: ^3.0.0
 
   '@envelop/core@5.1.1':
@@ -781,8 +776,8 @@ packages:
   '@solidifront/codegen@1.0.7':
     resolution: {integrity: sha512-F5v94xF0ZknZuooBve/iTPZL0rW1gb/PcpbhDL4/a/Hsx+Dm096VJJdEtmlqSVtTRICyY0bZxCdRzEeH8Oifng==}
 
-  '@solidifront/storefront-client@0.3.3':
-    resolution: {integrity: sha512-OYHFI/tCMzTiyPkt/ewUnBD5YkGPvZAXicWLGE6h6kDfWa95TRE1jw8n/BJPD2mwpD3AjKd3rD4lQHsTrzJk2g==}
+  '@solidifront/storefront-client@0.3.4':
+    resolution: {integrity: sha512-fnAL2BvzUff+q7+GvaoKDUSZYjCPB/AIV6OFLueY+lTHPKZqTa15lUi9+mnjRgZrnhQMvfjx/XCWBf983iAviQ==}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
@@ -1058,7 +1053,7 @@ packages:
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
     peerDependencies:
-      typescript: 5.8.2
+      typescript: '>=4.9.5'
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -1131,8 +1126,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect@3.13.4:
-    resolution: {integrity: sha512-XZgCImyBpONuKdsBRk37JfV7242yxTu8r/TcL5ZELIyqRbMYa+Prr86cz1INxXi7iFXfU0havZkCJGyYp1BsiA==}
+  effect@3.13.7:
+    resolution: {integrity: sha512-yjDuWX5M34kB38Pwilv8QU956nA2m1a6ws0i+04VQkQJEBPI4GfVhUhtNNFRaqKIOlkqdqzJHCDOwARmaf2XzA==}
 
   electron-to-chromium@1.5.109:
     resolution: {integrity: sha512-AidaH9JETVRr9DIPGfp1kAarm/W6hRJTPuCnkF+2MqhF4KaAgRIcBc8nvjk+YMXZhwfISof/7WG29eS4iGxQLQ==}
@@ -2092,7 +2087,7 @@ packages:
       '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
       postcss: ^8.4.12
-      typescript: 5.8.2
+      typescript: '>=4.5.0'
     peerDependenciesMeta:
       '@microsoft/api-extractor':
         optional: true
@@ -2622,15 +2617,15 @@ snapshots:
       human-id: 4.1.1
       prettier: 2.8.8
 
-  '@effect/platform@0.77.4(effect@3.13.4)':
+  '@effect/platform@0.78.0(effect@3.13.7)':
     dependencies:
-      effect: 3.13.4
+      effect: 3.13.7
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
-  '@effect/vitest@0.19.2(effect@3.13.4)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))':
+  '@effect/vitest@0.19.2(effect@3.13.7)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))':
     dependencies:
-      effect: 3.13.4
+      effect: 3.13.7
       vitest: 3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0)
 
   '@envelop/core@5.1.1':
@@ -3291,10 +3286,10 @@ snapshots:
       - encoding
       - graphql
 
-  '@solidifront/storefront-client@0.3.3':
+  '@solidifront/storefront-client@0.3.4':
     dependencies:
-      '@effect/platform': 0.77.4(effect@3.13.4)
-      effect: 3.13.4
+      '@effect/platform': 0.78.0(effect@3.13.7)
+      effect: 3.13.7
       typescript: 5.8.2
 
   '@standard-schema/spec@1.0.0': {}
@@ -3644,7 +3639,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect@3.13.4:
+  effect@3.13.7:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2

@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-api",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A hybrid cart that integrates with the AJAX Cart API and the Storefront Api",
   "scripts": {
     "build": "tsup --clean",
@@ -17,12 +17,12 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/main/index.d.ts",
+      "import": "./dist/main/index.js"
     },
     "./effect": {
-      "types": "./dist/effect.d.ts",
-      "import": "./dist/effect.js"
+      "types": "./dist/effect/index.d.ts",
+      "import": "./dist/effect/index.js"
     }
   },
   "type": "module",
@@ -32,16 +32,16 @@
   "devDependencies": {
     "@effect/vitest": "^0.19.0",
     "@graphql-codegen/cli": "^5.0.5",
+    "@repo/js-delivr-imports-plugin": "workspace:*",
     "@solidifront/codegen": "^1.0.7",
     "dts-bundle-generator": "^9.5.1",
     "tsup": "^8.4.0",
-    "vitest": "^3.0.6",
-    "@repo/js-delivr-imports-plugin": "workspace:*"
+    "vitest": "^3.0.6"
   },
   "dependencies": {
     "@brytdesigns/shopify-utils": "workspace:*",
-    "@effect/platform": "^0.77.4",
-    "@solidifront/storefront-client": "^0.3.3",
-    "effect": "3.13.4"
+    "@effect/platform": "0.78.0",
+    "@solidifront/storefront-client": "^0.3.4",
+    "effect": "3.13.7"
   }
 }
