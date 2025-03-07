@@ -1,0 +1,16 @@
+{
+  "name": "@repo/js-delivr-imports-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "tsup": "^8.4.0",
+    "yaml": "^2.7.0"
+  }
+}

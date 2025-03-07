@@ -6,8 +6,7 @@ import * as HttpClientResponse from "@effect/platform/HttpClientResponse";
 import * as HttpClientRequest from "@effect/platform/HttpClientRequest";
 import * as FetchHttpClient from "@effect/platform/FetchHttpClient";
 
-import * as AjaxSections from "@repo/shopify-utils/effect";
-import { ShopifyRoutes } from "@repo/shopify-utils/effect";
+import { Ajax } from "@brytdesigns/shopify-utils/effect";
 
 import * as LoggerUtils from "../logger/LoggerUtils.js";
 import { CartError, InvalidAjaxMethodError } from "../errors.js";
@@ -19,7 +18,7 @@ export const Default = FetchHttpClient.layer;
 
 export const makeFactory =
   <
-    A extends typeof AjaxSections.Input.Type,
+    A extends typeof Ajax.Sections.Input.Type,
     I,
     R,
     B extends typeof BaseOutputSchema.Type,
@@ -33,7 +32,7 @@ export const makeFactory =
   }: {
     method: keyof Pick<typeof HttpClientRequest, "post" | "get">;
     routeName: keyof Pick<
-      ShopifyRoutes,
+      Ajax.Window.ShopifyRoutes.ShopifyRoutes,
       | "cart_add_url"
       | "cart_update_url"
       | "cart_url"
@@ -49,7 +48,7 @@ export const makeFactory =
       const decodedInput = yield* Schema.decodeUnknown(inputSchema)(
         input || {}
       );
-      const routes = new ShopifyRoutes();
+      const routes = Ajax.Window.ShopifyRoutes.make();
       const route = routes[routeName];
       const url = `${window.location.origin}${route}`;
 
@@ -80,7 +79,7 @@ export const makeFactory =
         const output = outputSchema.pipe(
           Schema.extend(
             Schema.Struct({
-              sections: AjaxSections.makeResponseSchema(decodedInput.sections),
+              sections: Ajax.Sections.makeResponseSchema(decodedInput.sections),
             })
           )
         );

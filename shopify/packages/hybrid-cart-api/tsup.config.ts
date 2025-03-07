@@ -1,12 +1,13 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { defineConfig } from "tsup";
+import jsDelivrImportsPlugin from "@repo/js-delivr-imports-plugin";
 import { generateDtsBundle } from "dts-bundle-generator";
+import { defineConfig } from "tsup";
 
 const outDir = "dist";
 
 const commonConfig = {
-  minify: false,
+  minify: true,
   bundle: false,
   splitting: true,
   clean: true,
@@ -18,8 +19,9 @@ export default defineConfig([
   {
     ...commonConfig,
     format: "esm",
-    entry: ["src/effect/index.ts"],
+    entry: ["src/effect/**/*.ts"],
     outDir: `${outDir}/effect`,
+    dts: false,
     async onSuccess() {
       const [effectDts] = generateDtsBundle([
         {
@@ -29,15 +31,16 @@ export default defineConfig([
 
       await fs.writeFile(
         path.resolve(outDir, "effect", "index.d.ts"),
-        effectDts,
+        effectDts
       );
     },
   },
   {
     ...commonConfig,
     format: "esm",
-    entry: ["src/index.ts"],
+    entry: ["src/**/*.ts"],
     outDir: `${outDir}/main`,
+    dts: false,
     async onSuccess() {
       const [indexDts] = generateDtsBundle([
         {
@@ -47,5 +50,26 @@ export default defineConfig([
 
       await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
     },
+  },
+  {
+    ...commonConfig,
+    format: "esm",
+    entry: ["src/**/*.ts"],
+    outDir: `${outDir}/jsdelivr`,
+    dts: false,
+    async onSuccess() {
+      const [indexDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/index.ts"),
+        },
+      ]);
+
+      await fs.writeFile(
+        path.resolve(outDir, "jsdelivr", "index.d.ts"),
+        indexDts
+      );
+    },
+
+    esbuildPlugins: [jsDelivrImportsPlugin()],
   },
 ]);

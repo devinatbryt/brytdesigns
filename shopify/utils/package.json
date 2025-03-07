@@ -1,16 +1,19 @@
 {
-  "name": "@repo/shopify-utils",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@brytdesigns/shopify-utils",
+  "version": "1.1.0",
+  "private": false,
   "type": "module",
+  "main": "./dist/main/index.js",
+  "types": "./dist/main/index.d.ts",
+  "jsdelivr": "./dist/jsdelivr/index.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/main/index.d.ts",
+      "import": "./dist/main/index.js"
     },
     "./effect": {
       "types": "./dist/effect/index.d.ts",
-      "import": "./dist/effect/index.d.js"
+      "import": "./dist/effect/index.js"
     }
   },
   "scripts": {
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",
-    "tsup": "^8.4.0"
+    "tsup": "^8.4.0",
+    "@repo/js-delivr-imports-plugin": "workspace:*"
   }
 }

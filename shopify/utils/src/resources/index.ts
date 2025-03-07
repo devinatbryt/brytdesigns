@@ -1,5 +1,5 @@
 import * as Effect from "effect/Effect";
-import * as Resource from "../effect/Resource";
+import { Resource } from "../effect";
 
 export const parseResource = (gid: Resource.GID) =>
   Effect.runSync(Resource.parse(gid));
@@ -13,7 +13,9 @@ export const formatResource = <
   const T extends Resource.ID,
   const R extends Resource.Type,
 >(
-  options: FormatResourceOptions<T, R>,
+  options: FormatResourceOptions<T, R>
 ) => Effect.runSync(Resource.format<T, R>(options));
 
-export type { GID, ID, Type } from "../effect";
+export type ID = Resource.ID;
+export type GID = Resource.GID;
+export type Type = Resource.Type;

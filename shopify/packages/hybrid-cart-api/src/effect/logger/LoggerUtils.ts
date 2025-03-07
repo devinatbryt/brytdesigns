@@ -1,4 +1,4 @@
-import * as Logging from "@repo/shopify-utils/effect";
+import { Logging } from "@brytdesigns/shopify-utils/effect";
 
 export const withNamespacedLogSpan = Logging.makeNamespacedLogSpan(
   "[@brytdesigns/shopify-hybrid-cart-client]"

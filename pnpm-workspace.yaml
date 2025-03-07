@@ -1,3 +1,4 @@
 packages:
   - "shopify/packages/*"
   - "shopify/*"
+  - "packages/*"

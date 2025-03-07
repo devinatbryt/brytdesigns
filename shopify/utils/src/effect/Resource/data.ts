@@ -23,4 +23,6 @@ export const format = <const T extends ID, const R extends Type>({
     return `gid://shopify/${actualType}/${actualId}` as `gid://shopify/${R}/${T}`;
   });
 
-export const parse = Schema.decode(GID);
+export const parse = (
+  input: string
+): Effect.Effect<string, ParseError, never> => Schema.decode(GID)(input);

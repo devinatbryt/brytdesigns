@@ -9,3 +9,8 @@ export class StorefrontClientConfig extends Data.Class<IStorefrontClientConfig> 
     });
   }
 }
+
+export const make = () =>
+  Data.case<StorefrontClientConfig>()({
+    ...window.Shopify.storefront.config,
+  });

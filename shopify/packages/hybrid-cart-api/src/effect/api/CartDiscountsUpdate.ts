@@ -9,8 +9,7 @@ import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 import * as StorefrontClient from "@solidifront/storefront-client/effect";
 
-import * as Resource from "@repo/shopify-utils/effect";
-import { StorefrontClientConfig } from "@repo/shopify-utils/effect";
+import { Ajax, Resource } from "@brytdesigns/shopify-utils/effect";
 
 import * as LoggerUtils from "../logger/LoggerUtils.js";
 import * as AjaxClientResponse from "../data/AjaxClientResponse.js";
@@ -49,7 +48,7 @@ export const make = (
   | ExtractOperationNameError
 > =>
   Effect.gen(function* () {
-    const config = new StorefrontClientConfig();
+    const config = Ajax.Window.StorefrontClientConfig.make();
 
     const client = yield* StorefrontClient.make<
       StorefrontQueries,

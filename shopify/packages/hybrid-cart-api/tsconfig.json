@@ -15,7 +15,7 @@
     "noImplicitOverride": true,
     "module": "preserve",
     "noEmit": true,
-    "types": ["./src/storefront/storefrontapi.generated.d.ts"],
+    "types": ["./storefrontapi.generated.d.ts"],
     "lib": ["es2022", "DOM"]
   }
 }

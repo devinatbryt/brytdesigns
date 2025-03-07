@@ -1,6 +1,5 @@
-import * as Resource from "@repo/shopify-utils/effect";
-import * as AjaxSections from "@repo/shopify-utils/effect";
 import * as Schema from "effect/Schema";
+import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
 
 export type BaseAttributes = Schema.Schema.Type<typeof BaseAttributes>;
 export const BaseAttributes = Schema.Record({
@@ -229,7 +228,7 @@ export const makeCartSchema = (sections?: string) => {
     return Schema.Struct({
       ...Cart.fields,
       sections: Schema.optionalWith(
-        Schema.NullOr(AjaxSections.makeResponseSchema(sections)),
+        Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
         { default: () => null }
       ),
     });
@@ -248,7 +247,7 @@ export const AddItemInput = Schema.Struct({
   selling_plan: Schema.optional(Resource.ID),
 });
 
-export const BaseInput = Schema.extend(AjaxSections.Input);
+export const BaseInput = Schema.extend(Ajax.Sections.Input);
 
 export type CartAddInput = Schema.Schema.Encoded<typeof CartAddInput>;
 export const CartAddInput = Schema.Struct({
@@ -344,10 +343,10 @@ export const CartChangeOutput = Schema.Struct({
 });
 
 export type CartClearInput = Schema.Schema.Encoded<typeof CartClearInput>;
-export const CartClearInput = AjaxSections.Input;
+export const CartClearInput = Ajax.Sections.Input;
 
 export type CartGetInput = Schema.Schema.Encoded<typeof CartClearInput>;
-export const CartGetInput = AjaxSections.Input;
+export const CartGetInput = Ajax.Sections.Input;
 
 export type CartUpdateDiscountsInput = Schema.Schema.Encoded<
   typeof CartUpdateDiscountsInput

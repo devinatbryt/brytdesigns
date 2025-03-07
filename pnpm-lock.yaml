@@ -29,14 +29,23 @@ importers:
         specifier: 5.8.2
         version: 5.8.2
 
+  packages/js-delivr-imports-plugin:
+    dependencies:
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+      yaml:
+        specifier: ^2.7.0
+        version: 2.7.0
+
   shopify/packages/hybrid-cart-api:
     dependencies:
+      '@brytdesigns/shopify-utils':
+        specifier: workspace:*
+        version: link:../../utils
       '@effect/platform':
         specifier: 0.77.4
         version: 0.77.4(effect@3.13.4)
-      '@repo/shopify-utils':
-        specifier: workspace:*
-        version: link:../../utils
       '@solidifront/storefront-client':
         specifier: ^0.3.3
         version: 0.3.3
@@ -50,6 +59,9 @@ importers:
       '@graphql-codegen/cli':
         specifier: ^5.0.5
         version: 5.0.5(@types/node@22.13.8)(enquirer@2.4.1)(graphql@16.10.0)(typescript@5.8.2)
+      '@repo/js-delivr-imports-plugin':
+        specifier: workspace:*
+        version: link:../../../packages/js-delivr-imports-plugin
       '@solidifront/codegen':
         specifier: ^1.0.7
         version: 1.0.7(graphql@16.10.0)
@@ -69,6 +81,9 @@ importers:
         specifier: 3.13.4
         version: 3.13.4
     devDependencies:
+      '@repo/js-delivr-imports-plugin':
+        specifier: workspace:*
+        version: link:../../packages/js-delivr-imports-plugin
       dts-bundle-generator:
         specifier: ^9.5.1
         version: 9.5.1

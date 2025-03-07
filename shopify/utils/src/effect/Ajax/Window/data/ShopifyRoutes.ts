@@ -32,3 +32,9 @@ export class ShopifyRoutes extends Data.Class<IShopifyRoutes> {
     });
   }
 }
+
+export const make = () =>
+  Data.case<ShopifyRoutes>()({
+    ...Defaults,
+    ...(window?.Shopify?.routes || {}),
+  });
