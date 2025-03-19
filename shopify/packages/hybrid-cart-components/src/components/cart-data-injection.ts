@@ -4,7 +4,7 @@ import {
   type ValidHybridPath,
   useFormattedValue,
   useFullPropertyPath,
-} from "../hooks";
+} from "../hooks/index.js";
 import { type Format, getTargetElement } from "../utils/index.js";
 import { createEffect, on, onCleanup } from "solid-js";
 
