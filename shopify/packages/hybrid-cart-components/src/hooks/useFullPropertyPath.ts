@@ -25,7 +25,7 @@ type Options = {
 };
 
 function createFullPathPropertyContext(
-  options: Options,
+  options: Options
 ): Accessor<ValidHybridPath> {
   return useFullPropertyPath({ element: options.element, path: options.path });
 }
@@ -43,7 +43,7 @@ export function provideFullPropertyPathContext({
 }
 
 export function useFullPropertyPathContext(
-  context: FullPropertyPathContextType,
+  context: FullPropertyPathContextType
 ) {
   return context;
 }
@@ -55,6 +55,7 @@ export function useFullPropertyPath(props: {
   const context = consume(FullPropertyPathContext, props.element);
   const basePath = useFullPropertyPathContext(context);
   return () => {
+    if (typeof basePath !== "function") return "" as ValidHybridPath;
     const b = basePath();
     if (typeof props.path === "undefined") return b;
     const p = props.path();
