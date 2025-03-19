@@ -112,4 +112,8 @@ declare global {
   }
 }
 
+//@ts-ignore
+if (!window.BrytDesigns) window.BrytDesigns = {};
+window.BrytDesigns.cart = HybridCart;
+
 export default HybridCart;
