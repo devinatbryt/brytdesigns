@@ -144,7 +144,9 @@ export function jsDelivrImportsPlugin(): Plugin {
               moduleSpecifier.startsWith(".") ||
               moduleSpecifier.startsWith("/")
             ) {
-              return match; // skip relative or absolute file imports
+              if (!pkg.name) return match; // Ensure package name is available
+              const relativePath = path.join("dist/jsdelivr/", moduleSpecifier);
+              return `${importPart}"/npm/${pkg.name}@${pkg.version}/${relativePath}"`;
             }
             let actualModuleName = "";
             if (moduleSpecifier.startsWith("@")) {
