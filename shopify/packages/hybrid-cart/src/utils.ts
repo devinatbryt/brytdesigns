@@ -2,7 +2,7 @@ import type { CartData } from "./types";
 
 import { observable } from "solid-js";
 
-import { Cart } from "./query";
+import { Cart } from "./query/index.js";
 
 export const uniq = (array: string[]): string[] =>
   Array.from(new Set(...array));
