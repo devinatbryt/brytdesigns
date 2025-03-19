@@ -17,10 +17,12 @@ type CartDataProps = {
 
 export const CartData: CorrectComponentType<CartDataProps> = (
   props,
-  { element },
+  { element }
 ) => {
   if (!props.propertyName)
-    return console.warn("No path provided for cart-data component.");
+    return console.warn(
+      "No property-name attribute provided for cart-data component."
+    );
   const fullPath = useFullPropertyPath({
     element,
     path: () => props.propertyName,
