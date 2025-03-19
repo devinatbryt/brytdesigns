@@ -148,7 +148,7 @@ export function jsDelivrImportsPlugin(): Plugin {
                 "./dist/jsdelivr/",
                 moduleSpecifier,
               );
-              return `${importPart}"./${relativePath}"`;
+              return `${importPart}"/npm/${pkg.name}@${pkg.version}/${relativePath}"`;
             }
             let actualModuleName = "";
             if (moduleSpecifier.startsWith("@")) {

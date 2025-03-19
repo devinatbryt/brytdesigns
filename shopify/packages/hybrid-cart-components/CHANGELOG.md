@@ -1,5 +1,14 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.4
+
+### Patch Changes
+
+- Attempt at fixing jsdelivr relative imports
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.4
+  - @brytdesigns/shopify-hybrid-cart@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes

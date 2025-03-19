@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.4
+
+### Patch Changes
+
+- Attempt at fixing jsdelivr relative imports
+
 ## 0.1.3
 
 ### Patch Changes

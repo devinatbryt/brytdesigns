@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Reactive state management solution for the Hybrid Cart API library",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.4
+
+### Patch Changes
+
+- Attempt at fixing jsdelivr relative imports
+
 ## 1.2.3
 
 ### Patch Changes
