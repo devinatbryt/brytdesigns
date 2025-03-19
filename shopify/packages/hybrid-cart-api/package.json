@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-api",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "A hybrid cart that integrates with the AJAX Cart API and the Storefront Api",
   "scripts": {
     "build": "tsup --clean",
@@ -12,20 +12,17 @@
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
   "module": "./dist/main/index.js",
-  "jsdelivr": "./dist/jsdelivr/index.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
       "types": "./dist/main/index.d.ts",
-      "import": "./dist/main/index.js",
-      "jsdelivr": "./dist/jsdelivr/index.js"
+      "import": "./dist/main/index.js"
     },
     "./effect": {
       "types": "./dist/main/effect/index.d.ts",
-      "import": "./dist/main/effect/index.js",
-      "jsdelivr": "./dist/jsdelivr/effect/index.js"
+      "import": "./dist/main/effect/index.js"
     }
   },
   "type": "module",

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.7
+
+### Patch Changes
+
+- Remove jsdelivr build for now
+
 ## 0.1.6
 
 ### Patch Changes

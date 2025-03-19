@@ -1,9 +1,8 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-components",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "",
   "main": "./dist/main/index.js",
-  "jsdelivr": "./dist/jsdelivr/index.js",
   "types": "./dist/main/index.d.ts",
   "type": "module",
   "scripts": {
@@ -13,8 +12,7 @@
   "exports": {
     ".": {
       "types": "./dist/main/index.d.ts",
-      "module": "./dist/main/index.js",
-      "jsdelivr": "./dist/jsdelivr/index.js"
+      "module": "./dist/main/index.js"
     }
   },
   "files": [

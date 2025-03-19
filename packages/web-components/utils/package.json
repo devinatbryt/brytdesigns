@@ -1,17 +1,15 @@
 {
   "name": "@brytdesigns/web-component-utils",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Web component utilities for building solid based web components",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
-  "jsdelivr": "./dist/jsdelivr/index.js",
   "types": "./dist/main/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/main/index.d.ts",
-      "module": "./dist/main/index.js",
-      "jsdelivr": "./dist/jsdelivr/index.js"
+      "module": "./dist/main/index.js"
     }
   },
   "scripts": {
