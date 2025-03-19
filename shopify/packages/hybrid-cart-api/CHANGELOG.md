@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.10
+
+### Patch Changes
+
+- Upgraded storefront client version
+
 ## 1.2.9
 
 ### Patch Changes
