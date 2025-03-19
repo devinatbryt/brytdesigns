@@ -55,20 +55,24 @@ export function useFullPropertyPath(props: {
   const context = consume(FullPropertyPathContext, props.element);
   const basePath = useFullPropertyPathContext(context);
   return () => {
-    console.log(props.element);
     if (typeof basePath !== "function" && typeof props.path === "function") {
+      console.log(props.element);
       console.log("Path: ", props.path());
       return props.path();
     } else if (
       typeof basePath === "function" &&
       typeof props.path === "undefined"
     ) {
+      console.log(props.element);
       console.log("Base path: ", basePath());
       return basePath();
     } else if (
       typeof basePath === "function" &&
       typeof props.path === "function"
     ) {
+      console.log(props.element);
+      console.log("Path: ", props.path());
+      console.log("Base path: ", basePath());
       console.log("Combined path: ", `${basePath()}.${props.path()}`);
       return `${basePath()}.${props.path()}` as ValidHybridPath;
     }
