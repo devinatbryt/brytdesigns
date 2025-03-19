@@ -1,0 +1,38 @@
+{
+  "name": "@brytdesigns/shopify-hybrid-cart-components",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./dist/main/index.js",
+  "jsdelivr": "./dist/jsdelivr/index.js",
+  "types": "./dist/main/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/main/index.d.ts",
+      "module": "./dist/main/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "dependencies": {
+    "@brytdesigns/shopify-hybrid-cart": "workspace:*",
+    "@brytdesigns/web-component-utils": "workspace:*",
+    "component-register": "^0.8.7",
+    "lodash.debounce": "^4.0.8",
+    "solid-js": "^1.9.5"
+  },
+  "author": "Bryt Designs",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "@repo/js-delivr-imports-plugin": "workspace:*",
+    "dts-bundle-generator": "^9.5.1",
+    "tsup": "^8.4.0"
+  }
+}
