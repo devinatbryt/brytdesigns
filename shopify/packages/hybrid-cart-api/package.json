@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-api",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A hybrid cart that integrates with the AJAX Cart API and the Storefront Api",
   "scripts": {
     "build": "tsup --clean",
