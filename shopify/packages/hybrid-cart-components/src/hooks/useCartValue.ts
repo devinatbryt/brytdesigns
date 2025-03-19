@@ -2,7 +2,7 @@ import { type Accessor, createMemo } from "solid-js";
 import { type ICustomElement } from "component-register";
 
 import { type ValidHybridPath } from "./useFullPropertyPath.js";
-import { useHybridCart } from "./useHybridCart";
+import { useHybridCart } from "./useHybridCart.js";
 import { getValueFromPath } from "../utils/index.js";
 
 type Options = {

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.7
+
+### Patch Changes
+
+- Fixed missing import
+
 ## 0.1.6
 
 ### Patch Changes
