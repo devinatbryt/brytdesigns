@@ -92,8 +92,8 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       '@effect/platform':
-        specifier: 0.78.0
-        version: 0.78.0(effect@3.13.12)
+        specifier: 0.79.3
+        version: 0.79.3(effect@3.13.12)
       '@solidifront/storefront-client':
         specifier: ^0.3.6
         version: 0.3.6
@@ -318,6 +318,11 @@ packages:
     resolution: {integrity: sha512-2vGIfBtPO7zPioVy4wmSbeF0VWfj3GLpB9+6JT7K0lZVeYogHF2GTuPDB87xMILw86Ecz9iR98JuA9Co7PgxKQ==}
     peerDependencies:
       effect: ^3.13.7
+
+  '@effect/platform@0.79.3':
+    resolution: {integrity: sha512-oABDV66SmrUVP+xWL/a+WPvz53m8ckNkv9Cgk09rhOXgzL3eusjDj8VFaIzz0OPgInjRTRoMVemILW0voTYjYA==}
+    peerDependencies:
+      effect: ^3.13.12
 
   '@effect/vitest@0.19.2':
     resolution: {integrity: sha512-PNCVLlgORQSYHlWBzspnJFSEFFr5My3d9OXjzaPzbVf/iVZkLhcF5zuARq+iXhBDfwcpYp+u2Wg0Totl2BjEUw==}
@@ -2759,6 +2764,12 @@ snapshots:
       prettier: 2.8.8
 
   '@effect/platform@0.78.0(effect@3.13.12)':
+    dependencies:
+      effect: 3.13.12
+      find-my-way-ts: 0.1.5
+      multipasta: 0.2.5
+
+  '@effect/platform@0.79.3(effect@3.13.12)':
     dependencies:
       effect: 3.13.12
       find-my-way-ts: 0.1.5
