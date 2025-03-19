@@ -55,6 +55,7 @@ export function useFullPropertyPath(props: {
   const context = consume(FullPropertyPathContext, props.element);
   const basePath = useFullPropertyPathContext(context);
   return () => {
+    console.log(props.element);
     if (typeof basePath !== "function" && typeof props.path === "function") {
       console.log("Path: ", props.path());
       return props.path();

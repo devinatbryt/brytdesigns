@@ -15,15 +15,15 @@ export function useCartValue(options: Options) {
 
   const value = createMemo(() => {
     const c = cart();
-    console.log("CART", c);
+    // console.log("CART", c);
     if (typeof options.path !== "function") return cart;
     const path = options.path();
-    console.log("PATH", path);
+    // console.log("PATH", path);
     if (!path) return cart;
     const v = getValueFromPath(c, path);
-    console.log("VALUE", v);
+    // console.log("VALUE", v);
     if (v === undefined || v === null) return null;
-    console.log("VALUE", v);
+    // console.log("VALUE", v);
     return v;
   });
 
