@@ -1,19 +1,21 @@
 {
   "name": "@brytdesigns/shopify-utils",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "private": false,
   "type": "module",
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
-  "jsdelivr": "./dist/jsdelivr/effect/index.js",
+  "jsdelivr": "./dist/jsdelivr/index.js",
   "exports": {
     ".": {
       "types": "./dist/main/index.d.ts",
-      "import": "./dist/main/index.js"
+      "import": "./dist/main/index.js",
+      "jsdelivr": "./dist/jsdelivr/index.js"
     },
     "./effect": {
-      "types": "./dist/effect/index.d.ts",
-      "import": "./dist/effect/index.js"
+      "types": "./dist/main/effect/index.d.ts",
+      "import": "./dist/main/effect/index.js",
+      "jsdelivr": "./dist/jsdelivr/effect/index.js"
     }
   },
   "scripts": {

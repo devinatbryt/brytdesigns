@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.6
+
+### Patch Changes
+
+- Attempt at fixing import bugs
+
 ## 0.1.5
 
 ### Patch Changes
