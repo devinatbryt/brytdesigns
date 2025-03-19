@@ -1,5 +1,9 @@
 import * as Data from "effect/Data";
 
+/**
+ * @internal
+ *
+ */
 export class CartError extends Data.TaggedError(
   "@brytdesigns/hybrid-cart-client/CartError",
 )<{
@@ -8,6 +12,10 @@ export class CartError extends Data.TaggedError(
   description: string;
 }> { }
 
+/**
+ * @internal
+ *
+ */
 export class InvalidAjaxMethodError extends Data.TaggedError(
   "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError",
 )<{

@@ -24,5 +24,5 @@ export const format = <const T extends ID, const R extends Type>({
   });
 
 export const parse = (
-  input: string
+  input: string,
 ): Effect.Effect<string, ParseError, never> => Schema.decode(GID)(input);

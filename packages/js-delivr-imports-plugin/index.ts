@@ -1,14 +1,18 @@
+import type { Options } from "tsup";
+
 import fs from "node:fs/promises";
 import path from "node:path";
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import yaml from "yaml";
 
-function jsDelivrImportsPlugin() {
+type Plugin = NonNullable<Options["esbuildPlugins"]>[number];
+
+export function jsDelivrImportsPlugin(): Plugin {
   // Cache for package versions (to avoid repetitive file system reads)
-  const versionCache = {};
+  const versionCache: Record<string, string | null> = {};
 
   // Helper to load JSON safely
-  function readJSON(filePath) {
+  function readJSON(filePath: string) {
     try {
       const data = readFileSync(filePath, "utf-8");
       return JSON.parse(data);
@@ -18,7 +22,7 @@ function jsDelivrImportsPlugin() {
   }
 
   // Locate the workspace root (where pnpm-workspace.yaml might exist)
-  function findWorkspaceRoot(dir) {
+  function findWorkspaceRoot(dir: string) {
     const workspaceFile = "pnpm-workspace.yaml";
     let currentDir = dir;
     while (true) {
@@ -33,7 +37,7 @@ function jsDelivrImportsPlugin() {
   }
 
   // Load local workspace package versions if pnpm workspace is used
-  function loadWorkspacePackages(rootDir) {
+  function loadWorkspacePackages(rootDir: string) {
     const wsFile = path.join(rootDir, "pnpm-workspace.yaml");
     if (!existsSync(wsFile)) return;
     const wsConfig = readFileSync(wsFile, "utf-8");
@@ -90,7 +94,7 @@ function jsDelivrImportsPlugin() {
 
   // Preload the current package's dependency versions
   const pkg = readJSON(path.join(process.cwd(), "package.json")) || {};
-  const deps = pkg.dependencies || {};
+  const deps: Record<string, string> = pkg.dependencies || {};
 
   // Populate version cache for direct dependencies
   for (const [depName, depVersion] of Object.entries(deps)) {
@@ -170,7 +174,7 @@ function jsDelivrImportsPlugin() {
             }
             newImport += `/+esm`; // ensure ESM format
             return `${importPart}"${newImport}"`; // preserve original import syntax around the path
-          }
+          },
         );
 
         return { contents: transformed, loader: "ts" };
@@ -183,5 +187,3 @@ function jsDelivrImportsPlugin() {
     },
   };
 }
-
-export default jsDelivrImportsPlugin;

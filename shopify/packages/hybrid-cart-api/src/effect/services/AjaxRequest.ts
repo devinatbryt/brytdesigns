@@ -9,7 +9,7 @@ import * as FetchHttpClient from "@effect/platform/FetchHttpClient";
 import { Ajax } from "@brytdesigns/shopify-utils/effect";
 
 import * as LoggerUtils from "../logger/LoggerUtils.js";
-import { CartError, InvalidAjaxMethodError } from "../errors.js";
+import { type CartError, InvalidAjaxMethodError } from "../errors.js";
 import { AjaxClientResponse } from "../data/index.js";
 
 const BaseOutputSchema = Schema.Struct({});
@@ -71,7 +71,11 @@ export const makeFactory =
       if (response.status !== 200) {
         const data = (yield* response.json) as CartError;
         return AjaxClientResponse.make({
-          error: new CartError(data),
+          error: {
+            description: data.description,
+            status: data.status,
+            message: data.message,
+          },
         });
       }
 

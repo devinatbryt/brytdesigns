@@ -1,6 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-// import jsDelivrImportsPlugin from "@repo/js-delivr-imports-plugin";
+import { jsDelivrImportsPlugin } from "@repo/js-delivr-imports-plugin";
 import { generateDtsBundle } from "dts-bundle-generator";
 import { defineConfig } from "tsup";
 
@@ -31,7 +31,7 @@ export default defineConfig([
 
       await fs.writeFile(
         path.resolve(outDir, "effect", "index.d.ts"),
-        effectDts
+        effectDts,
       );
     },
   },
@@ -51,25 +51,25 @@ export default defineConfig([
       await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
     },
   },
-  // {
-  //   ...commonConfig,
-  //   format: "esm",
-  //   entry: ["src/**/*.ts"],
-  //   outDir: `${outDir}/jsdelivr`,
-  //   dts: false,
-  //   async onSuccess() {
-  //     const [indexDts] = generateDtsBundle([
-  //       {
-  //         filePath: path.resolve("./src/index.ts"),
-  //       },
-  //     ]);
+  {
+    ...commonConfig,
+    format: "esm",
+    entry: ["src/**/*.ts"],
+    outDir: `${outDir}/jsdelivr`,
+    dts: false,
+    async onSuccess() {
+      const [indexDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/index.ts"),
+        },
+      ]);
 
-  //     await fs.writeFile(
-  //       path.resolve(outDir, "jsdelivr", "index.d.ts"),
-  //       indexDts
-  //     );
-  //   },
+      await fs.writeFile(
+        path.resolve(outDir, "jsdelivr", "index.d.ts"),
+        indexDts,
+      );
+    },
 
-  //   esbuildPlugins: [jsDelivrImportsPlugin()],
-  // },
+    esbuildPlugins: [jsDelivrImportsPlugin()],
+  },
 ]);

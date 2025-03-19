@@ -39,3 +39,5 @@ export namespace discounts {
 export const discounts = {
   update: CartDiscountsUpdate.make,
 };
+
+export * from "./errors.js";

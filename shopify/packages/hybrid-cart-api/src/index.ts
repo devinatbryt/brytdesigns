@@ -7,7 +7,9 @@ import * as AjaxRequest from "./effect/services/AjaxRequest.js";
 
 export namespace createHybridCartClient {
   export type Options = {
-    logger?: Parameters<typeof Logger.make>[0];
+    // logger?: <Message, Output>(
+    //   options: Logger.Logger.Options<Message>
+    // ) => Output;
   };
 
   export type RequestOptions = {
@@ -15,105 +17,278 @@ export namespace createHybridCartClient {
   };
 }
 
-export const createHybridCartApi = ({
-  logger,
-}: createHybridCartClient.Options = {}) => {
+export const createHybridCartApi = () => {
   let baseLayer = Layer.empty;
   let minimumLogLevel = LogLevel.None;
   let loggerLayer = Logger.pretty;
 
-  if (logger) {
-    loggerLayer = Logger.replace(Logger.defaultLogger, Logger.make(logger));
-    baseLayer = Layer.mergeAll(loggerLayer);
-    minimumLogLevel = LogLevel.All;
-  }
+  // if (logger) {
+  //   loggerLayer = Logger.replace(Logger.defaultLogger, Logger.make(logger));
+  //   baseLayer = Layer.mergeAll(loggerLayer);
+  //   minimumLogLevel = LogLevel.All;
+  // }
 
   const ajaxLayer = Layer.mergeAll(baseLayer, AjaxRequest.Default);
 
   return {
     add: (
       input: API.add.Input,
-      options?: createHybridCartClient.RequestOptions
+      options?: createHybridCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
         API.add(input).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
-          Effect.provide(ajaxLayer)
+          Effect.provide(ajaxLayer),
+          Effect.catchAll((error) => {
+            if (
+              error._tag === "ParseError" ||
+              error._tag === "RequestError" ||
+              error._tag === "ResponseError" ||
+              error._tag ===
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+            ) {
+              return Effect.fail(
+                new Error(error.message, {
+                  cause: error.cause,
+                }),
+              );
+            }
+            if (error._tag === "HttpBodyError") {
+              const reason = error.reason;
+              if (reason._tag === "JsonError") {
+                return Effect.fail(new Error("Failed to parse JSON response"));
+              }
+              if (reason._tag === "SchemaError") {
+                return Effect.fail(
+                  new Error(reason.error.message, {
+                    cause: reason.error.cause,
+                  }),
+                );
+              }
+            }
+            return Effect.fail(new Error(error.toString()));
+          }),
         ),
         {
           signal: options?.signal,
-        }
+        },
       ),
     change: (
       input: API.change.Input,
-      options?: createHybridCartClient.RequestOptions
+      options?: createHybridCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
         API.change(input).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
-          Effect.provide(ajaxLayer)
+          Effect.provide(ajaxLayer),
+          Effect.catchAll((error) => {
+            if (
+              error._tag === "ParseError" ||
+              error._tag === "RequestError" ||
+              error._tag === "ResponseError" ||
+              error._tag ===
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+            ) {
+              return Effect.fail(
+                new Error(error.message, {
+                  cause: error.cause,
+                }),
+              );
+            }
+            if (error._tag === "HttpBodyError") {
+              const reason = error.reason;
+              if (reason._tag === "JsonError") {
+                return Effect.fail(new Error("Failed to parse JSON response"));
+              }
+              if (reason._tag === "SchemaError") {
+                return Effect.fail(
+                  new Error(reason.error.message, {
+                    cause: reason.error.cause,
+                  }),
+                );
+              }
+            }
+            return Effect.fail(new Error(error.toString()));
+          }),
         ),
         {
           signal: options?.signal,
-        }
+        },
       ),
     clear: (
       input: API.clear.Input,
-      options?: createHybridCartClient.RequestOptions
+      options?: createHybridCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
         API.clear(input).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
-          Effect.provide(ajaxLayer)
+          Effect.provide(ajaxLayer),
+          Effect.catchAll((error) => {
+            if (
+              error._tag === "ParseError" ||
+              error._tag === "RequestError" ||
+              error._tag === "ResponseError" ||
+              error._tag ===
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+            ) {
+              return Effect.fail(
+                new Error(error.message, {
+                  cause: error.cause,
+                }),
+              );
+            }
+            if (error._tag === "HttpBodyError") {
+              const reason = error.reason;
+              if (reason._tag === "JsonError") {
+                return Effect.fail(new Error("Failed to parse JSON response"));
+              }
+              if (reason._tag === "SchemaError") {
+                return Effect.fail(
+                  new Error(reason.error.message, {
+                    cause: reason.error.cause,
+                  }),
+                );
+              }
+            }
+            return Effect.fail(new Error(error.toString()));
+          }),
         ),
         {
           signal: options?.signal,
-        }
+        },
       ),
 
     get: (
       input: API.get.Input,
-      options?: createHybridCartClient.RequestOptions
+      options?: createHybridCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
         API.get(input).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
-          Effect.provide(ajaxLayer)
+          Effect.provide(ajaxLayer),
+          Effect.catchAll((error) => {
+            if (
+              error._tag === "ParseError" ||
+              error._tag === "RequestError" ||
+              error._tag === "ResponseError" ||
+              error._tag ===
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+            ) {
+              return Effect.fail(
+                new Error(error.message, {
+                  cause: error.cause,
+                }),
+              );
+            }
+            if (error._tag === "HttpBodyError") {
+              const reason = error.reason;
+              if (reason._tag === "JsonError") {
+                return Effect.fail(new Error("Failed to parse JSON response"));
+              }
+              if (reason._tag === "SchemaError") {
+                return Effect.fail(
+                  new Error(reason.error.message, {
+                    cause: reason.error.cause,
+                  }),
+                );
+              }
+            }
+            return Effect.fail(new Error(error.toString()));
+          }),
         ),
         {
           signal: options?.signal,
-        }
+        },
       ),
 
     update: (
       input: API.update.Input,
-      options?: createHybridCartClient.RequestOptions
+      options?: createHybridCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
         API.update(input).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
-          Effect.provide(ajaxLayer)
+          Effect.provide(ajaxLayer),
+          Effect.catchAll((error) => {
+            if (
+              error._tag === "ParseError" ||
+              error._tag === "RequestError" ||
+              error._tag === "ResponseError" ||
+              error._tag ===
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+            ) {
+              return Effect.fail(
+                new Error(error.message, {
+                  cause: error.cause,
+                }),
+              );
+            }
+            if (error._tag === "HttpBodyError") {
+              const reason = error.reason;
+              if (reason._tag === "JsonError") {
+                return Effect.fail(new Error("Failed to parse JSON response"));
+              }
+              if (reason._tag === "SchemaError") {
+                return Effect.fail(
+                  new Error(reason.error.message, {
+                    cause: reason.error.cause,
+                  }),
+                );
+              }
+            }
+            return Effect.fail(new Error(error.toString()));
+          }),
         ),
         {
           signal: options?.signal,
-        }
+        },
       ),
 
     discounts: {
       update: (
         input: API.discounts.update["Input"],
-        options?: createHybridCartClient.RequestOptions
+        options?: createHybridCartClient.RequestOptions,
       ) =>
         Effect.runPromise(
-          API.discounts
-            .update(input)
-            .pipe(
-              Logger.withMinimumLogLevel(minimumLogLevel),
-              Effect.provide(baseLayer)
-            ),
+          API.discounts.update(input).pipe(
+            Logger.withMinimumLogLevel(minimumLogLevel),
+            Effect.provide(baseLayer),
+            Effect.catchAll((error) => {
+              if (
+                error._tag === "ParseError" ||
+                error._tag === "RequestError" ||
+                error._tag === "ResponseError" ||
+                error._tag ===
+                  "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError" ||
+                error._tag === "ExtractOperationNameError"
+              ) {
+                return Effect.fail(
+                  new Error(error.message, {
+                    cause: error.cause,
+                  }),
+                );
+              }
+              if (error._tag === "HttpBodyError") {
+                const reason = error.reason;
+                if (reason._tag === "JsonError") {
+                  return Effect.fail(
+                    new Error("Failed to parse JSON response"),
+                  );
+                }
+                if (reason._tag === "SchemaError") {
+                  return Effect.fail(
+                    new Error(reason.error.message, {
+                      cause: reason.error.cause,
+                    }),
+                  );
+                }
+              }
+              return Effect.fail(new Error(error.toString()));
+            }),
+          ),
           {
             signal: options?.signal,
-          }
+          },
         ),
     },
   };

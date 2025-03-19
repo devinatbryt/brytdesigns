@@ -5,12 +5,12 @@ import * as Data from "effect/Data";
 export class StorefrontClientConfig extends Data.Class<IStorefrontClientConfig> {
   constructor() {
     super({
-      ...window.Shopify.storefront.config,
+      ...window.BrytDesigns.storefront.config,
     });
   }
 }
 
 export const make = () =>
   Data.case<StorefrontClientConfig>()({
-    ...window.Shopify.storefront.config,
+    ...window.BrytDesigns.storefront.config,
   });

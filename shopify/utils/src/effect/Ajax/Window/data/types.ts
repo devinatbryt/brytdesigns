@@ -27,7 +27,7 @@ export interface IStorefrontClientConfig {
 
 declare global {
   interface Window {
-    Shopify: {
+    BrytDesigns: {
       routes: IShopifyRoutes;
       storefront: {
         config: IStorefrontClientConfig;

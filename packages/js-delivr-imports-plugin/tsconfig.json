@@ -1,6 +1,6 @@
 {
   "include": [
-    "src"
+    "index.ts"
   ],
   "exclude": [
     "dist",
@@ -9,6 +9,7 @@
   ],
   "compilerOptions": {
     "esModuleInterop": true,
+    "declaration": true,
     "skipLibCheck": true,
     "target": "es2022",
     "allowJs": true,
@@ -20,13 +21,10 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "module": "preserve",
-    "noEmit": true,
-    "types": [
-      "./storefrontapi.generated.d.ts"
-    ],
     "lib": [
       "es2022",
       "DOM"
-    ]
+    ],
+    "outDir": "dist"
   }
 }

@@ -28,7 +28,7 @@ export class ShopifyRoutes extends Data.Class<IShopifyRoutes> {
   constructor() {
     super({
       ...Defaults,
-      ...(window?.Shopify?.routes || {}),
+      ...(window?.BrytDesigns?.routes || {}),
     });
   }
 }
@@ -36,5 +36,5 @@ export class ShopifyRoutes extends Data.Class<IShopifyRoutes> {
 export const make = () =>
   Data.case<ShopifyRoutes>()({
     ...Defaults,
-    ...(window?.Shopify?.routes || {}),
+    ...(window?.BrytDesigns?.routes || {}),
   });

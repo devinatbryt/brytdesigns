@@ -14,7 +14,6 @@ import { Ajax, Resource } from "@brytdesigns/shopify-utils/effect";
 import * as LoggerUtils from "../logger/LoggerUtils.js";
 import * as AjaxClientResponse from "../data/AjaxClientResponse.js";
 import * as CartGet from "./CartGet.js";
-import { CartError } from "../errors.js";
 import { CartUpdateDiscountsInput } from "../schema.js";
 
 export type ExtractOperationNameError = Types.ExtractTag<
@@ -39,14 +38,7 @@ const updateCartDiscountCodesMutation = `#graphql
 
 export type UpdateDiscountsInput = CartUpdateDiscountsInput;
 
-export const make = (
-  discountCodes: CartUpdateDiscountsInput
-): Effect.Effect<
-  Effect.Effect.Success<ReturnType<typeof CartGet.make>>,
-  | Effect.Effect.Error<ReturnType<typeof CartGet.make>>
-  | CartError
-  | ExtractOperationNameError
-> =>
+export const make = (discountCodes: CartUpdateDiscountsInput) =>
   Effect.gen(function* () {
     const config = Ajax.Window.StorefrontClientConfig.make();
 
@@ -64,13 +56,16 @@ export const make = (
     const initialCart = yield* CartGet.make();
 
     if (!initialCart.data) {
-      if (initialCart.error) return yield* Effect.fail(initialCart.error);
+      if (initialCart.error)
+        return AjaxClientResponse.make({
+          error: initialCart.error,
+        });
       return AjaxClientResponse.make({
-        error: new CartError({
+        error: {
           status: 404,
           message: "Cart not found",
           description: "Could not find the cart to update the discount codes",
-        }),
+        },
       });
     }
 
@@ -88,27 +83,27 @@ export const make = (
 
     if (response.errors) {
       return AjaxClientResponse.make({
-        error: new CartError({
+        error: {
           status: response.errors.networkStatusCode || 500,
           message: response.errors.message || "Unknown error",
           description:
             response.errors.graphQLErrors
               ?.map((error) => error.message)
               .join(", ") || "No errors reported",
-        }),
+        },
       });
     }
 
     if ((response.data?.cartDiscountCodesUpdate?.userErrors || []).length > 0) {
       return AjaxClientResponse.make({
-        error: new CartError({
+        error: {
           status: 500,
           message: "Failed to update cart discount codes",
           description:
             response.data?.cartDiscountCodesUpdate?.userErrors
               .map((error) => error.message)
               .join(", ") || "No errors reported",
-        }),
+        },
       });
     }
 

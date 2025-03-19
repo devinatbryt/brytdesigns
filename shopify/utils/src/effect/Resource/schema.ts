@@ -41,4 +41,8 @@ export type GID = Schema.Schema.Encoded<typeof GID>;
 export const GID = Schema.String.pipe(Schema.startsWith("gid://shopify/"));
 
 export type ID = Schema.Schema.Encoded<typeof ID>;
-export const ID = Schema.Union(Schema.Number, Schema.NumberFromString);
+export const ID = Schema.Union(
+  Schema.Number,
+  Schema.NumberFromString,
+  Schema.String,
+);
