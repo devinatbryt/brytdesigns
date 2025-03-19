@@ -144,9 +144,13 @@ export function jsDelivrImportsPlugin(): Plugin {
               moduleSpecifier.startsWith(".") ||
               moduleSpecifier.startsWith("/")
             ) {
+              const absolutePath = path.resolve(
+                path.dirname(args.path),
+                moduleSpecifier,
+              );
               const relativePath = path.join(
                 "./dist/jsdelivr/",
-                moduleSpecifier,
+                absolutePath.split("/src").at(1) || moduleSpecifier,
               );
               return `${importPart}"/npm/${pkg.name}@${pkg.version}/${relativePath}"`;
             }

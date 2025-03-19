@@ -8,7 +8,7 @@ import {
   useFullPropertyPath,
   useCartValue,
   provideFullPropertyPathContext,
-} from "../hooks";
+} from "../hooks/index.js";
 import html from "solid-js/html";
 
 type CartDataArrayProps = {

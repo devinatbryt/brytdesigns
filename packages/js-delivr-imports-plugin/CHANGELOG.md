@@ -1,5 +1,11 @@
 # @repo/js-delivr-imports-plugin
 
+## 1.1.5
+
+### Patch Changes
+
+- Final fix for jsdelivr relative imports
+
 ## 1.1.4
 
 ### Patch Changes
