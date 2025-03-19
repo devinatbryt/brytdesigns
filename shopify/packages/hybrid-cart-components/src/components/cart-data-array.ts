@@ -18,12 +18,12 @@ type CartDataArrayProps = {
 
 export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
   props,
-  { element },
+  { element }
 ) => {
   const itemTemplate = getTemplateContent(element, "item");
   if (!itemTemplate)
     return console.warn(
-      "cart-data-array: No template found with a property of 'item'.",
+      "cart-data-array: No template found with a property of 'item'."
     );
   if (!props.arrayPath)
     return console.warn("cart-data-array: No array path provided.");
@@ -56,7 +56,7 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
   };
 
   return html`
-    <${Show} when=${() => arrayValue() && arrayValue()!.length > 1}>
+    <${Show} when=${() => arrayValue() && arrayValue()!.length > 0}>
       <${For} each=${arrayValue}>
         <${(_: any, idx: Accessor<number>) => html`
           <cart-data-array-item path=${idx}>
