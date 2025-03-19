@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.11
+
+### Patch Changes
+
+- No longer separate private and public properties
+
 ## 1.2.10
 
 ### Patch Changes

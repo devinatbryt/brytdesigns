@@ -8,36 +8,38 @@ export const BaseAttributes = Schema.Record({
     Schema.Null,
     Schema.String,
     Schema.Boolean,
-    Schema.Number,
+    Schema.Number
   ),
 });
 
-export const SplitAttributes = Schema.Struct({
-  private: BaseAttributes,
-  public: BaseAttributes,
-});
+// export const SplitAttributes = Schema.Struct({
+//   private: BaseAttributes,
+//   public: BaseAttributes,
+// });
 
-export const Attributes = Schema.transform(BaseAttributes, SplitAttributes, {
-  decode(attrs) {
-    const entries = Object.entries(attrs);
-    return {
-      private: entries.reduce((attr, [key, value]) => {
-        if (!key.startsWith("_")) return attr;
-        return { ...attr, [key.substring(1)]: value };
-      }, {}),
-      public: entries.reduce((attr, [key, value]) => {
-        if (key.startsWith("_")) return attr;
-        return { ...attr, [key]: value };
-      }, {}),
-    };
-  },
-  encode(attrs) {
-    return {
-      ...attrs.private,
-      ...attrs.public,
-    };
-  },
-});
+export const Attributes = BaseAttributes;
+
+// export const Attributes = Schema.transform(BaseAttributes, SplitAttributes, {
+//   decode(attrs) {
+//     const entries = Object.entries(attrs);
+//     return {
+//       private: entries.reduce((attr, [key, value]) => {
+//         if (!key.startsWith("_")) return attr;
+//         return { ...attr, [key.substring(1)]: value };
+//       }, {}),
+//       public: entries.reduce((attr, [key, value]) => {
+//         if (key.startsWith("_")) return attr;
+//         return { ...attr, [key]: value };
+//       }, {}),
+//     };
+//   },
+//   encode(attrs) {
+//     return {
+//       ...attrs.private,
+//       ...attrs.public,
+//     };
+//   },
+// });
 
 export type DiscountApplication = Schema.Schema.Type<
   typeof DiscountApplication
@@ -154,10 +156,7 @@ export type LineItem = Schema.Schema.Type<typeof LineItem>;
 export const LineItem = Schema.Struct({
   id: Resource.ID,
   properties: Schema.optionalWith(Schema.NullOr(Attributes), {
-    default: () => ({
-      private: {},
-      public: {},
-    }),
+    default: () => ({}),
   }),
   quantity: Schema.Number,
   variant_id: Resource.ID,
@@ -198,7 +197,7 @@ export const LineItem = Schema.Struct({
   unit_price_measurement: Schema.optional(UnitPriceMeasurement),
   selling_plan_allocation: Schema.optionalWith(
     Schema.NullOr(SellingPlanAllocation),
-    { default: () => null },
+    { default: () => null }
   ),
 });
 
@@ -206,10 +205,7 @@ export const Cart = Schema.Struct({
   token: Schema.String,
   note: Schema.NullOr(Schema.String),
   attributes: Schema.optionalWith(Attributes, {
-    default: () => ({
-      private: {},
-      public: {},
-    }),
+    default: () => ({}),
   }),
   discounts: Schema.optionalWith(Schema.Array(Discount), { default: () => [] }),
   original_total_price: Schema.Number,
@@ -230,7 +226,7 @@ export const makeCartSchema = (sections?: string) => {
       ...Cart.fields,
       sections: Schema.optionalWith(
         Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
-        { default: () => null },
+        { default: () => null }
       ),
     });
   }
@@ -271,7 +267,7 @@ export const UpdateItemRecordInput = Schema.Record({
 export type CartUpdateInput = Schema.Schema.Encoded<typeof CartUpdateInput>;
 export const CartUpdateInput = Schema.Struct({
   updates: Schema.optional(
-    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number)),
+    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number))
   ),
   note: Schema.optional(Schema.NullOr(Schema.String)),
   attributes: Schema.optional(Attributes),
@@ -297,7 +293,7 @@ export const CartChangeItemOptionalInput = Schema.Struct({
     Schema.Record({
       key: Schema.String,
       value: Schema.NullOr(Schema.String),
-    }),
+    })
   ),
   selling_plan: Schema.optional(Schema.NullOr(Resource.ID)),
 }).pipe(BaseInput);
@@ -327,13 +323,13 @@ export const CartChangeInput = Schema.Union(
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       id: Schema.String,
-    }),
+    })
   ),
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       line: Schema.Number,
-    }),
-  ),
+    })
+  )
 );
 
 export type CartChangeOutput = Schema.Schema.Type<typeof CartChangeOutput>;
@@ -353,5 +349,5 @@ export type CartUpdateDiscountsInput = Schema.Schema.Encoded<
   typeof CartUpdateDiscountsInput
 >;
 export const CartUpdateDiscountsInput = Schema.mutable(
-  Schema.Array(Schema.NonEmptyString),
+  Schema.Array(Schema.NonEmptyString)
 );

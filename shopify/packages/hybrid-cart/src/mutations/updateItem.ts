@@ -51,24 +51,8 @@ export const mutation = createMutation(
               ...i,
               quantity: item.quantity || i.quantity,
               properties: {
-                private: {
-                  ...(i.properties?.private || {}),
-                  ...Object.entries(i?.properties || {})
-                    .filter(([key, _]) => key.startsWith("_"))
-                    .reduce(
-                      (obj, [key, value]) => ({ ...obj, [key]: value }),
-                      {},
-                    ),
-                },
-                public: {
-                  ...(i.properties?.private || {}),
-                  ...Object.entries(i?.properties || {})
-                    .filter(([key, _]) => !key.startsWith("_"))
-                    .reduce(
-                      (obj, [key, value]) => ({ ...obj, [key]: value }),
-                      {},
-                    ),
-                },
+                ...item.properties,
+                ...i.properties,
               },
             };
           }
@@ -87,5 +71,5 @@ export const mutation = createMutation(
       Cart.set(() => cart);
     },
   }),
-  () => client,
+  () => client
 );

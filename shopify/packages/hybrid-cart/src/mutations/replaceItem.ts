@@ -16,15 +16,14 @@ export const mutation = createMutation(
       const currentItem = cart.items.find((i) => i.key === item.key);
       if (!currentItem) {
         throw new Error(
-          `Item with provided key of ${item.key} does not exists!`,
+          `Item with provided key of ${item.key} does not exists!`
         );
       }
 
       const tempValues = {
         quantity: currentItem.quantity,
         properties: {
-          ...currentItem.properties?.public,
-          ...currentItem.properties?.private,
+          ...currentItem.properties,
         },
         selling_plan:
           currentItem?.selling_plan_allocation?.selling_plan.id || undefined,
@@ -51,5 +50,5 @@ export const mutation = createMutation(
       Cart.invalidate();
     },
   }),
-  () => client,
+  () => client
 );

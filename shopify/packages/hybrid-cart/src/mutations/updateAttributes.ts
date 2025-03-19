@@ -26,18 +26,8 @@ export const mutation = createMutation(
       Cart.set((old) => ({
         ...old,
         attributes: {
-          private: {
-            ...(old.attributes?.private || {}),
-            ...Object.entries(attributes || {})
-              .filter(([key, _]) => key.startsWith("_"))
-              .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}),
-          },
-          public: {
-            ...(old.attributes?.public || {}),
-            ...Object.entries(attributes || {})
-              .filter(([key, _]) => !key.startsWith("_"))
-              .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {}),
-          },
+          ...old.attributes,
+          ...attributes,
         },
       }));
 
@@ -52,5 +42,5 @@ export const mutation = createMutation(
       Cart.set(() => cart);
     },
   }),
-  () => client,
+  () => client
 );
