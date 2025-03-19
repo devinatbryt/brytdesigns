@@ -1,5 +1,14 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.3
+
+### Patch Changes
+
+- Removed typegen for jsdelivr and fixed export paths as well
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.3
+  - @brytdesigns/shopify-hybrid-cart@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.3
+
+### Patch Changes
+
+- Removed typegen for jsdelivr and fixed export paths as well
+
 ## 1.2.2
 
 ### Patch Changes

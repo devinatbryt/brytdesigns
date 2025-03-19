@@ -135,7 +135,7 @@ export function jsDelivrImportsPlugin(): Plugin {
 
         // Regex to find import statements and capture the module specifier
         const importRegex =
-          /^(\s*import\s+(?:type\s+)?(?:[^'"]*\sfrom\s+)?)['"]([^'"]+)['"]/gm;
+          /^(\s*(?:import|export)\s+(?:type\s+)?(?:[^'"]*\sfrom\s+)?)['"]([^'"]+)['"]/gm;
         transformed = transformed.replace(
           importRegex,
           (match, importPart, moduleSpecifier) => {
@@ -144,9 +144,11 @@ export function jsDelivrImportsPlugin(): Plugin {
               moduleSpecifier.startsWith(".") ||
               moduleSpecifier.startsWith("/")
             ) {
-              if (!pkg.name) return match; // Ensure package name is available
-              const relativePath = path.join("dist/jsdelivr/", moduleSpecifier);
-              return `${importPart}"/npm/${pkg.name}@${pkg.version}/${relativePath}"`;
+              const relativePath = path.join(
+                "./dist/jsdelivr/",
+                moduleSpecifier,
+              );
+              return `${importPart}"./${relativePath}"`;
             }
             let actualModuleName = "";
             if (moduleSpecifier.startsWith("@")) {

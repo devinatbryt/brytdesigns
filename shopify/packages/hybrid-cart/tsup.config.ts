@@ -38,19 +38,6 @@ export default defineConfig([
     entry: ["src/**/*.ts"],
     outDir: `${outDir}/jsdelivr`,
     dts: false,
-    async onSuccess() {
-      const [indexDts] = generateDtsBundle([
-        {
-          filePath: path.resolve("./src/index.ts"),
-        },
-      ]);
-
-      await fs.writeFile(
-        path.resolve(outDir, "jsdelivr", "index.d.ts"),
-        indexDts,
-      );
-    },
-
     esbuildPlugins: [jsDelivrImportsPlugin()],
   },
 ]);

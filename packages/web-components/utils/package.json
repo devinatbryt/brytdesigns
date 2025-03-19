@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-utils",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Web component utilities for building solid based web components",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

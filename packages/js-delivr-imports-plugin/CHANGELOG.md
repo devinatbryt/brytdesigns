@@ -1,5 +1,11 @@
 # @repo/js-delivr-imports-plugin
 
+## 1.1.3
+
+### Patch Changes
+
+- Removed typegen for jsdelivr and fixed export paths as well
+
 ## 1.1.2
 
 ### Patch Changes
