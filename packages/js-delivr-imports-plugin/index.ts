@@ -9,7 +9,10 @@ type Plugin = NonNullable<Options["esbuildPlugins"]>[number];
 
 export function jsDelivrImportsPlugin(): Plugin {
   // Cache for package versions (to avoid repetitive file system reads)
-  const versionCache: Record<string, string | null> = {};
+  const versionCache: Record<
+    string,
+    { version: string; workspace: boolean } | null
+  > = {};
 
   // Helper to load JSON safely
   function readJSON(filePath: string) {
@@ -86,7 +89,10 @@ export function jsDelivrImportsPlugin(): Plugin {
         if (!existsSync(pkgJsonPath)) continue;
         const pkgJson = readJSON(pkgJsonPath);
         if (pkgJson && pkgJson.name && pkgJson.version) {
-          versionCache[pkgJson.name] = pkgJson.version;
+          versionCache[pkgJson.name] = {
+            version: pkgJson.version,
+            workspace: true,
+          };
         }
       }
     }
@@ -102,7 +108,10 @@ export function jsDelivrImportsPlugin(): Plugin {
       // Mark workspace deps for resolution
       versionCache[depName] = null; // will fill in after scanning workspaces
     } else {
-      versionCache[depName] = depVersion;
+      versionCache[depName] = {
+        version: depVersion,
+        workspace: false,
+      };
     }
   }
 
@@ -168,11 +177,11 @@ export function jsDelivrImportsPlugin(): Plugin {
               return match;
             }
             // Build jsDelivr URL path
-            let newImport = `/npm/${pkgName}@${version}`;
+            let newImport = `/npm/${pkgName}@${version.version}`;
             if (subPath) {
               newImport += `/${subPath}`;
             }
-            newImport += `/+esm`; // ensure ESM format
+            if (!version.workspace) newImport += `/+esm`; // ensure ESM format
             return `${importPart}"${newImport}"`; // preserve original import syntax around the path
           },
         );

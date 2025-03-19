@@ -1,5 +1,11 @@
 # @repo/js-delivr-imports-plugin
 
+## 1.1.1
+
+### Patch Changes
+
+- Ensure workspace repos use jsdelivr import not esm run from jsdelivr
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.1
+
+### Patch Changes
+
+- Ensure workspace repos use jsdelivr import not esm run from jsdelivr
+
 ## 1.2.0
 
 ### Minor Changes

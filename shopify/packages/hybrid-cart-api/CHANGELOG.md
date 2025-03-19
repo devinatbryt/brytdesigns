@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.1
+
+### Patch Changes
+
+- Ensure workspace repos use jsdelivr import not esm run from jsdelivr
+- Updated dependencies
+  - @brytdesigns/shopify-utils@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes
