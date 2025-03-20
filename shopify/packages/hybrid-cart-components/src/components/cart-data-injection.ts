@@ -33,7 +33,8 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
 
   if (
     !props.injectionType ||
-    (props.injectionType && VALID_INJECTION_TYPES.includes(props.injectionType))
+    (props.injectionType &&
+      !VALID_INJECTION_TYPES.includes(props.injectionType))
   )
     return console.warn(
       "cart-data-injection: Invalid injection-type attribute provided.",
