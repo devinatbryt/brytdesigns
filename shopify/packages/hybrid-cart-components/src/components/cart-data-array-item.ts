@@ -3,6 +3,7 @@ import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import {
   type ValidHybridPath,
   provideFullPropertyPathContext,
+  useFullPropertyPath,
 } from "../hooks/index.js";
 import { createEffect } from "solid-js";
 
@@ -12,7 +13,7 @@ type CartDataArrayItemProps = {
 
 export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
   props,
-  { element }
+  { element },
 ) => {
   if (!props.path)
     return console.warn("cart-data-array-item: No path attribute provided.");
@@ -20,7 +21,12 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
     element,
     path: () => props.path,
   };
-  const fullPath = provideFullPropertyPathContext(mergedProps);
+  const fullPath = useFullPropertyPath(mergedProps);
+  provideFullPropertyPathContext({
+    element,
+    path: fullPath,
+  });
+
   createEffect(() => {
     console.log(element, fullPath());
   });

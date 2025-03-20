@@ -27,13 +27,7 @@ type Options = {
 function createFullPathPropertyContext(
   options: Options,
 ): Accessor<ValidHybridPath> {
-  console.log(options.path());
-  const fullPath = useFullPropertyPath({
-    element: options.element,
-    path: options.path,
-  });
-  console.log("Creating full path context", options.element, fullPath());
-  return fullPath;
+  return options.path;
 }
 
 const FullPropertyPathContext = createContext(createFullPathPropertyContext);
@@ -45,7 +39,7 @@ export function provideFullPropertyPathContext({
   element: WalkableNode;
   path: Accessor<ValidHybridPath>;
 }): FullPropertyPathContextType {
-  return provide(FullPropertyPathContext, { path, element }, element);
+  return provide(FullPropertyPathContext, { path }, element);
 }
 
 export function useFullPropertyPathContext(

@@ -18,12 +18,12 @@ type CartDataArrayProps = {
 
 export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
   props,
-  { element }
+  { element },
 ) => {
   const itemTemplate = getTemplateContent(element, "item");
   if (!itemTemplate)
     return console.warn(
-      "cart-data-array: No template found with a property of 'item'."
+      "cart-data-array: No template found with a property of 'item'.",
     );
   if (!props.arrayPath)
     return console.warn("cart-data-array: No array path provided.");
@@ -32,7 +32,7 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     path: () => props.arrayPath,
   };
   const fullPath = useFullPropertyPath(mergedProps);
-  provideFullPropertyPathContext(mergedProps);
+  provideFullPropertyPathContext({ element, path: fullPath });
   createEffect(() => {
     console.log(element, fullPath());
   });
