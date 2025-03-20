@@ -21,15 +21,6 @@ customShadowlessElement(
 );
 
 customShadowlessElement(
-  "cart-data",
-  {
-    format: "",
-    propertyName: "item_count",
-  },
-  correctElementType(CartData),
-);
-
-customShadowlessElement(
   "cart-data-array",
   {
     format: "",
@@ -43,6 +34,15 @@ customShadowlessElement(
   //@ts-ignore
   { itemIndex: "0" },
   correctElementType(CartDataArrayItem),
+);
+
+customShadowlessElement(
+  "cart-data",
+  {
+    format: "",
+    propertyName: "item_count",
+  },
+  correctElementType(CartData),
 );
 
 customShadowlessElement(
