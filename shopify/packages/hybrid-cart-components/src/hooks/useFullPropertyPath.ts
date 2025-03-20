@@ -25,9 +25,15 @@ type Options = {
 };
 
 function createFullPathPropertyContext(
-  options: Options
+  options: Options,
 ): Accessor<ValidHybridPath> {
-  return useFullPropertyPath({ element: options.element, path: options.path });
+  console.log(options.path());
+  const fullPath = useFullPropertyPath({
+    element: options.element,
+    path: options.path,
+  });
+  console.log("Creating full path context", options.element, fullPath());
+  return fullPath;
 }
 
 const FullPropertyPathContext = createContext(createFullPathPropertyContext);
@@ -43,7 +49,7 @@ export function provideFullPropertyPathContext({
 }
 
 export function useFullPropertyPathContext(
-  context: FullPropertyPathContextType
+  context: FullPropertyPathContextType,
 ) {
   return context;
 }
