@@ -8,7 +8,7 @@ export const BaseAttributes = Schema.Record({
     Schema.Null,
     Schema.String,
     Schema.Boolean,
-    Schema.Number
+    Schema.Number,
   ),
 });
 
@@ -68,7 +68,7 @@ export const Image = Schema.Struct({
   aspect_ratio: Schema.Number,
   alt: Schema.String,
   height: Schema.Number,
-  url: Schema.URL,
+  url: Schema.String,
   width: Schema.Number,
 });
 
@@ -180,7 +180,7 @@ export const LineItem = Schema.Struct({
   final_price: Schema.Number,
   url: Schema.String,
   featured_image: Schema.optional(Image),
-  image: Schema.URL,
+  image: Schema.String,
   handle: Schema.String,
   requires_shipping: Schema.Boolean,
   product_type: Schema.String,
@@ -197,7 +197,7 @@ export const LineItem = Schema.Struct({
   unit_price_measurement: Schema.optional(UnitPriceMeasurement),
   selling_plan_allocation: Schema.optionalWith(
     Schema.NullOr(SellingPlanAllocation),
-    { default: () => null }
+    { default: () => null },
   ),
 });
 
@@ -226,7 +226,7 @@ export const makeCartSchema = (sections?: string) => {
       ...Cart.fields,
       sections: Schema.optionalWith(
         Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
-        { default: () => null }
+        { default: () => null },
       ),
     });
   }
@@ -267,7 +267,7 @@ export const UpdateItemRecordInput = Schema.Record({
 export type CartUpdateInput = Schema.Schema.Encoded<typeof CartUpdateInput>;
 export const CartUpdateInput = Schema.Struct({
   updates: Schema.optional(
-    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number))
+    Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number)),
   ),
   note: Schema.optional(Schema.NullOr(Schema.String)),
   attributes: Schema.optional(Attributes),
@@ -293,7 +293,7 @@ export const CartChangeItemOptionalInput = Schema.Struct({
     Schema.Record({
       key: Schema.String,
       value: Schema.NullOr(Schema.String),
-    })
+    }),
   ),
   selling_plan: Schema.optional(Schema.NullOr(Resource.ID)),
 }).pipe(BaseInput);
@@ -302,7 +302,7 @@ export const LineItemChange = Schema.Struct({
   product_id: Schema.Number,
   variant_id: Schema.Number,
   id: Schema.String,
-  image: Schema.URL,
+  image: Schema.String,
   price: Schema.String,
   presentment_price: Schema.Number,
   quantity: Schema.Number,
@@ -323,13 +323,13 @@ export const CartChangeInput = Schema.Union(
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       id: Schema.String,
-    })
+    }),
   ),
   Schema.extend(CartChangeItemOptionalInput)(
     Schema.Struct({
       line: Schema.Number,
-    })
-  )
+    }),
+  ),
 );
 
 export type CartChangeOutput = Schema.Schema.Type<typeof CartChangeOutput>;
@@ -349,5 +349,5 @@ export type CartUpdateDiscountsInput = Schema.Schema.Encoded<
   typeof CartUpdateDiscountsInput
 >;
 export const CartUpdateDiscountsInput = Schema.mutable(
-  Schema.Array(Schema.NonEmptyString)
+  Schema.Array(Schema.NonEmptyString),
 );

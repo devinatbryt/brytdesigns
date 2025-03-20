@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.12
+
+### Patch Changes
+
+- Remove effect schema parsing to url object
+
 ## 1.2.11
 
 ### Patch Changes
