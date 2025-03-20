@@ -1,6 +1,6 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { Show, createMemo, For, type Accessor } from "solid-js";
+import { Show, createMemo, For, type Accessor, createEffect } from "solid-js";
 import html from "solid-js/html";
 
 import { useFullPropertyPath, useCartValue } from "../hooks/index.js";
@@ -17,14 +17,14 @@ type ConditionValue = {
 
 type Condition = {
   type:
-    | "typeof"
-    | "includes_property"
-    | "equals"
-    | "not_equals"
-    | "lt"
-    | "lte"
-    | "gt"
-    | "gte";
+  | "typeof"
+  | "includes_property"
+  | "equals"
+  | "not_equals"
+  | "lt"
+  | "lte"
+  | "gt"
+  | "gte";
   format?: Format;
   invert?: boolean;
   valueA: ConditionValue;
@@ -57,6 +57,8 @@ function validateConditions<T>(conditions: Condition[], data: T) {
     let valueA = getValue(data, condition.valueA),
       valueB = getValue(data, condition.valueB),
       result = false;
+
+    console.log(valueA, valueB);
 
     if (typeof valueA === "undefined" && typeof valueB === "undefined")
       return false;
@@ -144,16 +146,20 @@ export const CartDataConditions: CorrectComponentType<
     element,
   });
 
+  createEffect(() => {
+    console.log(element, fullPath(), data());
+  });
+
   return html`
     <${For} each=${() => conditionTemplates}>
       ${(tmpl: HTMLTemplateElement, idx: Accessor<number>) => {
-        const conditions = allConditions()[idx()];
-        return html`
+      const conditions = allConditions()[idx()];
+      return html`
           <${Show} when=${() => validateConditions(conditions, data())}>
             ${() => Array.from(tmpl.content.cloneNode(true).childNodes)}
           <//>
         `;
-      }}
+    }}
     <//>
   `;
 };

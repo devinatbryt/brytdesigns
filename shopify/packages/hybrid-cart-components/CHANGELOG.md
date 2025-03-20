@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.37
+
+### Patch Changes
+
+- Fixed cart-data-array context now testing cart-data-conditions
+
 ## 0.1.36
 
 ### Patch Changes

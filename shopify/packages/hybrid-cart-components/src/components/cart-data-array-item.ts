@@ -26,8 +26,4 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
     element,
     path: fullPath,
   });
-
-  createEffect(() => {
-    console.log(element, fullPath());
-  });
 };

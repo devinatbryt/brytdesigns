@@ -36,9 +36,6 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     element,
     path: fullPath,
   });
-  createEffect(() => {
-    console.log(element, fullPath());
-  });
 
   const value = useCartValue({
     element,
