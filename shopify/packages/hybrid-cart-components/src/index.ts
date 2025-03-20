@@ -21,19 +21,19 @@ customShadowlessElement(
 );
 
 customShadowlessElement(
+  "cart-data-array-item",
+  //@ts-ignore
+  { itemIndex: "0" },
+  correctElementType(CartDataArrayItem),
+);
+
+customShadowlessElement(
   "cart-data-array",
   {
     format: "",
     arrayPath: "items",
   },
   correctElementType(CartDataArray),
-);
-
-customShadowlessElement(
-  "cart-data-array-item",
-  //@ts-ignore
-  { itemIndex: "0" },
-  correctElementType(CartDataArrayItem),
 );
 
 customShadowlessElement(
