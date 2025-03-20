@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.34
+
+### Patch Changes
+
+- Bug fix
+
 ## 0.1.33
 
 ### Patch Changes

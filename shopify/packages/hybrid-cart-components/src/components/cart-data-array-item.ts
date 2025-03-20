@@ -15,7 +15,6 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
   props,
   { element },
 ) => {
-  console.log(props.path);
   if (!props.path)
     return console.warn("cart-data-array-item: No path attribute provided.");
   const mergedProps = {
@@ -23,7 +22,10 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
     path: () => props.path,
   };
   const fullPath = useFullPropertyPath(mergedProps);
-  provideFullPropertyPathContext(mergedProps);
+  provideFullPropertyPathContext({
+    element,
+    path: fullPath,
+  });
 
   createEffect(() => {
     console.log(element, fullPath());
