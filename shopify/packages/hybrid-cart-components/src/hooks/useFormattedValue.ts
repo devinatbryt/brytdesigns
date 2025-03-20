@@ -25,7 +25,9 @@ export function useFormattedValue(options: Options) {
       return formatValue(options.format || "", v);
     }
     console.warn(
-      "useFormattedValue: Unsupported value type. Expected string, number, or boolean. Received: ${typeof v}.",
+      options.element,
+      `useFormattedValue: Unsupported value type. Expected string, number, or boolean. Received: ${typeof v}.`,
+      v,
     );
     return null;
   });

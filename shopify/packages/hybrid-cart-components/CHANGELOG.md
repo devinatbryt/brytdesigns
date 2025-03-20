@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.41
+
+### Patch Changes
+
+- Better format error logging
+
 ## 0.1.40
 
 ### Patch Changes
