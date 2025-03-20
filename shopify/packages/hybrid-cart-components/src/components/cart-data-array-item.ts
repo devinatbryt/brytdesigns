@@ -22,12 +22,9 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
     path: () => props.path,
   };
   const fullPath = useFullPropertyPath(mergedProps);
-  provideFullPropertyPathContext({
-    element,
-    path: fullPath,
-  });
+  provideFullPropertyPathContext(mergedProps);
 
   createEffect(() => {
-    console.log(element, fullPath(), props.path);
+    console.log(element, fullPath());
   });
 };

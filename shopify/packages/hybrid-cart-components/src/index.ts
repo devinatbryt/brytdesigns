@@ -7,6 +7,7 @@ import {
   CartContext,
   CartData,
   CartDataArray,
+  CartDataArrayItem,
   CartDataConditions,
   CartDataInjection,
   CartDataListener,
@@ -39,11 +40,9 @@ customShadowlessElement(
 
 customShadowlessElement(
   "cart-data-array-item",
-  {
-    format: "",
-    propertyName: "items.0",
-  },
-  correctElementType(CartData),
+  //@ts-ignore
+  {},
+  correctElementType(CartDataArrayItem),
 );
 
 customShadowlessElement(

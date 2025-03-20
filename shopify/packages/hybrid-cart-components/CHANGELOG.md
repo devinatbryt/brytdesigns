@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.30
+
+### Patch Changes
+
+- Fixed major function reference bug
+
 ## 0.1.29
 
 ### Patch Changes

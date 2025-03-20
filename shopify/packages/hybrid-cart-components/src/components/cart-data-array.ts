@@ -32,7 +32,7 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     path: () => props.arrayPath,
   };
   const fullPath = useFullPropertyPath(mergedProps);
-  provideFullPropertyPathContext({ element, path: fullPath });
+  provideFullPropertyPathContext(mergedProps);
   createEffect(() => {
     console.log(element, fullPath());
   });
@@ -62,7 +62,7 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     <${Show} when=${() => arrayValue() && arrayValue()!.length > 0}>
       <${For} each=${arrayValue}>
         ${(_: any, idx: Accessor<number>) => html`
-          <cart-data-array-item path=${idx}>
+          <cart-data-array-item path=${() => idx()}>
             ${() => Array.from(itemTemplate.cloneNode(true).childNodes)}
           </cart-data-array-item>
         `}
