@@ -15,6 +15,7 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
   props,
   { element },
 ) => {
+  console.log(props.path);
   if (!props.path)
     return console.warn("cart-data-array-item: No path attribute provided.");
   const mergedProps = {
