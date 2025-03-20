@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import { getTemplateContent, type Format } from "../utils/index.js";
 
-import { Show, For, type Accessor } from "solid-js";
+import { Show, For, type Accessor, createEffect } from "solid-js";
 
 import {
   type ValidHybridPath,
@@ -33,6 +33,9 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
   };
   const fullPath = useFullPropertyPath(mergedProps);
   provideFullPropertyPathContext(mergedProps);
+  createEffect(() => {
+    console.log(element, fullPath());
+  });
 
   const value = useCartValue({
     element,

@@ -4,6 +4,7 @@ import {
   type ValidHybridPath,
   provideFullPropertyPathContext,
 } from "../hooks/index.js";
+import { createEffect } from "solid-js";
 
 type CartDataArrayItemProps = {
   path: ValidHybridPath;
@@ -11,7 +12,7 @@ type CartDataArrayItemProps = {
 
 export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
   props,
-  { element },
+  { element }
 ) => {
   if (!props.path)
     return console.warn("cart-data-array-item: No path attribute provided.");
@@ -19,5 +20,8 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
     element,
     path: () => props.path,
   };
-  provideFullPropertyPathContext(mergedProps);
+  const fullPath = provideFullPropertyPathContext(mergedProps);
+  createEffect(() => {
+    console.log(element, fullPath());
+  });
 };

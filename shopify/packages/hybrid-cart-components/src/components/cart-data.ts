@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import { type Format } from "../utils/index.js";
 
-import { Show } from "solid-js";
+import { createEffect, Show } from "solid-js";
 
 import {
   type ValidHybridPath,
@@ -33,6 +33,10 @@ export const CartData: CorrectComponentType<CartDataProps> = (
     },
     path: fullPath,
     element,
+  });
+
+  createEffect(() => {
+    console.log(element, fullPath());
   });
 
   return html`
