@@ -69,22 +69,16 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
           return console.warn(
             `cart-data-injection: Unable to find element with selector of: ${props.target}`,
           );
+
         if (injectionType === "attribute" && value) {
           target.setAttribute(attributeName, value);
-          return onCleanup(() => {
-            target.removeAttribute(attributeName);
-          });
+          return;
         }
 
         if (injectionType === "property" && value) {
           //@ts-ignore
-          const prevValue = target[attributeName];
-          //@ts-ignore
           target[attributeName] = value;
-          return onCleanup(() => {
-            //@ts-ignore
-            target[attributeName] = prevValue;
-          });
+          return;
         }
 
         if (injectionType === "template" && value) {

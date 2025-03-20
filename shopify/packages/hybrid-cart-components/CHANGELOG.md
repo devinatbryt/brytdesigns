@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.40
+
+### Patch Changes
+
+- Fix cart-data-injection component
+
 ## 0.1.39
 
 ### Patch Changes
