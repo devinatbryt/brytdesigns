@@ -41,7 +41,7 @@ customShadowlessElement(
 customShadowlessElement(
   "cart-data-array-item",
   //@ts-ignore
-  {},
+  { path: "" },
   correctElementType(CartDataArrayItem),
 );
 
