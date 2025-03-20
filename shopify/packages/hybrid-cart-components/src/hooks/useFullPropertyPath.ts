@@ -54,15 +54,15 @@ export function useFullPropertyPath(props: {
 }) {
   const context = consume(FullPropertyPathContext, props.element);
   const basePath = useFullPropertyPathContext(context);
-  createEffect(() => {
-    console.log(props.element);
-    if (typeof basePath === "function") {
-      console.log("Base path", basePath());
-    }
-    if (typeof props.path === "function") {
-      console.log("Path", props.path());
-    }
-  });
+  // createEffect(() => {
+  //   console.log(props.element);
+  //   if (typeof basePath === "function") {
+  //     console.log("Base path", basePath());
+  //   }
+  //   if (typeof props.path === "function") {
+  //     console.log("Path", props.path());
+  //   }
+  // });
   return createMemo(() => {
     if (typeof basePath !== "function" && typeof props.path === "function") {
       return props.path();

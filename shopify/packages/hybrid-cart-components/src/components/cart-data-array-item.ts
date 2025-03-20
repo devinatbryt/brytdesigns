@@ -28,6 +28,6 @@ export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
   });
 
   createEffect(() => {
-    console.log(element, fullPath());
+    console.log(element, fullPath(), props.path);
   });
 };
