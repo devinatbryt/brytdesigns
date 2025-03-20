@@ -59,7 +59,7 @@ export function useFullPropertyPath(props: {
       return props.path();
     } else if (
       typeof basePath === "function" &&
-      typeof props.path === "undefined"
+      typeof props.path !== "function"
     ) {
       return basePath();
     } else if (
