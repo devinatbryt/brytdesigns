@@ -58,8 +58,6 @@ function validateConditions<T>(conditions: Condition[], data: T) {
       valueB = getValue(data, condition.valueB),
       result = false;
 
-    console.log(valueA, valueB);
-
     if (typeof valueA === "undefined" && typeof valueB === "undefined")
       return false;
 
@@ -144,10 +142,6 @@ export const CartDataConditions: CorrectComponentType<
   const data = useCartValue({
     path: fullPath,
     element,
-  });
-
-  createEffect(() => {
-    console.log(element, fullPath(), data());
   });
 
   return html`

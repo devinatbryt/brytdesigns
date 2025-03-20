@@ -1,5 +1,12 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.38
+
+### Patch Changes
+
+- c0a7513: Minor ordering fix
+- Fixed 'useCartValue' function
+
 ## 0.1.37
 
 ### Patch Changes
