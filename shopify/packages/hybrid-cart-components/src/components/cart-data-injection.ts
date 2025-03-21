@@ -6,7 +6,7 @@ import {
   useFullPropertyPath,
 } from "../hooks/index.js";
 import { type Format, getTargetElement } from "../utils/index.js";
-import { createRenderEffect, on, onCleanup } from "solid-js";
+import { createEffect, on, onCleanup } from "solid-js";
 
 type CartDataInjectionProps = {
   propertyName: ValidHybridPath;
@@ -53,7 +53,7 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
     },
   });
 
-  createRenderEffect(
+  createEffect(
     on(
       () => {
         return {
