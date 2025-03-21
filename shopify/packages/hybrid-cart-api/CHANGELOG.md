@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.14
+
+### Patch Changes
+
+- Added debugging capabilities
+
 ## 1.2.13
 
 ### Patch Changes

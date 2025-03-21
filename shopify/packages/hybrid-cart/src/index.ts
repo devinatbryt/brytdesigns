@@ -108,6 +108,7 @@ declare global {
     BrytDesigns: {
       initialCart: CartData;
       cart: typeof HybridCart;
+      debug?: boolean;
     };
   }
 }

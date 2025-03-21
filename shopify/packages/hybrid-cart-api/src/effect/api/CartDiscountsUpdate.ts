@@ -110,5 +110,5 @@ export const make = (discountCodes: CartUpdateDiscountsInput) =>
     return yield* CartGet.make();
   }).pipe(
     LoggerUtils.withNamespacedLogSpan("discounts.update"),
-    Effect.provide(StorefrontClient.Default)
+    Effect.provide(StorefrontClient.Default),
   );

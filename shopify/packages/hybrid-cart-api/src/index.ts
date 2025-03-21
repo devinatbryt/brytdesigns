@@ -4,9 +4,11 @@ import * as Layer from "effect/Layer";
 import * as LogLevel from "effect/LogLevel";
 import * as API from "./effect/index.js";
 import * as AjaxRequest from "./effect/services/AjaxRequest.js";
+import * as StorefrontClient from "@solidifront/storefront-client/effect";
 
 export namespace createHybridCartClient {
   export type Options = {
+    debug?: boolean;
     // logger?: <Message, Output>(
     //   options: Logger.Logger.Options<Message>
     // ) => Output;
@@ -17,10 +19,15 @@ export namespace createHybridCartClient {
   };
 }
 
-export const createHybridCartApi = () => {
+export const createHybridCartApi = ({ debug = false }) => {
   let baseLayer = Layer.empty;
   let minimumLogLevel = LogLevel.None;
   let loggerLayer = Logger.pretty;
+
+  if (debug) {
+    baseLayer = Layer.mergeAll(loggerLayer);
+    minimumLogLevel = LogLevel.All;
+  }
 
   // if (logger) {
   //   loggerLayer = Logger.replace(Logger.defaultLogger, Logger.make(logger));
@@ -252,6 +259,7 @@ export const createHybridCartApi = () => {
         Effect.runPromise(
           API.discounts.update(input).pipe(
             Logger.withMinimumLogLevel(minimumLogLevel),
+            Effect.provide(StorefrontClient.Default),
             Effect.provide(baseLayer),
             Effect.catchAll((error) => {
               if (
