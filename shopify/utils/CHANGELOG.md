@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.10
+
+### Patch Changes
+
+- Fixed exports in pkg.json
+
 ## 1.2.9
 
 ### Patch Changes

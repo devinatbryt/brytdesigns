@@ -1,29 +1,13 @@
-import type {
-  StorefrontQueries,
-  StorefrontMutations,
-} from "@solidifront/storefront-client/effect";
-
-import type { Types } from "effect";
-
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
-import * as StorefrontClient from "@solidifront/storefront-client/effect";
 
 import { Ajax, Resource } from "@brytdesigns/shopify-utils/effect";
 
 import * as LoggerUtils from "../logger/LoggerUtils.js";
 import * as AjaxClientResponse from "../data/AjaxClientResponse.js";
 import * as CartGet from "./CartGet.js";
+import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import { CartUpdateDiscountsInput } from "../schema.js";
-
-export type ExtractOperationNameError = Types.ExtractTag<
-  Effect.Effect.Error<
-    ReturnType<
-      Effect.Effect.Success<ReturnType<typeof StorefrontClient.make>>["query"]
-    >
-  >,
-  "ExtractOperationNameError"
->;
 
 const updateCartDiscountCodesMutation = `#graphql
   mutation updateCartDiscounts($id: ID!, $discountCodes: [String!]) {
@@ -39,16 +23,13 @@ const updateCartDiscountCodesMutation = `#graphql
 export type UpdateDiscountsInput = CartUpdateDiscountsInput;
 
 export const make = (discountCodes: CartUpdateDiscountsInput) =>
-  Effect.gen(function* () {
+  Effect.gen(function*() {
     const config = Ajax.Window.StorefrontClientConfig.make();
 
-    const client = yield* StorefrontClient.make<
-      StorefrontQueries,
-      StorefrontMutations
-    >({
-      storeName: config.shopName,
+    const client = createStorefrontApiClient({
+      storeDomain: `https://${config.shopName}.myshopify.com`,
       publicAccessToken: config.accessToken,
-      apiVersion: config.apiVersion as any,
+      apiVersion: config.apiVersion,
     });
 
     const codes = yield* Schema.decode(CartUpdateDiscountsInput)(discountCodes);
@@ -74,10 +55,19 @@ export const make = (discountCodes: CartUpdateDiscountsInput) =>
       type: "Cart",
     });
 
-    const response = yield* client.mutate(updateCartDiscountCodesMutation, {
-      variables: {
-        discountCodes: codes,
-        id,
+    const response = yield* Effect.tryPromise({
+      try: () =>
+        client.request(updateCartDiscountCodesMutation, {
+          variables: {
+            discountCodes: codes,
+            id,
+          },
+        }),
+      catch: (error) => {
+        if (error instanceof Error) {
+          return error;
+        }
+        return new Error("Failed to update cart discount codes!");
       },
     });
 
@@ -101,14 +91,11 @@ export const make = (discountCodes: CartUpdateDiscountsInput) =>
           message: "Failed to update cart discount codes",
           description:
             response.data?.cartDiscountCodesUpdate?.userErrors
-              .map((error) => error.message)
+              .map((error: { message: string }) => error.message)
               .join(", ") || "No errors reported",
         },
       });
     }
 
     return yield* CartGet.make();
-  }).pipe(
-    LoggerUtils.withNamespacedLogSpan("discounts.update"),
-    Effect.provide(StorefrontClient.Default),
-  );
+  }).pipe(LoggerUtils.withNamespacedLogSpan("discounts.update"));

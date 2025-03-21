@@ -94,6 +94,9 @@ importers:
       '@effect/platform':
         specifier: 0.80.1
         version: 0.80.1(effect@3.14.1)
+      '@shopify/storefront-api-client':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@solidifront/storefront-client':
         specifier: ^0.3.10
         version: 0.3.10
@@ -878,6 +881,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@shopify/graphql-client@1.3.1':
+    resolution: {integrity: sha512-Q+LSW1Pw5RO7UOkwydydqokuADe90Sz4cbSNOuLpQ3Eb/LWuhsnyWAXbbH5JsOcbRtFl/wNvyVL0EA/sqnFGuA==}
+
   '@shopify/graphql-codegen@0.0.2':
     resolution: {integrity: sha512-DScSpsQ+ucv6Y4cujXa5ye9r4lZ6Jl7S+90iyfxEgeTW6HVh/0b9PDcSCJ4T1EONc7kmvCx1dd83tTvCmc7X7A==}
     engines: {node: '>=18'}
@@ -886,6 +892,9 @@ packages:
 
   '@shopify/hydrogen-codegen@0.3.2':
     resolution: {integrity: sha512-e1hWL3y4hHXNFfG7xgn5VLG5OCeaxwVygLFr7IPtRqq2fU67nPGiMBbTgN79ytCyaZJA2N/t1TGU2JO+YWjENw==}
+
+  '@shopify/storefront-api-client@1.0.6':
+    resolution: {integrity: sha512-6XNeb06+d8tFuIB8QtISE4Qy3BCWSSKJQWMkkp15K4aAJdthITteqOUMqJI/HPsvdt04wQcwmv4iUfDi4QKnkQ==}
 
   '@solidifront/codegen@1.0.7':
     resolution: {integrity: sha512-F5v94xF0ZknZuooBve/iTPZL0rW1gb/PcpbhDL4/a/Hsx+Dm096VJJdEtmlqSVtTRICyY0bZxCdRzEeH8Oifng==}
@@ -3467,6 +3476,8 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.9':
     optional: true
 
+  '@shopify/graphql-client@1.3.1': {}
+
   '@shopify/graphql-codegen@0.0.2(graphql@16.10.0)':
     dependencies:
       '@graphql-codegen/add': 5.0.3(graphql@16.10.0)
@@ -3483,6 +3494,10 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - graphql
+
+  '@shopify/storefront-api-client@1.0.6':
+    dependencies:
+      '@shopify/graphql-client': 1.3.1
 
   '@solidifront/codegen@1.0.7(graphql@16.10.0)':
     dependencies:

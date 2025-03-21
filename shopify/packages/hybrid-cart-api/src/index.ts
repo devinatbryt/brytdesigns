@@ -5,6 +5,7 @@ import * as LogLevel from "effect/LogLevel";
 import * as API from "./effect/index.js";
 import * as AjaxRequest from "./effect/services/AjaxRequest.js";
 import * as StorefrontClient from "@solidifront/storefront-client/effect";
+import { ParseError } from "effect/ParseResult";
 
 export namespace createHybridCartClient {
   export type Options = {
@@ -52,7 +53,7 @@ export const createHybridCartApi = ({ debug = false }) => {
               error._tag === "RequestError" ||
               error._tag === "ResponseError" ||
               error._tag ===
-                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+              "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
             ) {
               return Effect.fail(
                 new Error(error.message, {
@@ -94,7 +95,7 @@ export const createHybridCartApi = ({ debug = false }) => {
               error._tag === "RequestError" ||
               error._tag === "ResponseError" ||
               error._tag ===
-                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+              "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
             ) {
               return Effect.fail(
                 new Error(error.message, {
@@ -136,7 +137,7 @@ export const createHybridCartApi = ({ debug = false }) => {
               error._tag === "RequestError" ||
               error._tag === "ResponseError" ||
               error._tag ===
-                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+              "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
             ) {
               return Effect.fail(
                 new Error(error.message, {
@@ -179,7 +180,7 @@ export const createHybridCartApi = ({ debug = false }) => {
               error._tag === "RequestError" ||
               error._tag === "ResponseError" ||
               error._tag ===
-                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+              "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
             ) {
               return Effect.fail(
                 new Error(error.message, {
@@ -222,7 +223,7 @@ export const createHybridCartApi = ({ debug = false }) => {
               error._tag === "RequestError" ||
               error._tag === "ResponseError" ||
               error._tag ===
-                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
+              "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
             ) {
               return Effect.fail(
                 new Error(error.message, {
@@ -262,13 +263,15 @@ export const createHybridCartApi = ({ debug = false }) => {
             Effect.provide(StorefrontClient.Default),
             Effect.provide(baseLayer),
             Effect.catchAll((error) => {
+              if (!("_tag" in error) && error instanceof Error) {
+                return Effect.fail(error);
+              }
               if (
                 error._tag === "ParseError" ||
                 error._tag === "RequestError" ||
                 error._tag === "ResponseError" ||
                 error._tag ===
-                  "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError" ||
-                error._tag === "ExtractOperationNameError"
+                "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError"
               ) {
                 return Effect.fail(
                   new Error(error.message, {

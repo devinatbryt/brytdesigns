@@ -1,5 +1,18 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.23
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/shopify-utils@1.2.10
+
+## 1.2.22
+
+### Patch Changes
+
+- Switch to different storefront client for testing
+
 ## 1.2.21
 
 ### Patch Changes
