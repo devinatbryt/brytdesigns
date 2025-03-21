@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.21
+
+### Patch Changes
+
+- Attempt at fixing parsing bug
+
 ## 1.2.20
 
 ### Patch Changes
