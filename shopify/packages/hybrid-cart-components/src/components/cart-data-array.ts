@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import { getTemplateContent, type Format } from "../utils/index.js";
 
-import { Show, For, type Accessor, createEffect } from "solid-js";
+import { Show, For, type Accessor } from "solid-js";
 
 import {
   type ValidHybridPath,

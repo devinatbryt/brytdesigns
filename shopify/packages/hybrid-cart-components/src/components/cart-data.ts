@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import { type Format } from "../utils/index.js";
 
-import { createEffect, Show } from "solid-js";
+import { Show } from "solid-js";
 
 import {
   type ValidHybridPath,

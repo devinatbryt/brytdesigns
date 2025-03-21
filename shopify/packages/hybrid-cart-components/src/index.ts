@@ -12,6 +12,7 @@ import {
   CartDataInjection,
   CartDataListener,
   CartDataListenerStatus,
+  CartLoadingState,
 } from "./components/index.js";
 
 customShadowlessElement(
@@ -81,6 +82,12 @@ customShadowlessElement(
   "cart-data-listener-status",
   {},
   correctElementType(CartDataListenerStatus),
+);
+
+customShadowlessElement(
+  "cart-loading-state",
+  { ignoredStates: [] },
+  correctElementType(CartLoadingState),
 );
 
 export * from "./hooks/index.js";

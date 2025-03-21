@@ -5,7 +5,6 @@ import {
   provideFullPropertyPathContext,
   useFullPropertyPath,
 } from "../hooks/index.js";
-import { createEffect } from "solid-js";
 
 type CartDataArrayItemProps = {
   itemIndex: ValidHybridPath;

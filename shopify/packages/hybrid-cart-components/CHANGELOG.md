@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.0
+
+### Minor Changes
+
+- Added new 'cart-loading-state' component
+
 ## 0.1.44
 
 ### Patch Changes
