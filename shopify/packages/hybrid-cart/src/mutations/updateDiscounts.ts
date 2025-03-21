@@ -17,12 +17,8 @@ export const mutation = createMutation(
 
       return response.data;
     },
-    onError() {
+    onSettled() {
       Cart.invalidate();
-    },
-    onSuccess(cart) {
-      if (!cart) return Cart.invalidate();
-      Cart.set(() => cart);
     },
   }),
   () => client,

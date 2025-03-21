@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.23
+
+### Patch Changes
+
+- Remove immediate setting of cart to ensure we always fetch the latest
+
 ## 0.1.22
 
 ### Patch Changes
