@@ -4,8 +4,7 @@ import { observable } from "solid-js";
 
 import { Cart } from "./query/index.js";
 
-export const uniq = (array: string[]): string[] =>
-  Array.from(new Set(...array));
+export const uniq = (array: string[]): string[] => Array.from(new Set(array));
 
 export const getNormalizedAttributes = () => {
   const cart = Cart.get();
@@ -24,7 +23,8 @@ export const getCartDiscountCodes = () => {
   const itemLevelCodes = (cart?.items || [])?.reduce((codes, item) => {
     const itemCodes = (item?.line_level_discount_allocations || [])
       .filter(
-        (allocation) => allocation.discount_application.type === "discount_code"
+        (allocation) =>
+          allocation.discount_application.type === "discount_code",
       )
       .map((allocation) => allocation.discount_application.title);
     return uniq([...codes, ...itemCodes]);
@@ -39,7 +39,7 @@ function defaultUnwrap<T>(cart: CartData): T {
 
 export function subscribe<T>(
   unwrapValue: (cart: CartData) => T = defaultUnwrap,
-  cb: (data: T) => void
+  cb: (data: T) => void,
 ): () => void {
   // Assuming cartQuery and observable are defined and set correctly.
   const observer = observable(() => unwrapValue(Cart.query.data));
