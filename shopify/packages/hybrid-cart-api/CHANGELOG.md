@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.17
+
+### Patch Changes
+
+- Updated solidifront version
+
 ## 1.2.16
 
 ### Patch Changes
