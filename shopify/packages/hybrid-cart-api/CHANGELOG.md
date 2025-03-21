@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.16
+
+### Patch Changes
+
+- git add .
+
 ## 1.2.15
 
 ### Patch Changes

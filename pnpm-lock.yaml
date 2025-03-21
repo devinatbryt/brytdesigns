@@ -95,8 +95,8 @@ importers:
         specifier: 0.79.3
         version: 0.79.3(effect@3.14.1)
       '@solidifront/storefront-client':
-        specifier: ^0.3.7
-        version: 0.3.7
+        specifier: ^0.3.8
+        version: 0.3.8
       effect:
         specifier: 3.14.1
         version: 3.14.1
@@ -860,8 +860,8 @@ packages:
   '@solidifront/codegen@1.0.7':
     resolution: {integrity: sha512-F5v94xF0ZknZuooBve/iTPZL0rW1gb/PcpbhDL4/a/Hsx+Dm096VJJdEtmlqSVtTRICyY0bZxCdRzEeH8Oifng==}
 
-  '@solidifront/storefront-client@0.3.7':
-    resolution: {integrity: sha512-DaySnUd5Md56EulSu5ENkfjTdfbRuhyZBrlpGxUpucQfXjxXLPJRxfjlu0aqltfSdp3sX/dM6G3R+WHO85p6eA==}
+  '@solidifront/storefront-client@0.3.8':
+    resolution: {integrity: sha512-BKviOemfQ8ipl81ftgZdroPPdrbRiuXQiitCwawXEburNDEs8Dr/GC2ra5dElaI2Q2g4daIgD7xXU9YVcOFrOw==}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
@@ -3427,7 +3427,7 @@ snapshots:
       - encoding
       - graphql
 
-  '@solidifront/storefront-client@0.3.7':
+  '@solidifront/storefront-client@0.3.8':
     dependencies:
       '@effect/platform': 0.79.3(effect@3.14.1)
       effect: 3.14.1
