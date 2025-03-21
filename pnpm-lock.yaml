@@ -93,17 +93,17 @@ importers:
         version: link:../../utils
       '@effect/platform':
         specifier: 0.79.3
-        version: 0.79.3(effect@3.13.12)
+        version: 0.79.3(effect@3.14.1)
       '@solidifront/storefront-client':
         specifier: ^0.3.7
         version: 0.3.7
       effect:
-        specifier: 3.13.12
-        version: 3.13.12
+        specifier: 3.14.1
+        version: 3.14.1
     devDependencies:
       '@effect/vitest':
         specifier: ^0.19.0
-        version: 0.19.2(effect@3.13.12)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))
+        version: 0.19.2(effect@3.14.1)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))
       '@graphql-codegen/cli':
         specifier: ^5.0.5
         version: 5.0.5(@types/node@22.13.8)(enquirer@2.4.1)(graphql@16.10.0)(typescript@5.8.2)
@@ -157,8 +157,8 @@ importers:
   shopify/utils:
     dependencies:
       effect:
-        specifier: 3.13.12
-        version: 3.13.12
+        specifier: 3.14.1
+        version: 3.14.1
     devDependencies:
       '@repo/js-delivr-imports-plugin':
         specifier: workspace:*
@@ -1242,8 +1242,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect@3.13.12:
-    resolution: {integrity: sha512-XHvZA8lOX7vxk+ME3Q+4BN6EVYsyo8csdHmHsD4oYEtWPb2Ou3WPkpavlHOD+DNap8QIwfZjmDtshcGlgV34hA==}
+  effect@3.14.1:
+    resolution: {integrity: sha512-YrE6KYUu8r+fF3/cvdM+SZRZRjarVGhfcJwQjP/YyMmF79fwE1Rf0nWqLZ9Xfw7a9njm5/wmrYP83RYt5WTTbQ==}
 
   electron-to-chromium@1.5.109:
     resolution: {integrity: sha512-AidaH9JETVRr9DIPGfp1kAarm/W6hRJTPuCnkF+2MqhF4KaAgRIcBc8nvjk+YMXZhwfISof/7WG29eS4iGxQLQ==}
@@ -2758,15 +2758,15 @@ snapshots:
       human-id: 4.1.1
       prettier: 2.8.8
 
-  '@effect/platform@0.79.3(effect@3.13.12)':
+  '@effect/platform@0.79.3(effect@3.14.1)':
     dependencies:
-      effect: 3.13.12
+      effect: 3.14.1
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
-  '@effect/vitest@0.19.2(effect@3.13.12)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))':
+  '@effect/vitest@0.19.2(effect@3.14.1)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0))':
     dependencies:
-      effect: 3.13.12
+      effect: 3.14.1
       vitest: 3.0.7(@types/node@22.13.8)(jiti@2.4.2)(yaml@2.7.0)
 
   '@envelop/core@5.1.1':
@@ -3429,8 +3429,8 @@ snapshots:
 
   '@solidifront/storefront-client@0.3.7':
     dependencies:
-      '@effect/platform': 0.79.3(effect@3.13.12)
-      effect: 3.13.12
+      '@effect/platform': 0.79.3(effect@3.14.1)
+      effect: 3.14.1
       typescript: 5.8.2
 
   '@standard-schema/spec@1.0.0': {}
@@ -3812,7 +3812,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect@3.13.12:
+  effect@3.14.1:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2

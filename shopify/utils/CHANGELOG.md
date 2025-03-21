@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.9
+
+### Patch Changes
+
+- Upgraded effect versions
+
 ## 1.2.8
 
 ### Patch Changes

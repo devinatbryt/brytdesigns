@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-api",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "A hybrid cart that integrates with the AJAX Cart API and the Storefront Api",
   "scripts": {
     "build": "tsup --clean",
@@ -42,6 +42,6 @@
     "@brytdesigns/shopify-utils": "workspace:*",
     "@effect/platform": "0.79.3",
     "@solidifront/storefront-client": "^0.3.7",
-    "effect": "3.13.12"
+    "effect": "3.14.1"
   }
 }
