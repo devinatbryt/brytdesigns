@@ -68,6 +68,8 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
         if (!on)
           return console.error("cart-item-listener: on property is required!");
 
+        let resetStatusId: number | null = null;
+
         function onEvent(e: Event) {
           const cart = HybridCart;
 
@@ -84,8 +86,10 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
               })
               .finally(() => {
                 if (resetStatusDelay > 0) {
-                  setTimeout(() => {
+                  //@ts-ignore
+                  resetStatusId = setTimeout(() => {
                     setStatus("default");
+                    resetStatusId = null;
                   }, resetStatusDelay);
                 } else {
                   setStatus("default");
@@ -190,6 +194,7 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
 
         return onCleanup(() => {
           controller.abort();
+          if (resetStatusId) clearTimeout(resetStatusId);
         });
       },
     ),

@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-components",
-  "version": "0.1.42",
+  "version": "0.1.43",
   "description": "",
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",

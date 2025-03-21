@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.1.43
+
+### Patch Changes
+
+- Remove timeout if cart-data-listener receives new data update
+
 ## 0.1.42
 
 ### Patch Changes
