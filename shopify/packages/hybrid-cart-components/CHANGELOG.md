@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.12
+
+### Patch Changes
+
+- @brytdesigns/shopify-hybrid-cart@0.1.22
+
 ## 0.2.11
 
 ### Patch Changes

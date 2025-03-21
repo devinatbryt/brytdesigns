@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.19
+
+### Patch Changes
+
+- Updated storefront-client to fix potential cors issue
+
 ## 1.2.18
 
 ### Patch Changes
