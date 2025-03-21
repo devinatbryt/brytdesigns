@@ -25,7 +25,6 @@ export const query = createQuery(
     initialData: window.BrytDesigns.initialCart,
     staleTime: 1000 * 60 * 5,
     throwOnError: true,
-    reconcile: "cartQuery",
   }),
   () => client,
 );

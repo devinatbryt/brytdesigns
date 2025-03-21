@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.24
+
+### Patch Changes
+
+- remove reconciliation
+
 ## 0.1.23
 
 ### Patch Changes

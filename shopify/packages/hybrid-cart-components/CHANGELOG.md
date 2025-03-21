@@ -1,5 +1,12 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/shopify-hybrid-cart@0.1.24
+
 ## 0.2.13
 
 ### Patch Changes
