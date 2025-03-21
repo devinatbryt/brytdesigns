@@ -1,6 +1,6 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createEffect, on, onCleanup } from "solid-js";
+import { createEffect, createUniqueId, on, onCleanup } from "solid-js";
 import debounce from "lodash.debounce";
 
 import {
@@ -41,6 +41,8 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
     path,
   });
 
+  let currentEventId: string | null = null;
+
   createEffect(
     on(
       () => ({
@@ -68,10 +70,15 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
         if (!on)
           return console.error("cart-item-listener: on property is required!");
 
-        let resetStatusId: number | null = null;
+        let resetStatusId: number | null = null,
+          tempEventId: string | null = null;
 
         function onEvent(e: Event) {
           const cart = HybridCart;
+
+          (currentEventId = createUniqueId()), (tempEventId = currentEventId);
+
+          if (preventDefault) e.preventDefault();
 
           async function handleStatus<T>(promise: Promise<T>) {
             setStatus("loading");
@@ -194,7 +201,8 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
 
         return onCleanup(() => {
           controller.abort();
-          if (resetStatusId) clearTimeout(resetStatusId);
+          if (resetStatusId && currentEventId !== tempEventId)
+            clearTimeout(resetStatusId);
         });
       },
     ),
