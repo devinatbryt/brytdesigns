@@ -71,13 +71,17 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
           );
 
         if (injectionType === "attribute" && value) {
-          target.setAttribute(attributeName, value);
+          setTimeout(() => {
+            target.setAttribute(attributeName, value);
+          });
           return;
         }
 
         if (injectionType === "property" && value) {
-          //@ts-ignore
-          target[attributeName] = value;
+          setTimeout(() => {
+            //@ts-ignore
+            target[attributeName] = value;
+          });
           return;
         }
 
