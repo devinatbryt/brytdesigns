@@ -50,9 +50,10 @@ export const DiscountApplication = Schema.Struct({
   target_type: Schema.Literal("line_item", "shipping_line"),
   title: Schema.NonEmptyString,
   total_allocated_amount: Schema.Number,
-  type: Schema.Literal("automatic", "discount_code", "manual", "script"),
+  type: Schema.Literal("", "automatic", "discount_code", "manual", "script"),
   value: Schema.NumberFromString,
   value_type: Schema.Literal("fixed_amount", "percentage"),
+  description: Schema.NullOr(Schema.String),
 });
 
 export const Discount = Schema.Struct({
