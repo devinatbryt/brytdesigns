@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.26
+
+### Patch Changes
+
+- Attempt at fixing different discount schema only for update route
+- Updated dependencies
+  - @brytdesigns/shopify-hybrid-cart-api@1.2.20
+
 ## 0.1.25
 
 ### Patch Changes

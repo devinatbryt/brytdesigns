@@ -37,9 +37,11 @@ export const mutation = createMutation(
     },
     onError(_, __, context) {
       if (context?.previousCart) Cart.set(() => context.previousCart);
-    },
-    onSettled() {
       Cart.invalidate();
+    },
+    onSuccess(cart) {
+      if (!cart) return Cart.invalidate();
+      Cart.set(() => cart);
     },
   }),
   () => client,

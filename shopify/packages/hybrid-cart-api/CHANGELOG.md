@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.20
+
+### Patch Changes
+
+- Attempt at fixing different discount schema only for update route
+
 ## 1.2.19
 
 ### Patch Changes
