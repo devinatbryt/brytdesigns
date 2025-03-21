@@ -46,12 +46,16 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     const v = value();
 
     if (!v) {
-      console.warn("cart-data-array: value is null or undefined.");
+      console.warn(
+        `cart-data-array: value is null or undefined at path ${fullPath()}`,
+      );
       return null;
     }
 
     if (!Array.isArray(v)) {
-      console.warn("cart-data-array: value is not an array.");
+      console.warn(
+        `cart-data-array: value is not an array at path ${fullPath()}`,
+      );
       return null;
     }
 

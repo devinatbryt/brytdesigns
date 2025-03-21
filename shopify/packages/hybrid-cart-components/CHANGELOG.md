@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.1
+
+### Patch Changes
+
+- Added better warning logging
+
 ## 0.2.0
 
 ### Minor Changes
