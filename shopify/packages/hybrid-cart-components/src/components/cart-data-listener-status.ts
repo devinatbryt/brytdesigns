@@ -31,6 +31,8 @@ export const CartDataListenerStatus: CorrectComponentType<{}> = (
     return s;
   };
 
+  element.replaceChildren(...[]);
+
   return createMemo(() => {
     const state = currentStatus();
     if (!state) return null;

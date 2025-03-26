@@ -17,14 +17,14 @@ type ConditionValue = {
 
 type Condition = {
   type:
-  | "typeof"
-  | "includes_property"
-  | "equals"
-  | "not_equals"
-  | "lt"
-  | "lte"
-  | "gt"
-  | "gte";
+    | "typeof"
+    | "includes_property"
+    | "equals"
+    | "not_equals"
+    | "lt"
+    | "lte"
+    | "gt"
+    | "gte";
   format?: Format;
   invert?: boolean;
   valueA: ConditionValue;
@@ -144,16 +144,18 @@ export const CartDataConditions: CorrectComponentType<
     element,
   });
 
+  element.replaceChildren(...[]);
+
   return html`
     <${For} each=${() => conditionTemplates}>
       ${(tmpl: HTMLTemplateElement, idx: Accessor<number>) => {
-      const conditions = allConditions()[idx()];
-      return html`
+        const conditions = allConditions()[idx()];
+        return html`
           <${Show} when=${() => validateConditions(conditions, data())}>
             ${() => Array.from(tmpl.content.cloneNode(true).childNodes)}
           <//>
         `;
-    }}
+      }}
     <//>
   `;
 };

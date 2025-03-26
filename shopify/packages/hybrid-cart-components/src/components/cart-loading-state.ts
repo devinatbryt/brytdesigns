@@ -39,17 +39,19 @@ export const CartLoadingState: CorrectComponentType<CartLoadingStateProps> = (
     return state;
   });
 
+  element.replaceChildren(...[]);
+
   return html`
     <${Show} when=${() => cart}>
       ${() => {
-      const state = cartState();
-      if (!state) return null;
-      if (!templates[state]) return null;
-      const children = Array.from(
-        templates[state].cloneNode(true).childNodes,
-      );
-      return children;
-    }}
+        const state = cartState();
+        if (!state) return null;
+        if (!templates[state]) return null;
+        const children = Array.from(
+          templates[state].cloneNode(true).childNodes,
+        );
+        return children;
+      }}
     <//>
   `;
 };

@@ -1,6 +1,6 @@
-import { createContext } from "component-register";
+import type { createContext } from "component-register";
 
-export default function getContextFromProvider<T>(
+export function getContextFromProvider<T>(
   context: ReturnType<typeof createContext>,
   element: Element,
 ) {

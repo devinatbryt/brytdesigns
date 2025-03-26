@@ -32,12 +32,12 @@ export default defineConfig([
       await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
     },
   },
-  {
-    ...commonConfig,
-    format: "esm",
-    entry: ["src/**/*.ts"],
-    outDir: `${outDir}/jsdelivr`,
-    dts: false,
-    esbuildPlugins: [jsDelivrImportsPlugin()],
-  },
+  // {
+  //   ...commonConfig,
+  //   format: "esm",
+  //   entry: ["src/**/*.ts"],
+  //   outDir: `${outDir}/jsdelivr`,
+  //   dts: false,
+  //   esbuildPlugins: [jsDelivrImportsPlugin()],
+  // },
 ]);

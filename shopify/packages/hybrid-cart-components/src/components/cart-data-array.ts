@@ -62,6 +62,8 @@ export const CartDataArray: CorrectComponentType<CartDataArrayProps> = (
     return v;
   };
 
+  element.replaceChildren(...[]);
+
   return html`
     <${Show} when=${() => arrayValue() && arrayValue()!.length > 0}>
       <${For} each=${arrayValue}>

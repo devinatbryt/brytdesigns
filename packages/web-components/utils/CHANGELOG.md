@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.8
+
+### Patch Changes
+
+- New drawer web component, updated effect packages to latest and changed build processes
+
 ## 0.1.7
 
 ### Patch Changes

@@ -1,6 +1,5 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { jsDelivrImportsPlugin } from "@repo/js-delivr-imports-plugin";
 import { generateDtsBundle } from "dts-bundle-generator";
 import { defineConfig } from "tsup";
 
@@ -16,25 +15,6 @@ const commonConfig = {
 };
 
 export default defineConfig([
-  {
-    ...commonConfig,
-    format: "esm",
-    entry: ["src/effect/**/*.ts"],
-    outDir: `${outDir}/effect`,
-    dts: false,
-    async onSuccess() {
-      const [effectDts] = generateDtsBundle([
-        {
-          filePath: path.resolve("./src/effect/index.ts"),
-        },
-      ]);
-
-      await fs.writeFile(
-        path.resolve(outDir, "effect", "index.d.ts"),
-        effectDts,
-      );
-    },
-  },
   {
     ...commonConfig,
     format: "esm",

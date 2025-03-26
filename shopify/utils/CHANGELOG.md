@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.11
+
+### Patch Changes
+
+- New drawer web component, updated effect packages to latest and changed build processes
+
 ## 1.2.10
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.30
+
+### Patch Changes
+
+- New drawer web component, updated effect packages to latest and changed build processes
+- Updated dependencies
+  - @brytdesigns/shopify-hybrid-cart-api@1.2.24
+
 ## 0.1.29
 
 ### Patch Changes
