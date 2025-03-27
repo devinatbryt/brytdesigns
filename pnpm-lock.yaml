@@ -191,6 +191,28 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
+  shopify/packages/product-info-components:
+    dependencies:
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../../../packages/web-components/utils
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
   shopify/utils:
     dependencies:
       effect:
