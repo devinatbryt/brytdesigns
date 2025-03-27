@@ -62,7 +62,7 @@ function initializeProductContext(props: CreateContextOptions) {
   ] as const;
 }
 
-const ProductContextState = createContext(initializeProductContext);
+export const ProductContextState = createContext(initializeProductContext);
 
 export const provideProductContext = (
   initialState: Omit<CreateContextOptions, "root">,
