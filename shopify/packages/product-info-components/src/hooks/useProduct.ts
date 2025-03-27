@@ -25,7 +25,7 @@ function initializeProductContext(props: CreateContextOptions) {
   function updateSelectedVariant(variantId: string | number) {
     if (
       typeof state?.product?.selected_or_first_available_variant ===
-      "undefined" ||
+        "undefined" ||
       typeof state?.product === "undefined" ||
       typeof state?.product?.variants === "undefined"
     )
@@ -62,7 +62,7 @@ function initializeProductContext(props: CreateContextOptions) {
   ] as const;
 }
 
-export const ProductContextState = createContext(initializeProductContext);
+const ProductContextState = createContext(initializeProductContext);
 
 export const provideProductContext = (
   initialState: Omit<CreateContextOptions, "root">,

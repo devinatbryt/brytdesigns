@@ -2,7 +2,7 @@ import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
 import { createEffect, createMemo, observable } from "solid-js";
 
-import { provideProductContext, ProductContextState } from "../hooks/index.js";
+import { provideProductContext } from "../hooks/index.js";
 
 import type { Product } from "../types.js";
 
@@ -49,9 +49,6 @@ export const ProductInfo: CorrectComponentType<ProductInfoProps> = (
   }
 
   Object.assign(element, {
-    contextIds: {
-      product: ProductContextState.id,
-    },
     subscribe,
   });
 
