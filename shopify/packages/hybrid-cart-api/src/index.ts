@@ -4,8 +4,6 @@ import * as Layer from "effect/Layer";
 import * as LogLevel from "effect/LogLevel";
 import * as API from "./effect/index.js";
 import * as AjaxRequest from "./effect/services/AjaxRequest.js";
-import * as StorefrontClient from "@solidifront/storefront-client/effect";
-import { ParseError } from "effect/ParseResult";
 
 export namespace createHybridCartClient {
   export type Options = {
@@ -260,8 +258,7 @@ export const createHybridCartApi = ({ debug = false }) => {
         Effect.runPromise(
           API.discounts.update(input).pipe(
             Logger.withMinimumLogLevel(minimumLogLevel),
-            Effect.provide(StorefrontClient.Default),
-            Effect.provide(baseLayer),
+            Effect.provide(ajaxLayer),
             Effect.catchAll((error) => {
               if (!("_tag" in error) && error instanceof Error) {
                 return Effect.fail(error);

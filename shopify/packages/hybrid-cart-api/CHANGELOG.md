@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.25
+
+### Patch Changes
+
+- Removed solidifront/storefront client as dependency
+
 ## 1.2.24
 
 ### Patch Changes

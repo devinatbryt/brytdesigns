@@ -67,6 +67,31 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
+  packages/web-components/keen-slider:
+    dependencies:
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../utils
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      keen-slider:
+        specifier: ^6.8.6
+        version: 6.8.6
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
   packages/web-components/utils:
     dependencies:
       component-register:
@@ -131,9 +156,6 @@ importers:
       '@shopify/storefront-api-client':
         specifier: ^1.0.6
         version: 1.0.6
-      '@solidifront/storefront-client':
-        specifier: ^0.3.10
-        version: 0.3.10
       effect:
         specifier: 3.14.2
         version: 3.14.2
@@ -955,9 +977,6 @@ packages:
   '@solidifront/codegen@1.0.7':
     resolution: {integrity: sha512-F5v94xF0ZknZuooBve/iTPZL0rW1gb/PcpbhDL4/a/Hsx+Dm096VJJdEtmlqSVtTRICyY0bZxCdRzEeH8Oifng==}
 
-  '@solidifront/storefront-client@0.3.10':
-    resolution: {integrity: sha512-C8kq85lTYHOrNkLmMqxQbacM+cfggrBOIF/JVMIUMcoT1dIRCeaLWj67Ax3ve0i4A9iVo1ymdGRLpy+myhx95A==}
-
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
@@ -1720,6 +1739,9 @@ packages:
 
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
+
+  keen-slider@6.8.6:
+    resolution: {integrity: sha512-dcEQ7GDBpCjUQA8XZeWh3oBBLLmyn8aoeIQFGL/NTVkoEOsmlnXqA4QykUm/SncolAZYGsEk/PfUhLZ7mwMM2w==}
 
   lilconfig@3.1.3:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
@@ -3608,12 +3630,6 @@ snapshots:
       - encoding
       - graphql
 
-  '@solidifront/storefront-client@0.3.10':
-    dependencies:
-      '@effect/platform': 0.80.1(effect@3.14.2)
-      effect: 3.14.2
-      typescript: 5.8.2
-
   '@standard-schema/spec@1.0.0': {}
 
   '@tanstack/query-core@5.67.1': {}
@@ -4389,6 +4405,8 @@ snapshots:
   jsonfile@4.0.0:
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  keen-slider@6.8.6: {}
 
   lilconfig@3.1.3: {}
 
