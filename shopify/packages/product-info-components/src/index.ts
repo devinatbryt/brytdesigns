@@ -15,6 +15,7 @@ customShadowlessElement(
   "product-info",
   {
     product: undefined,
+    isProductPage: false,
   },
   correctElementType(ProductInfo),
 );

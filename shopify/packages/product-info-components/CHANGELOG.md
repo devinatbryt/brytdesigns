@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-product-info-components
 
+## 1.0.3
+
+### Patch Changes
+
+- Minor props bug fix
+
 ## 1.0.2
 
 ### Patch Changes
