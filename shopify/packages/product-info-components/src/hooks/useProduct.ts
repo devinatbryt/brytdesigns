@@ -34,6 +34,12 @@ function initializeProductContext(props: CreateContextOptions) {
       (variant) => variant.id.toString() === variantId.toString(),
     );
 
+    if (
+      newVariant?.id.toString() ===
+      product.selected_or_first_available_variant?.id.toString()
+    )
+      return;
+
     const newState = {
       ...product,
       selected_or_first_available_variant: newVariant,
