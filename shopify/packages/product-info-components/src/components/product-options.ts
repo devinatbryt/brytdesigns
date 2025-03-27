@@ -13,13 +13,5 @@ export const ProductOptions: CorrectComponentType<ProductOptionsProps> = (
     return console.warn(
       "product-options: selected-options attribute is required",
     );
-  provideProductOptionsContext(
-    {
-      get selectedOptions() {
-        return props.selectedOptions;
-      },
-      element,
-    },
-    element,
-  );
+  provideProductOptionsContext(props, element);
 };

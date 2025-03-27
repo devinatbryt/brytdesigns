@@ -4,13 +4,13 @@ import {
   provide,
   consume,
 } from "component-register";
-import { createEffect, mergeProps, splitProps } from "solid-js";
+import { createEffect, mergeProps, splitProps, untrack } from "solid-js";
 import { getContextFromProvider } from "@brytdesigns/web-component-utils";
 
 import { useProduct } from "./useProduct.js";
 
 type CreateContextOptions = {
-  element: HTMLElement & ICustomElement;
+  root: HTMLElement & ICustomElement;
   selectedOptions: string[];
 };
 
@@ -19,18 +19,16 @@ type WalkableNode = Parameters<typeof provide>[2];
 type ProductOptionsContext = ReturnType<typeof initializeProductOptionsContext>;
 
 function initializeProductOptionsContext(props: CreateContextOptions) {
-  const [privateProps, publicProps] = splitProps(props, ["element"]);
-  const [context, methods] = useProduct(privateProps.element);
+  const [privateProps, publicProps] = splitProps(props, ["root"]);
+  const [context, methods] = useProduct(privateProps.root);
 
   function updateSelectedOptions(options: string[]) {
-    privateProps.element.setAttribute(
-      "selected-options",
-      JSON.stringify(options),
-    );
+    privateProps.root.setAttribute("selected-options", JSON.stringify(options));
   }
 
   function updateSelectedOption(option: string, index: number) {
-    const options = [...props.selectedOptions];
+    const current = untrack(() => publicProps.selectedOptions);
+    const options = [...current];
     options[index] = option;
     return updateSelectedOptions(options);
   }

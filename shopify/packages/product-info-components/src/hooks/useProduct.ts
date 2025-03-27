@@ -4,13 +4,13 @@ import {
   provide,
   consume,
 } from "component-register";
-import { mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps, untrack } from "solid-js";
 import { getContextFromProvider } from "@brytdesigns/web-component-utils";
 
 import type { Product } from "../types";
 
 type CreateContextOptions = {
-  element: HTMLElement & ICustomElement;
+  root: HTMLElement & ICustomElement;
   product: Product;
 };
 
@@ -19,29 +19,29 @@ type WalkableNode = Parameters<typeof provide>[2];
 type ProductContext = ReturnType<typeof initializeProductContext>;
 
 function initializeProductContext(props: CreateContextOptions) {
-  const [privateProps, publicProps] = splitProps(props, ["element"]);
+  const [privateProps, publicProps] = splitProps(props, ["root"]);
   const state = mergeProps(publicProps, {});
 
   function updateSelectedVariant(variantId: string | number) {
+    const product = untrack(() => state?.product);
     if (
-      typeof state?.product?.selected_or_first_available_variant ===
-        "undefined" ||
-      typeof state?.product === "undefined" ||
-      typeof state?.product?.variants === "undefined"
+      typeof product?.selected_or_first_available_variant === "undefined" ||
+      typeof product === "undefined" ||
+      typeof product?.variants === "undefined"
     )
       return;
-    const newVariant = state.product.variants.find(
+    const newVariant = product.variants.find(
       (variant) => variant.id.toString() === variantId.toString(),
     );
 
     const newState = {
-      ...props.product,
+      ...product,
       selected_or_first_available_variant: newVariant,
     };
 
-    privateProps.element.setAttribute("product", JSON.stringify(newState));
+    privateProps.root.setAttribute("product", JSON.stringify(newState));
 
-    privateProps.element.dispatchEvent(
+    privateProps.root.dispatchEvent(
       new CustomEvent("variant-updated", {
         detail: {
           variant: newVariant,

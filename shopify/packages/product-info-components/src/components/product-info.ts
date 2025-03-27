@@ -23,15 +23,7 @@ export const ProductInfo: CorrectComponentType<ProductInfoProps> = (
     return console.warn(
       "product-info: product attribute needs selected or first available variant object",
     );
-  provideProductContext(
-    {
-      get product() {
-        return props.product!;
-      },
-      element,
-    },
-    element,
-  );
+  provideProductContext(props as any, element);
 
   const url = createMemo(() => {
     const url = new URL(window.location.href);
