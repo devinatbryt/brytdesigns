@@ -31,7 +31,7 @@ function initializeProductContext(props: CreateContextOptions) {
     )
       return;
     const newVariant = product.variants.find(
-      (variant) => variant.id.toString() === variantId.toString(),
+      (variant) => variant.id.toString() === variantId.toString()
     );
 
     if (
@@ -54,7 +54,7 @@ function initializeProductContext(props: CreateContextOptions) {
           product: newState,
         },
         bubbles: true,
-      }),
+      })
     );
   }
 
@@ -72,7 +72,7 @@ const ProductContextState = createContext(initializeProductContext);
 
 export const provideProductContext = (
   initialState: Omit<CreateContextOptions, "root">,
-  element: WalkableNode,
+  element: WalkableNode
 ): ProductContext => {
   const props = mergeProps(initialState, { root: element });
   return provide(ProductContextState, props, element);
@@ -87,7 +87,7 @@ export const useProduct = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "DrawerContext not found! Please ensure to wrap your custom element with drawer-context element.",
+      "ProductInfoContext not found! Please ensure to wrap your custom element with product-info element."
     );
   }
 
@@ -97,7 +97,7 @@ export const useProduct = (element: HTMLElement & ICustomElement) => {
 export const getProductContext = (element: Element) => {
   const context = getContextFromProvider<ProductContext>(
     ProductContextState,
-    element,
+    element
   );
   return useProductContext(context);
 };

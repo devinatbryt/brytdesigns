@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.23
+
+### Patch Changes
+
+- Minor error wording and css variable namespace updates
+
 ## 0.2.22
 
 ### Patch Changes

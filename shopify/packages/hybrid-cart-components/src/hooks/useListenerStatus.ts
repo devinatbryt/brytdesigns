@@ -39,7 +39,7 @@ export const provideListenerStatusContext = (options: {
 };
 
 export const useListenerStatusContext = (
-  context: ListenerStatusContextType,
+  context: ListenerStatusContextType
 ) => {
   return context;
 };
@@ -49,7 +49,7 @@ export const useListenerStatus = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "cart-data-listener context not found! Please ensure to wrap your custom element with cart-data-listener element.",
+      "CartListenerContext not found! Please ensure to wrap your custom element with cart-data-listener element."
     );
   }
 

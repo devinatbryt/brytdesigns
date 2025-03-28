@@ -13,7 +13,7 @@ type HybridCartContextType = () => (typeof HybridCart)["data"];
 const HybridCartContext = createContext(() => () => HybridCart.data);
 
 export const provideHybridCartContext = (
-  element: WalkableNode,
+  element: WalkableNode
 ): HybridCartContextType => {
   return provide(HybridCartContext, {}, element);
 };
@@ -27,7 +27,7 @@ export const useHybridCart = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "CartContext not found! Please ensure to wrap your custom element with hybrid-cart element.",
+      "CartContext not found! Please ensure to wrap your custom element with cart-context element."
     );
   }
 
