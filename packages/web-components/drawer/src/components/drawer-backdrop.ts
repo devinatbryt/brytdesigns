@@ -56,7 +56,7 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
     return animate(
       element,
       {
-        opacity: [`var(--opacity-to)`, `var(--opacity-from)`],
+        opacity: [`var(--drawer--opacity-to)`, `var(--drawer--opacity-from)`],
       },
       options
     );

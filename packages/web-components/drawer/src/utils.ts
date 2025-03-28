@@ -23,37 +23,43 @@ export async function controlPromise(controls: AnimationPlaybackControls) {
 
 export function convertPositionToTranslate(position: Position) {
   if (position === POSITION.TOP || position === POSITION.BOTTOM)
-    return ["translateY(var(--d-slide-from))", "translateY(var(--d-slide-to))"];
+    return [
+      "translateY(var(--drawer--slide-from))",
+      "translateY(var(--drawer--slide-to))",
+    ];
 
-  return ["translateX(var(--d-slide-from))", "translateX(var(--d-slide-to))"];
+  return [
+    "translateX(var(--drawer--slide-from))",
+    "translateX(var(--drawer--slide-to))",
+  ];
 }
 
 export function getTransitionConfig(style: CSSStyleDeclaration) {
   const properties = {
-    autoplay: style.getPropertyValue("--m-autoplay"),
-    bounce: style.getPropertyValue("--m-bounce"),
-    bounceDamping: style.getPropertyValue("--m-bounce-damping"),
-    bounceStiffness: style.getPropertyValue("--m-bounce-stiffness"),
-    duration: style.getPropertyValue("--m-duration"),
-    damping: style.getPropertyValue("--m-damping"),
-    delay: style.getPropertyValue("--m-delay"),
-    ease: style.getPropertyValue("--m-ease"),
-    elapsed: style.getPropertyValue("--m-elapsed"),
-    mass: style.getPropertyValue("--m-mass"),
-    max: style.getPropertyValue("--m-max"),
-    min: style.getPropertyValue("--m-min"),
-    power: style.getPropertyValue("--m-power"),
-    repeat: style.getPropertyValue("--m-repeat"),
-    repeatDelay: style.getPropertyValue("--m-repeat-delay"),
-    repeatType: style.getPropertyValue("--m-repeat-type"),
-    restDelta: style.getPropertyValue("--m-rest-delta"),
-    restSpeed: style.getPropertyValue("--m-rest-speed"),
-    startTime: style.getPropertyValue("--m-start-time"),
-    timeConstant: style.getPropertyValue("--m-time-constant"),
-    times: style.getPropertyValue("--m-times"),
-    type: style.getPropertyValue("--m-type"),
-    velocity: style.getPropertyValue("--m-velocity"),
-    visualDuration: style.getPropertyValue("--m-visual-duration"),
+    autoplay: style.getPropertyValue("--motion--autoplay"),
+    bounce: style.getPropertyValue("--motion--bounce"),
+    bounceDamping: style.getPropertyValue("--motion--bounce-damping"),
+    bounceStiffness: style.getPropertyValue("--motion--bounce-stiffness"),
+    duration: style.getPropertyValue("--motion--duration"),
+    damping: style.getPropertyValue("--motion--damping"),
+    delay: style.getPropertyValue("--motion--delay"),
+    ease: style.getPropertyValue("--motion--ease"),
+    elapsed: style.getPropertyValue("--motion--elapsed"),
+    mass: style.getPropertyValue("--motion--mass"),
+    max: style.getPropertyValue("--motion--max"),
+    min: style.getPropertyValue("--motion--min"),
+    power: style.getPropertyValue("--motion--power"),
+    repeat: style.getPropertyValue("--motion--repeat"),
+    repeatDelay: style.getPropertyValue("--motion--repeat-delay"),
+    repeatType: style.getPropertyValue("--motion--repeat-type"),
+    restDelta: style.getPropertyValue("--motion--rest-delta"),
+    restSpeed: style.getPropertyValue("--motion--rest-speed"),
+    startTime: style.getPropertyValue("--motion--start-time"),
+    timeConstant: style.getPropertyValue("--motion--time-constant"),
+    times: style.getPropertyValue("--motion--times"),
+    type: style.getPropertyValue("--motion--type"),
+    velocity: style.getPropertyValue("--motion--velocity"),
+    visualDuration: style.getPropertyValue("--motion--visual-duration"),
   };
   return {
     autoplay: properties.autoplay === "true",

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.1
+
+### Patch Changes
+
+- Minor error wording and css variable namespace updates
+
 ## 1.0.0
 
 ### Major Changes
