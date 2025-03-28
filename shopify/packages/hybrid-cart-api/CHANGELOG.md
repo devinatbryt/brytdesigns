@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.26
+
+### Patch Changes
+
+- Updated package versions for effect and effect/platform
+
 ## 1.2.25
 
 ### Patch Changes
