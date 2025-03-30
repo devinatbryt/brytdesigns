@@ -4,7 +4,14 @@ import {
   provide,
   consume,
 } from "component-register";
-import { createEffect, mergeProps, on, batch, splitProps } from "solid-js";
+import {
+  createEffect,
+  mergeProps,
+  on,
+  batch,
+  splitProps,
+  untrack,
+} from "solid-js";
 import { createStore } from "solid-js/store";
 import {
   toHyphenated,
@@ -50,12 +57,15 @@ function initializeDrawerContext(props: CreateContextOptions) {
     key: keyof Omit<CreateContextOptions, "root">,
     value: boolean | ((v: boolean) => boolean),
   ) {
+    const currentValue = untrack(() => props[key]);
     if (typeof value === "function") {
-      const currentValue = props[key];
+      const currentValue = untrack(() => props[key]);
       const result = value(currentValue || false);
+      if (`${currentValue}` === `${value}`) return;
       element.root.setAttribute(toHyphenated(key), `${result}`);
       return;
     }
+    if (`${currentValue}` === `${value}`) return;
     return element.root.setAttribute(toHyphenated(key), `${value}`);
   }
 

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.2
+
+### Patch Changes
+
+- Remove reactive values from set functions to prevent unintentional rerenders.
+
 ## 1.0.1
 
 ### Patch Changes
