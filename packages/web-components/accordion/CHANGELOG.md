@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-accordion
 
+## 1.0.1
+
+### Patch Changes
+
+- Fixed minor bug typo
+
 ## 1.0.0
 
 ### Major Changes

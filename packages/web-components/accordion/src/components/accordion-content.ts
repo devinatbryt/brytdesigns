@@ -130,7 +130,7 @@ export const AccordionContent: CorrectComponentType<AccordionContentProps> = (
     on(
       () => state.isExpanded,
       (isExpanded) => {
-        if (isExpanded) {
+        if (!isExpanded) {
           const animation = collapse(element);
           accordionMethods.updateAnimationQueue(controlPromise(animation));
           return onCleanup(() => animation.complete());
