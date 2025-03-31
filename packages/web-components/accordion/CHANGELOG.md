@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-accordion
 
+## 1.0.2
+
+### Patch Changes
+
+- Attempt at syncing active index with isExpanded
+
 ## 1.0.1
 
 ### Patch Changes

@@ -58,6 +58,12 @@ function initializeAccordionItemContext(props: CreateContextOptions) {
     });
   });
 
+  createEffect(() => {
+    const index = untrack(() => stateProps.index);
+    const isExpanded = stateProps.isExpanded;
+    if (isExpanded) methods.item.update(index);
+  });
+
   function setActive(index: number) {
     methods.item.update(index);
   }
