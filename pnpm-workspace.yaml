@@ -1,6 +1,5 @@
 packages:
   - "shopify/packages/*"
   - "packages/web-components/*"
-  - "packages/forks/*"
   - "packages/*"
   - "shopify/*"
