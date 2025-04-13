@@ -1,0 +1,51 @@
+keen-slider:not([data-keen-slider-disabled]) {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  align-content: flex-start;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -khtml-user-select: none;
+  width: 100%;
+}
+
+keen-slider:not([data-keen-slider-disabled]):not([config*='"perView": "auto"'])
+  .keen-slider__slide {
+  position: relative;
+  overflow: hidden;
+  min-width: calc(
+    calc(100% / var(--slides-per-view, 1)) - var(--slides-spacing, 0px)
+  );
+  min-height: 100%;
+}
+
+keen-slider[config*='"vertical": true']:not([data-keen-slider-disabled])
+  .keen-slider__slide {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(
+    calc(100% / var(--slides-per-view, 1)) - var(--slides-spacing, 0px)
+  );
+  min-width: 100%;
+}
+
+keen-slider:not([data-initialized]) {
+  gap: var(--slides-spacing, 0px);
+}
+
+keen-slider:not([data-keen-slider-disabled])[data-keen-slider-reverse] {
+  flex-direction: row-reverse;
+}
+
+keen-slider:not([data-keen-slider-disabled])[config*='"vertical": true'] {
+  flex-wrap: wrap;
+}
+
+keen-slider:not([data-keen-slider-disabled])[data-keen-slider-moves] * {
+  pointer-events: none;
+}
