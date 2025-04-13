@@ -103,9 +103,31 @@ importers:
       keen-slider:
         specifier: ^6.8.6
         version: 6.8.6
-      motion:
-        specifier: ^12.5.0
-        version: 12.5.0
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
+  packages/web-components/keen-slider-navigation-arrows:
+    dependencies:
+      '@brytdesigns/web-component-keen-slider':
+        specifier: workspace:*
+        version: link:../keen-slider
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../utils
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
       solid-element:
         specifier: ^1.9.1
         version: 1.9.1(solid-js@1.9.5)
