@@ -29,10 +29,6 @@ export default defineConfig([
       ]);
 
       await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
-      await fs.copyFile(
-        path.resolve("src/index.css"),
-        path.resolve("dist/styles.css")
-      );
     },
   },
   // {
