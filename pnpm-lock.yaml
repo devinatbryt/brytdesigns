@@ -103,6 +103,9 @@ importers:
       keen-slider:
         specifier: ^6.8.6
         version: 6.8.6
+      motion:
+        specifier: ^12.5.0
+        version: 12.5.0
       solid-element:
         specifier: ^1.9.1
         version: 1.9.1(solid-js@1.9.5)
