@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.3
+
+### Patch Changes
+
+- Fixed class naming conventions
+
 ## 1.0.2
 
 ### Patch Changes

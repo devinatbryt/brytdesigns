@@ -207,7 +207,8 @@ export const KeenSliderScrollbar: CorrectComponentType<
         function handleClick(e: Event) {
           const bp = e.target as HTMLElement | null;
           if (!bp) return;
-          if (!bp.classList.contains("keen-scrollbar-breakpoint")) return;
+          if (!bp.classList.contains("keen-slider-scrollbar-breakpoint"))
+            return;
           setCurrentIdx(parseInt(bp.getAttribute("data-index") || "0"));
           updateSliderPosition(bp, slider);
         }
@@ -258,16 +259,16 @@ export const KeenSliderScrollbar: CorrectComponentType<
   return html`
     <${Show} when=${() => maxSlides() > 1}>
       <div
-        class="keen-scrollbar-thumb"
+        class="keen-slider-scrollbar-thumb"
         ref=${(el: HTMLElement) => setThumb(el)}
       ></div>
       <ul
-        class="keen-scrollbar-breakpoints"
+        class="keen-slider-scrollbar-breakpoints"
         ref=${(el: HTMLElement) => (breakpointsContainer = el)}
       >
         <${For} each=${() => Array(maxSlides()).fill(0)}>
           ${(_: number, idx: Accessor<number>) => html`
-            <li class="keen-scrollbar-breakpoint" data-index=${idx}>
+            <li class="keen-slider-scrollbar-breakpoint" data-index=${idx}>
               <button type="button" style=${srOnly}>
                 <span style=${srOnly}> Breakpoint ${idx} </span>
               </button>

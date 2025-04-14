@@ -59,7 +59,7 @@ keen-slider-scrollbar::before {
   box-sizing: border-box;
 }
 
-keen-slider-scrollbar .keen-scrollbar-thumb {
+keen-slider-scrollbar .keen-slider-scrollbar-thumb {
   display: block;
   position: relative;
   background: var(--scrollbar-thumb-color);
@@ -68,7 +68,7 @@ keen-slider-scrollbar .keen-scrollbar-thumb {
   z-index: 2;
 }
 
-keen-slider-scrollbar:not([is-vertical]) .keen-scrollbar-thumb {
+keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar-thumb {
   left: 0;
   top: 50% !important;
   transform: translate3d(0, -50%, 0);
@@ -78,7 +78,7 @@ keen-slider-scrollbar:not([is-vertical]) .keen-scrollbar-thumb {
   height: 100%;
 }
 
-keen-slider-scrollbar[is-vertical] .keen-scrollbar-thumb {
+keen-slider-scrollbar[is-vertical] .keen-slider-scrollbar-thumb {
   left: 50% !important;
   top: 0;
   transform: translate3d(-50%, 0%, 0);
@@ -88,7 +88,7 @@ keen-slider-scrollbar[is-vertical] .keen-scrollbar-thumb {
   width: 100%;
 }
 
-keen-slider-scrollbar .keen-scrollbar-breakpoints {
+keen-slider-scrollbar .keen-slider-scrollbar-breakpoints {
   z-index: 1;
   position: absolute;
   display: grid;
@@ -101,12 +101,12 @@ keen-slider-scrollbar .keen-scrollbar-breakpoints {
   padding: 0;
 }
 
-keen-slider-scrollbar:not([is-vertical]) .keen-scrollbar-breakpoints {
+keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar-breakpoints {
   grid-auto-rows: auto;
   grid-template-columns: repeat(var(--total-slides, 1), 1fr);
 }
 
-keen-slider-scrollbar[is-vertical] .keen-scrollbar-breakpoints {
+keen-slider-scrollbar[is-vertical] .keen-slider-scrollbar-breakpoints {
   grid-auto-columns: auto;
   grid-template-rows: repeat(var(--total-slides, 1), 1fr);
 }
