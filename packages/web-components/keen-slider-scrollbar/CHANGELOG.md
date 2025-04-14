@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.4
+
+### Patch Changes
+
+- Renamed css variables and class names to used BEM
+
 ## 1.0.3
 
 ### Patch Changes
