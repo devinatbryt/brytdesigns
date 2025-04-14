@@ -196,6 +196,87 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
 
+  packages/web-components/keen-slider-navigation-dots:
+    dependencies:
+      '@brytdesigns/web-component-keen-slider':
+        specifier: workspace:*
+        version: link:../keen-slider
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../utils
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
+  packages/web-components/keen-slider-scrollbar:
+    dependencies:
+      '@brytdesigns/web-component-keen-slider':
+        specifier: workspace:*
+        version: link:../keen-slider
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@neodrag/vanilla':
+        specifier: ^2.3.0
+        version: 2.3.0
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      popmotion:
+        specifier: ^11.0.5
+        version: 11.0.5
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
+  packages/web-components/keen-slider-slider:
+    dependencies:
+      '@brytdesigns/web-component-keen-slider':
+        specifier: workspace:*
+        version: link:../keen-slider
+      '@brytdesigns/web-component-utils':
+        specifier: workspace:*
+        version: link:../utils
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.5)
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
+
   packages/web-components/utils:
     dependencies:
       component-register:
@@ -1216,6 +1297,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@neodrag/vanilla@2.3.0':
+    resolution: {integrity: sha512-YA4zyYEw9DlwQR7XA8vAHXsGSufMT9cbwhIwSJoe3vTGWk89EKsGBbpkfJxv4sOoqJyjRxNpkZjL89Rs001WhQ==}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -2075,6 +2159,9 @@ packages:
       react-dom:
         optional: true
 
+  framesync@6.1.2:
+    resolution: {integrity: sha512-jBTqhX6KaQVDyus8muwZbBeGGP0XgujBRbQ7gM7BRdS3CadCZIHiawyzYLnafYcvZIh5j8WE7cxZKFn7dXhu9g==}
+
   fs-extra@7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
     engines: {node: '>=6 <7 || >=8'}
@@ -2189,6 +2276,9 @@ packages:
 
   header-case@2.0.4:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
+
+  hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   html-encoding-sniffer@4.0.0:
     resolution: {integrity: sha512-Y22oTqIU4uuPgEemfz7NDJz6OeKf12Lsu+QC+s3BVpda64lTiMYCyGwg5ki4vFxkMwQdeZDl2adZoqUgdFuTgQ==}
@@ -2749,6 +2839,9 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
+  popmotion@11.0.5:
+    resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
+
   postcss-load-config@6.0.1:
     resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
     engines: {node: '>= 18'}
@@ -3044,6 +3137,9 @@ packages:
     resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
     engines: {node: '>=4'}
 
+  style-value-types@5.1.2:
+    resolution: {integrity: sha512-Vs9fNreYF9j6W2VvuDTP7kepALi7sk0xtk2Tu8Yxi9UoajJdEVpNpCov0HsLTqXvNGKX+Uv09pkozVITi1jf3Q==}
+
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -3160,6 +3256,9 @@ packages:
 
   ts-log@2.2.7:
     resolution: {integrity: sha512-320x5Ggei84AxzlXp91QkIGSw5wgaLT6GeAH0KsqDmRZdVWW2OiSeVvElVoatk3f7nicwXlElXsoFkARiGE2yg==}
+
+  tslib@2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
@@ -4642,6 +4741,8 @@ snapshots:
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.3':
     optional: true
 
+  '@neodrag/vanilla@2.3.0': {}
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -5524,6 +5625,10 @@ snapshots:
       motion-utils: 12.5.0
       tslib: 2.8.1
 
+  framesync@6.1.2:
+    dependencies:
+      tslib: 2.4.0
+
   fs-extra@7.0.1:
     dependencies:
       graceful-fs: 4.2.11
@@ -5650,6 +5755,8 @@ snapshots:
     dependencies:
       capital-case: 1.0.4
       tslib: 2.8.1
+
+  hey-listen@1.0.8: {}
 
   html-encoding-sniffer@4.0.0:
     dependencies:
@@ -6190,6 +6297,13 @@ snapshots:
 
   pirates@4.0.6: {}
 
+  popmotion@11.0.5:
+    dependencies:
+      framesync: 6.1.2
+      hey-listen: 1.0.8
+      style-value-types: 5.1.2
+      tslib: 2.4.0
+
   postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.7.0):
     dependencies:
       lilconfig: 3.1.3
@@ -6474,6 +6588,11 @@ snapshots:
 
   strip-bom@3.0.0: {}
 
+  style-value-types@5.1.2:
+    dependencies:
+      hey-listen: 1.0.8
+      tslib: 2.4.0
+
   sucrase@3.35.0:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
@@ -6579,6 +6698,8 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   ts-log@2.2.7: {}
+
+  tslib@2.4.0: {}
 
   tslib@2.6.3: {}
 
