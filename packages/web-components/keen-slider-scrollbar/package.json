@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-scrollbar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keen slider scrollbar web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
