@@ -2,7 +2,7 @@ import {
   customShadowlessElement,
   correctElementType,
 } from "@brytdesigns/web-component-utils";
-import { KeenSlider } from "./components/keen-slider.js";
+import { KeenSlider } from "./components/index.js";
 import { initializeSliderClasses } from "./utils.js";
 
 export type {

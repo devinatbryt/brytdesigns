@@ -23,7 +23,7 @@ import {
   getMaxSlides,
   constrain,
   srOnly,
-} from "../utils";
+} from "../utils.js";
 
 type KeenSliderNavigationDotsContextProps = {
   target: string;

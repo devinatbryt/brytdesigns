@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keen slider web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

@@ -15,7 +15,7 @@ import {
   addHiddenStyles,
   isLastSlide,
   srOnly,
-} from "../utils";
+} from "../utils.js";
 
 type KeenSliderNavigationArrowsContextProps = {
   target: string;

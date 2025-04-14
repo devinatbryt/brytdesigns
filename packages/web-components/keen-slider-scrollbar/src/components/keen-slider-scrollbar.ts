@@ -16,6 +16,7 @@ import {
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 import { Draggable } from "@neodrag/vanilla";
+import { animate } from "popmotion";
 
 import {
   getRelativeBreakpoint,
@@ -24,9 +25,7 @@ import {
   getMaxSlides,
   constrain,
   srOnly,
-} from "../utils";
-
-import { animate } from "popmotion";
+} from "../utils.js";
 
 type KeenSliderScrollbarProps = {
   target: string;
