@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart-api
 
+## 1.2.27
+
+### Patch Changes
+
+- Force jsdelvir to rebuild
+
 ## 1.2.26
 
 ### Patch Changes

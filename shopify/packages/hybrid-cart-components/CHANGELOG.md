@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.24
+
+### Patch Changes
+
+- Force jsdelvir to rebuild
+- Updated dependencies
+  - @brytdesigns/shopify-hybrid-cart@0.1.33
+
 ## 0.2.23
 
 ### Patch Changes
