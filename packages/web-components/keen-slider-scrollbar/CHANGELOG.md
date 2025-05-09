@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.5
+
+### Patch Changes
+
+- fixed css styling
+
 ## 1.0.4
 
 ### Patch Changes

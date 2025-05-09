@@ -27,21 +27,21 @@ keen-slider-scrollbar {
   box-sizing: border-box;
 }
 
-keen-slider-scrollbar:not([is-vertical]) {
+keen-slider-scrollbar[is-vertical="false"] {
   --keen-slider-scrollbar--width: 100%;
   --keen-slider-scrollbar--height: 5px;
   margin-top: var(--keen-slider-scrollbar--mt);
   margin-bottom: var(--keen-slider-scrollbar--mb);
 }
 
-keen-slider-scrollbar[is-vertical] {
+keen-slider-scrollbar[is-vertical="true"] {
   --keen-slider-scrollbar--height: 100%;
   --keen-slider-scrollbar--width: 5px;
   margin-left: var(--keen-slider-scrollbar--ml);
   margin-right: var(--keen-slider-scrollbar--mr);
 }
 
-keen-slider-scrollbar[is-hidden]:not([is-hidden="false"]) {
+keen-slider-scrollbar[is-hidden="true"] {
   --keen-slider-scrollbar--opacity: 0;
 
   visibility: hidden;
@@ -67,7 +67,7 @@ keen-slider-scrollbar .keen-slider-scrollbar__thumb {
   z-index: 2;
 }
 
-keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar__thumb {
+keen-slider-scrollbar[is-vertical="false"] .keen-slider-scrollbar__thumb {
   left: 0;
   top: 50% !important;
   transform: translate3d(0, -50%, 0);
@@ -80,7 +80,7 @@ keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar__thumb {
   height: 100%;
 }
 
-keen-slider-scrollbar[is-vertical] .keen-slider-scrollbar__thumb {
+keen-slider-scrollbar[is-vertical="true"] .keen-slider-scrollbar__thumb {
   left: 50% !important;
   top: 0;
   transform: translate3d(-50%, 0%, 0);
@@ -106,7 +106,7 @@ keen-slider-scrollbar .keen-slider-scrollbar__breakpoints {
   padding: 0;
 }
 
-keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar__breakpoints {
+keen-slider-scrollbar[is-vertical="false"] .keen-slider-scrollbar__breakpoints {
   grid-auto-rows: auto;
   grid-template-columns: repeat(
     var(--keen-slider-scrollbar--total-slides, 1),
@@ -114,7 +114,7 @@ keen-slider-scrollbar:not([is-vertical]) .keen-slider-scrollbar__breakpoints {
   );
 }
 
-keen-slider-scrollbar[is-vertical] .keen-slider-scrollbar__breakpoints {
+keen-slider-scrollbar[is-vertical="true"] .keen-slider-scrollbar__breakpoints {
   grid-auto-columns: auto;
   grid-template-rows: repeat(
     var(--keen-slider-scrollbar--total-slides, 1),
