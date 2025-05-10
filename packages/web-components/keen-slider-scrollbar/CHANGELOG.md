@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.6
+
+### Patch Changes
+
+- fixed max slides calculation
+
 ## 1.0.5
 
 ### Patch Changes

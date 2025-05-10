@@ -67,7 +67,7 @@ export function getMaxSlides(slider: KeenSliderInstance) {
   const perView = (slider.options?.slides as any)?.perView || 1,
     perScroll = (slider.options?.slides as any)?.perScroll || 1,
     result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
-  if (perScroll === 1 && perView > 1) return slider.slides.length;
+  if (perScroll === 1 && perView === 1) return slider.slides.length;
 
   return result;
 }
