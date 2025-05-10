@@ -65,7 +65,7 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
   slider.container.setAttribute("role", "listbox");
   slider.container.setAttribute(
     "aria-orientation",
-    slider.options.vertical ? "vertical" : "horizontal"
+    slider.options.vertical ? "vertical" : "horizontal",
   );
   slider.container.setAttribute("aria-multiselectable", "false");
   slider.container.setAttribute("aria-label", "Slider");
@@ -78,7 +78,7 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
   slider.container.setAttribute("aria-valuemax", `${maxIdx}`);
   slider.container.setAttribute(
     "aria-valuenow",
-    `${slider?.track?.details?.rel || 0}`
+    `${slider?.track?.details?.rel || 0}`,
   );
 
   function getMaxRel(rel: number, perView = 1) {
@@ -96,8 +96,8 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
   async function updateTabIndexes(slide: HTMLElement, tabindex: string) {
     const focusableElements = Array.from(
       slide.querySelectorAll(
-        "input, a, button:not(:disabled), textarea, select, textarea, [tabindex]"
-      )
+        "input, a, button:not(:disabled), textarea, select, textarea, [tabindex]",
+      ),
     );
     focusableElements.forEach((element) => {
       element.setAttribute("tabindex", tabindex);
@@ -141,15 +141,15 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
 };
 
 export default class KeenSlider extends _KeenSlider {
+  //@ts-expect-error
   override options: ExtendedKeenSliderOptions;
   direction: "forward" | "backward" | null = null;
   constructor(
     element: ICustomElement & HTMLElement,
     config: KeenSliderOptions,
-    plugins: _KeenSliderPlugin[] = []
+    plugins: _KeenSliderPlugin[] = [],
   ) {
     super(element, config, plugins);
-    this.options = config;
     let prevSlide = 0;
 
     this.direction = null;
@@ -171,8 +171,8 @@ export default class KeenSlider extends _KeenSlider {
           constrain(
             this.track.details.rel + amount,
             0,
-            this.track.details.maxIdx
-          )
+            this.track.details.maxIdx,
+          ),
         );
       }
       return this.moveToIdx(constrain(this.track.details.abs + amount), true);
@@ -192,8 +192,8 @@ export default class KeenSlider extends _KeenSlider {
           constrain(
             this.track.details.rel - amount,
             0,
-            this.track.details.maxIdx
-          )
+            this.track.details.maxIdx,
+          ),
         );
       }
       return this.moveToIdx(constrain(this.track.details.abs - amount), true);

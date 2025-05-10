@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-navigation-arrows",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Keen slider navigation arrows web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
