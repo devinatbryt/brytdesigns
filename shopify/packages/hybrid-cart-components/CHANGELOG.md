@@ -1,5 +1,14 @@
 # @brytdesigns/shopify-hybrid-cart-components
 
+## 0.2.26
+
+### Patch Changes
+
+- updated solidjs version
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.9
+  - @brytdesigns/shopify-hybrid-cart@0.1.35
+
 ## 0.2.25
 
 ### Patch Changes

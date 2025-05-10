@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-form-sync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Web component for syncing the values of multiple forms",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -26,7 +26,7 @@
     "@brytdesigns/web-component-utils": "workspace:*",
     "component-register": "^0.8.7",
     "solid-element": "^1.9.1",
-    "solid-js": "^1.9.5"
+    "solid-js": "^1.9.6"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",

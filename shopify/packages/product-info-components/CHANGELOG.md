@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-product-info-components
 
+## 1.0.7
+
+### Patch Changes
+
+- updated solidjs version
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.9
+
 ## 1.0.6
 
 ### Patch Changes

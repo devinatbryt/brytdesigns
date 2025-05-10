@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.35
+
+### Patch Changes
+
+- updated solidjs version
+
 ## 0.1.34
 
 ### Patch Changes

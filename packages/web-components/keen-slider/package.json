@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Keen slider web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -27,7 +27,7 @@
     "component-register": "^0.8.7",
     "keen-slider": "^6.8.6",
     "solid-element": "^1.9.1",
-    "solid-js": "^1.9.5"
+    "solid-js": "^1.9.6"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",

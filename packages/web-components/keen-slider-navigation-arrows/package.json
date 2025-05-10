@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-navigation-arrows",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keen slider navigation arrows web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -23,11 +23,11 @@
   "author": "Bryt Designs",
   "license": "ISC",
   "dependencies": {
-    "@brytdesigns/web-component-utils": "workspace:*",
     "@brytdesigns/web-component-keen-slider": "workspace:*",
+    "@brytdesigns/web-component-utils": "workspace:*",
     "component-register": "^0.8.7",
     "solid-element": "^1.9.1",
-    "solid-js": "^1.9.5"
+    "solid-js": "^1.9.6"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",

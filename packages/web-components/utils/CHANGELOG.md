@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.9
+
+### Patch Changes
+
+- updated solidjs version
+
 ## 0.1.8
 
 ### Patch Changes

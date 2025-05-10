@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.4
+
+### Patch Changes
+
+- updated solidjs version
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.9
+
 ## 1.0.3
 
 ### Patch Changes

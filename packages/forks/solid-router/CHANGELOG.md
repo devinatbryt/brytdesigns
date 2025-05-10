@@ -1,5 +1,11 @@
 # @solidjs/router
 
+## 0.15.5
+
+### Patch Changes
+
+- updated solidjs version
+
 ## 0.15.4
 
 ### Patch Changes
