@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.36
+
+### Patch Changes
+
+- Updated tanstack query versions
+
 ## 0.1.35
 
 ### Patch Changes
