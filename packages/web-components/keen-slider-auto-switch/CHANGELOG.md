@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.7
+
 ## 1.0.3
 
 ### Patch Changes

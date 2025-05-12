@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.7
+
 ## 1.0.4
 
 ### Patch Changes

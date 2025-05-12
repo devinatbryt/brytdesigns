@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.7
+
 ## 1.0.9
 
 ### Patch Changes

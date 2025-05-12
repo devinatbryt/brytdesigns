@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.7
+
+### Patch Changes
+
+- Removed options override
+
 ## 1.0.6
 
 ### Patch Changes
