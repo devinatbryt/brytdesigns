@@ -23,19 +23,19 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
 > = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-auto-switch: Needs a proper target in order to properly extend a keen slider."
+      "keen-slider-auto-switch: Needs a proper target in order to properly extend a keen slider.",
     );
   let targetEl: HTMLElement | null = element;
   if (props.target) targetEl = document.querySelector(props.target);
   if (!targetEl)
     return console.warn(
-      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   if (targetEl.tagName !== "KEEN-SLIDER")
     targetEl = targetEl.querySelector("keen-slider");
   if (!targetEl)
     return console.warn(
-      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   const [_, { addPlugin }] = getKeenSliderContext(targetEl);
   const plugin = createMemo(() => {
@@ -43,7 +43,7 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
 
     const [_, setTimeoutVal] = createSignal<number | null>(null);
     const [sliderRef, setSliderRef] = createSignal<KeenSliderInstance | null>(
-      null
+      null,
     );
     const [isPaused, setIsPaused] = createSignal(false);
 
@@ -76,10 +76,10 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
             new CustomEvent("autoswitch:update", {
               bubbles: true,
               detail: { isPaused },
-            })
+            }),
           );
-        }
-      )
+        },
+      ),
     );
 
     createEffect(
@@ -88,7 +88,7 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
 
         function nextTimeout() {
           if (!slider) return;
-          if (slider.options.disabled) return;
+          if (slider.options?.disabled) return;
           return startNextTimeout(() => {
             if (slider.slides.length <= 1) return;
             slider.next();
@@ -125,7 +125,7 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
           slider.on("animationEnded", nextTimeout, true);
           slider.on("updated", nextTimeout, true);
         });
-      })
+      }),
     );
 
     return function (slider: KeenSliderInstance | null) {

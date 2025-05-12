@@ -38,26 +38,26 @@ export const KeenSliderScrollbar: CorrectComponentType<
 > = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-scrollbar: Needs a proper target in order to properly extend a keen slider."
+      "keen-slider-scrollbar: Needs a proper target in order to properly extend a keen slider.",
     );
   let targetEl: HTMLElement | null = element;
   if (props.target) targetEl = document.querySelector(props.target);
   if (!targetEl)
     return console.warn(
-      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   if (targetEl.tagName !== "KEEN-SLIDER")
     targetEl = targetEl.querySelector("keen-slider");
   if (!targetEl)
     return console.warn(
-      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   const [slider] = getKeenSliderContext(targetEl);
 
   const [thumb, setThumb] = createSignal<HTMLElement | null>(null);
   const [position, setPosition] = createSignal({ x: 0, y: 0 });
   const [maxIdx, setMaxIdx] = createSignal(
-    slider()?.track?.details?.maxIdx || 0
+    slider()?.track?.details?.maxIdx || 0,
   );
   const [currentIdx, setCurrentIdx] = createSignal(0);
 
@@ -67,7 +67,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
     on(maxIdx, (maxIdx) => {
       if (!maxIdx) return 0;
       return getMaxSlides(slider());
-    })
+    }),
   );
 
   const draggable = createMemo(
@@ -90,7 +90,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
             position,
             breakpointsContainer.children,
             element,
-            thumb
+            thumb,
           );
           if (!bp) return;
           const p = calculateMidpointPositionFromBP(bp, element, thumb);
@@ -106,11 +106,11 @@ export const KeenSliderScrollbar: CorrectComponentType<
           instance.updateOptions({
             position,
           });
-        })
+        }),
       );
 
       return instance;
-    })
+    }),
   );
 
   createEffect(
@@ -119,7 +119,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
       onCleanup(() => {
         draggable.destroy();
       });
-    })
+    }),
   );
 
   createEffect(
@@ -127,13 +127,13 @@ export const KeenSliderScrollbar: CorrectComponentType<
       if (!slider) return;
       element.setAttribute(
         "is-vertical",
-        `${slider.options.vertical || false}`
+        `${slider.options?.vertical || false}`,
       );
 
       function handleDetailsChanged(slider: KeenSliderInstance) {
         element.setAttribute(
           "is-vertical",
-          `${slider.options.vertical || false}`
+          `${slider.options?.vertical || false}`,
         );
       }
 
@@ -142,7 +142,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
       return onCleanup(() => {
         slider.on("detailsChanged", handleDetailsChanged, true);
       });
-    })
+    }),
   );
 
   createEffect(
@@ -151,7 +151,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
       if (!maxSlides) return;
       element.style.setProperty(
         "--keen-slider-scrollbar--total-slides",
-        `${maxSlides}`
+        `${maxSlides}`,
       );
 
       function updateDetails(slider: KeenSliderInstance) {
@@ -176,7 +176,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
         s.on("detailsChanged", updateDetails, true);
         s.on("updated", handleUpdate, true);
       });
-    })
+    }),
   );
 
   createEffect(
@@ -188,7 +188,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
           if (!breakpointsContainer) return;
           const bp = getRelativeBreakpoint(
             slider,
-            breakpointsContainer.children
+            breakpointsContainer.children,
           );
           if (!bp) return;
           if (!thumb) return;
@@ -197,8 +197,8 @@ export const KeenSliderScrollbar: CorrectComponentType<
           setCurrentIdx(parseInt(bp.getAttribute("data-index") || "0"));
         }
         slider.on("slideChanged", updateScrollbarPosition);
-      }
-    )
+      },
+    ),
   );
 
   createEffect(
@@ -221,15 +221,15 @@ export const KeenSliderScrollbar: CorrectComponentType<
         return onCleanup(() => {
           element.removeEventListener("click", handleClick);
         });
-      }
-    )
+      },
+    ),
   );
 
   createEffect(
     on(maxIdx, (maxIdx) => {
       if (maxIdx === 0) element.setAttribute("is-hidden", `${true}`);
       else element.setAttribute("is-hidden", `${false}`);
-    })
+    }),
   );
 
   function animateScrollbarPosition(p: { x: number; y: number }) {
@@ -252,9 +252,9 @@ export const KeenSliderScrollbar: CorrectComponentType<
   function updateSliderPosition(bp: Element, slider: KeenSliderInstance) {
     const idx = constrain(
       parseInt(bp.getAttribute("data-index") || "0") *
-        ((slider?.options?.slides as any)?.perScroll || 1),
+      ((slider?.options?.slides as any)?.perScroll || 1),
       0,
-      slider.track.details.maxIdx
+      slider.track.details.maxIdx,
     );
     slider.moveToIdx(idx);
   }

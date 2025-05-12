@@ -65,7 +65,7 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
   slider.container.setAttribute("role", "listbox");
   slider.container.setAttribute(
     "aria-orientation",
-    slider.options.vertical ? "vertical" : "horizontal",
+    slider.options?.vertical ? "vertical" : "horizontal",
   );
   slider.container.setAttribute("aria-multiselectable", "false");
   slider.container.setAttribute("aria-label", "Slider");
@@ -119,7 +119,7 @@ const attachAriaAttributes: KeenSliderPlugin = (slider) => {
   }
 
   function updateSlideAriaAttributes(slider: _KeenSliderInstance) {
-    if (slider.options.disabled) {
+    if (slider.options?.disabled) {
       slider.slides.forEach((slide, i) => {
         slide.setAttribute("role", "option");
         updateAriaActiveSlide(slide);

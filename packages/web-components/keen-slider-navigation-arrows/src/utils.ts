@@ -29,13 +29,13 @@ export function updateArrows(leftArrow: HTMLElement, rightArrow: HTMLElement) {
 }
 
 export function isFirstSlide(slider: KeenSliderInstance) {
-  return slider.track.details.rel === 0 && !slider.options.loop;
+  return slider.track.details.rel === 0 && !slider.options?.loop;
 }
 
 export function isLastSlide(slider: KeenSliderInstance) {
   return (
     slider.track.details.rel === slider.track.details.maxIdx &&
-    !slider.options.loop
+    !slider.options?.loop
   );
 }
 
@@ -58,7 +58,7 @@ type Options = {
 };
 
 export function initializeClasses<Props>(
-  ComponentType = (props: Props, options: Options) => {}
+  ComponentType = (props: Props, options: Options) => { },
 ) {
   return (props: Props, options: Options) => {
     const { element } = options;

@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider-navigation-arrows
 
+## 1.0.5
+
+### Patch Changes
+
+- Minor bug fixes to slider
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.6
+
 ## 1.0.4
 
 ### Patch Changes

@@ -27,26 +27,26 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
 > = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-navigation-arrows: Needs a proper target in order to properly extend a keen slider."
+      "keen-slider-navigation-arrows: Needs a proper target in order to properly extend a keen slider.",
     );
   let targetEl: HTMLElement | null = element;
   if (props.target) targetEl = document.querySelector(props.target);
   if (!targetEl)
     return console.warn(
-      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   if (targetEl.tagName !== "KEEN-SLIDER")
     targetEl = targetEl.querySelector("keen-slider");
   if (!targetEl)
     return console.warn(
-      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element."
+      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
     );
   const [slider] = getKeenSliderContext(targetEl);
   const leftArrowTmpl = element.querySelector<HTMLTemplateElement>(
-    "template[prev-arrow]"
+    "template[prev-arrow]",
   );
   const rightArrowTmpl = element.querySelector<HTMLTemplateElement>(
-    "template[next-arrow]"
+    "template[next-arrow]",
   );
 
   let leftArrow: HTMLElement, rightArrow: HTMLElement;
@@ -58,7 +58,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
       const handleArrowsUpdate = updateArrows(leftArrow, rightArrow);
 
       function hideAddIfDisabled(slider: KeenSliderInstance) {
-        if (slider.options.disabled)
+        if (slider.options?.disabled)
           return element.setAttribute("data-keen-slider-disabled", "true");
         return element.removeAttribute("data-keen-slider-disabled");
       }
@@ -79,7 +79,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
         slider.on("optionsChanged", handleUpdate, true);
         slider.on("destroyed", handleUpdate, true);
       });
-    })
+    }),
   );
 
   createEffect(
@@ -88,7 +88,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
 
       if (!hasMoreSlides(slider)) return addHiddenStyles(element);
       return addVisibleStyles(element);
-    })
+    }),
   );
 
   function handlePrev(event: Event) {

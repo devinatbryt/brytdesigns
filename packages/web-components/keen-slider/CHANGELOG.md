@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.6
+
+### Patch Changes
+
+- Minor bug fixes to slider
+
 ## 1.0.5
 
 ### Patch Changes
