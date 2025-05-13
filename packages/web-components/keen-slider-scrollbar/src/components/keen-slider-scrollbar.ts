@@ -179,10 +179,12 @@ export const KeenSliderScrollbar: CorrectComponentType<
         setMaxIdx(slider.track.details.maxIdx);
       }
 
+      s.on("created", handleUpdate);
       s.on("detailsChanged", updateDetails);
       s.on("updated", handleUpdate);
 
       return onCleanup(() => {
+        s.on("created", handleUpdate, true);
         s.on("detailsChanged", updateDetails, true);
         s.on("updated", handleUpdate, true);
       });
@@ -250,6 +252,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
 
     function plugin(slider: KeenSliderInstance) {
       setSlider(slider);
+      setMaxIdx(slider.track.details.maxIdx);
     }
 
     addPlugin({
@@ -284,7 +287,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
   function updateSliderPosition(bp: Element, slider: KeenSliderInstance) {
     const idx = constrain(
       parseInt(bp.getAttribute("data-index") || "0") *
-      ((slider?.options?.slides as any)?.perScroll || 1),
+        ((slider?.options?.slides as any)?.perScroll || 1),
       0,
       slider.track.details.maxIdx,
     );
