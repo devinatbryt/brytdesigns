@@ -104,6 +104,9 @@ export const KeenSliderNavigationDots: CorrectComponentType<
 
     function plugin(slider: KeenSliderInstance) {
       setSlider(slider);
+      slider.on("created", function (slider) {
+        setMaxIdx(slider.track.details.maxIdx);
+      });
     }
 
     addPlugin({
@@ -141,19 +144,19 @@ export const KeenSliderNavigationDots: CorrectComponentType<
       <ul class="keen-dots" role="tablist">
         <${For} each=${() => Array(maxSlides()).fill(0)}>
           ${(_: number, idx: Accessor<number>) => {
-      return html`
+            return html`
               <li
                 class=${() =>
-          `keen-dot ${isSelected(idx()) ? "keen-dot--active" : ""}`}
+                  `keen-dot ${isSelected(idx()) ? "keen-dot--active" : ""}`}
                 role="presentation"
               >
                 <button
                   onClick=${(e: Event) => {
-          const s = slider();
-          if (!s) return;
-          const i = getSlideIndex(s, idx());
-          s.moveToIdx(i);
-        }}
+                    const s = slider();
+                    if (!s) return;
+                    const i = getSlideIndex(s, idx());
+                    s.moveToIdx(i);
+                  }}
                   disabled=${() => isSelected(idx())}
                   class=${() => `keen-dot__button`}
                   aria-current=${() => isSelected(idx())}
@@ -163,7 +166,7 @@ export const KeenSliderNavigationDots: CorrectComponentType<
                 </button>
               </li>
             `;
-    }}
+          }}
         <//>
       </ul>
     <//>

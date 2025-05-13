@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.0.7
+
+### Patch Changes
+
+- Fixed similar bug to scrollbar
+
 ## 1.0.6
 
 ### Patch Changes
