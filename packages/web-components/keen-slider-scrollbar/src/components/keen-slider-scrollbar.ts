@@ -251,8 +251,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
     const controller = new AbortController();
 
     function plugin(slider: KeenSliderInstance) {
-      setSlider(slider);
-      setMaxIdx(slider.track.details.maxIdx);
+      slider.on("created", setSlider);
     }
 
     addPlugin({
