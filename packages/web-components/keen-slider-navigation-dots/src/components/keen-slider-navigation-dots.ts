@@ -13,7 +13,7 @@ import {
   type Accessor,
 } from "solid-js";
 import {
-  getKeenSliderContext,
+  addPlugin,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
@@ -34,21 +34,26 @@ export const KeenSliderNavigationDots: CorrectComponentType<
 > = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-navigation-dots: Needs a proper target in order to properly extend a keen slider."
+      "keen-slider-navigation-dots: Needs a proper target in order to properly extend a keen slider.",
     );
-  let targetEl: HTMLElement | null = element;
-  if (props.target) targetEl = document.querySelector(props.target);
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element."
-    );
-  if (targetEl.tagName !== "KEEN-SLIDER")
-    targetEl = targetEl.querySelector("keen-slider");
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element."
-    );
-  const [slider] = getKeenSliderContext(targetEl);
+
+  const target = createMemo(() => {
+    let targetEl: HTMLElement | null = element;
+    if (props.target) targetEl = document.querySelector(props.target);
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    if (targetEl.tagName !== "KEEN-SLIDER")
+      targetEl = targetEl.querySelector("keen-slider");
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    return targetEl;
+  });
+
+  const [slider, setSlider] = createSignal<KeenSliderInstance>();
 
   const [maxIdx, setMaxIdx] = createSignal(0);
   const [currentSlide, setCurrentSlide] = createSignal(0);
@@ -56,8 +61,10 @@ export const KeenSliderNavigationDots: CorrectComponentType<
   const maxSlides = createMemo(
     on(maxIdx, (maxIdx) => {
       if (!maxIdx) return 0;
-      return getMaxSlides(slider());
-    })
+      const s = slider();
+      if (!s) return 0;
+      return getMaxSlides(s);
+    }),
   );
 
   createEffect(
@@ -86,14 +93,36 @@ export const KeenSliderNavigationDots: CorrectComponentType<
         slider.on("slideChanged", handleSlideChange, true);
         slider.on("destroyed", handleSlideDestroy, true);
       });
-    })
+    }),
   );
+
+  createEffect(() => {
+    const t = target();
+    if (!t) return;
+
+    const controller = new AbortController();
+
+    function plugin(slider: KeenSliderInstance) {
+      setSlider(slider);
+    }
+
+    addPlugin({
+      target: t,
+      plugin,
+      controller,
+    });
+
+    return onCleanup(() => {
+      controller.abort();
+      setSlider(undefined);
+    });
+  });
 
   createEffect(
     on(maxSlides, (maxSlides) => {
-      if (maxSlides <= 1) return addHiddenStyles(element);
+      if (!maxSlides || maxSlides <= 1) return addHiddenStyles(element);
       return addVisibleStyles(element);
-    })
+    }),
   );
 
   const isSelected = createSelector(currentSlide);
@@ -103,7 +132,7 @@ export const KeenSliderNavigationDots: CorrectComponentType<
     return constrain(
       i * ((s?.options?.slides as any)?.perScroll || 1),
       0,
-      s.track.details.maxIdx
+      s.track.details.maxIdx,
     );
   }
 
@@ -112,18 +141,19 @@ export const KeenSliderNavigationDots: CorrectComponentType<
       <ul class="keen-dots" role="tablist">
         <${For} each=${() => Array(maxSlides()).fill(0)}>
           ${(_: number, idx: Accessor<number>) => {
-            return html`
+      return html`
               <li
                 class=${() =>
-                  `keen-dot ${isSelected(idx()) ? "keen-dot--active" : ""}`}
+          `keen-dot ${isSelected(idx()) ? "keen-dot--active" : ""}`}
                 role="presentation"
               >
                 <button
                   onClick=${(e: Event) => {
-                    const s = slider();
-                    const i = getSlideIndex(s, idx());
-                    s.moveToIdx(i);
-                  }}
+          const s = slider();
+          if (!s) return;
+          const i = getSlideIndex(s, idx());
+          s.moveToIdx(i);
+        }}
                   disabled=${() => isSelected(idx())}
                   class=${() => `keen-dot__button`}
                   aria-current=${() => isSelected(idx())}
@@ -133,7 +163,7 @@ export const KeenSliderNavigationDots: CorrectComponentType<
                 </button>
               </li>
             `;
-          }}
+    }}
         <//>
       </ul>
     <//>

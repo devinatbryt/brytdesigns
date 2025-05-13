@@ -12,7 +12,7 @@ import {
   type Accessor,
 } from "solid-js";
 import {
-  getKeenSliderContext,
+  addPlugin,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 import { Draggable } from "@neodrag/vanilla";
@@ -40,19 +40,24 @@ export const KeenSliderScrollbar: CorrectComponentType<
     return console.warn(
       "keen-slider-scrollbar: Needs a proper target in order to properly extend a keen slider.",
     );
-  let targetEl: HTMLElement | null = element;
-  if (props.target) targetEl = document.querySelector(props.target);
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  if (targetEl.tagName !== "KEEN-SLIDER")
-    targetEl = targetEl.querySelector("keen-slider");
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  const [slider] = getKeenSliderContext(targetEl);
+  const target = createMemo(() => {
+    let targetEl: HTMLElement | null = element;
+    if (props.target) targetEl = document.querySelector(props.target);
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    if (targetEl.tagName !== "KEEN-SLIDER")
+      targetEl = targetEl.querySelector("keen-slider");
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-scrollbar: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+
+    return targetEl;
+  });
+
+  const [slider, setSlider] = createSignal<KeenSliderInstance>();
 
   const [thumb, setThumb] = createSignal<HTMLElement | null>(null);
   const [position, setPosition] = createSignal({ x: 0, y: 0 });
@@ -66,7 +71,9 @@ export const KeenSliderScrollbar: CorrectComponentType<
   const maxSlides = createMemo(
     on(maxIdx, (maxIdx) => {
       if (!maxIdx) return 0;
-      return getMaxSlides(slider());
+      const s = slider();
+      if (!s) return 0;
+      return getMaxSlides(s);
     }),
   );
 
@@ -86,6 +93,8 @@ export const KeenSliderScrollbar: CorrectComponentType<
           setPosition((p) => ({ ...p, x: offsetX, y: offsetY })),
         onDragEnd: (position) => {
           if (!breakpointsContainer) return;
+          const s = slider();
+          if (!s) return;
           const bp = findClosestBreakpoint(
             position,
             breakpointsContainer.children,
@@ -95,7 +104,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
           if (!bp) return;
           const p = calculateMidpointPositionFromBP(bp, element, thumb);
           animateScrollbarPosition(p);
-          updateSliderPosition(bp, slider());
+          updateSliderPosition(bp, s);
           setCurrentIdx(parseInt(bp.getAttribute("data-index") || "0"));
         },
         ignoreMultitouch: true,
@@ -148,6 +157,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
   createEffect(
     on(maxSlides, (maxSlides) => {
       const s = slider();
+      if (!s) return;
       if (!maxSlides) return;
       element.style.setProperty(
         "--keen-slider-scrollbar--total-slides",
@@ -213,7 +223,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
           if (!bp.classList.contains("keen-slider-scrollbar__breakpoint"))
             return;
           setCurrentIdx(parseInt(bp.getAttribute("data-index") || "0"));
-          updateSliderPosition(bp, slider);
+          updateSliderPosition(bp, slider!);
         }
 
         element.addEventListener("click", handleClick);
@@ -231,6 +241,28 @@ export const KeenSliderScrollbar: CorrectComponentType<
       else element.setAttribute("is-hidden", `${false}`);
     }),
   );
+
+  createEffect(() => {
+    const t = target();
+    if (!t) return;
+
+    const controller = new AbortController();
+
+    function plugin(slider: KeenSliderInstance) {
+      setSlider(slider);
+    }
+
+    addPlugin({
+      target: t,
+      plugin,
+      controller,
+    });
+
+    return onCleanup(() => {
+      controller.abort();
+      setSlider(undefined);
+    });
+  });
 
   function animateScrollbarPosition(p: { x: number; y: number }) {
     animate({

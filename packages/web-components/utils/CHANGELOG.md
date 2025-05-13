@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.10
+
+### Patch Changes
+
+- Allow the ability for keen slider plugins to run after the content and keen slider component has loaded.
+
 ## 0.1.9
 
 ### Patch Changes

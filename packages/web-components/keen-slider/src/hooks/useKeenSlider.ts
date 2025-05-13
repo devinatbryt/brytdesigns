@@ -13,7 +13,10 @@ import {
   on,
   splitProps,
 } from "solid-js";
-import { getContextFromProvider } from "@brytdesigns/web-component-utils";
+import {
+  getContextFromProvider,
+  invokeOnLoaded,
+} from "@brytdesigns/web-component-utils";
 import KeenSlider, {
   type KeenSliderInstance,
   type KeenSliderOptions,
@@ -56,7 +59,7 @@ function initializeKeenSliderContext(props: CreateContextOptions) {
     const slider = new KeenSlider(
       privateProps.root,
       publicProps.config || ({} as any),
-      plugins()
+      plugins(),
     );
     const m = mutObserver();
 
@@ -114,8 +117,8 @@ function initializeKeenSliderContext(props: CreateContextOptions) {
         if (!centerSlides) return;
         const remove = addPlugin(centeredPlugin);
         return onCleanup(remove);
-      }
-    )
+      },
+    ),
   );
 
   createEffect(
@@ -123,9 +126,9 @@ function initializeKeenSliderContext(props: CreateContextOptions) {
       if (plugins.length === 0) return;
       console.log(
         `Registered a new plugin on element.\n`,
-        `Total slider plugins: ${plugins.length}`
+        `Total slider plugins: ${plugins.length}`,
       );
-    })
+    }),
   );
 
   return [slider, { addPlugin }] as const;
@@ -135,7 +138,7 @@ const KeenSliderContextState = createContext(initializeKeenSliderContext);
 
 export const provideKeenSliderContext = (
   initialState: Omit<CreateContextOptions, "root">,
-  element: WalkableNode
+  element: WalkableNode,
 ): KeenSliderContext => {
   const props = mergeProps(initialState, { root: element });
   return provide(KeenSliderContextState, props, element);
@@ -150,7 +153,7 @@ export const useKeenSlider = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "KeenSliderContext not found! Please ensure to wrap your custom element with keen-slider element."
+      "KeenSliderContext not found! Please ensure to wrap your custom element with keen-slider element.",
     );
   }
 
@@ -160,7 +163,28 @@ export const useKeenSlider = (element: HTMLElement & ICustomElement) => {
 export const getKeenSliderContext = (element: Element) => {
   const context = getContextFromProvider<KeenSliderContext>(
     KeenSliderContextState,
-    element
+    element,
   );
   return useKeenSliderContext(context);
 };
+
+type AddPluginOptions = {
+  target: void | HTMLElement;
+  plugin: KeenSliderPlugin;
+  controller?: AbortController;
+};
+
+export function addPlugin({ target, plugin, controller }: AddPluginOptions) {
+  if (!target) return;
+
+  invokeOnLoaded(
+    () => {
+      const [_, { addPlugin }] = getKeenSliderContext(target);
+      const removePlugin = addPlugin(plugin);
+      controller?.signal?.addEventListener("abort", removePlugin);
+    },
+    {
+      signal: controller?.signal,
+    },
+  );
+}

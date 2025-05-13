@@ -11,7 +11,11 @@ export type {
   KeenSliderPlugin,
 } from "./KeenSlider.js";
 
-export { useKeenSlider, getKeenSliderContext } from "./hooks/index.js";
+export {
+  useKeenSlider,
+  addPlugin,
+  getKeenSliderContext,
+} from "./hooks/index.js";
 
 customShadowlessElement(
   "keen-slider",
@@ -22,5 +26,5 @@ customShadowlessElement(
     refreshOnChildrenChange: false,
   },
   correctElementType(KeenSlider),
-  initializeSliderClasses
+  initializeSliderClasses,
 );

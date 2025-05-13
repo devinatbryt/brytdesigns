@@ -1,9 +1,16 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
 import html from "solid-js/html";
-import { createEffect, on, onCleanup, Show } from "solid-js";
 import {
-  getKeenSliderContext,
+  createEffect,
+  createMemo,
+  createSignal,
+  on,
+  onCleanup,
+  Show,
+} from "solid-js";
+import {
+  addPlugin,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
@@ -29,19 +36,25 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
     return console.warn(
       "keen-slider-navigation-arrows: Needs a proper target in order to properly extend a keen slider.",
     );
-  let targetEl: HTMLElement | null = element;
-  if (props.target) targetEl = document.querySelector(props.target);
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  if (targetEl.tagName !== "KEEN-SLIDER")
-    targetEl = targetEl.querySelector("keen-slider");
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  const [slider] = getKeenSliderContext(targetEl);
+
+  const target = createMemo(() => {
+    let targetEl: HTMLElement | null = element;
+    if (props.target) targetEl = document.querySelector(props.target);
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    if (targetEl.tagName !== "KEEN-SLIDER")
+      targetEl = targetEl.querySelector("keen-slider");
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+
+    return targetEl;
+  });
+
+  const [slider, setSlider] = createSignal<KeenSliderInstance>();
   const leftArrowTmpl = element.querySelector<HTMLTemplateElement>(
     "template[prev-arrow]",
   );
@@ -91,6 +104,28 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
     }),
   );
 
+  createEffect(() => {
+    const t = target();
+    if (!t) return;
+
+    const controller = new AbortController();
+
+    function plugin(slider: KeenSliderInstance) {
+      setSlider(slider);
+    }
+
+    addPlugin({
+      target: t,
+      plugin,
+      controller,
+    });
+
+    return onCleanup(() => {
+      controller.abort();
+      setSlider(undefined);
+    });
+  });
+
   function handlePrev(event: Event) {
     event.preventDefault();
 
@@ -112,7 +147,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
   return html`
     <button
       class="keen-arrow keen-arrow--left"
-      disabled=${() => slider() && isFirstSlide(slider())}
+      disabled=${() => slider() && isFirstSlide(slider()!)}
       ref=${(el: HTMLElement) => (leftArrow = el)}
       onClick=${(e: Event) => handlePrev(e)}
       type="button"
@@ -125,7 +160,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
     <button
       class="keen-arrow keen-arrow--right"
       ref=${(el: HTMLElement) => (rightArrow = el)}
-      disabled=${() => slider() && isLastSlide(slider())}
+      disabled=${() => slider() && isLastSlide(slider()!)}
       onClick=${(e: Event) => handleNext(e)}
       type="button"
     >

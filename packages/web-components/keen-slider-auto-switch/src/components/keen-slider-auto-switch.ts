@@ -9,7 +9,7 @@ import {
   batch,
 } from "solid-js";
 import {
-  getKeenSliderContext,
+  addPlugin,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
@@ -25,19 +25,23 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
     return console.warn(
       "keen-slider-auto-switch: Needs a proper target in order to properly extend a keen slider.",
     );
-  let targetEl: HTMLElement | null = element;
-  if (props.target) targetEl = document.querySelector(props.target);
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  if (targetEl.tagName !== "KEEN-SLIDER")
-    targetEl = targetEl.querySelector("keen-slider");
-  if (!targetEl)
-    return console.warn(
-      "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
-    );
-  const [_, { addPlugin }] = getKeenSliderContext(targetEl);
+
+  const target = createMemo(() => {
+    let targetEl: HTMLElement | null = element;
+    if (props.target) targetEl = document.querySelector(props.target);
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    if (targetEl.tagName !== "KEEN-SLIDER")
+      targetEl = targetEl.querySelector("keen-slider");
+    if (!targetEl)
+      return console.warn(
+        "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
+      );
+    return targetEl;
+  });
+
   const plugin = createMemo(() => {
     const duration = props.duration || 2000;
 
@@ -128,16 +132,27 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
       }),
     );
 
-    return function (slider: KeenSliderInstance | null) {
+    return function(slider: KeenSliderInstance | null) {
       setSliderRef(slider);
     };
   });
 
   createEffect(() => {
+    const t = target();
+
+    if (!t) return;
+
     const p = plugin();
-    const removePlugin = addPlugin(p);
+    const controller = new AbortController();
+
+    addPlugin({
+      target: t,
+      plugin: p,
+      controller,
+    });
+
     return onCleanup(() => {
-      removePlugin();
+      controller.abort();
     });
   });
 };

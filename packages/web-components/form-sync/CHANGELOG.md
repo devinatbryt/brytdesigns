@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-form-sync
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.10
+
 ## 1.0.1
 
 ### Patch Changes
