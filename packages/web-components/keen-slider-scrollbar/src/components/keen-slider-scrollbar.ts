@@ -251,7 +251,10 @@ export const KeenSliderScrollbar: CorrectComponentType<
     const controller = new AbortController();
 
     function plugin(slider: KeenSliderInstance) {
-      slider.on("created", setSlider);
+      setSlider(slider);
+      slider.on("created", function (slider) {
+        setMaxIdx(slider.track.details.maxIdx);
+      });
     }
 
     addPlugin({
@@ -286,7 +289,7 @@ export const KeenSliderScrollbar: CorrectComponentType<
   function updateSliderPosition(bp: Element, slider: KeenSliderInstance) {
     const idx = constrain(
       parseInt(bp.getAttribute("data-index") || "0") *
-        ((slider?.options?.slides as any)?.perScroll || 1),
+      ((slider?.options?.slides as any)?.perScroll || 1),
       0,
       slider.track.details.maxIdx,
     );
