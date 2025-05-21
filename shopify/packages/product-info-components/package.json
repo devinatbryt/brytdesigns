@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-product-info-components",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Headless web components used to render product information based on active product variants",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

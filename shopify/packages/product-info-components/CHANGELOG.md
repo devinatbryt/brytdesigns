@@ -1,5 +1,12 @@
 # @brytdesigns/shopify-product-info-components
 
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.11
+
 ## 1.0.8
 
 ### Patch Changes

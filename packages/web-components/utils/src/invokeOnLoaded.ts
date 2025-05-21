@@ -6,7 +6,9 @@ export function invokeOnLoaded(
 ) {
   if (checkLoaded()) {
     const id = setTimeout(() => fn());
-    signal?.addEventListener("abort", () => clearTimeout(id));
+    signal?.addEventListener("abort", () => clearTimeout(id), {
+      once: true,
+    });
   }
-  window.addEventListener("DOMContentLoaded", fn, { signal });
+  window.addEventListener("DOMContentLoaded", fn, { signal, once: true });
 }

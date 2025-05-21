@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.9
+
+### Patch Changes
+
+- Minor keen slider bug fix
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.11
+
 ## 1.0.8
 
 ### Patch Changes

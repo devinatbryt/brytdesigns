@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.11
+
+### Patch Changes
+
+- Minor keen slider bug fix
+
 ## 0.1.10
 
 ### Patch Changes

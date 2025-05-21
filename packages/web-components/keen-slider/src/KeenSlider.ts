@@ -47,7 +47,7 @@ export type KeenSliderPlugin<
 > = _KeenSliderPlugin<O, P, H>;
 
 function attachMoreDetails(prevSlide: number) {
-  return function (slider: KeenSliderInstance) {
+  return function(slider: KeenSliderInstance) {
     if (slider.track.details.rel != slider.animator.targetIdx) return;
 
     (slider as KeenSlider).direction =
@@ -155,15 +155,17 @@ export default class KeenSlider extends _KeenSlider {
 
     attachAriaAttributes(this);
 
-    this.next = function () {
+    this.next = function() {
       if (!this.options?.slides) return;
       if (
         typeof this.options.slides === "number" ||
         typeof this.options.slides === "function"
       )
         return;
-      if ("perScroll" in this.options.slides === false) return;
-      const amount = (this.options?.slides?.perScroll as number) || 1;
+      let amount: number = 1;
+      if ("perScroll" in this.options.slides === true) {
+        amount = (this.options?.slides?.perScroll as number) || 1;
+      }
       if (!this.options.loop) {
         return this.moveToIdx(
           constrain(
@@ -176,15 +178,17 @@ export default class KeenSlider extends _KeenSlider {
       return this.moveToIdx(constrain(this.track.details.abs + amount), true);
     };
 
-    this.prev = function () {
+    this.prev = function() {
       if (!this.options?.slides) return;
       if (
         typeof this.options.slides === "number" ||
         typeof this.options.slides === "function"
       )
         return;
-      if ("perScroll" in this.options.slides === false) return;
-      const amount = (this.options?.slides?.perScroll as number) || 1;
+      let amount: number = 1;
+      if ("perScroll" in this.options.slides === true) {
+        amount = (this.options?.slides?.perScroll as number) || 1;
+      }
       if (!this.options.loop) {
         this.moveToIdx(
           constrain(
