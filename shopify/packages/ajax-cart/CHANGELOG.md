@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.2
+
+### Patch Changes
+
+- Attempt at allowing import maps to work with this
+
 ## 1.0.1
 
 ### Patch Changes

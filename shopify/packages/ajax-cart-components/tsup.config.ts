@@ -31,6 +31,15 @@ export default defineConfig([
       await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
     },
   },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/index.ts"],
+    outDir: `${outDir}/esm`,
+    external: [],
+  },
   // {
   //   ...commonConfig,
   //   format: "esm",
