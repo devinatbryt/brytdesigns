@@ -22,7 +22,7 @@ type Options = {
 };
 
 export function initializeClasses<Props>(
-  ComponentType = (props: Props, options: Options) => {}
+  ComponentType = (props: Props, options: Options) => { },
 ) {
   return (props: Props, options: Options) => {
     const { element } = options;
@@ -33,10 +33,16 @@ export function initializeClasses<Props>(
 }
 
 export function getMaxSlides(slider: KeenSliderInstance) {
-  const perView = (slider.options?.slides as any)?.perView || 1,
-    perScroll = (slider.options?.slides as any)?.perScroll || 1,
-    result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
-  if (perScroll === 1 && perView > 1) return slider.slides.length;
+  const perView = (slider.options?.slides as any)?.perView || 1;
+  if (perView === "auto") {
+    const maxIdx = slider?.track?.details?.maxIdx || 1;
+    const perScroll = (slider.options?.slides as any)?.perScroll || 1;
+    const result = Math.ceil((slider.slides.length - maxIdx) / perScroll) + 1;
+    return result;
+  }
+  const perScroll = (slider.options?.slides as any)?.perScroll || 1;
+  const result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
+  if (perScroll === 1 && perView === 1) return slider.slides.length;
 
   return result;
 }

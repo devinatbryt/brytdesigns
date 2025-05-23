@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-accordion",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Headless accordion web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -27,7 +27,7 @@
     "component-register": "^0.8.7",
     "motion": "^12.5.0",
     "solid-element": "^1.9.1",
-    "solid-js": "^1.9.6"
+    "solid-js": "^1.9.7"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",

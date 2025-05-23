@@ -11,7 +11,7 @@ export function constrain(value: number, min = -Infinity, max = Infinity) {
 export function calculateMidpointPositionFromBP(
   bp: Element,
   container: HTMLElement,
-  scrollbar: HTMLElement
+  scrollbar: HTMLElement,
 ) {
   const bpRect = bp.getBoundingClientRect(),
     scrollbarRect = scrollbar.getBoundingClientRect(),
@@ -25,12 +25,12 @@ export function calculateMidpointPositionFromBP(
     x = constrain(
       relativeLeft + bpRect.width / 2 - scrollbarRect.width / 2,
       minX,
-      maxX
+      maxX,
     ),
     y = constrain(
       relativeTop + bpRect.height / 2 - scrollbarRect.height / 2,
       minY,
-      maxY
+      maxY,
     );
 
   return { x, y };
@@ -40,7 +40,7 @@ export function findClosestBreakpoint(
   position: DragEventData,
   breakpoints: HTMLCollection,
   container: HTMLElement,
-  scrollbar: HTMLElement
+  scrollbar: HTMLElement,
 ) {
   const min = 0,
     max = breakpoints.length - 1;
@@ -64,9 +64,15 @@ export function findClosestBreakpoint(
 }
 
 export function getMaxSlides(slider: KeenSliderInstance) {
-  const perView = (slider.options?.slides as any)?.perView || 1,
-    perScroll = (slider.options?.slides as any)?.perScroll || 1,
-    result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
+  const perView = (slider.options?.slides as any)?.perView || 1;
+  if (perView === "auto") {
+    const maxIdx = slider?.track?.details?.maxIdx || 1;
+    const perScroll = (slider.options?.slides as any)?.perScroll || 1;
+    const result = Math.ceil((slider.slides.length - maxIdx) / perScroll) + 1;
+    return result;
+  }
+  const perScroll = (slider.options?.slides as any)?.perScroll || 1;
+  const result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
   if (perScroll === 1 && perView === 1) return slider.slides.length;
 
   return result;
@@ -74,7 +80,7 @@ export function getMaxSlides(slider: KeenSliderInstance) {
 
 export function getRelativeBreakpoint(
   slider: KeenSliderInstance,
-  breakpoints: HTMLCollection
+  breakpoints: HTMLCollection,
 ) {
   const maxSlides = getMaxSlides(slider),
     perScroll = (slider.options?.slides as any)?.perScroll || 1;
@@ -82,7 +88,7 @@ export function getRelativeBreakpoint(
   const relativeIdx = constrain(
     Math.ceil(slider.track.details.rel / perScroll),
     0,
-    maxSlides - 1
+    maxSlides - 1,
   );
 
   return breakpoints[relativeIdx];

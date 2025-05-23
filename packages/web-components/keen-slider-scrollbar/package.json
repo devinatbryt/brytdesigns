@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-scrollbar",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Keen slider scrollbar web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -29,7 +29,7 @@
     "component-register": "^0.8.7",
     "popmotion": "^11.0.5",
     "solid-element": "^1.9.1",
-    "solid-js": "^1.9.6"
+    "solid-js": "^1.9.7"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",

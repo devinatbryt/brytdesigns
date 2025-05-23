@@ -1,0 +1,62 @@
+const ResponseData = {
+  items: [
+    {
+      id: 44632334565593,
+      properties: {},
+      quantity: 1,
+      variant_id: 44632334565593,
+      key: "44632334565593:d3473ad073fc874d3892bcf84ae6d6fa",
+      title: "The Complete Snowboard - Dawn",
+      product_title: "The Complete Snowboard",
+      variant_title: "Dawn",
+      price: 69995,
+      original_price: 69995,
+      discounted_price: 69995,
+      line_price: 69995,
+      original_line_price: 69995,
+      presentment_price: 699.95,
+      total_discount: 0,
+      discounts: [],
+      sku: "",
+      grams: 4536,
+      vendor: "Snowboard Vendor",
+      taxable: true,
+      product_id: 8515401973977,
+      product_has_only_default_variant: false,
+      gift_card: false,
+      final_price: 69995,
+      final_line_price: 69995,
+      url: "/products/the-complete-snowboard?variant=44632334565593",
+      featured_image: {
+        alt: "Top and bottom view of a snowboard. The top view shows abstract circles and lines in shades of teal.\n          The bottom view shows abstract circles and lines in shades of purple and blue with the text “SHOPIFY” in a\n          sans serif typeface on top.",
+        aspect_ratio: 1,
+        height: 1600,
+        url: "https://cdn.shopify.com/s/files/1/0683/1079/4457/products/Main_589fc064-24a2-4236-9eaf-13b2bd35d21d.jpg?v=1707519805",
+        width: 1600,
+      },
+      image:
+        "https://cdn.shopify.com/s/files/1/0683/1079/4457/products/Main_589fc064-24a2-4236-9eaf-13b2bd35d21d.jpg?v=1707519805",
+      handle: "the-complete-snowboard",
+      requires_shipping: true,
+      product_type: "snowboard",
+      untranslated_product_title: "The Complete Snowboard",
+      product_description: "This PREMIUM snowboard is so SUPERDUPER awesome!",
+      untranslated_variant_title: "Dawn",
+      variant_options: ["Dawn"],
+      options_with_values: [
+        {
+          name: "Color",
+          value: "Dawn",
+        },
+      ],
+      line_level_discount_allocations: [],
+      line_level_total_discount: 0,
+    },
+  ],
+  sections: {
+    "main-product": "",
+    "review-section": null,
+  },
+};
+
+export default ResponseData;

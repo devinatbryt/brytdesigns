@@ -1,0 +1,39 @@
+{
+  "name": "@brytdesigns/web-component-modal",
+  "version": "0.0.2",
+  "description": "Headless modal web component",
+  "main": "./dist/main/index.js",
+  "module": "./dist/main/index.js",
+  "types": "./dist/main/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/main/index.d.ts",
+      "module": "./dist/main/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "Bryt Designs",
+  "license": "ISC",
+  "dependencies": {
+    "@brytdesigns/web-component-utils": "workspace:*",
+    "body-scroll-lock-upgrade": "^1.1.0",
+    "component-register": "^0.8.7",
+    "focus-trap": "^7.6.4",
+    "motion": "^12.5.0",
+    "observe-element-in-viewport": "^0.0.15",
+    "solid-element": "^1.9.1",
+    "solid-js": "^1.9.7"
+  },
+  "devDependencies": {
+    "dts-bundle-generator": "^9.5.1",
+    "tsup": "^8.4.0"
+  }
+}

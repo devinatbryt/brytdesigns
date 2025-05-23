@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.13
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+
 ## 1.2.12
 
 ### Patch Changes

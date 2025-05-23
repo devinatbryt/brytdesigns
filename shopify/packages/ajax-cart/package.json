@@ -1,0 +1,37 @@
+{
+  "name": "@brytdesigns/shopify-ajax-cart",
+  "version": "1.0.0",
+  "description": "Reactive state management solution for the Ajax Cart API library",
+  "main": "./dist/main/index.js",
+  "module": "./dist/main/index.js",
+  "types": "./dist/main/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/main/index.d.ts",
+      "module": "./dist/main/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "author": "Bryt Designs",
+  "license": "ISC",
+  "dependencies": {
+    "@brytdesigns/shopify-ajax-cart-api": "workspace:*",
+    "@tanstack/query-sync-storage-persister": "^5.76.0",
+    "@tanstack/solid-query": "^5.76.2",
+    "@tanstack/solid-query-persist-client": "^5.76.2",
+    "lz-string": "^1.5.0",
+    "solid-js": "^1.9.7"
+  },
+  "devDependencies": {
+    "dts-bundle-generator": "^9.5.1",
+    "tsup": "^8.4.0"
+  }
+}

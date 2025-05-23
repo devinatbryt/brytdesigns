@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "Reactive state management solution for the Hybrid Cart API library",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -25,10 +25,10 @@
   "dependencies": {
     "@brytdesigns/shopify-hybrid-cart-api": "workspace:*",
     "@tanstack/query-sync-storage-persister": "^5.76.0",
-    "@tanstack/solid-query": "^5.76.0",
-    "@tanstack/solid-query-persist-client": "^5.76.0",
+    "@tanstack/solid-query": "^5.76.2",
+    "@tanstack/solid-query-persist-client": "^5.76.2",
     "lz-string": "^1.5.0",
-    "solid-js": "^1.9.6"
+    "solid-js": "^1.9.7"
   },
   "devDependencies": {
     "@repo/js-delivr-imports-plugin": "workspace:*",

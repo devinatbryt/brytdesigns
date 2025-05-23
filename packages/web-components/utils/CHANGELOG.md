@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+
 ## 0.1.11
 
 ### Patch Changes

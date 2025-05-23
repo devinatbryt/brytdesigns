@@ -3,7 +3,7 @@
   "description": "Fork of Universal router for SolidJS - 0.15.3",
   "author": "Bryt Designs",
   "license": "MIT",
-  "version": "0.15.5",
+  "version": "0.15.6",
   "homepage": "https://github.com/solidjs/solid-router#readme",
   "repository": {
     "type": "git",
@@ -43,7 +43,7 @@
     "jsdom": "^25.0.1",
     "prettier": "^3.4.1",
     "rollup": "^4.27.4",
-    "solid-js": "^1.9.6",
+    "solid-js": "^1.9.7",
     "typescript": "^5.7.2",
     "vite": "^6.0.0",
     "vite-plugin-solid": "^2.11.0",

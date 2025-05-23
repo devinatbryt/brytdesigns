@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-hybrid-cart-components",
-  "version": "0.2.29",
+  "version": "0.2.30",
   "description": "",
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
@@ -24,7 +24,7 @@
     "@brytdesigns/web-component-utils": "workspace:*",
     "component-register": "^0.8.7",
     "lodash.debounce": "^4.0.8",
-    "solid-js": "^1.9.6"
+    "solid-js": "^1.9.7"
   },
   "author": "Bryt Designs",
   "license": "ISC",

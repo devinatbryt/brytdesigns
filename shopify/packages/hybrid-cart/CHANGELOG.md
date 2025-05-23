@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-hybrid-cart
 
+## 0.1.37
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+- Updated dependencies
+  - @brytdesigns/shopify-hybrid-cart-api@1.2.29
+
 ## 0.1.36
 
 ### Patch Changes

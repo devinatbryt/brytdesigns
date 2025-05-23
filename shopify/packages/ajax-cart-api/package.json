@@ -1,0 +1,42 @@
+{
+  "name": "@brytdesigns/shopify-ajax-cart-api",
+  "version": "1.0.0",
+  "description": "An AJAX cart that integrates with the AJAX Cart API",
+  "scripts": {
+    "build": "tsup --clean",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "main": "./dist/main/index.js",
+  "types": "./dist/main/index.d.ts",
+  "module": "./dist/main/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/main/index.d.ts",
+      "import": "./dist/main/index.js"
+    },
+    "./effect": {
+      "types": "./dist/main/effect/index.d.ts",
+      "import": "./dist/main/effect/index.js"
+    }
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Bryt Designs",
+  "license": "ISC",
+  "devDependencies": {
+    "@effect/vitest": "^0.19.0",
+    "dts-bundle-generator": "^9.5.1",
+    "tsup": "^8.4.0",
+    "vitest": "^3.0.6"
+  },
+  "dependencies": {
+    "@brytdesigns/shopify-utils": "workspace:*",
+    "@effect/platform": "0.82.4",
+    "effect": "3.15.2"
+  }
+}

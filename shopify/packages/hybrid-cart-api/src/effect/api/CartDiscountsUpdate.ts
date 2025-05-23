@@ -23,7 +23,7 @@ const updateCartDiscountCodesMutation = `#graphql
 export type UpdateDiscountsInput = CartUpdateDiscountsInput;
 
 export const make = (discountCodes: CartUpdateDiscountsInput) =>
-  Effect.gen(function*() {
+  Effect.gen(function* () {
     const config = Ajax.Window.StorefrontClientConfig.make();
 
     const client = createStorefrontApiClient({

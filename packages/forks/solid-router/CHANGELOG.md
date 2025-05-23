@@ -1,5 +1,11 @@
 # @solidjs/router
 
+## 0.15.6
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+
 ## 0.15.5
 
 ### Patch Changes

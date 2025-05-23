@@ -1,5 +1,14 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.10
+  - @brytdesigns/web-component-utils@0.1.12
+
 ## 1.0.6
 
 ### Patch Changes

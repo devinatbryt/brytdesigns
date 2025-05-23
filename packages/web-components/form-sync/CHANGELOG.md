@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-form-sync
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated versions and created ajax only cart api given shopify's new method of adding discounts
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.12
+
 ## 1.0.3
 
 ### Patch Changes
