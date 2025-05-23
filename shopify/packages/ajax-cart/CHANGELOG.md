@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.4
+
+### Patch Changes
+
+- Minor bug fixes and validation_updates
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-cart-api@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

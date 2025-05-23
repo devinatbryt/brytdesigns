@@ -1,6 +1,7 @@
 import type { CartData } from "../types";
 
 import { useQuery } from "@tanstack/solid-query";
+import { validateCart } from "@brytdesigns/shopify-ajax-cart-api";
 
 import client from "../client.js";
 import API from "../api.js";
@@ -22,7 +23,7 @@ export const query = useQuery(
       }
       return cart.data;
     },
-    initialData: window.BrytDesigns.initialCart,
+    initialData: validateCart(window.BrytDesigns.initialCart),
     staleTime: 1000 * 60 * 5,
     throwOnError: true,
     reconcile: "cart",

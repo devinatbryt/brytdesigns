@@ -4,7 +4,9 @@ import * as Layer from "effect/Layer";
 import * as LogLevel from "effect/LogLevel";
 import * as API from "./effect/index.js";
 import * as AjaxRequest from "./effect/services/AjaxRequest.js";
+import * as Schema from "effect/Schema";
 import { AjaxClientResponse } from "./effect/data/index.js";
+import { Cart } from "./effect/schema.js";
 
 export namespace createAjaxCartClient {
   export type Options = {
@@ -18,6 +20,9 @@ export namespace createAjaxCartClient {
     signal?: AbortSignal;
   };
 }
+
+export const validateCart = (cart: unknown) =>
+  Effect.runSync(Schema.decodeUnknown(Cart)(cart));
 
 export const createAjaxCartApi = ({ debug = false }) => {
   let baseLayer = Layer.empty;
