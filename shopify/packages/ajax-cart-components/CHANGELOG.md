@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.0.6
+
+### Patch Changes
+
+- Fixed format function
+
 ## 1.0.5
 
 ### Patch Changes

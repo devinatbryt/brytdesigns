@@ -16,13 +16,9 @@ export function formatValue(format: Format, value: unknown) {
     case "number":
       return Number(value);
     case "boolean":
-      return typeof value === "string"
-        ? value.toLowerCase() === "true"
-        : Boolean(value);
+      return Boolean();
     case "invert_boolean":
-      return typeof value === "string"
-        ? value.toLowerCase() === "false"
-        : !Boolean(value);
+      return !Boolean(value);
     default:
       return value as any;
   }
