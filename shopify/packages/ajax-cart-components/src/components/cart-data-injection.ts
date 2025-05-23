@@ -70,18 +70,30 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
             `cart-data-injection: Unable to find element with selector of: ${props.target}`,
           );
 
-        if (injectionType === "attribute" && value) {
+        if (
+          injectionType === "attribute" &&
+          value !== null &&
+          value !== undefined
+        ) {
           target.setAttribute(attributeName, value);
           return;
         }
 
-        if (injectionType === "property" && value) {
+        if (
+          injectionType === "property" &&
+          value !== null &&
+          value !== undefined
+        ) {
           //@ts-ignore
           target[attributeName] = value;
           return;
         }
 
-        if (injectionType === "template" && value) {
+        if (
+          injectionType === "template" &&
+          value !== null &&
+          value !== undefined
+        ) {
           if (attributeName === "style") {
             //@ts-ignore
             const styleTmpl = target[attributeName].cssText;
