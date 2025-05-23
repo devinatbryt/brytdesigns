@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-drawer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Headless drawer web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

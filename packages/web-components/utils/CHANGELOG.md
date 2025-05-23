@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-utils
 
+## 0.1.13
+
+### Patch Changes
+
+- Added import map compatable build
+
 ## 0.1.12
 
 ### Patch Changes
