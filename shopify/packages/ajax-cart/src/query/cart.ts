@@ -24,6 +24,7 @@ export const query = useQuery(
       return cart.data;
     },
     initialData: validateCart(window.BrytDesigns.initialCart),
+    refetchOnMount: "always",
     staleTime: 1000 * 60 * 5,
     throwOnError: true,
     reconcile: "cart",

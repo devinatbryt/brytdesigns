@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.5
+
+### Patch Changes
+
+- Always fetch data on mount
+
 ## 1.0.4
 
 ### Patch Changes
