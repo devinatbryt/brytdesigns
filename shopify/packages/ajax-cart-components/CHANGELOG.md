@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.0.7
+
+### Patch Changes
+
+- Fixed minor bug with formatValue
+
 ## 1.0.6
 
 ### Patch Changes

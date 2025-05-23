@@ -16,7 +16,7 @@ export function formatValue(format: Format, value: unknown) {
     case "number":
       return Number(value);
     case "boolean":
-      return Boolean();
+      return Boolean(value);
     case "invert_boolean":
       return !Boolean(value);
     default:
