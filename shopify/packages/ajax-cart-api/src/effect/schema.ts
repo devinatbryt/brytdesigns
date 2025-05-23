@@ -273,14 +273,11 @@ export const CartUpdateInput = Schema.Struct({
   ),
   note: Schema.optional(Schema.NullOr(Schema.String)),
   attributes: Schema.optional(Attributes),
-  discount: Schema.optionalWith(
+  discount: Schema.optional(
     Schema.transform(DiscountCodeInput, DiscountCodeTransformed, {
       decode: (input) => input.join(","),
       encode: (input) => input.split(","),
     }),
-    {
-      default: () => "",
-    },
   ),
 }).pipe(BaseInput);
 
