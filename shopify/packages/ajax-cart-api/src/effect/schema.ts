@@ -46,7 +46,7 @@ const BasePrivateAttributesArray = Schema.transform(
 );
 
 const BasePublicAttributesArray = Schema.transform(
-  BasePrivateAttributes,
+  BasePublicAttributes,
   Schema.Array(
     Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
   ),
