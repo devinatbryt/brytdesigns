@@ -7,6 +7,7 @@ import {
   CartContext,
   CartData,
   CartDataArray,
+  CartDataArrayInjection,
   CartDataArrayItem,
   CartDataConditions,
   CartDataInjection,
@@ -16,44 +17,55 @@ import {
 } from "./components/index.js";
 
 customShadowlessElement(
-  "cart-context",
+  CartContext.Name,
   { debug: false },
-  correctElementType(CartContext),
+  correctElementType(CartContext.Component),
 );
 
 customShadowlessElement(
-  "cart-data-array-item",
+  CartDataArrayItem.Name,
   //@ts-ignore
   { itemIndex: "0" },
-  correctElementType(CartDataArrayItem),
+  correctElementType(CartDataArrayItem.Component),
 );
 
 customShadowlessElement(
-  "cart-data-array",
+  CartDataArray.Name,
   {
     format: "",
     arrayPath: "items",
   },
-  correctElementType(CartDataArray),
+  correctElementType(CartDataArray.Component),
 );
 
 customShadowlessElement(
-  "cart-data",
+  CartDataArrayInjection.Name,
+  {
+    format: "",
+    arrayPath: "items",
+    target: "",
+    wrapInnerChild: true,
+  },
+  correctElementType(CartDataArrayInjection.Component),
+);
+
+customShadowlessElement(
+  CartData.Name,
   {
     format: "",
     propertyName: "item_count",
   },
-  correctElementType(CartData),
+  correctElementType(CartData.Component),
 );
 
 customShadowlessElement(
-  "cart-data-conditions",
+  CartDataConditions.Name,
   {},
-  correctElementType(CartDataConditions),
+  correctElementType(CartDataConditions.Component),
 );
 
 customShadowlessElement(
-  "cart-data-injection",
+  CartDataInjection.Name,
   {
     propertyName: "item_count",
     attributeName: "data-item-count",
@@ -61,11 +73,11 @@ customShadowlessElement(
     target: "",
     format: "",
   },
-  correctElementType(CartDataInjection),
+  correctElementType(CartDataInjection.Component),
 );
 
 customShadowlessElement(
-  "cart-data-listener",
+  CartDataListener.Name,
   {
     status: "default",
     on: "submit",
@@ -75,19 +87,19 @@ customShadowlessElement(
     resetStatusDelay: 0,
     preventDefault: true,
   },
-  correctElementType(CartDataListener),
+  correctElementType(CartDataListener.Component),
 );
 
 customShadowlessElement(
-  "cart-data-listener-status",
+  CartDataListenerStatus.Name,
   {},
-  correctElementType(CartDataListenerStatus),
+  correctElementType(CartDataListenerStatus.Component),
 );
 
 customShadowlessElement(
-  "cart-loading-state",
+  CartLoadingState.Name,
   { ignoredStates: [] },
-  correctElementType(CartLoadingState),
+  correctElementType(CartLoadingState.Component),
 );
 
 export * from "./hooks/index.js";

@@ -15,14 +15,14 @@ type CartDataProps = {
   format?: Format;
 };
 
-export const CartData: CorrectComponentType<CartDataProps> = (
+export const Name = "cart-data";
+
+export const Component: CorrectComponentType<CartDataProps> = (
   props,
   { element },
 ) => {
   if (!props.propertyName)
-    return console.warn(
-      "No property-name attribute provided for cart-data component.",
-    );
+    return console.warn(`${Name}: No property-name attribute provided.`);
   const fullPath = useFullPropertyPath({
     element,
     path: () => props.propertyName,

@@ -22,7 +22,9 @@ type CartDataListenerProps = {
   preventDefault: boolean;
 };
 
-export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
+export const Name = "cart-data-listener";
+
+export const Component: CorrectComponentType<CartDataListenerProps> = (
   props,
   { element },
 ) => {
@@ -64,11 +66,8 @@ export const CartDataListener: CorrectComponentType<CartDataListenerProps> = (
         resetStatusDelay,
       }) => {
         if (!method)
-          return console.error(
-            "cart-item-listener: method property is required!",
-          );
-        if (!on)
-          return console.error("cart-item-listener: on property is required!");
+          return console.error(`${Name}: method property is required!`);
+        if (!on) return console.error(`${Name}: on property is required!`);
 
         let resetStatusId: number | null = null,
           tempEventId: string | null = null;

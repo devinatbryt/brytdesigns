@@ -10,12 +10,14 @@ type CartDataArrayItemProps = {
   itemIndex: ValidAjaxPath;
 };
 
-export const CartDataArrayItem: CorrectComponentType<CartDataArrayItemProps> = (
+export const Name = "cart-data-array-item";
+
+export const Component: CorrectComponentType<CartDataArrayItemProps> = (
   props,
   { element },
 ) => {
   if (!props.itemIndex)
-    return console.warn("cart-data-array-item: No path attribute provided.");
+    return console.warn(`${Name}: No path attribute provided.`);
   const mergedProps = {
     element,
     path: () => props.itemIndex,

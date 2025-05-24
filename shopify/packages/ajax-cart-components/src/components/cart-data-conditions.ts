@@ -17,14 +17,15 @@ type ConditionValue = {
 
 type Condition = {
   type:
-    | "typeof"
-    | "includes_property"
-    | "equals"
-    | "not_equals"
-    | "lt"
-    | "lte"
-    | "gt"
-    | "gte";
+  | "typeof"
+  | "includes"
+  | "includes_property"
+  | "equals"
+  | "not_equals"
+  | "lt"
+  | "lte"
+  | "gt"
+  | "gte";
   format?: Format;
   invert?: boolean;
   valueA: ConditionValue;
@@ -63,6 +64,12 @@ function validateConditions<T>(conditions: Condition[], data: T) {
 
     if (condition.type === "typeof") {
       result = typeof valueA === valueB;
+    }
+
+    if (condition.type === "includes") {
+      result = formatValue(condition.format || "", valueA).includes(
+        formatValue(condition.format || "", valueB),
+      );
     }
 
     if (condition.type === "includes_property") {
@@ -113,22 +120,25 @@ function validateConditions<T>(conditions: Condition[], data: T) {
   return result;
 }
 
-export const CartDataConditions: CorrectComponentType<
-  CartDataConditionsProps
-> = (_, { element }) => {
+export const Name = "cart-data-conditions";
+
+export const Component: CorrectComponentType<CartDataConditionsProps> = (
+  _,
+  { element },
+) => {
   const conditionTemplates = Array.from(element.children).filter(
     (child) => child.tagName === "TEMPLATE" && child.hasAttribute("conditions"),
   );
   if (!conditionTemplates.length)
     return console.error(
-      "cart-data-conditions: no templates found with any conditions attribute!",
+      `${Name}: no templates found with any conditions attribute!`,
     );
 
   const allConditions = createMemo(() =>
     conditionTemplates.map((tmpl) => {
       const conditions = tmpl.getAttribute("conditions");
       if (!conditions)
-        console.warn("cart-data-conditions: conditions attribute is required!");
+        console.warn(`${Name}: conditions attribute is required!`);
 
       try {
         return JSON.parse(conditions!);
@@ -149,13 +159,13 @@ export const CartDataConditions: CorrectComponentType<
   return html`
     <${For} each=${() => conditionTemplates}>
       ${(tmpl: HTMLTemplateElement, idx: Accessor<number>) => {
-        const conditions = allConditions()[idx()];
-        return html`
+      const conditions = allConditions()[idx()];
+      return html`
           <${Show} when=${() => validateConditions(conditions, data())}>
             ${() => Array.from(tmpl.content.cloneNode(true).childNodes)}
           <//>
         `;
-      }}
+    }}
     <//>
   `;
 };

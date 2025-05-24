@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 import { getTemplateContent, type Format } from "../utils/index.js";
 
-import { Show, For, type Accessor } from "solid-js";
+import { createEffect, on, createMemo, mapArray } from "solid-js";
 
 import {
   type ValidAjaxPath,
@@ -9,14 +9,19 @@ import {
   useCartValue,
   provideFullPropertyPathContext,
 } from "../hooks/index.js";
+
+import { getTargetElement } from "../utils/index.js";
+
 import html from "solid-js/html";
 
 type CartDataArrayProps = {
   arrayPath: ValidAjaxPath;
+  wrapInnerChild: boolean;
+  target: string;
   format?: Format;
 };
 
-export const Name = "cart-data-array";
+export const Name = "cart-data-array-injection";
 
 export const Component: CorrectComponentType<CartDataArrayProps> = (
   props,
@@ -59,17 +64,50 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     return v;
   };
 
+  const children = createMemo(
+    mapArray(arrayValue, (item, idx) => {
+      const itemNode = itemTemplate.cloneNode(true);
+      if (props.wrapInnerChild) {
+        const firstItem = itemNode.firstChild;
+        if (!firstItem) return null;
+        const children = Array.from(firstItem.childNodes);
+
+        const wrapper = html`
+          <cart-data-array-item item-index=${() => `${idx()}`}>
+            ${() => Array.from(children)}
+          </cart-data-array-item>
+        `;
+
+        for (const node of children) {
+          firstItem.replaceChild(
+            node,
+            Array.isArray(wrapper) ? wrapper.at(0)! : wrapper,
+          );
+        }
+
+        return firstItem as Node;
+      }
+    }),
+  );
+
   element.replaceChildren(...[]);
 
-  return html`
-    <${Show} when=${() => arrayValue() && arrayValue()!.length > 0}>
-      <${For} each=${arrayValue}>
-        ${(_: any, idx: Accessor<number>) => html`
-          <cart-data-array-item item-index=${() => `${idx()}`}>
-            ${() => Array.from(itemTemplate.cloneNode(true).childNodes)}
-          </cart-data-array-item>
-        `}
-      <//>
-    <//>
-  `;
+  createEffect(
+    on(
+      () => {
+        const rootElement = element;
+        return {
+          target: getTargetElement(rootElement, props.target),
+          children: children(),
+        };
+      },
+      ({ children, target }) => {
+        if (!target) return;
+        const filteredChildren = children.filter(
+          (v) => v !== null && v !== undefined,
+        );
+        target.replaceChildren(...filteredChildren);
+      },
+    ),
+  );
 };

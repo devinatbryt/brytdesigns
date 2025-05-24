@@ -5,15 +5,11 @@ import { createMemo } from "solid-js";
 import { type Status, useListenerStatus } from "../hooks/index.js";
 import { getTemplateContent } from "../utils/index.js";
 
-export const CartDataListenerStatus: CorrectComponentType<{}> = (
-  _,
-  { element },
-) => {
+export const Name = "cart-data-listener-status";
+
+export const Component: CorrectComponentType<{}> = (_, { element }) => {
   const [status] = useListenerStatus(element);
-  if (!status)
-    return console.error(
-      "cart-data-listener-status: no listener context provided!",
-    );
+  if (!status) return console.error(`${Name}: no listener context provided!`);
 
   const templates = {
     default: getTemplateContent(element, "default"),

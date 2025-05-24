@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.1.0
+
+### Minor Changes
+
+- Added new web component to inject items into an array
+
 ## 1.0.9
 
 ### Patch Changes

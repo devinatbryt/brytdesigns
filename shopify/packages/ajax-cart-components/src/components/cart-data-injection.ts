@@ -18,27 +18,24 @@ type CartDataInjectionProps = {
 
 const VALID_INJECTION_TYPES = ["attribute", "property", "template"];
 
-export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
+export const Name = "cart-data-injection";
+
+export const Component: CorrectComponentType<CartDataInjectionProps> = (
   props,
   { element },
 ) => {
   if (!props.propertyName)
-    return console.warn("cart-data-injection: No path attribute provided.");
-  if (!props.target)
-    return console.warn("cart-data-injection: No target attribute found!");
+    return console.warn(`${Name}: No path attribute provided.`);
+  if (!props.target) return console.warn(`${Name}: No target attribute found!`);
   if (!props.attributeName)
-    return console.warn(
-      "cart-data-injection: No attribute-name attribute found!",
-    );
+    return console.warn(`${Name}: No attribute-name attribute found!`);
 
   if (
     !props.injectionType ||
     (props.injectionType &&
       !VALID_INJECTION_TYPES.includes(props.injectionType))
   )
-    return console.warn(
-      "cart-data-injection: Invalid injection-type attribute provided.",
-    );
+    return console.warn(`${Name}: Invalid injection-type attribute provided.`);
 
   const mergedProps = {
     element,
@@ -67,7 +64,7 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
       ({ target, value, attributeName, injectionType, propertyName }) => {
         if (!target)
           return console.warn(
-            `cart-data-injection: Unable to find element with selector of: ${props.target}`,
+            `${Name}: Unable to find element with selector of: ${props.target}`,
           );
 
         if (
@@ -112,7 +109,9 @@ export const CartDataInjection: CorrectComponentType<CartDataInjectionProps> = (
           }
           const tmpValue = target.getAttribute(attributeName);
           if (!tmpValue || !value)
-            return console.warn("Unable to inject value into template");
+            return console.warn(
+              `${Name}: Unable to inject value into template`,
+            );
           setTimeout(() => {
             target.setAttribute(
               attributeName,

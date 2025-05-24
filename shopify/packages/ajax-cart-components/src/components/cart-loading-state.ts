@@ -12,7 +12,9 @@ type CartLoadingStateProps = {
   ignoredStates: Array<Status>;
 };
 
-export const CartLoadingState: CorrectComponentType<CartLoadingStateProps> = (
+export const Name = "cart-loading-state";
+
+export const Component: CorrectComponentType<CartLoadingStateProps> = (
   props,
   { element },
 ) => {
