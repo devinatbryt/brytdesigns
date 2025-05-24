@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.8
+
+### Patch Changes
+
+- Api now separates public and private attributes
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-cart-api@1.0.6
+
 ## 1.0.7
 
 ### Patch Changes

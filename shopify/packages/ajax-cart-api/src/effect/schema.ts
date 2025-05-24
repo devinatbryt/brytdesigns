@@ -2,7 +2,7 @@ import * as Schema from "effect/Schema";
 import * as Array from "effect/Array";
 import * as Record from "effect/Record";
 import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
-import { pipe } from "effect";
+import { pipe, identity } from "effect";
 
 type BaseAttributeValue = Schema.Schema.Type<typeof BaseAttributeValue>;
 const BaseAttributeValue = Schema.Union(
@@ -18,8 +18,35 @@ export const BaseAttributes = Schema.Record({
   value: BaseAttributeValue,
 });
 
-const BaseAttributesArray = Schema.transform(
-  BaseAttributes,
+const BasePrivateAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
+  decode: Record.filter((value, key) => key.startsWith("_")),
+  encode: identity,
+});
+const BasePublicAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
+  decode: Record.filter((value, key) => !key.startsWith("_")),
+  encode: identity,
+});
+
+const BasePrivateAttributesArray = Schema.transform(
+  BasePrivateAttributes,
+  Schema.Array(
+    Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
+  ),
+  {
+    decode: (record) =>
+      Record.toEntries(record).map(([key, value]) => ({ key, value })),
+    encode: (array) =>
+      Record.fromEntries(
+        pipe(
+          array,
+          Array.map(({ key, value }) => [key, value]),
+        ),
+      ),
+  },
+);
+
+const BasePublicAttributesArray = Schema.transform(
+  BasePrivateAttributes,
   Schema.Array(
     Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
   ),
@@ -39,16 +66,29 @@ const BaseAttributesArray = Schema.transform(
 export const Attributes = Schema.transform(
   BaseAttributes,
   Schema.Struct({
-    array: BaseAttributesArray,
-    record: BaseAttributes,
+    private: Schema.Struct({
+      array: BasePrivateAttributesArray,
+      record: BasePrivateAttributes,
+    }),
+    public: Schema.Struct({
+      array: BasePublicAttributes,
+      record: BasePublicAttributes,
+    }),
   }),
   {
     decode: (attributes) => ({
-      array: attributes,
-      record: attributes,
+      private: {
+        array: attributes,
+        record: attributes,
+      },
+      public: {
+        array: attributes,
+        record: attributes,
+      },
     }),
     encode: (attributes) => ({
-      ...attributes.record,
+      ...attributes.private.record,
+      ...attributes.public.record,
     }),
   },
 );
@@ -189,8 +229,14 @@ export const LineItem = Schema.Struct({
   id: Resource.ID,
   properties: Schema.optionalWith(Attributes, {
     default: () => ({
-      array: [],
-      record: {} as BaseAttributes,
+      private: {
+        array: [] as any,
+        record: {} as BaseAttributes,
+      },
+      public: {
+        array: [] as any,
+        record: {} as BaseAttributes,
+      },
     }),
     nullable: true,
   }),
@@ -242,8 +288,14 @@ export const Cart = Schema.Struct({
   note: Schema.NullOr(Schema.String),
   attributes: Schema.optionalWith(Attributes, {
     default: () => ({
-      record: {} as BaseAttributes,
-      array: [],
+      private: {
+        array: [] as any,
+        record: {} as BaseAttributes,
+      },
+      public: {
+        array: [] as any,
+        record: {} as BaseAttributes,
+      },
     }),
     nullable: true,
   }),

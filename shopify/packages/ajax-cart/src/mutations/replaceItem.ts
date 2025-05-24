@@ -39,7 +39,8 @@ export const mutation = useMutation(
             id: item.id,
             ...tempValues,
             properties: {
-              ...tempValues.properties.record,
+              ...tempValues.properties.private.record,
+              ...tempValues.properties.public.record,
             },
           },
         ],
