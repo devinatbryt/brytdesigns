@@ -71,7 +71,7 @@ export const Attributes = Schema.transform(
       record: BasePrivateAttributes,
     }),
     public: Schema.Struct({
-      array: BasePublicAttributes,
+      array: BasePublicAttributesArray,
       record: BasePublicAttributes,
     }),
   }),
