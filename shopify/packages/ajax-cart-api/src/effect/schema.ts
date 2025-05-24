@@ -1,18 +1,43 @@
 import * as Schema from "effect/Schema";
 import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
 
+type BaseAttributeValue = Schema.Schema.Type<typeof BaseAttributeValue>;
+const BaseAttributeValue = Schema.Union(
+  Schema.Null,
+  Schema.String,
+  Schema.Boolean,
+  Schema.Number,
+);
+
 export type BaseAttributes = Schema.Schema.Type<typeof BaseAttributes>;
 export const BaseAttributes = Schema.Record({
   key: Schema.String,
-  value: Schema.Union(
-    Schema.Null,
-    Schema.String,
-    Schema.Boolean,
-    Schema.Number,
-  ),
+  value: BaseAttributeValue,
 });
 
 export const Attributes = BaseAttributes;
+
+const AttributesArray = Schema.transform(
+  Attributes,
+  Schema.Array(
+    Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
+  ),
+  {
+    decode: (record) =>
+      Object.keys(record).map((key) => ({
+        key,
+        value: record[key],
+      })) as Readonly<{ key: string; value: BaseAttributeValue }[]>,
+    encode: (array) =>
+      array.reduce(
+        (result, { key, value }) => ({
+          ...result,
+          [key]: value,
+        }),
+        {} as BaseAttributes,
+      ),
+  },
+);
 
 export type DiscountApplication = Schema.Schema.Type<
   typeof DiscountApplication
@@ -151,6 +176,9 @@ export const LineItem = Schema.Struct({
   properties: Schema.optionalWith(Schema.NullOr(Attributes), {
     default: () => ({}),
   }),
+  properties_array: Schema.optionalWith(Schema.NullOr(AttributesArray), {
+    default: () => [],
+  }),
   quantity: Schema.Number,
   variant_id: Resource.ID,
   key: Schema.String,
@@ -200,6 +228,7 @@ export const Cart = Schema.Struct({
   attributes: Schema.optionalWith(Attributes, {
     default: () => ({}),
   }),
+  attributes_array: Schema.optionalWith(AttributesArray, { default: () => [] }),
   discounts: Schema.optionalWith(Schema.Array(Discount), { default: () => [] }),
   discount_codes: Schema.optionalWith(
     Schema.Array(

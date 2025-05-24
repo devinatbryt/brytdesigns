@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.4
+
+### Patch Changes
+
+- Added "attributes_array" and "properties_array" to represent key, value array
+
 ## 1.0.3
 
 ### Patch Changes
