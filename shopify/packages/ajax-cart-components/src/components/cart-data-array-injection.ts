@@ -67,25 +67,22 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
   const children = createMemo(
     mapArray(arrayValue, (item, idx) => {
       const itemNode = itemTemplate.cloneNode(true);
-      if (props.wrapInnerChild) {
-        const firstItem = itemNode.firstChild;
-        if (!firstItem) return null;
-        const children = Array.from(firstItem.childNodes);
+      const container = itemNode instanceof Element ? itemNode : null;
+      if (props.wrapInnerChild && container) {
+        const firstElement = container.firstElementChild;
+        if (!firstElement) return null;
+        const children = Array.from(firstElement.children);
 
         const wrapper = html`
           <cart-data-array-item item-index=${() => `${idx()}`}>
             ${() => Array.from(children)}
           </cart-data-array-item>
         `;
+        firstElement.replaceChildren(
+          Array.isArray(wrapper) ? wrapper.at(0)! : wrapper,
+        );
 
-        for (const node of children) {
-          firstItem.replaceChild(
-            node,
-            Array.isArray(wrapper) ? wrapper.at(0)! : wrapper,
-          );
-        }
-
-        return firstItem as Node;
+        return firstElement;
       }
     }),
   );

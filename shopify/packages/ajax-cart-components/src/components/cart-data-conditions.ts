@@ -17,15 +17,16 @@ type ConditionValue = {
 
 type Condition = {
   type:
-  | "typeof"
-  | "includes"
-  | "includes_property"
-  | "equals"
-  | "not_equals"
-  | "lt"
-  | "lte"
-  | "gt"
-  | "gte";
+    | "typeof"
+    | "includes"
+    | "includes_property"
+    | "equals"
+    | "not_equals"
+    | "starts_with"
+    | "lt"
+    | "lte"
+    | "gt"
+    | "gte";
   format?: Format;
   invert?: boolean;
   valueA: ConditionValue;
@@ -75,6 +76,12 @@ function validateConditions<T>(conditions: Condition[], data: T) {
     if (condition.type === "includes_property") {
       result = valueA.some(
         (v: any) => v[condition.valueA?.property_name || ""] === valueB,
+      );
+    }
+
+    if (condition.type === "starts_with") {
+      result = formatValue("string", valueA).startsWith(
+        formatValue(condition.format || "", valueB),
       );
     }
 
@@ -159,13 +166,13 @@ export const Component: CorrectComponentType<CartDataConditionsProps> = (
   return html`
     <${For} each=${() => conditionTemplates}>
       ${(tmpl: HTMLTemplateElement, idx: Accessor<number>) => {
-      const conditions = allConditions()[idx()];
-      return html`
+        const conditions = allConditions()[idx()];
+        return html`
           <${Show} when=${() => validateConditions(conditions, data())}>
             ${() => Array.from(tmpl.content.cloneNode(true).childNodes)}
           <//>
         `;
-    }}
+      }}
     <//>
   `;
 };
