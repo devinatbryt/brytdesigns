@@ -90,8 +90,6 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     }),
   );
 
-  element.replaceChildren(...[]);
-
   createEffect(
     on(
       () => {
