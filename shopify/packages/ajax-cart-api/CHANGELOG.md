@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.5
+
+### Patch Changes
+
+- Reverted change updated to new format
+
 ## 1.0.4
 
 ### Patch Changes

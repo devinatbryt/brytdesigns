@@ -15,10 +15,8 @@ export const BaseAttributes = Schema.Record({
   value: BaseAttributeValue,
 });
 
-export const Attributes = BaseAttributes;
-
-const AttributesArray = Schema.transform(
-  Attributes,
+const BaseAttributesArray = Schema.transform(
+  BaseAttributes,
   Schema.Array(
     Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
   ),
@@ -36,6 +34,23 @@ const AttributesArray = Schema.transform(
         }),
         {} as BaseAttributes,
       ),
+  },
+);
+
+export const Attributes = Schema.transform(
+  BaseAttributes,
+  Schema.Struct({
+    array: BaseAttributesArray,
+    record: BaseAttributes,
+  }),
+  {
+    decode: (attributes) => ({
+      array: [] as any,
+      record: {} as BaseAttributes,
+    }),
+    encode: (attributes) => ({
+      ...attributes.record,
+    }),
   },
 );
 
@@ -173,11 +188,12 @@ export const UnitPriceMeasurement = Schema.Struct({
 export type LineItem = Schema.Schema.Type<typeof LineItem>;
 export const LineItem = Schema.Struct({
   id: Resource.ID,
-  properties: Schema.optionalWith(Schema.NullOr(Attributes), {
-    default: () => ({}),
-  }),
-  properties_array: Schema.optionalWith(Schema.NullOr(AttributesArray), {
-    default: () => [],
+  properties: Schema.optionalWith(Attributes, {
+    default: () => ({
+      array: [],
+      record: {} as BaseAttributes,
+    }),
+    nullable: true,
   }),
   quantity: Schema.Number,
   variant_id: Resource.ID,
@@ -226,9 +242,12 @@ export const Cart = Schema.Struct({
   token: Schema.String,
   note: Schema.NullOr(Schema.String),
   attributes: Schema.optionalWith(Attributes, {
-    default: () => ({}),
+    default: () => ({
+      record: {} as BaseAttributes,
+      array: [],
+    }),
+    nullable: true,
   }),
-  attributes_array: Schema.optionalWith(AttributesArray, { default: () => [] }),
   discounts: Schema.optionalWith(Schema.Array(Discount), { default: () => [] }),
   discount_codes: Schema.optionalWith(
     Schema.Array(
