@@ -30,14 +30,14 @@ const AjaxCart = mergeProps(Cart.query, {
   addAttributes(input: UpdateAttributes.Input) {
     const mergedAttributes = getNormalizedAttributes();
     return UpdateAttributes.mutation.mutateAsync({
-      ...mergedAttributes,
+      ...mergedAttributes.record,
       ...input,
     });
   },
   addAttribute(input: { key: string; value: UpdateAttributes.Input[string] }) {
     const mergedAttributes = getNormalizedAttributes();
     return UpdateAttributes.mutation.mutateAsync({
-      ...mergedAttributes,
+      ...mergedAttributes.record,
       [input.key]: input.value,
     });
   },
@@ -45,14 +45,14 @@ const AjaxCart = mergeProps(Cart.query, {
   removeAttributes(input: string[]) {
     const mergedAttributes = getNormalizedAttributes();
     return UpdateAttributes.mutation.mutateAsync({
-      ...mergedAttributes,
+      ...mergedAttributes.record,
       ...Object.fromEntries(input.map((key) => [key, null])),
     });
   },
   removeAttribute(key: string) {
     const mergedAttributes = getNormalizedAttributes();
     return UpdateAttributes.mutation.mutateAsync({
-      ...mergedAttributes,
+      ...mergedAttributes.record,
       [key]: null,
     });
   },

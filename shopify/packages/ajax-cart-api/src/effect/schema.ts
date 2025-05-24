@@ -1,5 +1,8 @@
 import * as Schema from "effect/Schema";
+import * as Array from "effect/Array";
+import * as Record from "effect/Record";
 import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
+import { pipe } from "effect";
 
 type BaseAttributeValue = Schema.Schema.Type<typeof BaseAttributeValue>;
 const BaseAttributeValue = Schema.Union(
@@ -22,17 +25,13 @@ const BaseAttributesArray = Schema.transform(
   ),
   {
     decode: (record) =>
-      Object.keys(record).map((key) => ({
-        key,
-        value: record[key],
-      })) as Readonly<{ key: string; value: BaseAttributeValue }[]>,
+      Record.toEntries(record).map(([key, value]) => ({ key, value })),
     encode: (array) =>
-      array.reduce(
-        (result, { key, value }) => ({
-          ...result,
-          [key]: value,
-        }),
-        {} as BaseAttributes,
+      Record.fromEntries(
+        pipe(
+          array,
+          Array.map(({ key, value }) => [key, value]),
+        ),
       ),
   },
 );
@@ -45,8 +44,8 @@ export const Attributes = Schema.transform(
   }),
   {
     decode: (attributes) => ({
-      array: [] as any,
-      record: {} as BaseAttributes,
+      array: attributes,
+      record: attributes,
     }),
     encode: (attributes) => ({
       ...attributes.record,
