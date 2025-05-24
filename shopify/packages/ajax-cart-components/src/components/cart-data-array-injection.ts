@@ -65,9 +65,9 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
   };
 
   const children = createMemo(
-    mapArray(arrayValue, (item, idx) => {
-      const itemNode = itemTemplate.cloneNode(true);
-      const container = itemNode instanceof Element ? itemNode : null;
+    mapArray(arrayValue, (_, idx) => {
+      const fragment = itemTemplate.cloneNode(true);
+      const container = fragment instanceof DocumentFragment ? fragment : null;
       if (props.wrapInnerChild && container) {
         const firstElement = container.firstElementChild;
         if (!firstElement) return null;

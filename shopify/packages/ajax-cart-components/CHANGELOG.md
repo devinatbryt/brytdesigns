@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.1.5
+
+### Patch Changes
+
+- Fixed bug with cart-data-array-injection
+
 ## 1.1.4
 
 ### Patch Changes
