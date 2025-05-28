@@ -41,7 +41,7 @@ function initializeDrawerContext(props: CreateContextOptions) {
       () => store.animationQueue,
       (animationQueue) => {
         if (!animationQueue.length) return;
-        const animations = Promise.all(store.animationQueue);
+        const animations = Promise.all([...store.animationQueue]);
         setElementState("isAnimating", true);
         animations.then(() => {
           batch(() => {
