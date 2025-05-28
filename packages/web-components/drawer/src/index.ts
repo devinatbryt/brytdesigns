@@ -11,7 +11,7 @@ import {
 } from "./components/index.js";
 
 customShadowlessElement(
-  "drawer-context",
+  DrawerContext.Name,
   {
     isOpen: false,
     id: "",
@@ -19,25 +19,25 @@ customShadowlessElement(
     shouldTrapFocus: false,
     isAnimating: false,
   },
-  correctElementType(DrawerContext),
+  correctElementType(DrawerContext.Component),
 );
 
 customShadowlessElement(
-  "drawer-trigger",
+  DrawerTrigger.Name,
   { target: "", action: "", on: "click", preventDefault: true },
-  correctElementType(DrawerTrigger),
+  correctElementType(DrawerTrigger.Component),
 );
 
 customShadowlessElement(
-  "drawer-backdrop",
+  DrawerBackdrop.Name,
   {},
-  correctElementType(DrawerBackdrop),
+  correctElementType(DrawerBackdrop.Component),
 );
 
 customShadowlessElement(
-  "drawer-content",
+  DrawerContent.Name,
   {},
-  correctElementType(DrawerContent),
+  correctElementType(DrawerContent.Component),
 );
 
 export { useDrawer, getDrawerContext } from "./hooks/index.js";

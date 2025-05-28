@@ -13,8 +13,10 @@ import { POSITION, type Position } from "../consts.js";
 
 type DrawerContentProps = {};
 
-export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
-  props,
+export const Name = `drawer-content`;
+
+export const Component: CorrectComponentType<DrawerContentProps> = (
+  _,
   { element },
 ) => {
   const [state, { updateAnimationQueue }] = useDrawer(element);
@@ -46,7 +48,7 @@ export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    let position = style.getPropertyValue("--d-position") as Position;
+    let position = style.getPropertyValue("--drawer--position") as Position;
     if (!position) position = POSITION.LEFT;
     const transform = convertPositionToTranslate(position);
 
@@ -62,7 +64,7 @@ export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
   function exit(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    let position = style.getPropertyValue("--d-position") as Position;
+    let position = style.getPropertyValue("--drawer--position") as Position;
     if (!position) position = POSITION.LEFT;
     const transform = convertPositionToTranslate(position);
     return animate(

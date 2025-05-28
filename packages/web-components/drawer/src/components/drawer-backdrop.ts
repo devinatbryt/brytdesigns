@@ -8,9 +8,11 @@ import { controlPromise, getTransitionConfig } from "../utils.js";
 
 type DrawerBackdropProps = {};
 
-export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
+export const Name = `drawer-backdrop`;
+
+export const Component: CorrectComponentType<DrawerBackdropProps> = (
   _,
-  { element }
+  { element },
 ) => {
   const [state, { updateAnimationQueue, close }] = useDrawer(element);
 
@@ -22,8 +24,8 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
         const animation = enter(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(animation.complete);
-      }
-    )
+      },
+    ),
   );
 
   createEffect(
@@ -34,8 +36,8 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
         const animation = exit(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(animation.complete);
-      }
-    )
+      },
+    ),
   );
 
   function enter(element: HTMLElement) {
@@ -44,9 +46,9 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
     return animate(
       element,
       {
-        opacity: [`var(--opacity-from)`, `var(--opacity-to)`],
+        opacity: [`var(--drawer--opacity-from)`, `var(--drawer--opacity-to)`],
       },
-      options
+      options,
     );
   }
 
@@ -58,7 +60,7 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
       {
         opacity: [`var(--drawer--opacity-to)`, `var(--drawer--opacity-from)`],
       },
-      options
+      options,
     );
   }
 

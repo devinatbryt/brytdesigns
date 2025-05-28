@@ -19,7 +19,9 @@ type DrawerContextProps = {
   isAnimating: boolean;
 };
 
-export const DrawerContext: CorrectComponentType<DrawerContextProps> = (
+export const Name = `drawer-context`;
+
+export const Component: CorrectComponentType<DrawerContextProps> = (
   props,
   { element },
 ) => {
