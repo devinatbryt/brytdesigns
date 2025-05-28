@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.9
+
+### Patch Changes
+
+- Attempt at fixing drawer trigger logic
+
 ## 1.0.8
 
 ### Patch Changes

@@ -1,7 +1,10 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import {
+  invokeOnLoaded,
+  type CorrectComponentType,
+} from "@brytdesigns/web-component-utils";
 import type { Action } from "../consts";
 
-import { createEffect, on, onCleanup } from "solid-js";
+import { createEffect, createRoot, on as _on, onCleanup } from "solid-js";
 import { observeElementInViewport } from "observe-element-in-viewport";
 
 import { getDrawerContext } from "../hooks/index.js";
@@ -13,98 +16,98 @@ type DrawerTriggerProps = {
   preventDefault: boolean;
 };
 
-export const DrawerTrigger: CorrectComponentType<DrawerTriggerProps> = (
+export const Name = "drawer-trigger";
+
+export const Component: CorrectComponentType<DrawerTriggerProps> = (
   props,
   { element },
 ) => {
-  if (!props.target)
-    return console.warn("DrawerTrigger: target prop is required!");
-  if (!props.action)
-    return console.warn("DrawerTrigger: action prop is required!");
-  if (
-    props.action !== "close" &&
-    props.action !== "open" &&
-    props.action !== "toggle"
-  )
-    return console.warn(
-      "DrawerTrigger: action prop must be 'close', 'open', or 'toggle'",
-    );
-  if (!props.on) return console.warn("DrawerTrigger: on prop is required!");
-
-  const target = document.querySelector(props.target!);
-  if (!target) return console.warn("DrawerTrigger: target element not found!");
-
-  const [state, { open, close, toggle }] = getDrawerContext(target);
-
-  function dispatchAction(action: Action) {
-    switch (action) {
-      case "close":
-        close();
-        break;
-      case "open":
-        open();
-        break;
-      case "toggle":
-        toggle();
-        break;
-    }
-  }
-
   createEffect(() => {
-    element.setAttribute("is-open", `${state.isOpen}`);
-    element.setAttribute("is-animating", `${state.isAnimating}`);
-  });
+    const targetProp = props.target,
+      action = props.action,
+      on = props.on,
+      preventDefault = props.preventDefault;
 
-  createEffect(
-    on(
-      () => ({
-        action: props.action!,
-        on: props.on,
-        preventDefault: props.preventDefault,
-      }),
-      ({ action, on, preventDefault }) => {
-        if (!on || !action) return;
+    if (!targetProp)
+      return console.warn(`${Name}: target prop is required!`, element);
+    if (!action)
+      return console.warn(`${Name}: action prop is required!`, element);
+    if (action !== "close" && action !== "open" && action !== "toggle")
+      return console.warn(
+        `${Name}: action prop must be 'close', 'open', or 'toggle'`,
+      );
+    if (!on) return console.warn(`${Name}: on prop is required!`);
 
-        switch (on) {
-          case "enter":
-            return handleOnEnter(action);
-          case "exit":
-            return handleOnExit(action);
-          default: {
-            function handleEvent(event: Event) {
-              if (preventDefault) event.preventDefault();
-              dispatchAction(action);
+    const target = document.querySelector(targetProp);
+    if (!target)
+      return console.warn(`${Name}: target element not found!`, {
+        element,
+        target: targetProp,
+      });
+
+    const controller = new AbortController();
+
+    invokeOnLoaded(
+      () => {
+        createRoot((dispose) => {
+          const [state, { open, close, toggle }] = getDrawerContext(target);
+
+          switch (on) {
+            case "enter": {
+              let unsubscribe = null;
+              if (action === "toggle") {
+                unsubscribe = observeElementInViewport(element, open, close);
+              }
+
+              if (unsubscribe) onCleanup(unsubscribe);
+              break;
+            }
+            case "exit": {
+              let unsubscribe = null;
+              if (action === "toggle") {
+                unsubscribe = observeElementInViewport(element, close, open);
+              }
+
+              if (unsubscribe) onCleanup(unsubscribe);
+              break;
             }
 
-            element.addEventListener(on, handleEvent);
-
-            return onCleanup(() =>
-              element.removeEventListener(on, handleEvent),
-            );
+            default: {
+              element.addEventListener(
+                on,
+                (event) => {
+                  if (preventDefault) event.preventDefault();
+                  switch (action) {
+                    case "close":
+                      close();
+                      break;
+                    case "open":
+                      open();
+                      break;
+                    case "toggle":
+                      toggle();
+                      break;
+                  }
+                },
+                { signal: controller.signal },
+              );
+              break;
+            }
           }
-        }
+
+          createEffect(() => {
+            element.setAttribute("is-open", `${state.isOpen}`);
+            element.setAttribute("is-animating", `${state.isAnimating}`);
+          });
+
+          controller.signal.addEventListener("abort", dispose);
+        });
       },
-    ),
-  );
+      { signal: controller.signal },
+    );
 
-  // Handles the enter/exit events for the drawer.
-  function handleOnEnter(action: Action) {
-    let unsubscribe = null;
-    if (action === "toggle") {
-      unsubscribe = observeElementInViewport(element, open, close);
-    }
-
-    if (unsubscribe) onCleanup(unsubscribe);
-    return;
-  }
-
-  function handleOnExit(action: Action) {
-    let unsubscribe = null;
-    if (action === "toggle") {
-      unsubscribe = observeElementInViewport(element, close, open);
-    }
-
-    if (unsubscribe) onCleanup(unsubscribe);
-    return;
-  }
+    return onCleanup(() => {
+      controller.abort();
+    });
+  });
 };
