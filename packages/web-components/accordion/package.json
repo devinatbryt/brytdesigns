@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-accordion",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Headless accordion web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

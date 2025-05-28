@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-form-sync",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Web component for syncing the values of multiple forms",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.12
+
+### Patch Changes
+
+- New build to enable use of import maps
+
 ## 1.0.11
 
 ### Patch Changes

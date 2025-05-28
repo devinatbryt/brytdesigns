@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.8
+
+### Patch Changes
+
+- New build to enable use of import maps
+
 ## 1.0.7
 
 ### Patch Changes

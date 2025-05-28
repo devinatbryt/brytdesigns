@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 1.0.9
+
+### Patch Changes
+
+- New build to enable use of import maps
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.12
+
 ## 1.0.8
 
 ### Patch Changes

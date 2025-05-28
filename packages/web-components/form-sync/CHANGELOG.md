@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-form-sync
 
+## 1.0.6
+
+### Patch Changes
+
+- New build to enable use of import maps
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider-scrollbar
 
+## 1.0.18
+
+### Patch Changes
+
+- New build to enable use of import maps
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.12
+
 ## 1.0.17
 
 ### Patch Changes
