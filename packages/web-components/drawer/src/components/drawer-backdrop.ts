@@ -75,9 +75,16 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
     );
   }
 
-  element.addEventListener("click", () => close(), {
-    signal: controller.signal,
-  });
+  element.addEventListener(
+    "click",
+    () => {
+      if (state.isAnimating) return;
+      close();
+    },
+    {
+      signal: controller.signal,
+    },
+  );
 
   onCleanup(() => {
     controller.abort();

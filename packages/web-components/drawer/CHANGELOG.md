@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.20
+
+### Patch Changes
+
+- Remove the ability to quickly open and close drawer
+
 ## 1.0.19
 
 ### Patch Changes

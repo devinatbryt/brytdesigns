@@ -77,6 +77,7 @@ export const Component: CorrectComponentType<DrawerTriggerProps> = (
                 on,
                 (event) => {
                   if (preventDefault) event.preventDefault();
+                  if (state.isAnimating) return;
                   switch (action) {
                     case "close":
                       close();
