@@ -52,7 +52,7 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
   createEffect(() => {
     if (!props.debug) return;
     console.table({
-      ...props,
+      ...state,
     });
   });
 
