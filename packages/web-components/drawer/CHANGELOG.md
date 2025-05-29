@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.16
+
+### Patch Changes
+
+- Fix content animation
+
 ## 1.0.15
 
 ### Patch Changes

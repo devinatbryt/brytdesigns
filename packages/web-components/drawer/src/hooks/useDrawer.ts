@@ -4,14 +4,7 @@ import {
   provide,
   consume,
 } from "component-register";
-import {
-  createEffect,
-  mergeProps,
-  on,
-  batch,
-  splitProps,
-  untrack,
-} from "solid-js";
+import { createEffect, on, batch, splitProps, untrack } from "solid-js";
 import { createStore } from "solid-js/store";
 import {
   toHyphenated,
@@ -68,7 +61,20 @@ function initializeDrawerContext(props: CreateContextOptions) {
     return _internal.root.setAttribute(toHyphenated(key), `${value}`);
   }
 
-  return [mergeProps(_state, store), { setElementState, setStore }] as const;
+  return [
+    {
+      get isOpen() {
+        return _state.isOpen;
+      },
+      get isAnimating() {
+        return _state.isAnimating;
+      },
+      get animationQueue() {
+        return store.animationQueue;
+      },
+    },
+    { setElementState, setStore },
+  ] as const;
 }
 
 const DrawerContextState = createContext(initializeDrawerContext);

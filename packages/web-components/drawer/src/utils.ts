@@ -23,15 +23,13 @@ export async function controlPromise(controls: AnimationPlaybackControls) {
 
 export function convertPositionToTranslate(position: Position) {
   if (position === POSITION.TOP || position === POSITION.BOTTOM)
-    return [
-      "translateY(var(--drawer--slide-from))",
-      "translateY(var(--drawer--slide-to))",
-    ];
+    return {
+      y: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+    };
 
-  return [
-    "translateX(var(--drawer--slide-from))",
-    "translateX(var(--drawer--slide-to))",
-  ];
+  return {
+    x: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+  };
 }
 
 export function getTransitionConfig(style: CSSStyleDeclaration) {

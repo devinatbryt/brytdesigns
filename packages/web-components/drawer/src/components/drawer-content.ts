@@ -65,7 +65,7 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
     return animate(
       element,
       {
-        transform,
+        ...transform,
       },
       transition,
     );
@@ -80,7 +80,7 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
     return animate(
       element,
       {
-        transform,
+        ...transform,
       },
       transition,
     );
