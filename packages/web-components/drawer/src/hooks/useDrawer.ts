@@ -59,9 +59,8 @@ function initializeDrawerContext(props: CreateContextOptions) {
   ) {
     const currentValue = untrack(() => props[key]);
     if (typeof value === "function") {
-      const currentValue = untrack(() => props[key]);
       const result = value(currentValue || false);
-      if (`${currentValue}` === `${value}`) return;
+      if (`${currentValue}` === `${result}`) return;
       element.root.setAttribute(toHyphenated(key), `${result}`);
       return;
     }

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.11
+
+### Patch Changes
+
+- Attempt at fixing weird bug
+
 ## 1.0.10
 
 ### Patch Changes

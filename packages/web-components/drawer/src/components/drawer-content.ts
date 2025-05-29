@@ -28,7 +28,9 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
         if (!isOpen) return;
         const animation = enter(element);
         updateAnimationQueue(controlPromise(animation));
-        return onCleanup(animation.complete);
+        return onCleanup(() => {
+          if (animation.state !== "finished") animation.complete();
+        });
       },
     ),
   );
@@ -40,7 +42,9 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
         if (isOpen) return;
         const animation = exit(element);
         updateAnimationQueue(controlPromise(animation));
-        return onCleanup(animation.complete);
+        return onCleanup(() => {
+          if (animation.state !== "finished") animation.complete();
+        });
       },
     ),
   );
