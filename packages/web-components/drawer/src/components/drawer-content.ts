@@ -4,11 +4,7 @@ import { createEffect, on, onCleanup, onMount } from "solid-js";
 import { animate } from "motion";
 
 import { useDrawer } from "../hooks/index.js";
-import {
-  controlPromise,
-  convertPositionToTranslate,
-  getTransitionConfig,
-} from "../utils.js";
+import { controlPromise, getTransitionConfig } from "../utils.js";
 import { POSITION, type Position } from "../consts.js";
 
 type DrawerContentProps = {};
@@ -60,7 +56,16 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
     const transition = getTransitionConfig(style);
     let position = style.getPropertyValue("--drawer--position") as Position;
     if (!position) position = POSITION.LEFT;
-    const transform = convertPositionToTranslate(position);
+
+    let transform: Record<string, string[]> = {
+      x: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+    };
+
+    if (position === POSITION.TOP || position === POSITION.BOTTOM) {
+      transform = {
+        y: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+      };
+    }
 
     return animate(
       element,
@@ -76,7 +81,17 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
     const transition = getTransitionConfig(style);
     let position = style.getPropertyValue("--drawer--position") as Position;
     if (!position) position = POSITION.LEFT;
-    const transform = convertPositionToTranslate(position);
+
+    let transform: Record<string, string[]> = {
+      x: ["var(--drawer--slide-to)", "var(--drawer--slide-from)"],
+    };
+
+    if (position === POSITION.TOP || position === POSITION.BOTTOM) {
+      transform = {
+        y: ["var(--drawer--slide-to)", "var(--drawer--slide-from)"],
+      };
+    }
+
     return animate(
       element,
       {

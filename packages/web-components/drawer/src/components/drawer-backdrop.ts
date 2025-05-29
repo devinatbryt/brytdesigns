@@ -1,6 +1,6 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createEffect, on, onCleanup } from "solid-js";
+import { createEffect, onMount, on, onCleanup } from "solid-js";
 import { animate } from "motion";
 
 import { useDrawer } from "../hooks/index.js";
@@ -46,6 +46,10 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
       },
     ),
   );
+
+  onMount(() => {
+    isFirstRender = false;
+  });
 
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);

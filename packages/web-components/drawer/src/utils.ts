@@ -5,7 +5,6 @@ import type {
   RepeatType,
   Transition,
 } from "motion";
-import { POSITION, type Position } from "./consts";
 
 export function hideElement<T extends HTMLElement>(element: T) {
   element.style.display = "none";
@@ -19,17 +18,6 @@ export async function controlPromise(controls: AnimationPlaybackControls) {
   return new Promise((resolve) => {
     controls.then(() => resolve(null));
   });
-}
-
-export function convertPositionToTranslate(position: Position) {
-  if (position === POSITION.TOP || position === POSITION.BOTTOM)
-    return {
-      y: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
-    };
-
-  return {
-    x: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
-  };
 }
 
 export function getTransitionConfig(style: CSSStyleDeclaration) {
@@ -60,7 +48,7 @@ export function getTransitionConfig(style: CSSStyleDeclaration) {
     visualDuration: style.getPropertyValue("--motion--visual-duration"),
   };
   return {
-    autoplay: properties.autoplay === "true",
+    autoplay: properties.autoplay ? properties.autoplay === "true" : undefined,
     bounce: properties.bounce ? parseFloat(properties.bounce) : undefined,
     bounceDamping: properties.bounceDamping
       ? parseFloat(properties.bounceDamping)
@@ -71,7 +59,7 @@ export function getTransitionConfig(style: CSSStyleDeclaration) {
     duration: properties.duration ? parseFloat(properties.duration) : undefined,
     damping: properties.damping ? parseFloat(properties.damping) : undefined,
     delay: properties.delay ? parseFloat(properties.delay) : undefined,
-    ease: properties.ease as Easing,
+    ease: (properties.ease as Easing) || undefined,
     elapsed: properties.elapsed ? parseFloat(properties.elapsed) : undefined,
     mass: properties.mass ? parseFloat(properties.mass) : undefined,
     max: properties.max ? parseFloat(properties.max) : undefined,
@@ -81,7 +69,7 @@ export function getTransitionConfig(style: CSSStyleDeclaration) {
     repeatDelay: properties.repeatDelay
       ? parseFloat(properties.repeatDelay)
       : undefined,
-    repeatType: properties.repeatType as RepeatType,
+    repeatType: (properties.repeatType as RepeatType) || undefined,
     restDelta: properties.restDelta
       ? parseFloat(properties.restDelta)
       : undefined,
@@ -94,7 +82,7 @@ export function getTransitionConfig(style: CSSStyleDeclaration) {
     timeConstant: properties.timeConstant
       ? parseFloat(properties.timeConstant)
       : undefined,
-    type: properties.type as AnimationGeneratorType,
+    type: (properties.type as AnimationGeneratorType) || undefined,
     velocity: properties.velocity ? parseFloat(properties.velocity) : undefined,
     visualDuration: properties.visualDuration
       ? parseFloat(properties.visualDuration)

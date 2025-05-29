@@ -1,5 +1,17 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.19
+
+### Patch Changes
+
+- More bug fixes
+
+## 1.0.18
+
+### Patch Changes
+
+- Fixed how transition config props are added
+
 ## 1.0.17
 
 ### Patch Changes
