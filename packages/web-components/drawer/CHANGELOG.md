@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.13
+
+### Patch Changes
+
+- Added debugging
+
 ## 1.0.12
 
 ### Patch Changes

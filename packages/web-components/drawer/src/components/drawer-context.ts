@@ -17,6 +17,7 @@ type DrawerContextProps = {
   closeOnEscape: boolean;
   shouldTrapFocus: boolean;
   isAnimating: boolean;
+  debug?: boolean;
 };
 
 export const Name = `drawer-context`;
@@ -45,6 +46,13 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
       onDeactivate: () => {
         setElementState("isOpen", false);
       },
+    });
+  });
+
+  createEffect(() => {
+    if (!props.debug) return;
+    console.table({
+      ...props,
     });
   });
 
@@ -78,6 +86,7 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
       }),
       ({ isOpen, focusTrap, shouldTrapFocus }) => {
         if (!isOpen) return;
+        if (props.debug) console.log("Showing element", element);
         showElement(element);
         if (!shouldTrapFocus) return;
         focusTrap.activate();
@@ -123,7 +132,13 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
       () => ({ isOpen: state.isOpen, animationQueue: state.animationQueue }),
       ({ isOpen, animationQueue }) => {
         if (isOpen) return;
-        return Promise.all(animationQueue).then(() => hideElement(element));
+        if (props.debug)
+          console.log("Waiting for animations to complete...", animationQueue);
+        return Promise.all(animationQueue)
+          .then(() => hideElement(element))
+          .then(() => {
+            if (props.debug) console.log("Hiding element", element);
+          });
       },
     ),
   );

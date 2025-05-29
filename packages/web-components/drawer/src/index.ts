@@ -18,6 +18,7 @@ customShadowlessElement(
     closeOnEscape: false,
     shouldTrapFocus: false,
     isAnimating: false,
+    debug: false,
   },
   correctElementType(DrawerContext.Component),
 );
