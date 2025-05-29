@@ -1,6 +1,6 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createEffect, on, onCleanup } from "solid-js";
+import { createEffect, on, onCleanup, onMount } from "solid-js";
 import { animate } from "motion";
 
 import { useDrawer } from "../hooks/index.js";
@@ -21,11 +21,13 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
 ) => {
   const [state, { updateAnimationQueue }] = useDrawer(element);
 
+  let isFirstRender = true;
+
   createEffect(
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (!isOpen) return;
+        if (!isOpen || isFirstRender) return;
         const animation = enter(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(() => {
@@ -39,7 +41,7 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (isOpen) return;
+        if (isOpen || isFirstRender) return;
         const animation = exit(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(() => {
@@ -48,6 +50,10 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
       },
     ),
   );
+
+  onMount(() => {
+    isFirstRender = false;
+  });
 
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);

@@ -15,12 +15,15 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
   { element },
 ) => {
   const [state, { updateAnimationQueue, close }] = useDrawer(element);
+  const controller = new AbortController();
+
+  let isFirstRender = true;
 
   createEffect(
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (!isOpen) return;
+        if (!isOpen || isFirstRender) return;
         const animation = enter(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(() => {
@@ -34,7 +37,7 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (isOpen) return;
+        if (isOpen || isFirstRender) return;
         const animation = exit(element);
         updateAnimationQueue(controlPromise(animation));
         return onCleanup(() => {
@@ -68,9 +71,13 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
     );
   }
 
-  element.addEventListener("click", close);
+  element.addEventListener("click", () => close(), {
+    signal: controller.signal,
+  });
 
   onCleanup(() => {
-    element.removeEventListener("click", close);
+    controller.abort();
   });
+
+  isFirstRender = false;
 };
