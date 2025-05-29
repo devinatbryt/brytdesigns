@@ -33,7 +33,7 @@ type WalkableNode = Parameters<typeof provide>[2];
 type DrawerContext = ReturnType<typeof initializeDrawerContext>;
 
 function initializeDrawerContext(props: CreateContextOptions) {
-  const [element, stateProps] = splitProps(props, ["root"]);
+  const [_internal, _state] = splitProps(props, ["root"]);
   const [store, setStore] = createStore<StoreContext>({ animationQueue: [] });
 
   createEffect(
@@ -61,17 +61,14 @@ function initializeDrawerContext(props: CreateContextOptions) {
     if (typeof value === "function") {
       const result = value(currentValue || false);
       if (`${currentValue}` === `${result}`) return;
-      element.root.setAttribute(toHyphenated(key), `${result}`);
+      _internal.root.setAttribute(toHyphenated(key), `${result}`);
       return;
     }
     if (`${currentValue}` === `${value}`) return;
-    return element.root.setAttribute(toHyphenated(key), `${value}`);
+    return _internal.root.setAttribute(toHyphenated(key), `${value}`);
   }
 
-  return [
-    mergeProps(store, stateProps),
-    { setElementState, setStore },
-  ] as const;
+  return [mergeProps(_state, store), { setElementState, setStore }] as const;
 }
 
 const DrawerContextState = createContext(initializeDrawerContext);
