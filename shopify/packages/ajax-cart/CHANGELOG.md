@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.11
+
+### Patch Changes
+
+- Intercept cart mutation calls to force update our cart
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-cart-api@1.0.9
+
 ## 1.0.10
 
 ### Patch Changes

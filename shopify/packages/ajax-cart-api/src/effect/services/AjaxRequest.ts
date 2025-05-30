@@ -46,7 +46,7 @@ export const makeFactory =
     Effect.gen(function* () {
       const client = yield* HttpClient.HttpClient;
       const decodedInput = yield* Schema.decodeUnknown(inputSchema)(
-        input || {}
+        input || {},
       );
       const routes = Ajax.Window.ShopifyRoutes.make();
       const route = routes[routeName];
@@ -57,6 +57,10 @@ export const makeFactory =
       if (method === "post") {
         request = yield* HttpClientRequest.post(url, {
           acceptJson: true,
+          headers: {
+            "X-SDK-Variant": "brytdesigns",
+            "X-SK-Variant-Source": "shopify-cart-ajax-api",
+          },
         }).pipe(HttpClientRequest.bodyJson(decodedInput));
       } else if (method === "get") {
         request = HttpClientRequest.get(url, {
@@ -84,13 +88,13 @@ export const makeFactory =
           Schema.extend(
             Schema.Struct({
               sections: Ajax.Sections.makeResponseSchema(decodedInput.sections),
-            })
-          )
+            }),
+          ),
         );
 
         const json = yield* Function.pipe(
           response,
-          HttpClientResponse.schemaBodyJson(output)
+          HttpClientResponse.schemaBodyJson(output),
         );
 
         const clientResponse = AjaxClientResponse.make({
@@ -113,13 +117,13 @@ export const makeFactory =
         Schema.extend(
           Schema.Struct({
             sections: Schema.optionalWith(Schema.Null, { default: () => null }),
-          })
-        )
+          }),
+        ),
       );
 
       const json = yield* Function.pipe(
         response,
-        HttpClientResponse.schemaBodyJson(output)
+        HttpClientResponse.schemaBodyJson(output),
       );
 
       const clientResponse = AjaxClientResponse.make({
@@ -139,6 +143,6 @@ export const makeFactory =
     }).pipe(
       Effect.scoped,
       LoggerUtils.withNamespacedLogSpan(
-        routeName.replace("_url", "").replace("_", ":")
-      )
+        routeName.replace("_url", "").replace("_", ":"),
+      ),
     );
