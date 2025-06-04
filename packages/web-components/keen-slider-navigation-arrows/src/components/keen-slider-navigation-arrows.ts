@@ -68,7 +68,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   createEffect(
     on(slider, (slider) => {
       if (!slider) return;
-      if (props.debug) console.log("Slider instantiated", slider);
+      if (props.debug) console.log(`${Name}: Slider instantiated`, slider);
 
       const handleArrowsUpdate = updateArrows(leftArrow, rightArrow);
 
@@ -79,14 +79,17 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
       }
 
       function handleUpdate(slider: KeenSliderInstance) {
-        if (props.debug) console.log("Updating navigation arrows", element);
+        if (props.debug)
+          console.log(`${Name}: Updating navigation arrows`, element);
         hideAddIfDisabled(slider);
         handleArrowsUpdate(slider);
         if (!hasMoreSlides(slider)) {
-          if (props.debug) console.log("Hiding navigation arrows", element);
+          if (props.debug)
+            console.log(`${Name}: Hiding navigation arrows`, element);
           addHiddenStyles(element);
         } else {
-          if (props.debug) console.log("Showing navigation arrows", element);
+          if (props.debug)
+            console.log(`${Name}: Showing navigation arrows`, element);
           addVisibleStyles(element);
         }
       }
@@ -111,7 +114,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     on(slider, (slider) => {
       if (slider) return;
       if (props.debug)
-        console.log("Slider is undefined, hiding arrows", element);
+        console.log(`${Name}: Slider is undefined, hiding arrows`, element);
       addHiddenStyles(element);
     }),
   );
@@ -125,7 +128,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     function plugin(slider: KeenSliderInstance) {
       if (props.debug)
         console.log(
-          "Keen slider navigation arrows plugin added",
+          `${Name}: Keen slider navigation arrows plugin added`,
           slider,
           element,
         );
@@ -139,6 +142,8 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     });
 
     return onCleanup(() => {
+      if (props.debug)
+        console.log(`${Name}: Something changed, cleaning up`, element);
       controller.abort();
       setSlider(undefined);
     });

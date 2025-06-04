@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.14
+
 ## 1.0.12
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-modal
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.14
+
 ## 0.0.3
 
 ### Patch Changes

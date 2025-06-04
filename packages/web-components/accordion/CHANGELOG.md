@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-accordion
 
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-utils@0.1.14
+
 ## 1.0.8
 
 ### Patch Changes

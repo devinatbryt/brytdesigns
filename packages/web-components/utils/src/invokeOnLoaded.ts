@@ -9,6 +9,8 @@ export function invokeOnLoaded(
     signal?.addEventListener("abort", () => clearTimeout(id), {
       once: true,
     });
+    return;
   }
   window.addEventListener("DOMContentLoaded", fn, { signal, once: true });
+  return;
 }
