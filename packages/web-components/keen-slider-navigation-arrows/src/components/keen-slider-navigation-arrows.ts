@@ -97,14 +97,12 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
       slider.on("created", handleUpdate);
       slider.on("slideChanged", handleUpdate);
       slider.on("optionsChanged", handleUpdate);
-      slider.on("detailsChanged", handleUpdate);
       slider.on("destroyed", handleUpdate);
 
       return onCleanup(() => {
         slider.on("created", handleUpdate, true);
         slider.on("slideChanged", handleUpdate, true);
         slider.on("optionsChanged", handleUpdate, true);
-        slider.on("detailsChanged", handleUpdate, true);
         slider.on("destroyed", handleUpdate, true);
       });
     }),
@@ -112,7 +110,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
 
   createEffect(
     on(slider, (slider) => {
-      if (slider) return;
+      if (slider) return addVisibleStyles(element);
       if (props.debug)
         console.log(`${Name}: Slider is undefined, hiding arrows`, element);
       addHiddenStyles(element);
