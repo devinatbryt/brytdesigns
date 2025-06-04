@@ -122,7 +122,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   createEffect(() => {
     const t = target();
     if (props.debug)
-      console.log(`${Name}: Target found, adding plugin`, target, element);
+      console.log(`${Name}: Target found, adding plugin`, t, element);
     if (!t) return;
 
     const controller = new AbortController();
