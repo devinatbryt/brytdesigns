@@ -24,17 +24,18 @@ import {
   srOnly,
 } from "../utils.js";
 
-type KeenSliderNavigationArrowsContextProps = {
+export type Props = {
   target: string;
   class: string;
+  debug?: boolean;
 };
 
-export const KeenSliderNavigationArrows: CorrectComponentType<
-  KeenSliderNavigationArrowsContextProps
-> = (props, { element }) => {
+export const Name = `keen-slider-navigation-arrows`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-navigation-arrows: Needs a proper target in order to properly extend a keen slider.",
+      `${Name}: Needs a proper target in order to properly extend a keen slider.`,
     );
 
   const target = createMemo(() => {
@@ -42,13 +43,13 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
     if (props.target) targetEl = document.querySelector(props.target);
     if (!targetEl)
       return console.warn(
-        "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
+        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
       );
     if (targetEl.tagName !== "KEEN-SLIDER")
       targetEl = targetEl.querySelector("keen-slider");
     if (!targetEl)
       return console.warn(
-        "keen-slider-navigation-arrows: Could not find the target element. Make sure it exists and is a keen-slider element.",
+        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
       );
 
     return targetEl;
@@ -67,6 +68,7 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
   createEffect(
     on(slider, (slider) => {
       if (!slider) return;
+      if (props.debug) console.log("Slider instantiated", slider);
 
       const handleArrowsUpdate = updateArrows(leftArrow, rightArrow);
 
@@ -77,10 +79,16 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
       }
 
       function handleUpdate(slider: KeenSliderInstance) {
+        if (props.debug) console.log("Updating navigation arrows", element);
         hideAddIfDisabled(slider);
         handleArrowsUpdate(slider);
-        if (!hasMoreSlides(slider)) addHiddenStyles(element);
-        else addVisibleStyles(element);
+        if (!hasMoreSlides(slider)) {
+          if (props.debug) console.log("Hiding navigation arrows", element);
+          addHiddenStyles(element);
+        } else {
+          if (props.debug) console.log("Showing navigation arrows", element);
+          addVisibleStyles(element);
+        }
       }
 
       slider.on("created", handleUpdate);
@@ -101,10 +109,10 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
 
   createEffect(
     on(slider, (slider) => {
-      if (!slider) return;
-
-      if (!hasMoreSlides(slider)) return addHiddenStyles(element);
-      return addVisibleStyles(element);
+      if (slider) return;
+      if (props.debug)
+        console.log("Slider is undefined, hiding arrows", element);
+      addHiddenStyles(element);
     }),
   );
 
@@ -115,6 +123,12 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
     const controller = new AbortController();
 
     function plugin(slider: KeenSliderInstance) {
+      if (props.debug)
+        console.log(
+          "Keen slider navigation arrows plugin added",
+          slider,
+          element,
+        );
       setSlider(slider);
     }
 

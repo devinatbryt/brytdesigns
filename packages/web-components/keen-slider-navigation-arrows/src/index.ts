@@ -6,12 +6,12 @@ import { KeenSliderNavigationArrows } from "./components/index.js";
 import { initializeClasses } from "./utils.js";
 
 customShadowlessElement(
-  "keen-slider-navigation-arrows",
+  KeenSliderNavigationArrows.Name,
   {
     class: "",
     target: "",
   },
-  correctElementType(KeenSliderNavigationArrows),
+  correctElementType(KeenSliderNavigationArrows.Component),
   //@ts-ignore
-  initializeClasses
+  initializeClasses,
 );
