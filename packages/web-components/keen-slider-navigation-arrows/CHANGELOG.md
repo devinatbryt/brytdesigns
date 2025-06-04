@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-arrows
 
+## 1.0.13
+
+### Patch Changes
+
+- add/remove visible styles when slider changes
+
 ## 1.0.12
 
 ### Patch Changes

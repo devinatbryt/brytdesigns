@@ -79,6 +79,8 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
       function handleUpdate(slider: KeenSliderInstance) {
         hideAddIfDisabled(slider);
         handleArrowsUpdate(slider);
+        if (!hasMoreSlides(slider)) addHiddenStyles(element);
+        else addVisibleStyles(element);
       }
 
       slider.on("created", handleUpdate);
