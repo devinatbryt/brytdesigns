@@ -84,12 +84,14 @@ export const KeenSliderNavigationArrows: CorrectComponentType<
       slider.on("created", handleUpdate);
       slider.on("slideChanged", handleUpdate);
       slider.on("optionsChanged", handleUpdate);
+      slider.on("detailsChanged", handleUpdate);
       slider.on("destroyed", handleUpdate);
 
       return onCleanup(() => {
         slider.on("created", handleUpdate, true);
         slider.on("slideChanged", handleUpdate, true);
         slider.on("optionsChanged", handleUpdate, true);
+        slider.on("detailsChanged", handleUpdate, true);
         slider.on("destroyed", handleUpdate, true);
       });
     }),

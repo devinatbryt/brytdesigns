@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-arrows
 
+## 1.0.12
+
+### Patch Changes
+
+- Handle update if details change
+
 ## 1.0.11
 
 ### Patch Changes
