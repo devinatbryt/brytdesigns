@@ -10,6 +10,7 @@ customShadowlessElement(
   {
     class: "",
     target: "",
+    debug: false,
   },
   correctElementType(KeenSliderNavigationArrows.Component),
   //@ts-ignore
