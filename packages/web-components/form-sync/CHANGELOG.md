@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-form-sync
 
+## 1.0.8
+
+### Patch Changes
+
+- Listen for "change" events as well
+
 ## 1.0.7
 
 ### Patch Changes

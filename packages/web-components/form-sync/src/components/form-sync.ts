@@ -57,6 +57,9 @@ export const FormSync: CorrectComponentType<FormSyncProps> = (
       element.addEventListener("input", handleFormUpdate, {
         signal: controller.signal,
       });
+      element.addEventListener("change", handleFormUpdate, {
+        signal: controller.signal,
+      });
       element.addEventListener("reset", handleFormReset, {
         signal: controller.signal,
       });
