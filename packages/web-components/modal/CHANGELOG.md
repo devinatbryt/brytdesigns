@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated motion version
+
 ## 0.0.4
 
 ### Patch Changes

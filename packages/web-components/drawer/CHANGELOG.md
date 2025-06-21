@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.22
+
+### Patch Changes
+
+- Updated motion version
+
 ## 1.0.21
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-accordion
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated motion version
+
 ## 1.0.9
 
 ### Patch Changes
