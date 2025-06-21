@@ -99,7 +99,9 @@ export const Component: CorrectComponentType<ParallaxContainerProps> = (
     );
 
   element.style.willChange = "transform";
-  if (!window.getComputedStyle(element).getPropertyValue("display")) {
+  if (
+    window.getComputedStyle(element).getPropertyValue("display") === "inline"
+  ) {
     element.style.display = "block";
   }
 
