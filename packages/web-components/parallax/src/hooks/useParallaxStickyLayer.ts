@@ -66,7 +66,9 @@ function initializeParallaxStickyLayerContext(props: CreateContextOptions) {
   _internal.root.style.bottom = "0";
   _internal.root.style.left = "0";
   _internal.root.style.height = "100vh";
-  if (!_internal.root.style.display) {
+  _internal.root.style.overflowX = "hidden";
+  _internal.root.style.maxWidth = "100%";
+  if (window.getComputedStyle(_internal.root).display === "inline") {
     _internal.root.style.display = "block";
   }
 
