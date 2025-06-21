@@ -1,6 +1,6 @@
 import { type CorrectComponentType } from "@brytdesigns/web-component-utils";
 import type { ICustomElement } from "component-register";
-import { animate, type AnimationPlaybackControls } from "motion";
+import { animate, type AnimationPlaybackControlsWithThen } from "motion";
 import { createEffect, on, onCleanup } from "solid-js";
 
 import { useAccordion, useAccordionItem } from "../hooks/index.js";
@@ -9,7 +9,7 @@ type AccordionContentProps = {
   shouldScrollIntoView: boolean;
 };
 
-async function controlPromise(controls: AnimationPlaybackControls) {
+async function controlPromise(controls: AnimationPlaybackControlsWithThen) {
   return new Promise((resolve) => {
     controls.then(() => resolve(null));
   });

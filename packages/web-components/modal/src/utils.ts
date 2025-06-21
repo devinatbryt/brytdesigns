@@ -1,6 +1,6 @@
 import type {
   AnimationGeneratorType,
-  AnimationPlaybackControls,
+  AnimationPlaybackControlsWithThen,
   Easing,
   RepeatType,
   Transition,
@@ -14,7 +14,9 @@ export function showElement<T extends HTMLElement>(element: T) {
   element.style.display = "block";
 }
 
-export async function controlPromise(controls: AnimationPlaybackControls) {
+export async function controlPromise(
+  controls: AnimationPlaybackControlsWithThen,
+) {
   return new Promise((resolve) => {
     controls.then(() => resolve(null));
   });
