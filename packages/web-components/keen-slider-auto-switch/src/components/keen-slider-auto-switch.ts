@@ -13,17 +13,17 @@ import {
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
-type KeenSliderAutoSwitchProps = {
+type Props = {
   target: string;
   duration: number;
 };
 
-export const KeenSliderAutoSwitch: CorrectComponentType<
-  KeenSliderAutoSwitchProps
-> = (props, { element }) => {
+export const Name = "keen-slider-auto-switch";
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-auto-switch: Needs a proper target in order to properly extend a keen slider.",
+      `${Name}: Needs a proper target in order to properly extend a keen slider.`,
     );
 
   const target = createMemo(() => {
@@ -31,63 +31,62 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
     if (props.target) targetEl = document.querySelector(props.target);
     if (!targetEl)
       return console.warn(
-        "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
+        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
       );
     if (targetEl.tagName !== "KEEN-SLIDER")
       targetEl = targetEl.querySelector("keen-slider");
     if (!targetEl)
       return console.warn(
-        "keen-slider-auto-switch: Could not find the target element. Make sure it exists and is a keen-slider element.",
+        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
       );
     return targetEl;
   });
 
-  const plugin = createMemo(() => {
-    const duration = props.duration || 2000;
+  const [sliderRef, setSliderRef] = createSignal<KeenSliderInstance | null>(
+    null,
+  );
+  const [_, setTimeoutVal] = createSignal<number | null>(null);
+  const [isPaused, setIsPaused] = createSignal(false);
 
-    const [_, setTimeoutVal] = createSignal<number | null>(null);
-    const [sliderRef, setSliderRef] = createSignal<KeenSliderInstance | null>(
-      null,
-    );
-    const [isPaused, setIsPaused] = createSignal(false);
-
-    function clearCurrentTimeout() {
-      batch(() => {
-        setIsPaused(true);
-        setTimeoutVal((val) => {
-          if (val) clearTimeout(val);
-          return null;
-        });
+  function clearCurrentTimeout() {
+    batch(() => {
+      setIsPaused(true);
+      setTimeoutVal((val) => {
+        if (val) clearTimeout(val);
+        return null;
       });
-    }
+    });
+  }
 
-    function startNextTimeout(cb: any) {
-      batch(() => {
-        setIsPaused(false);
-        setTimeoutVal((val) => {
-          if (val) clearTimeout(val);
-          return setTimeout(cb, duration) as any as number;
-        });
+  function startNextTimeout(cb: any, duration: number) {
+    batch(() => {
+      setIsPaused(false);
+      setTimeoutVal((val) => {
+        if (val) clearTimeout(val);
+        return setTimeout(cb, duration) as any as number;
       });
-    }
+    });
+  }
 
-    createEffect(
-      on(
-        () => ({ isPaused: isPaused(), slider: sliderRef() }),
-        ({ isPaused, slider }) => {
-          if (!slider) return;
-          slider.container.dispatchEvent(
-            new CustomEvent("autoswitch:update", {
-              bubbles: true,
-              detail: { isPaused },
-            }),
-          );
-        },
-      ),
-    );
+  createEffect(
+    on(
+      () => ({ isPaused: isPaused(), slider: sliderRef() }),
+      ({ isPaused, slider }) => {
+        if (!slider) return;
+        slider.container.dispatchEvent(
+          new CustomEvent("autoswitch:update", {
+            bubbles: true,
+            detail: { isPaused },
+          }),
+        );
+      },
+    ),
+  );
 
-    createEffect(
-      on(sliderRef, (slider) => {
+  createEffect(
+    on(
+      () => ({ slider: sliderRef(), duration: props.duration }),
+      ({ slider, duration }) => {
         if (!slider) return;
 
         function nextTimeout() {
@@ -96,7 +95,7 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
           return startNextTimeout(() => {
             if (slider.slides.length <= 1) return;
             slider.next();
-          });
+          }, duration);
         }
 
         function handleMouseEnter() {
@@ -129,25 +128,24 @@ export const KeenSliderAutoSwitch: CorrectComponentType<
           slider.on("animationEnded", nextTimeout, true);
           slider.on("updated", nextTimeout, true);
         });
-      }),
-    );
-
-    return function(slider: KeenSliderInstance | null) {
-      setSliderRef(slider);
-    };
-  });
+      },
+    ),
+  );
 
   createEffect(() => {
     const t = target();
 
     if (!t) return;
 
-    const p = plugin();
+    const plugin = (slider: KeenSliderInstance | null) => {
+      setSliderRef(slider);
+    };
+
     const controller = new AbortController();
 
     addPlugin({
       target: t,
-      plugin: p,
+      plugin,
       controller,
     });
 

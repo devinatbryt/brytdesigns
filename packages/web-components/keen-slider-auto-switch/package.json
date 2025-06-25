@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-auto-switch",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Keen slider auto switch plugin web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

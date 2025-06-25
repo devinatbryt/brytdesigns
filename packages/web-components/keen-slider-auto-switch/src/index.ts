@@ -5,10 +5,10 @@ import {
 import { KeenSliderAutoSwitch } from "./components/index.js";
 
 customShadowlessElement(
-  "keen-slider-auto-switch",
+  KeenSliderAutoSwitch.Name,
   {
-    target: "",
+    target: "keen-slider",
     duration: 2000,
   },
-  correctElementType(KeenSliderAutoSwitch),
+  correctElementType(KeenSliderAutoSwitch.Component),
 );

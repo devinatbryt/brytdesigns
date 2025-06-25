@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 2.0.1
+
+### Patch Changes
+
+- Restructured auto switch plugin
+
 ## 2.0.0
 
 ### Major Changes
