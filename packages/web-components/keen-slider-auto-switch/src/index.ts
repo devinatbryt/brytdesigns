@@ -5,10 +5,10 @@ import {
 import { KeenSliderAutoSwitch } from "./components/index.js";
 
 customShadowlessElement(
-  "keen-slider-navigation-dots",
+  "keen-slider-auto-switch",
   {
     target: "",
     duration: 2000,
   },
-  correctElementType(KeenSliderAutoSwitch)
+  correctElementType(KeenSliderAutoSwitch),
 );

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 2.0.0
+
+### Major Changes
+
+- change keen-slider-auto-switch name
+
 ## 1.0.10
 
 ### Patch Changes
