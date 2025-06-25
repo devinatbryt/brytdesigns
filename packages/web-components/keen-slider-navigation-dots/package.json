@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-navigation-dots",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Keen slider navigation dots web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

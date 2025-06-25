@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.0.14
+
+### Patch Changes
+
+- Fixed "next" and "prev" function overrides
+
 ## 1.0.13
 
 ### Patch Changes

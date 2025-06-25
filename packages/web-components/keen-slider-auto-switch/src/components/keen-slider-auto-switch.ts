@@ -88,6 +88,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
       () => ({ slider: sliderRef(), duration: props.duration }),
       ({ slider, duration }) => {
         if (!slider) return;
+        const controller = new AbortController();
 
         function nextTimeout() {
           if (!slider) return;
@@ -98,19 +99,15 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
           }, duration);
         }
 
-        function handleMouseEnter() {
-          clearCurrentTimeout();
-        }
-
-        function handleMouseLeave() {
-          nextTimeout();
-        }
-
         (slider as any).pauseAutoplay = clearCurrentTimeout;
         (slider as any).startAutoplay = nextTimeout;
 
-        slider.container.addEventListener("mouseenter", clearCurrentTimeout);
-        slider.container.addEventListener("mouseleave", nextTimeout);
+        slider.container.addEventListener("mouseenter", clearCurrentTimeout, {
+          signal: controller.signal,
+        });
+        slider.container.addEventListener("mouseleave", nextTimeout, {
+          signal: controller.signal,
+        });
 
         slider.on("dragStarted", clearCurrentTimeout);
         slider.on("slideChanged", clearCurrentTimeout);
@@ -120,8 +117,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         nextTimeout();
 
         return onCleanup(() => {
-          slider.container.removeEventListener("mouseenter", handleMouseEnter);
-          slider.container.removeEventListener("mouseleave", handleMouseLeave);
+          controller.abort();
 
           slider.on("dragStarted", clearCurrentTimeout, true);
           slider.on("slideChanged", clearCurrentTimeout, true);

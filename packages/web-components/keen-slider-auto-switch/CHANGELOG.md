@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-keen-slider-auto-switch
 
+## 2.0.2
+
+### Patch Changes
+
+- Prefer abort controller over remove event listener
+- Updated dependencies
+  - @brytdesigns/web-component-keen-slider@1.0.14
+
 ## 2.0.1
 
 ### Patch Changes
