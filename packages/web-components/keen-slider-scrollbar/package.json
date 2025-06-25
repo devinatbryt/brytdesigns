@@ -10,7 +10,8 @@
     ".": {
       "types": "./dist/main/index.d.ts",
       "module": "./dist/main/index.js"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
     "build": "tsup --clean",

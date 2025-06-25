@@ -4,3 +4,4 @@ packages:
   - "packages/forks/*"
   - "packages/*"
   - "shopify/*"
+  - "examples/*"
