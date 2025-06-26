@@ -41,7 +41,12 @@ export const mutation = useMutation(
         ...old,
         items_count: old.items.reduce((total, i, index) => {
           if (isItemCheck(i, index)) {
-            return total + (item.quantity || i.quantity);
+            return (
+              total +
+              (typeof item.quantity !== "undefined"
+                ? item.quantity
+                : i.quantity)
+            );
           }
           return total + i.quantity;
         }, 0),
@@ -49,7 +54,10 @@ export const mutation = useMutation(
           if (isItemCheck(i, index)) {
             return {
               ...i,
-              quantity: item.quantity || i.quantity,
+              quantity:
+                typeof item.quantity !== "undefined"
+                  ? item.quantity
+                  : i.quantity,
               properties: {
                 ...item.properties,
                 ...i.properties,
