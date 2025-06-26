@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-arrows
 
+## 1.0.22
+
+### Patch Changes
+
+- add check to see if more slides exist to hide or show arrows
+
 ## 1.0.21
 
 ### Patch Changes

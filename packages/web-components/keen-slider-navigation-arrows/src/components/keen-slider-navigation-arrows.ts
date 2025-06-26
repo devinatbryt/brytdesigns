@@ -110,7 +110,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
 
   createEffect(
     on(slider, (slider) => {
-      if (slider) return addVisibleStyles(element);
+      if (slider && hasMoreSlides(slider)) return addVisibleStyles(element);
       if (props.debug)
         console.log(`${Name}: Slider is undefined, hiding arrows`, element);
       addHiddenStyles(element);
