@@ -42,7 +42,6 @@ export function subscribe<T>(
   cb: (data: T) => void,
 ): () => void {
   // Assuming cartQuery and observable are defined and set correctly.
-  // @ts-expect-error
   const observer = observable(() => unwrapValue(Cart.query.data));
   return observer.subscribe(cb).unsubscribe;
 }

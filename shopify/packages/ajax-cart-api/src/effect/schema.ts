@@ -309,7 +309,7 @@ export const LineItem = Schema.transform(
       public_properties: Schema.optionalWith(BasePublicAttributes, {
         default: () => ({}),
       }),
-      public_properties_array: Schema.optionalWith(BasePrivateAttributesArray, {
+      public_properties_array: Schema.optionalWith(BasePublicAttributesArray, {
         default: () => [],
       }),
     }),
@@ -374,7 +374,7 @@ export const Cart = Schema.extend(
     public_attributes: Schema.optionalWith(BasePublicAttributes, {
       default: () => ({}),
     }),
-    public_attributes_array: Schema.optionalWith(BasePrivateAttributesArray, {
+    public_attributes_array: Schema.optionalWith(BasePublicAttributesArray, {
       default: () => [],
     }),
   }),
