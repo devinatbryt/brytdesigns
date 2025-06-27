@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.13
+
+### Patch Changes
+
+- Attempt at fixing reconcilation bug
+
 ## 1.0.12
 
 ### Patch Changes

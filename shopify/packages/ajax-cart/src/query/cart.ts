@@ -27,7 +27,7 @@ export const query = useQuery(
     refetchOnMount: "always",
     staleTime: 1000 * 60 * 5,
     throwOnError: true,
-    reconcile: "cart",
+    reconcile: "id",
   }),
   () => client,
 );
