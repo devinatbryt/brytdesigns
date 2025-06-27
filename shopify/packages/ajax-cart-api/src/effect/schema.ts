@@ -12,16 +12,37 @@ const BaseAttributeValue = Schema.Union(
   Schema.Number,
 );
 
+const AttributesArray = Schema.Array(
+  Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
+);
+
 export type BaseAttributes = Schema.Schema.Type<typeof BaseAttributes>;
 export const BaseAttributes = Schema.Record({
   key: Schema.String,
   value: BaseAttributeValue,
 });
 
+export const BaseAttributesArray = Schema.transform(
+  BaseAttributes,
+  AttributesArray,
+  {
+    decode: (record) =>
+      Record.toEntries(record).map(([key, value]) => ({ key, value })),
+    encode: (array) =>
+      Record.fromEntries(
+        pipe(
+          array,
+          Array.map(({ key, value }) => [key, value]),
+        ),
+      ),
+  },
+);
+
 const BasePrivateAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
   decode: Record.filter((value, key) => key.startsWith("_")),
   encode: identity,
 });
+
 const BasePublicAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
   decode: Record.filter((value, key) => !key.startsWith("_")),
   encode: identity,
@@ -29,9 +50,7 @@ const BasePublicAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
 
 const BasePrivateAttributesArray = Schema.transform(
   BasePrivateAttributes,
-  Schema.Array(
-    Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
-  ),
+  AttributesArray,
   {
     decode: (record) =>
       Record.toEntries(record).map(([key, value]) => ({ key, value })),
@@ -47,9 +66,7 @@ const BasePrivateAttributesArray = Schema.transform(
 
 const BasePublicAttributesArray = Schema.transform(
   BasePublicAttributes,
-  Schema.Array(
-    Schema.Struct({ key: Schema.String, value: BaseAttributeValue }),
-  ),
+  AttributesArray,
   {
     decode: (record) =>
       Record.toEntries(record).map(([key, value]) => ({ key, value })),
@@ -224,22 +241,10 @@ export const UnitPriceMeasurement = Schema.Struct({
   reference_value: Schema.Number,
 });
 
-export type LineItem = Schema.Schema.Type<typeof LineItem>;
-export const LineItem = Schema.Struct({
+export type BaseLineItem = Schema.Schema.Type<typeof BaseLineItem>;
+const BaseLineItem = Schema.Struct({
   id: Resource.ID,
-  properties: Schema.optionalWith(Attributes, {
-    default: () => ({
-      private: {
-        array: [] as any,
-        record: {} as BaseAttributes,
-      },
-      public: {
-        array: [] as any,
-        record: {} as BaseAttributes,
-      },
-    }),
-    nullable: true,
-  }),
+  properties: BaseAttributes,
   quantity: Schema.Number,
   variant_id: Resource.ID,
   key: Schema.String,
@@ -283,22 +288,57 @@ export const LineItem = Schema.Struct({
   ),
 });
 
-export const Cart = Schema.Struct({
+export type LineItem = Schema.Schema.Type<typeof LineItem>;
+export const LineItem = Schema.transform(
+  BaseLineItem,
+  Schema.extend(
+    BaseLineItem,
+    Schema.Struct({
+      properties_array: Schema.optionalWith(BaseAttributesArray, {
+        default: () => [],
+      }),
+      private_properties: Schema.optionalWith(BasePrivateAttributes, {
+        default: () => ({}),
+      }),
+      private_properties_array: Schema.optionalWith(
+        BasePrivateAttributesArray,
+        {
+          default: () => [],
+        },
+      ),
+      public_properties: Schema.optionalWith(BasePublicAttributes, {
+        default: () => ({}),
+      }),
+      public_properties_array: Schema.optionalWith(BasePrivateAttributesArray, {
+        default: () => [],
+      }),
+    }),
+  ),
+  {
+    decode: (lineItem) => ({
+      ...lineItem,
+      properties_array: lineItem.properties,
+      private_properties: lineItem.properties,
+      private_properties_array: lineItem.properties,
+      public_properties: lineItem.properties,
+      public_properties_array: lineItem.properties,
+    }),
+    encode: (lineItem) =>
+      pipe(
+        Record.remove("properties_array")(lineItem),
+        Record.remove("private_properties"),
+        Record.remove("private_properties_array"),
+        Record.remove("public_properties"),
+        Record.remove("public_properties_array"),
+      ) as BaseLineItem,
+  },
+);
+
+type BaseCart = Schema.Schema.Type<typeof BaseCart>;
+export const BaseCart = Schema.Struct({
   token: Schema.String,
   note: Schema.NullOr(Schema.String),
-  attributes: Schema.optionalWith(Attributes, {
-    default: () => ({
-      private: {
-        array: [] as any,
-        record: {} as BaseAttributes,
-      },
-      public: {
-        array: [] as any,
-        record: {} as BaseAttributes,
-      },
-    }),
-    nullable: true,
-  }),
+  attributes: BaseAttributes,
   discounts: Schema.optionalWith(Schema.Array(Discount), { default: () => [] }),
   discount_codes: Schema.optionalWith(
     Schema.Array(
@@ -318,20 +358,69 @@ export const Cart = Schema.Struct({
   cart_level_discount_applications: Schema.Array(CartLevelDiscountApplication),
 });
 
+export const Cart = Schema.transform(
+  BaseCart,
+  Schema.extend(
+    BaseCart,
+    Schema.Struct({
+      attributes_array: Schema.optionalWith(BaseAttributesArray, {
+        default: () => [],
+      }),
+      private_attributes: Schema.optionalWith(BasePrivateAttributes, {
+        default: () => ({}),
+      }),
+      private_attributes_array: Schema.optionalWith(
+        BasePrivateAttributesArray,
+        {
+          default: () => [],
+        },
+      ),
+      public_attributes: Schema.optionalWith(BasePublicAttributes, {
+        default: () => ({}),
+      }),
+      public_attributes_array: Schema.optionalWith(BasePrivateAttributesArray, {
+        default: () => [],
+      }),
+    }),
+  ),
+  {
+    decode: (cart) => ({
+      ...cart,
+      attributes_array: cart.attributes,
+      private_attributes: cart.attributes,
+      private_attributes_array: cart.attributes,
+      public_attributes: cart.attributes,
+      public_attributes_array: cart.attributes,
+    }),
+    encode: (cart) =>
+      pipe(
+        Record.remove("attributes_array")(cart),
+        Record.remove("private_attributes"),
+        Record.remove("private_attributes_array"),
+        Record.remove("public_attributes"),
+        Record.remove("public_attributes_array"),
+      ) as BaseCart,
+  },
+);
+
 export const makeCartSchema = (sections?: string) => {
   if (sections) {
-    return Schema.Struct({
-      ...Cart.fields,
-      sections: Schema.optionalWith(
-        Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
-        { default: () => null },
-      ),
-    });
+    return Schema.extend(
+      Cart,
+      Schema.Struct({
+        sections: Schema.optionalWith(
+          Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
+          { default: () => null },
+        ),
+      }),
+    );
   }
-  return Schema.Struct({
-    ...Cart.fields,
-    sections: Schema.optionalWith(Schema.Null, { default: () => null }),
-  });
+  return Schema.extend(
+    Cart,
+    Schema.Struct({
+      sections: Schema.optionalWith(Schema.Null, { default: () => null }),
+    }),
+  );
 };
 
 export type AddItemInput = Schema.Schema.Encoded<typeof AddItemInput>;
@@ -371,7 +460,7 @@ export const CartUpdateInput = Schema.Struct({
     Schema.Union(UpdateItemRecordInput, Schema.Array(Schema.Number)),
   ),
   note: Schema.optional(Schema.NullOr(Schema.String)),
-  attributes: Schema.optional(Attributes),
+  attributes: Schema.optional(BaseAttributes),
   discount: Schema.optional(
     Schema.transform(DiscountCodeInput, DiscountCodeTransformed, {
       decode: (input) => input.join(","),
@@ -387,12 +476,14 @@ export const ItemAddedChangelog = Schema.Struct({
 });
 
 export type CartUpdateOutput = Schema.Schema.Type<typeof CartUpdateOutput>;
-export const CartUpdateOutput = Schema.Struct({
-  ...Cart.fields,
-  items_changelog: Schema.Struct({
-    added: Schema.Array(ItemAddedChangelog),
+export const CartUpdateOutput = Schema.extend(
+  Cart,
+  Schema.Struct({
+    items_changelog: Schema.Struct({
+      added: Schema.Array(ItemAddedChangelog),
+    }),
   }),
-});
+);
 
 export const CartChangeItemOptionalInput = Schema.Struct({
   quantity: Schema.optional(Schema.Number),
@@ -440,11 +531,13 @@ export const CartChangeInput = Schema.Union(
 );
 
 export type CartChangeOutput = Schema.Schema.Type<typeof CartChangeOutput>;
-export const CartChangeOutput = Schema.Struct({
-  ...Cart.fields,
-  items_added: Schema.Array(LineItemChange),
-  items_removed: Schema.Array(LineItemChange),
-});
+export const CartChangeOutput = Schema.extend(
+  Cart,
+  Schema.Struct({
+    items_added: Schema.Array(LineItemChange),
+    items_removed: Schema.Array(LineItemChange),
+  }),
+);
 
 export type CartClearInput = Schema.Schema.Encoded<typeof CartClearInput>;
 export const CartClearInput = Ajax.Sections.Input;
