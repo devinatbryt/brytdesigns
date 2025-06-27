@@ -113,13 +113,7 @@ export const makeFactory =
         return clientResponse;
       }
 
-      const output = outputSchema.pipe(
-        Schema.extend(
-          Schema.Struct({
-            sections: Schema.optionalWith(Schema.Null, { default: () => null }),
-          }),
-        ),
-      );
+      const output = outputSchema;
 
       const json = yield* Function.pipe(
         response,
