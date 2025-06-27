@@ -358,32 +358,36 @@ export const BaseCart = Schema.Struct({
   cart_level_discount_applications: Schema.Array(CartLevelDiscountApplication),
 });
 
-export const Cart = Schema.transform(
+type Cart = Schema.Schema.Type<typeof Cart>;
+export const Cart = Schema.extend(
   BaseCart,
-  Schema.extend(
-    BaseCart,
-    Schema.Struct({
-      attributes_array: Schema.optionalWith(BaseAttributesArray, {
-        default: () => [],
-      }),
-      private_attributes: Schema.optionalWith(BasePrivateAttributes, {
-        default: () => ({}),
-      }),
-      private_attributes_array: Schema.optionalWith(
-        BasePrivateAttributesArray,
-        {
-          default: () => [],
-        },
-      ),
-      public_attributes: Schema.optionalWith(BasePublicAttributes, {
-        default: () => ({}),
-      }),
-      public_attributes_array: Schema.optionalWith(BasePrivateAttributesArray, {
-        default: () => [],
-      }),
+  Schema.Struct({
+    attributes_array: Schema.optionalWith(BaseAttributesArray, {
+      default: () => [],
     }),
-  ),
-  {
+    private_attributes: Schema.optionalWith(BasePrivateAttributes, {
+      default: () => ({}),
+    }),
+    private_attributes_array: Schema.optionalWith(BasePrivateAttributesArray, {
+      default: () => [],
+    }),
+    public_attributes: Schema.optionalWith(BasePublicAttributes, {
+      default: () => ({}),
+    }),
+    public_attributes_array: Schema.optionalWith(BasePrivateAttributesArray, {
+      default: () => [],
+    }),
+  }),
+);
+
+export const makeCartTransformSchema = <
+  A extends Schema.Schema.Type<typeof BaseCart>,
+  I,
+  R,
+>(
+  schema: Schema.Schema<A, I, R>,
+) =>
+  Schema.transform(schema, Cart, {
     decode: (cart) => ({
       ...cart,
       attributes_array: cart.attributes,
@@ -399,27 +403,32 @@ export const Cart = Schema.transform(
         Record.remove("private_attributes_array"),
         Record.remove("public_attributes"),
         Record.remove("public_attributes_array"),
-      ) as BaseCart,
-  },
-);
+      ) as Schema.Schema.Type<Schema.Schema<A, I, R>>,
+  });
+
+export const CartOutput = makeCartTransformSchema(BaseCart);
 
 export const makeCartSchema = (sections?: string) => {
   if (sections) {
-    return Schema.extend(
-      Cart,
-      Schema.Struct({
-        sections: Schema.optionalWith(
-          Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
-          { default: () => null },
-        ),
-      }),
+    return makeCartTransformSchema(
+      Schema.extend(
+        BaseCart,
+        Schema.Struct({
+          sections: Schema.optionalWith(
+            Schema.NullOr(Ajax.Sections.makeResponseSchema(sections)),
+            { default: () => null },
+          ),
+        }),
+      ),
     );
   }
-  return Schema.extend(
-    Cart,
-    Schema.Struct({
-      sections: Schema.optionalWith(Schema.Null, { default: () => null }),
-    }),
+  return makeCartTransformSchema(
+    Schema.extend(
+      BaseCart,
+      Schema.Struct({
+        sections: Schema.optionalWith(Schema.Null, { default: () => null }),
+      }),
+    ),
   );
 };
 
@@ -476,13 +485,15 @@ export const ItemAddedChangelog = Schema.Struct({
 });
 
 export type CartUpdateOutput = Schema.Schema.Type<typeof CartUpdateOutput>;
-export const CartUpdateOutput = Schema.extend(
-  Cart,
-  Schema.Struct({
-    items_changelog: Schema.Struct({
-      added: Schema.Array(ItemAddedChangelog),
+export const CartUpdateOutput = makeCartTransformSchema(
+  Schema.extend(
+    BaseCart,
+    Schema.Struct({
+      items_changelog: Schema.Struct({
+        added: Schema.Array(ItemAddedChangelog),
+      }),
     }),
-  }),
+  ),
 );
 
 export const CartChangeItemOptionalInput = Schema.Struct({
@@ -531,12 +542,14 @@ export const CartChangeInput = Schema.Union(
 );
 
 export type CartChangeOutput = Schema.Schema.Type<typeof CartChangeOutput>;
-export const CartChangeOutput = Schema.extend(
-  Cart,
-  Schema.Struct({
-    items_added: Schema.Array(LineItemChange),
-    items_removed: Schema.Array(LineItemChange),
-  }),
+export const CartChangeOutput = makeCartTransformSchema(
+  Schema.extend(
+    BaseCart,
+    Schema.Struct({
+      items_added: Schema.Array(LineItemChange),
+      items_removed: Schema.Array(LineItemChange),
+    }),
+  ),
 );
 
 export type CartClearInput = Schema.Schema.Encoded<typeof CartClearInput>;
