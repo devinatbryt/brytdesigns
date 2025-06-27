@@ -149,7 +149,7 @@ export const SellingPlanAllocationPriceAdjustment = Schema.Struct({
 export const SellingPlanPriceAdjustment = Schema.Struct({
   order_count: Schema.NullOr(Schema.Number),
   position: Schema.Number,
-  value: Schema.Number,
+  value: Schema.Union(Schema.Number, Schema.String),
   value_type: Schema.Literal("percentage", "fixed_amount", "price"),
 });
 
