@@ -398,10 +398,6 @@ export const LineItem = Schema.transform(
         Record.remove("product"),
       ) as BaseLineItem,
   },
-).pipe(
-  Schema.annotations({
-    concurrency: "unbounded",
-  }),
 );
 
 type BaseCart = Schema.Schema.Type<typeof BaseCart>;
@@ -421,7 +417,7 @@ export const BaseCart = Schema.Struct({
   total_discount: Schema.Number,
   total_weight: Schema.Number,
   item_count: Schema.Number,
-  items: Schema.Array(LineItem),
+  items: Schema.Array(LineItem).annotations({ concurrency: "unbounded" }),
   requires_shipping: Schema.Boolean,
   currency: CurrencyCode,
   items_subtotal_price: Schema.Number,

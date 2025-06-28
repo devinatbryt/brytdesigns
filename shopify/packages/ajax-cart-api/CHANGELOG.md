@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.20
+
+### Patch Changes
+
+- Minor bug fix
+
 ## 1.0.19
 
 ### Patch Changes
