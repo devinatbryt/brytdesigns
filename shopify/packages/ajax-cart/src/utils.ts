@@ -33,12 +33,12 @@ export const getCartDiscountCodes = () => {
   return uniq([...cartLevelCodes, ...itemLevelCodes]);
 };
 
-function defaultUnwrap<T>(cart: CartData): T {
+function defaultUnwrap<T>(cart?: CartData): T {
   return cart as T; // Use unknown as intermediary to satisfy TypeScript
 }
 
 export function subscribe<T>(
-  unwrapValue: (cart: CartData) => T = defaultUnwrap,
+  unwrapValue: (cart?: CartData) => T = defaultUnwrap,
   cb: (data: T) => void,
 ): () => void {
   // Assuming cartQuery and observable are defined and set correctly.

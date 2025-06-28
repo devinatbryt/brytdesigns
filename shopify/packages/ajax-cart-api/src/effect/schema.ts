@@ -296,7 +296,7 @@ const cachedGet = (url: string) =>
 
 const Product = Schema.transformOrFail(Schema.String, BaseProduct, {
   decode(handle, _, ast) {
-    return Effect.mapBoth(cachedGet(`/products/${handle}`), {
+    return Effect.mapBoth(cachedGet(`/products/${handle}.js`), {
       onFailure: (e) => new ParseResult.Type(ast, handle, e.message),
       onSuccess: (product) => product as BaseProduct,
     });
