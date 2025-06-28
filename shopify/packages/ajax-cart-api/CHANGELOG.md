@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.16
+
+### Patch Changes
+
+- Attempt to fetch additional product information for every line item
+
 ## 1.0.15
 
 ### Patch Changes

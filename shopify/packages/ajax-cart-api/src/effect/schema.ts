@@ -1,6 +1,8 @@
 import * as Schema from "effect/Schema";
 import * as Array from "effect/Array";
 import * as Record from "effect/Record";
+import * as Effect from "effect/Effect";
+import * as ParseResult from "effect/ParseResult";
 import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
 import { pipe, identity } from "effect";
 
@@ -241,6 +243,67 @@ export const UnitPriceMeasurement = Schema.Struct({
   reference_value: Schema.Number,
 });
 
+const VariantQuantityRule = Schema.Struct({
+  min: Schema.NullOr(Schema.Number),
+  max: Schema.NullOr(Schema.Number),
+  increment: Schema.Number,
+});
+
+const VariantOptions = Schema.optionalWith(Schema.Array(Schema.String), {
+  default: () => [],
+});
+
+const BaseVariant = Schema.Struct({
+  id: Resource.ID,
+  title: Schema.String,
+  options: VariantOptions,
+  quantity_rule: VariantQuantityRule,
+});
+
+const ProductOption = Schema.Struct({
+  name: Schema.String,
+  position: Schema.Number,
+  values: Schema.Array(Schema.String),
+});
+
+type BaseProduct = Schema.Schema.Type<typeof BaseProduct>;
+const BaseProduct = Schema.Struct({
+  id: Resource.ID,
+  title: Schema.String,
+  handle: Schema.String,
+  variants: Schema.Array(BaseVariant),
+  options: Schema.Array(ProductOption),
+  tags: Schema.Array(Schema.String),
+});
+
+const get = (url: string): Effect.Effect<unknown, Error> =>
+  Effect.tryPromise({
+    try: () =>
+      fetch(url).then((res) => {
+        if (res.ok) {
+          return res.json() as Promise<unknown>;
+        }
+        throw new Error(String(res.status));
+      }),
+    catch: (e) => new Error(String(e)),
+  });
+
+const cachedGet = (url: string) =>
+  Effect.gen(function* () {
+    const cache = yield* Effect.cachedWithTTL(get(url), "60 minutes");
+    return yield* cache;
+  });
+
+const Product = Schema.transformOrFail(Schema.String, BaseProduct, {
+  decode(handle, _, ast) {
+    return Effect.mapBoth(cachedGet(`/products/${handle}`), {
+      onFailure: (e) => new ParseResult.Type(ast, handle, e.message),
+      onSuccess: (product) => product as BaseProduct,
+    });
+  },
+  encode: (product) => ParseResult.succeed(product.handle),
+});
+
 export type BaseLineItem = Schema.Schema.Type<typeof BaseLineItem>;
 const BaseLineItem = Schema.Struct({
   id: Resource.ID,
@@ -274,7 +337,7 @@ const BaseLineItem = Schema.Struct({
   product_title: Schema.String,
   product_description: Schema.String,
   variant_title: Schema.NullOr(Schema.String),
-  variant_options: Schema.Array(Schema.String),
+  variant_options: VariantOptions,
   options_with_values: Schema.Array(OptionWithValue),
   line_level_discount_allocations: Schema.Array(LineLevelDiscountAllocation),
   line_level_total_discount: Schema.Number,
@@ -294,6 +357,7 @@ export const LineItem = Schema.transform(
   Schema.extend(
     BaseLineItem,
     Schema.Struct({
+      product: Product,
       properties_array: Schema.optionalWith(BaseAttributesArray, {
         default: () => [],
       }),
@@ -317,6 +381,7 @@ export const LineItem = Schema.transform(
   {
     decode: (lineItem) => ({
       ...lineItem,
+      product: lineItem.handle,
       properties_array: lineItem.properties,
       private_properties: lineItem.properties,
       private_properties_array: lineItem.properties,
@@ -330,6 +395,7 @@ export const LineItem = Schema.transform(
         Record.remove("private_properties_array"),
         Record.remove("public_properties"),
         Record.remove("public_properties_array"),
+        Record.remove("product"),
       ) as BaseLineItem,
   },
 );

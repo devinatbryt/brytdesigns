@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-ajax-cart-api",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "An AJAX cart that integrates with the AJAX Cart API",
   "scripts": {
     "build": "tsup --clean",

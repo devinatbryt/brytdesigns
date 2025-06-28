@@ -11,7 +11,7 @@ persistQueryClient({
     storage: window.localStorage,
     serialize: (data) => lz.compressToUTF16(JSON.stringify(data)),
     deserialize: (data) => JSON.parse(lz.decompressFromUTF16(data)),
-    key: "brytdesigns-hybrid-cart",
+    key: "brytdesigns-ajax-cart",
   }),
 });
 
