@@ -22,7 +22,7 @@ export namespace createAjaxCartClient {
 }
 
 export const validateCart = (cart: unknown) =>
-  Effect.runSync(Schema.decodeUnknown(CartOutput)(cart));
+  Effect.runPromise(Schema.decodeUnknown(CartOutput)(cart));
 
 export const createAjaxCartApi = ({ debug = false }) => {
   let baseLayer = Layer.empty;

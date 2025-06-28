@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-ajax-cart-components",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "Headless web components for the Ajax Cart Library",
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",

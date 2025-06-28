@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.17
+
+### Patch Changes
+
+- Attempt at fixing validateCart function
+
 ## 1.0.16
 
 ### Patch Changes
