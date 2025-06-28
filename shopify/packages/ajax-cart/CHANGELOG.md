@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.25
+
+### Patch Changes
+
+- Removed product fetching due to performance issues
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-cart-api@1.0.21
+
 ## 1.0.24
 
 ### Patch Changes
