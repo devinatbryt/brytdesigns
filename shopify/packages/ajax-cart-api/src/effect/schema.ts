@@ -398,6 +398,10 @@ export const LineItem = Schema.transform(
         Record.remove("product"),
       ) as BaseLineItem,
   },
+).pipe(
+  Schema.annotations({
+    concurrency: "unbounded",
+  }),
 );
 
 type BaseCart = Schema.Schema.Type<typeof BaseCart>;

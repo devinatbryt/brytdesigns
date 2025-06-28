@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.19
+
+### Patch Changes
+
+- Force async transformations to be unbounded
+
 ## 1.0.18
 
 ### Patch Changes
