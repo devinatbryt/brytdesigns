@@ -275,6 +275,7 @@ const BaseProduct = Schema.Struct({
   variants: Schema.Array(BaseVariant),
   options: Schema.Array(ProductOption),
   tags: Schema.Array(Schema.String),
+  available: Schema.Boolean,
 });
 
 const get = (url: string): Effect.Effect<unknown, Error> =>
