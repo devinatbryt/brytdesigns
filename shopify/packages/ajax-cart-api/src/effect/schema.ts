@@ -1,11 +1,8 @@
 import * as Schema from "effect/Schema";
 import * as Array from "effect/Array";
 import * as Record from "effect/Record";
-import * as Effect from "effect/Effect";
-import * as ParseResult from "effect/ParseResult";
 import { Resource, Ajax } from "@brytdesigns/shopify-utils/effect";
 import { pipe, identity } from "effect";
-import * as Cache from "./cache";
 
 type BaseAttributeValue = Schema.Schema.Type<typeof BaseAttributeValue>;
 const BaseAttributeValue = Schema.Union(
@@ -244,70 +241,8 @@ export const UnitPriceMeasurement = Schema.Struct({
   reference_value: Schema.Number,
 });
 
-const VariantQuantityRule = Schema.Struct({
-  min: Schema.NullOr(Schema.Number),
-  max: Schema.NullOr(Schema.Number),
-  increment: Schema.Number,
-});
-
 const VariantOptions = Schema.optionalWith(Schema.Array(Schema.String), {
   default: () => [],
-});
-
-const BaseVariant = Schema.Struct({
-  id: Resource.ID,
-  title: Schema.String,
-  options: VariantOptions,
-  quantity_rule: VariantQuantityRule,
-});
-
-const ProductOption = Schema.Struct({
-  name: Schema.String,
-  position: Schema.Number,
-  values: Schema.Array(Schema.String),
-});
-
-type BaseProduct = Schema.Schema.Type<typeof BaseProduct>;
-const BaseProduct = Schema.Struct({
-  id: Resource.ID,
-  title: Schema.String,
-  handle: Schema.String,
-  variants: Schema.Array(BaseVariant),
-  options: Schema.Array(ProductOption),
-  tags: Schema.Array(Schema.String),
-  available: Schema.Boolean,
-});
-
-const get = (url: string): Effect.Effect<unknown, Error> =>
-  Effect.tryPromise({
-    try: () =>
-      fetch(url).then((res) => {
-        if (res.ok) {
-          return res.json() as Promise<unknown>;
-        }
-        throw new Error(String(res.status));
-      }),
-    catch: (e) => new Error(String(e)),
-  });
-
-const cachedGet = (url: string) =>
-  Effect.gen(function* () {
-    const cacheKey = `shopify-ajax-cart-api:${url}`;
-    const cachedValue = yield* Cache.get(cacheKey);
-    if (cachedValue) return cachedValue;
-    const value = yield* get(url);
-    yield* Cache.set(cacheKey, value, "60 minutes");
-    return value;
-  });
-
-const Product = Schema.transformOrFail(Schema.String, BaseProduct, {
-  decode(handle, _, ast) {
-    return Effect.mapBoth(cachedGet(`/products/${handle}.js`), {
-      onFailure: (e) => new ParseResult.Type(ast, handle, e.message),
-      onSuccess: (product) => product as BaseProduct,
-    });
-  },
-  encode: (product) => ParseResult.succeed(product.handle),
 });
 
 export type BaseLineItem = Schema.Schema.Type<typeof BaseLineItem>;
@@ -363,7 +298,6 @@ export const LineItem = Schema.transform(
   Schema.extend(
     BaseLineItem,
     Schema.Struct({
-      product: Product,
       properties_array: Schema.optionalWith(BaseAttributesArray, {
         default: () => [],
       }),
@@ -401,7 +335,6 @@ export const LineItem = Schema.transform(
         Record.remove("private_properties_array"),
         Record.remove("public_properties"),
         Record.remove("public_properties_array"),
-        Record.remove("product"),
       ) as BaseLineItem,
   },
 );

@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.28
+
+### Patch Changes
+
+- Removed idea of fetching product info of products in cart
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-cart-api@1.0.24
+
 ## 1.0.27
 
 ### Patch Changes
