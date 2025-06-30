@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.22
+
+### Patch Changes
+
+- Added localstorage caching system
+
 ## 1.0.21
 
 ### Patch Changes
