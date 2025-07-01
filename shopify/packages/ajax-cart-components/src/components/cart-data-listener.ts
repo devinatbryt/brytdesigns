@@ -69,13 +69,13 @@ export const Component: CorrectComponentType<CartDataListenerProps> = (
           return console.error(`${Name}: method property is required!`);
         if (!on) return console.error(`${Name}: on property is required!`);
 
-        let resetStatusId: number | null = null,
-          tempEventId: string | null = null;
+        let resetStatusId: number | null = null;
+        // tempEventId: string | null = null;
 
         function onEvent(e: Event) {
           const cart = AjaxCart;
 
-          (currentEventId = createUniqueId()), (tempEventId = currentEventId);
+          // (currentEventId = createUniqueId()), (tempEventId = currentEventId);
 
           if (preventDefault) e.preventDefault();
 
@@ -200,8 +200,7 @@ export const Component: CorrectComponentType<CartDataListenerProps> = (
 
         return onCleanup(() => {
           controller.abort();
-          if (resetStatusId && currentEventId !== tempEventId)
-            clearTimeout(resetStatusId);
+          if (resetStatusId) clearTimeout(resetStatusId);
         });
       },
     ),

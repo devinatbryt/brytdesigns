@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.1.28
+
+### Patch Changes
+
+- Attempt at fixing wierd delay interaction
+
 ## 1.1.27
 
 ### Patch Changes
