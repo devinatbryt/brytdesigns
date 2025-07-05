@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.7
+
+### Patch Changes
+
+- Minor adjustments
+- Don't trigger if it's the first render
+
 ## 1.0.6
 
 ### Patch Changes

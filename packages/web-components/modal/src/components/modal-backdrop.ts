@@ -1,6 +1,6 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createEffect, on, onCleanup } from "solid-js";
+import { createEffect, onMount, on, onCleanup } from "solid-js";
 import { animate } from "motion";
 
 import { useModal } from "../hooks/index.js";
@@ -12,12 +12,15 @@ export const Name = "modal-backdrop";
 
 export const Component: CorrectComponentType<Props> = (_, { element }) => {
   const [state, { updateAnimationQueue, close }] = useModal(element);
+  const controller = new AbortController();
+
+  let isFirstRender = true;
 
   createEffect(
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (!isOpen) return;
+        if (!isOpen || isFirstRender) return;
         const animation = enter(element);
         updateAnimationQueue(animation);
         return onCleanup(() => {
@@ -31,7 +34,7 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     on(
       () => state.isOpen,
       (isOpen) => {
-        if (isOpen) return;
+        if (isOpen || isFirstRender) return;
         const animation = exit(element);
         updateAnimationQueue(animation);
         return onCleanup(() => {
@@ -40,6 +43,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
       },
     ),
   );
+
+  onMount(() => {
+    isFirstRender = false;
+  });
 
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);
@@ -65,9 +72,18 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     );
   }
 
-  element.addEventListener("click", close);
+  element.addEventListener(
+    "click",
+    () => {
+      if (state.isAnimating) return;
+      close();
+    },
+    {
+      signal: controller.signal,
+    },
+  );
 
   onCleanup(() => {
-    element.removeEventListener("click", close);
+    controller.abort();
   });
 };
