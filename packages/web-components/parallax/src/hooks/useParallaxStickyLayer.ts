@@ -14,13 +14,10 @@ import {
   animate,
   type AnimationPlaybackControlsWithThen,
 } from "motion";
+import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
+import { abortablePromise } from "@brytdesigns/web-component-core/promise";
 import { useParallax } from "./useParallax";
-import {
-  normalizeTuple,
-  isInRange,
-  abortablePromise,
-  awaitAllAnimations,
-} from "../utils";
+import { normalizeTuple, isInRange } from "../utils";
 
 type CreateContextOptions = {
   root: HTMLElement & ICustomElement;

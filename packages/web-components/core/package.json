@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Web component core utilities for building solid based web components",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -10,6 +10,18 @@
     ".": {
       "types": "./dist/main/index.d.ts",
       "module": "./dist/main/index.js"
+    },
+    "./focusTrap": {
+      "types": "./dist/main/focusTrap/index.d.ts",
+      "module": "./dist/main/focusTrap/index.js"
+    },
+    "./promise": {
+      "types": "./dist/main/promise/index.d.ts",
+      "module": "./dist/main/promise/index.js"
+    },
+    "./animation": {
+      "types": "./dist/main/animation/index.d.ts",
+      "module": "./dist/main/animation/index.js"
     }
   },
   "scripts": {
@@ -24,6 +36,7 @@
   "license": "ISC",
   "dependencies": {
     "focus-trap": "^7.6.4",
+    "motion": "^12.18.1",
     "solid-js": "^1.9.7"
   },
   "devDependencies": {

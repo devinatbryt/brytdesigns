@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-parallax",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Headless parallax animation web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -24,6 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@brytdesigns/web-component-utils": "workspace:*",
+    "@brytdesigns/web-component-core": "workspace:*",
     "component-register": "^0.8.7",
     "motion": "^12.18.1",
     "solid-element": "^1.9.1",

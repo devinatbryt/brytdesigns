@@ -14,14 +14,6 @@ export function showElement<T extends HTMLElement>(element: T) {
   element.style.display = "block";
 }
 
-export async function controlPromise(
-  controls: AnimationPlaybackControlsWithThen,
-) {
-  return new Promise((resolve) => {
-    controls.then(() => resolve(null));
-  });
-}
-
 export function getTransitionConfig(style: CSSStyleDeclaration) {
   const properties = {
     autoplay: style.getPropertyValue("--motion--autoplay"),

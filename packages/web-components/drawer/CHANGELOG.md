@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.24
+
+### Patch Changes
+
+- Introduced new animation utilities
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.0.1
+
 ## 1.0.23
 
 ### Patch Changes

@@ -4,7 +4,7 @@ import { createEffect, onMount, on, onCleanup } from "solid-js";
 import { animate } from "motion";
 
 import { useDrawer } from "../hooks/index.js";
-import { controlPromise, getTransitionConfig } from "../utils.js";
+import { getTransitionConfig } from "../utils.js";
 
 type DrawerBackdropProps = {};
 
@@ -25,7 +25,7 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
       (isOpen) => {
         if (!isOpen || isFirstRender) return;
         const animation = enter(element);
-        updateAnimationQueue(controlPromise(animation));
+        updateAnimationQueue(animation);
         return onCleanup(() => {
           if (animation.state !== "finished") animation.complete();
         });
@@ -39,7 +39,7 @@ export const Component: CorrectComponentType<DrawerBackdropProps> = (
       (isOpen) => {
         if (isOpen || isFirstRender) return;
         const animation = exit(element);
-        updateAnimationQueue(controlPromise(animation));
+        updateAnimationQueue(animation);
         return onCleanup(() => {
           if (animation.state !== "finished") animation.complete();
         });

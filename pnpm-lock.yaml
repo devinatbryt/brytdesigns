@@ -129,6 +129,9 @@ importers:
       focus-trap:
         specifier: ^7.6.4
         version: 7.6.4
+      motion:
+        specifier: ^12.18.1
+        version: 12.18.1
       solid-js:
         specifier: ^1.9.7
         version: 1.9.7
@@ -366,6 +369,9 @@ importers:
 
   packages/web-components/parallax:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-utils':
         specifier: workspace:*
         version: link:../utils

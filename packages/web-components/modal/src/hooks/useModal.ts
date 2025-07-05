@@ -11,6 +11,7 @@ import {
   batch,
   splitProps,
   untrack,
+  onCleanup,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import {
@@ -18,8 +19,12 @@ import {
   getContextFromProvider,
 } from "@brytdesigns/web-component-utils";
 
+import type { AnimationPlaybackControlsWithThen } from "motion";
+import { abortablePromise } from "@brytdesigns/web-component-core/promise";
+import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
+
 type StoreContext = {
-  animationQueue: Promise<unknown>[];
+  animationQueue: AnimationPlaybackControlsWithThen[];
 };
 
 type CreateContextOptions = {
@@ -41,13 +46,22 @@ function initializeModalContext(props: CreateContextOptions) {
       () => store.animationQueue,
       (animationQueue) => {
         if (!animationQueue.length) return;
-        const animations = Promise.all(store.animationQueue);
+        const controller = new AbortController();
+        const animations = awaitAllAnimations(animationQueue);
+        const abortableAnimations = abortablePromise(
+          animations,
+          controller.signal,
+        );
         setElementState("isAnimating", true);
-        animations.then(() => {
+        abortableAnimations.finally(() => {
           batch(() => {
             setElementState("isAnimating", false);
             setStore("animationQueue", []);
           });
+        });
+
+        return onCleanup(() => {
+          controller.abort();
         });
       },
     ),
@@ -88,7 +102,7 @@ export const provideModalContext = (
 export const useModalContext = (context: ModalContext) => {
   const [state, { setElementState, setStore: setState }] = context;
 
-  function updateAnimationQueue(animation: Promise<unknown>) {
+  function updateAnimationQueue(animation: AnimationPlaybackControlsWithThen) {
     setState("animationQueue", (state) => [...state, animation]);
   }
 

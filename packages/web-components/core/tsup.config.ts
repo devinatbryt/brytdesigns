@@ -28,8 +28,37 @@ export default defineConfig([
           filePath: path.resolve("./src/index.ts"),
         },
       ]);
+      const [focusTrapDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/focusTrap/index.ts"),
+        },
+      ]);
+      const [promiseDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/promise/index.ts"),
+        },
+      ]);
+      const [animationDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/animation/index.ts"),
+        },
+      ]);
 
-      await fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts);
+      await Promise.all([
+        fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts),
+        fs.writeFile(
+          path.resolve(outDir, "main", "focusTrap", "index.d.ts"),
+          focusTrapDts,
+        ),
+        fs.writeFile(
+          path.resolve(outDir, "main", "animation", "index.d.ts"),
+          animationDts,
+        ),
+        fs.writeFile(
+          path.resolve(outDir, "main", "promise", "index.d.ts"),
+          promiseDts,
+        ),
+      ]);
     },
   },
   {
@@ -39,6 +68,33 @@ export default defineConfig([
     splitting: false,
     entry: ["src/index.ts"],
     outDir: `${outDir}/esm`,
+    external: [],
+  },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/focusTrap/index.ts"],
+    outDir: `${outDir}/esm/focusTrap`,
+    external: [],
+  },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/promise/index.ts"],
+    outDir: `${outDir}/esm/promise`,
+    external: [],
+  },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/animation/index.ts"],
+    outDir: `${outDir}/esm/animation`,
     external: [],
   },
   // {

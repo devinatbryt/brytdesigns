@@ -4,7 +4,7 @@ import { createEffect, on, onCleanup } from "solid-js";
 import { animate } from "motion";
 
 import { useModal } from "../hooks/index.js";
-import { controlPromise, getTransitionConfig } from "../utils.js";
+import { getTransitionConfig } from "../utils.js";
 
 type Props = {};
 
@@ -19,8 +19,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
       (isOpen) => {
         if (!isOpen) return;
         const animation = enter(element);
-        updateAnimationQueue(controlPromise(animation));
-        return onCleanup(animation.complete);
+        updateAnimationQueue(animation);
+        return onCleanup(() => {
+          if (animation.state !== "finished") animation.complete();
+        });
       },
     ),
   );
@@ -31,8 +33,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
       (isOpen) => {
         if (isOpen) return;
         const animation = exit(element);
-        updateAnimationQueue(controlPromise(animation));
-        return onCleanup(animation.complete);
+        updateAnimationQueue(animation);
+        return onCleanup(() => {
+          if (animation.state !== "finished") animation.complete();
+        });
       },
     ),
   );

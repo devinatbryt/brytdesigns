@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.0.1
+
+### Patch Changes
+
+- Introduced new animation utilities
+
 ## 1.0.0
 
 ### Major Changes

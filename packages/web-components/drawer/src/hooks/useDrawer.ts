@@ -11,6 +11,7 @@ import {
   splitProps,
   untrack,
   mergeProps,
+  onCleanup,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import {
@@ -18,8 +19,12 @@ import {
   getContextFromProvider,
 } from "@brytdesigns/web-component-utils";
 
+import type { AnimationPlaybackControlsWithThen } from "motion";
+import { abortablePromise } from "@brytdesigns/web-component-core/promise";
+import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
+
 type StoreContext = {
-  animationQueue: Promise<unknown>[];
+  animationQueue: AnimationPlaybackControlsWithThen[];
 };
 
 type CreateContextOptions = {
@@ -41,13 +46,22 @@ function initializeDrawerContext(props: CreateContextOptions) {
       () => store.animationQueue,
       (animationQueue) => {
         if (!animationQueue.length) return;
-        const animations = Promise.allSettled([...store.animationQueue]);
+        const controller = new AbortController();
+        const animations = awaitAllAnimations(animationQueue);
+        const abortableAnimations = abortablePromise(
+          animations,
+          controller.signal,
+        );
         setElementState("isAnimating", true);
-        animations.finally(() => {
+        abortableAnimations.finally(() => {
           batch(() => {
             setElementState("isAnimating", false);
             setStore("animationQueue", []);
           });
+        });
+
+        return onCleanup(() => {
+          controller.abort();
         });
       },
     ),
@@ -84,7 +98,7 @@ export const provideDrawerContext = (
 export const useDrawerContext = (context: DrawerContext) => {
   const [state, { setElementState, setStore: setState }] = context;
 
-  function updateAnimationQueue(animation: Promise<unknown>) {
+  function updateAnimationQueue(animation: AnimationPlaybackControlsWithThen) {
     setState("animationQueue", (state) => [...state, animation]);
   }
 

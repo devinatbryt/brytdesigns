@@ -2,7 +2,7 @@ import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
 import { createEffect, on, onCleanup, onMount, splitProps } from "solid-js";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock-upgrade";
-import { createFocusTrap } from "@brytdesigns/web-component-core";
+import { createFocusTrap } from "@brytdesigns/web-component-core/focusTrap";
 
 import { provideModalContext, useModalContext } from "../hooks/index.js";
 import { hideElement, showElement } from "../utils.js";
