@@ -6,12 +6,11 @@ import { animate } from "motion";
 import { useModal } from "../hooks/index.js";
 import { controlPromise, getTransitionConfig } from "../utils.js";
 
-type DrawerContentProps = {};
+type Props = {};
 
-export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
-  props,
-  { element },
-) => {
+export const Name = "modal-panel";
+
+export const Component: CorrectComponentType<Props> = (_, { element }) => {
   const [state, { updateAnimationQueue }] = useModal(element);
 
   createEffect(
@@ -41,14 +40,18 @@ export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    // let position = style.getPropertyValue("--d-position") as Position;
-    // if (!position) position = POSITION.LEFT;
-    // const transform = convertPositionToTranslate(position);
 
     return animate(
       element,
       {
-        // transform,
+        transform: [
+          `translateX(var(--${Name}--slide-x-from,0%)) translateY(var(--${Name}--slide-y-from,0%)) scaleX(var(--${Name}--scale-x-from,1)) scaleY(var(--${Name}--scale-y-from,1))`,
+          `translateX(var(--${Name}--slide-x-to,0%)) translateY(var(--${Name}--slide-y-to,0%)) scaleX(var(--${Name}--scale-x-to,1)) scaleY(var(--${Name}--scale-y-to,1))`,
+        ],
+        opacity: [
+          `var(--${Name}--opacity-from,0)`,
+          `var(--${Name}--opacity-to,1)`,
+        ],
       },
       transition,
     );
@@ -57,13 +60,17 @@ export const DrawerContent: CorrectComponentType<DrawerContentProps> = (
   function exit(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    // let position = style.getPropertyValue("--d-position") as Position;
-    // if (!position) position = POSITION.LEFT;
-    // const transform = convertPositionToTranslate(position);
     return animate(
       element,
       {
-        // transform,
+        transform: [
+          `translateX(var(--${Name}--slide-x-to,0%)) translateY(var(--${Name}--slide-y-to,0%)) scaleX(var(--${Name}--scale-x-to,1)) scaleY(var(--${Name}--scale-y-to,1))`,
+          `translateX(var(--${Name}--slide-x-from,0%)) translateY(var(--${Name}--slide-y-from,0%)) scaleX(var(--${Name}--scale-x-from,1)) scaleY(var(--${Name}--scale-y-from,1))`,
+        ],
+        opacity: [
+          `var(--${Name}--opacity-to,1)`,
+          `var(--${Name}--opacity-from,0)`,
+        ],
       },
       transition,
     );

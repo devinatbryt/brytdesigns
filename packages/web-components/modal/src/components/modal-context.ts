@@ -1,12 +1,8 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createMemo, createEffect, on, onCleanup, splitProps } from "solid-js";
-import {
-  enableBodyScroll,
-  disableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock-upgrade";
-import { createFocusTrap } from "focus-trap";
+import { createEffect, on, onCleanup, onMount, splitProps } from "solid-js";
+import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock-upgrade";
+import { createFocusTrap } from "@brytdesigns/web-component-core";
 
 import { provideModalContext, useModalContext } from "../hooks/index.js";
 import { hideElement, showElement } from "../utils.js";
@@ -17,11 +13,12 @@ type ModalContextProps = {
   closeOnEscape: boolean;
   shouldTrapFocus: boolean;
   isAnimating: boolean;
-  openAfterDelay: boolean;
   delay: number;
 };
 
-export const ModalContext: CorrectComponentType<ModalContextProps> = (
+export const Name = "modal-context";
+
+export const Component: CorrectComponentType<ModalContextProps> = (
   props,
   { element },
 ) => {
@@ -38,15 +35,13 @@ export const ModalContext: CorrectComponentType<ModalContextProps> = (
 
   element.actions = events;
 
-  const focusTrap = createMemo(() => {
-    return createFocusTrap(element, {
-      allowOutsideClick: true,
-      escapeDeactivates: restProps.closeOnEscape,
-      onDeactivate: () => {
-        setElementState("isOpen", false);
-      },
-    });
-  });
+  const focusTrap = createFocusTrap(element, () => ({
+    allowOutsideClick: true,
+    escapeDeactivates: restProps.closeOnEscape,
+    onDeactivate: () => {
+      setElementState("isOpen", false);
+    },
+  }));
 
   createEffect(
     on(
@@ -93,8 +88,8 @@ export const ModalContext: CorrectComponentType<ModalContextProps> = (
         isAnimating: state.isAnimating,
         shouldTrapFocus: restProps.shouldTrapFocus,
       }),
-      ({ isOpen, isAnimating, shouldTrapFocus }) => {
-        if (isOpen && !isAnimating && shouldTrapFocus)
+      ({ isOpen, isAnimating }) => {
+        if (isOpen && !isAnimating)
           return disableBodyScroll(element, {
             allowTouchMove: (el: EventTarget) => {
               if (el instanceof HTMLElement) {
@@ -111,7 +106,6 @@ export const ModalContext: CorrectComponentType<ModalContextProps> = (
             },
           });
         onCleanup(() => {
-          if (!shouldTrapFocus) return;
           enableBodyScroll(element);
         });
       },
@@ -128,7 +122,36 @@ export const ModalContext: CorrectComponentType<ModalContextProps> = (
     ),
   );
 
+  let openAfterDelayTimeoutId: any = null;
+
+  onMount(() => {
+    if (!restProps.delay || contextProps.isOpen) return;
+
+    openAfterDelayTimeoutId = setTimeout(() => {
+      setElementState("isOpen", true);
+    }, props.delay);
+
+    return onCleanup(() => {
+      clearTimeout(openAfterDelayTimeoutId);
+    });
+  });
+
+  createEffect(
+    on(
+      () => ({
+        isOpen: state.isOpen,
+        openAfterDelay: restProps.delay > 0,
+      }),
+      ({ isOpen, openAfterDelay }) => {
+        if (!openAfterDelay && openAfterDelayTimeoutId)
+          clearTimeout(openAfterDelayTimeoutId);
+        if (isOpen && openAfterDelayTimeoutId)
+          clearTimeout(openAfterDelayTimeoutId);
+      },
+    ),
+  );
+
   onCleanup(() => {
-    clearAllBodyScrollLocks();
+    disableBodyScroll(element);
   });
 };

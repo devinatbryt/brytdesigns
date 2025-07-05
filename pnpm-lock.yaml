@@ -332,6 +332,9 @@ importers:
 
   packages/web-components/modal:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-utils':
         specifier: workspace:*
         version: link:../utils
@@ -341,9 +344,6 @@ importers:
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
-      focus-trap:
-        specifier: ^7.6.4
-        version: 7.6.4
       motion:
         specifier: ^12.18.1
         version: 12.18.1

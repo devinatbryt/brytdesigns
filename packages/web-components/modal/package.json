@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-modal",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Headless modal web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -24,9 +24,9 @@
   "license": "ISC",
   "dependencies": {
     "@brytdesigns/web-component-utils": "workspace:*",
+    "@brytdesigns/web-component-core": "workspace:*",
     "body-scroll-lock-upgrade": "^1.1.0",
     "component-register": "^0.8.7",
-    "focus-trap": "^7.6.4",
     "motion": "^12.18.1",
     "observe-element-in-viewport": "^0.0.15",
     "solid-element": "^1.9.1",

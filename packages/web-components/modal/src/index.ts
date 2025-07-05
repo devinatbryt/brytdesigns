@@ -4,14 +4,14 @@ import {
 } from "@brytdesigns/web-component-utils";
 
 import {
-  DrawerContent,
+  ModalTrigger,
   ModalContext,
-  DrawerTrigger,
-  DrawerBackdrop,
+  ModalBackdrop,
+  ModalPanel,
 } from "./components/index.js";
 
 customShadowlessElement(
-  "modal-context",
+  ModalContext.Name,
   {
     isOpen: false,
     id: "",
@@ -21,21 +21,25 @@ customShadowlessElement(
     openAfterDelay: false,
     delay: 0,
   },
-  correctElementType(ModalContext),
+  correctElementType(ModalContext.Component),
 );
 
 customShadowlessElement(
-  "modal-trigger",
+  ModalTrigger.Name,
   { target: "", action: "", on: "click", preventDefault: true },
-  correctElementType(DrawerTrigger),
+  correctElementType(ModalTrigger.Component),
 );
 
 customShadowlessElement(
-  "modal-backdrop",
+  ModalBackdrop.Name,
   {},
-  correctElementType(DrawerBackdrop),
+  correctElementType(ModalBackdrop.Component),
 );
 
-customShadowlessElement("modal-content", {}, correctElementType(DrawerContent));
+customShadowlessElement(
+  ModalPanel.Name,
+  {},
+  correctElementType(ModalPanel.Component),
+);
 
 export { useModal, getModalContext } from "./hooks/index.js";

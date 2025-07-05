@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.0
+
+### Major Changes
+
+- Finished building modal context
+
 ## 0.0.5
 
 ### Patch Changes

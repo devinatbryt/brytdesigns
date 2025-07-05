@@ -6,12 +6,11 @@ import { animate } from "motion";
 import { useModal } from "../hooks/index.js";
 import { controlPromise, getTransitionConfig } from "../utils.js";
 
-type DrawerBackdropProps = {};
+type Props = {};
 
-export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
-  _,
-  { element },
-) => {
+export const Name = "drawer-backdrop";
+
+export const Component: CorrectComponentType<Props> = (_, { element }) => {
   const [state, { updateAnimationQueue, close }] = useModal(element);
 
   createEffect(
@@ -44,7 +43,7 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
     return animate(
       element,
       {
-        opacity: [`var(--opacity-from)`, `var(--opacity-to)`],
+        opacity: [`var(--modal--opacity-from)`, `var(--modal--opacity-to)`],
       },
       options,
     );
@@ -56,7 +55,7 @@ export const DrawerBackdrop: CorrectComponentType<DrawerBackdropProps> = (
     return animate(
       element,
       {
-        opacity: [`var(--drawer--opacity-to)`, `var(--drawer--opacity-from)`],
+        opacity: [`var(--modal--opacity-to)`, `var(--modal--opacity-from)`],
       },
       options,
     );
