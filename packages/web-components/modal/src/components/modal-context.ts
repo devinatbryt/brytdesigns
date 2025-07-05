@@ -95,7 +95,7 @@ export const Component: CorrectComponentType<ModalContextProps> = (
               if (el instanceof HTMLElement) {
                 let element = el as (EventTarget & HTMLElement) | null;
                 while (element && element !== document.body) {
-                  if (element.tagName === "MODAL-CONTENT") {
+                  if (element.tagName === "MODAL-PANEL") {
                     return true;
                   }
 
