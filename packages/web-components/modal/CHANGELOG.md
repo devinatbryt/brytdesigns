@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.1
+
+### Patch Changes
+
+- Minor build bug fix
+
 ## 1.0.0
 
 ### Major Changes
