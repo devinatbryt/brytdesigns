@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.26
+
+### Patch Changes
+
+- Removed need to specify autoplay as true for transition config
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.0.2
+
 ## 1.0.25
 
 ### Patch Changes

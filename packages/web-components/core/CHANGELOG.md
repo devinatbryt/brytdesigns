@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.0.2
+
+### Patch Changes
+
+- Removed need to specify autoplay as true for transition config
+
 ## 1.0.1
 
 ### Patch Changes

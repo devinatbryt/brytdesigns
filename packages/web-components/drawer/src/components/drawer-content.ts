@@ -2,9 +2,9 @@ import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
 import { createEffect, on, onCleanup, onMount } from "solid-js";
 import { animate } from "motion";
+import { getTransitionConfig } from "@brytdesigns/web-component-core/animation";
 
 import { useDrawer } from "../hooks/index.js";
-import { getTransitionConfig } from "../utils.js";
 import { POSITION, type Position } from "../consts.js";
 
 type DrawerContentProps = {};

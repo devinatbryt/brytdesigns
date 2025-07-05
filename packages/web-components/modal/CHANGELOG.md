@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.8
+
+### Patch Changes
+
+- Removed need to specify autoplay as true for transition config
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.0.2
+
 ## 1.0.7
 
 ### Patch Changes
