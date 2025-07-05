@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.29
+
+### Patch Changes
+
+- Gracefully handle error
+
 ## 1.0.28
 
 ### Patch Changes

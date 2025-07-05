@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.11
+
+### Patch Changes
+
+- Gracefully handle error
+
 ## 1.0.10
 
 ### Patch Changes

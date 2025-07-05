@@ -42,7 +42,12 @@ export const Component: CorrectComponentType<DrawerTriggerProps> = (
 
     invokeOnLoaded(
       () => {
-        const target = document.querySelector(targetProp);
+        let target: Element | null = null;
+        try {
+          target = document.querySelector(targetProp);
+        } catch (e) {
+          e;
+        }
         if (!target)
           return console.warn(`${Name}: target element not found!`, {
             element,
