@@ -61,7 +61,7 @@ function initializeModalContext(props: CreateContextOptions) {
         });
 
         return onCleanup(() => {
-          controller.abort();
+          controller.abort("Aborting modal animations");
         });
       },
     ),

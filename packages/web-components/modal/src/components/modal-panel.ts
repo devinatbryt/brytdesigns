@@ -48,10 +48,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     return animate(
       element,
       {
-        transform: [
-          `translateX(var(--${Name}--slide-x-from)) translateY(var(--${Name}--slide-y-from)) scaleX(var(--${Name}--scale-x-from)) scaleY(var(--${Name}--scale-y-from))`,
-          `translateX(var(--${Name}--slide-x-to)) translateY(var(--${Name}--slide-y-to)) scaleX(var(--${Name}--scale-x-to)) scaleY(var(--${Name}--scale-y-to))`,
-        ],
+        x: [`var(--${Name}--slide-x-from)`, `var(--${Name}--slide-x-to)`],
+        y: [`var(--${Name}--slide-y-from)`, `var(--${Name}--slide-y-to)`],
+        scaleY: [`var(--${Name}--scale-y-from)`, `var(--${Name}--scale-y-to)`],
+        scaleX: [`var(--${Name}--scale-x-from)`, `var(--${Name}--scale-x-to)`],
         opacity: [`var(--${Name}--opacity-from)`, `var(--${Name}--opacity-to)`],
       },
       transition,
@@ -64,10 +64,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     return animate(
       element,
       {
-        transform: [
-          `translateX(var(--${Name}--slide-x-to)) translateY(var(--${Name}--slide-y-to)) scaleX(var(--${Name}--scale-x-to)) scaleY(var(--${Name}--scale-y-to))`,
-          `translateX(var(--${Name}--slide-x-from)) translateY(var(--${Name}--slide-y-from)) scaleX(var(--${Name}--scale-x-from)) scaleY(var(--${Name}--scale-y-from))`,
-        ],
+        x: [`var(--${Name}--slide-x-to)`, `var(--${Name}--slide-x-from)`],
+        y: [`var(--${Name}--slide-y-to)`, `var(--${Name}--slide-y-from)`],
+        scaleY: [`var(--${Name}--scale-y-to)`, `var(--${Name}--scale-y-from)`],
+        scaleX: [`var(--${Name}--scale-x-to)`, `var(--${Name}--scale-x-from)`],
         opacity: [`var(--${Name}--opacity-to)`, `var(--${Name}--opacity-from)`],
       },
       transition,

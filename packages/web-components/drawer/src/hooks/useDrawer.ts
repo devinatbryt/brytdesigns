@@ -61,7 +61,7 @@ function initializeDrawerContext(props: CreateContextOptions) {
         });
 
         return onCleanup(() => {
-          controller.abort();
+          controller.abort("Aborting drawer animations");
         });
       },
     ),

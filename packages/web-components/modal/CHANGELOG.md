@@ -1,5 +1,17 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated signal abort reason
+
+## 1.0.5
+
+### Patch Changes
+
+- Attempt at fixing animation bugs
+
 ## 1.0.4
 
 ### Patch Changes

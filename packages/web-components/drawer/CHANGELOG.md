@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.25
+
+### Patch Changes
+
+- Updated signal abort reason
+
 ## 1.0.24
 
 ### Patch Changes
