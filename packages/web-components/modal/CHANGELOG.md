@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.9
+
+### Patch Changes
+
+- Minor query selector bug fixes
+
 ## 1.0.8
 
 ### Patch Changes

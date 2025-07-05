@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.27
+
+### Patch Changes
+
+- Minor query selector bug fixes
+
 ## 1.0.26
 
 ### Patch Changes
