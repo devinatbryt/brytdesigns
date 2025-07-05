@@ -1,12 +1,8 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
 
-import { createMemo, createEffect, on, onCleanup, splitProps } from "solid-js";
-import {
-  enableBodyScroll,
-  disableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock-upgrade";
-import { createFocusTrap } from "focus-trap";
+import { createEffect, on, onCleanup, splitProps } from "solid-js";
+import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock-upgrade";
+import { createFocusTrap } from "@brytdesigns/web-component-core";
 
 import { provideDrawerContext, useDrawerContext } from "../hooks/index.js";
 import { hideElement, showElement } from "../utils.js";
@@ -39,15 +35,13 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
 
   element.actions = events;
 
-  const focusTrap = createMemo(() => {
-    return createFocusTrap(element, {
-      allowOutsideClick: true,
-      escapeDeactivates: restProps.closeOnEscape,
-      onDeactivate: () => {
-        setElementState("isOpen", false);
-      },
-    });
-  });
+  const focusTrap = createFocusTrap(element, () => ({
+    allowOutsideClick: true,
+    escapeDeactivates: restProps.closeOnEscape,
+    onDeactivate: () => {
+      setElementState("isOpen", false);
+    },
+  }));
 
   createEffect(() => {
     if (!props.debug) return;
@@ -100,10 +94,9 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
       () => ({
         isOpen: state.isOpen,
         isAnimating: state.isAnimating,
-        shouldTrapFocus: restProps.shouldTrapFocus,
       }),
-      ({ isOpen, isAnimating, shouldTrapFocus }) => {
-        if (isOpen && !isAnimating && shouldTrapFocus)
+      ({ isOpen, isAnimating }) => {
+        if (isOpen && !isAnimating)
           return disableBodyScroll(element, {
             allowTouchMove: (el: EventTarget) => {
               if (el instanceof HTMLElement) {
@@ -120,7 +113,6 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
             },
           });
         onCleanup(() => {
-          if (!shouldTrapFocus) return;
           enableBodyScroll(element);
         });
       },
@@ -144,6 +136,6 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
   );
 
   onCleanup(() => {
-    clearAllBodyScrollLocks();
+    disableBodyScroll(element);
   });
 };

@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.23
+
+### Patch Changes
+
+- Global trap focus stack for all elements that need to trap the user's focus.
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.0.0
+
 ## 1.0.22
 
 ### Patch Changes

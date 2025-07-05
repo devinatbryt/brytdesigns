@@ -1,7 +1,7 @@
 {
-  "name": "@brytdesigns/web-component-drawer",
-  "version": "1.0.23",
-  "description": "Headless drawer web component",
+  "name": "@brytdesigns/web-component-core",
+  "version": "1.0.0",
+  "description": "Web component core utilities for building solid based web components",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
@@ -23,16 +23,11 @@
   "author": "Bryt Designs",
   "license": "ISC",
   "dependencies": {
-    "@brytdesigns/web-component-utils": "workspace:*",
-    "@brytdesigns/web-component-core": "workspace:*",
-    "body-scroll-lock-upgrade": "^1.1.0",
-    "component-register": "^0.8.7",
-    "motion": "^12.18.1",
-    "observe-element-in-viewport": "^0.0.15",
-    "solid-element": "^1.9.1",
+    "focus-trap": "^7.6.4",
     "solid-js": "^1.9.7"
   },
   "devDependencies": {
+    "@repo/js-delivr-imports-plugin": "workspace:*",
     "dts-bundle-generator": "^9.5.1",
     "tsup": "^8.4.0"
   }
