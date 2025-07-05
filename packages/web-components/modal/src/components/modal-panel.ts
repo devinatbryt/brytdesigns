@@ -45,13 +45,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
       element,
       {
         transform: [
-          `translateX(var(--${Name}--slide-x-from,0%)) translateY(var(--${Name}--slide-y-from,0%)) scaleX(var(--${Name}--scale-x-from,1)) scaleY(var(--${Name}--scale-y-from,1))`,
-          `translateX(var(--${Name}--slide-x-to,0%)) translateY(var(--${Name}--slide-y-to,0%)) scaleX(var(--${Name}--scale-x-to,1)) scaleY(var(--${Name}--scale-y-to,1))`,
+          `translateX(var(--${Name}--slide-x-from)) translateY(var(--${Name}--slide-y-from)) scaleX(var(--${Name}--scale-x-from)) scaleY(var(--${Name}--scale-y-from))`,
+          `translateX(var(--${Name}--slide-x-to)) translateY(var(--${Name}--slide-y-to)) scaleX(var(--${Name}--scale-x-to)) scaleY(var(--${Name}--scale-y-to))`,
         ],
-        opacity: [
-          `var(--${Name}--opacity-from,0)`,
-          `var(--${Name}--opacity-to,1)`,
-        ],
+        opacity: [`var(--${Name}--opacity-from)`, `var(--${Name}--opacity-to)`],
       },
       transition,
     );
@@ -64,13 +61,10 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
       element,
       {
         transform: [
-          `translateX(var(--${Name}--slide-x-to,0%)) translateY(var(--${Name}--slide-y-to,0%)) scaleX(var(--${Name}--scale-x-to,1)) scaleY(var(--${Name}--scale-y-to,1))`,
-          `translateX(var(--${Name}--slide-x-from,0%)) translateY(var(--${Name}--slide-y-from,0%)) scaleX(var(--${Name}--scale-x-from,1)) scaleY(var(--${Name}--scale-y-from,1))`,
+          `translateX(var(--${Name}--slide-x-to)) translateY(var(--${Name}--slide-y-to)) scaleX(var(--${Name}--scale-x-to)) scaleY(var(--${Name}--scale-y-to))`,
+          `translateX(var(--${Name}--slide-x-from)) translateY(var(--${Name}--slide-y-from)) scaleX(var(--${Name}--scale-x-from)) scaleY(var(--${Name}--scale-y-from))`,
         ],
-        opacity: [
-          `var(--${Name}--opacity-to,1)`,
-          `var(--${Name}--opacity-from,0)`,
-        ],
+        opacity: [`var(--${Name}--opacity-to)`, `var(--${Name}--opacity-from)`],
       },
       transition,
     );

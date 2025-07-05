@@ -43,7 +43,7 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     return animate(
       element,
       {
-        opacity: [`var(--modal--opacity-from)`, `var(--modal--opacity-to)`],
+        opacity: [`var(--${Name}--opacity-from)`, `var(--${Name}--opacity-to)`],
       },
       options,
     );
@@ -55,7 +55,7 @@ export const Component: CorrectComponentType<Props> = (_, { element }) => {
     return animate(
       element,
       {
-        opacity: [`var(--modal--opacity-to)`, `var(--modal--opacity-from)`],
+        opacity: [`var(--${Name}--opacity-to)`, `var(--${Name}--opacity-from)`],
       },
       options,
     );
