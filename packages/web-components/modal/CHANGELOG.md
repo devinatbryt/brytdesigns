@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.10
+
+### Patch Changes
+
+- Moved where we query select
+
 ## 1.0.9
 
 ### Patch Changes

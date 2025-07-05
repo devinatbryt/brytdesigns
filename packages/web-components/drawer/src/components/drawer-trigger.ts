@@ -38,81 +38,76 @@ export const Component: CorrectComponentType<DrawerTriggerProps> = (
       );
     if (!on) return console.warn(`${Name}: on prop is required!`);
 
-    try {
-      const target = document.querySelector(targetProp);
-      if (!target)
-        return console.warn(`${Name}: target element not found!`, {
-          element,
-          target: targetProp,
-        });
+    const controller = new AbortController();
 
-      const controller = new AbortController();
+    invokeOnLoaded(
+      () => {
+        const target = document.querySelector(targetProp);
+        if (!target)
+          return console.warn(`${Name}: target element not found!`, {
+            element,
+            target: targetProp,
+          });
+        createRoot((dispose) => {
+          const [state, { open, close, toggle }] = getDrawerContext(target);
 
-      invokeOnLoaded(
-        () => {
-          createRoot((dispose) => {
-            const [state, { open, close, toggle }] = getDrawerContext(target);
-
-            switch (on) {
-              case "enter": {
-                let unsubscribe = null;
-                if (action === "toggle") {
-                  unsubscribe = observeElementInViewport(element, open, close);
-                }
-
-                if (unsubscribe) onCleanup(unsubscribe);
-                break;
-              }
-              case "exit": {
-                let unsubscribe = null;
-                if (action === "toggle") {
-                  unsubscribe = observeElementInViewport(element, close, open);
-                }
-
-                if (unsubscribe) onCleanup(unsubscribe);
-                break;
+          switch (on) {
+            case "enter": {
+              let unsubscribe = null;
+              if (action === "toggle") {
+                unsubscribe = observeElementInViewport(element, open, close);
               }
 
-              default: {
-                element.addEventListener(
-                  on,
-                  (event) => {
-                    if (preventDefault) event.preventDefault();
-                    if (state.isAnimating) return;
-                    switch (action) {
-                      case "close":
-                        close();
-                        break;
-                      case "open":
-                        open();
-                        break;
-                      case "toggle":
-                        toggle();
-                        break;
-                    }
-                  },
-                  { signal: controller.signal },
-                );
-                break;
+              if (unsubscribe) onCleanup(unsubscribe);
+              break;
+            }
+            case "exit": {
+              let unsubscribe = null;
+              if (action === "toggle") {
+                unsubscribe = observeElementInViewport(element, close, open);
               }
+
+              if (unsubscribe) onCleanup(unsubscribe);
+              break;
             }
 
-            createEffect(() => {
-              element.setAttribute("is-open", `${state.isOpen}`);
-              element.setAttribute("is-animating", `${state.isAnimating}`);
-            });
+            default: {
+              element.addEventListener(
+                on,
+                (event) => {
+                  if (preventDefault) event.preventDefault();
+                  if (state.isAnimating) return;
+                  switch (action) {
+                    case "close":
+                      close();
+                      break;
+                    case "open":
+                      open();
+                      break;
+                    case "toggle":
+                      toggle();
+                      break;
+                  }
+                },
+                { signal: controller.signal },
+              );
+              break;
+            }
+          }
 
-            controller.signal.addEventListener("abort", dispose);
+          createEffect(() => {
+            element.setAttribute("is-open", `${state.isOpen}`);
+            element.setAttribute("is-animating", `${state.isAnimating}`);
           });
-        },
-        { signal: controller.signal },
-      );
 
-      return onCleanup(() => {
-        controller.abort();
-      });
-    } catch (error) {
-      console.error(error);
-    }
+          controller.signal.addEventListener("abort", dispose);
+        });
+      },
+      { signal: controller.signal },
+    );
+
+    return onCleanup(() => {
+      controller.abort();
+    });
   });
 };
