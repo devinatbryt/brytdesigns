@@ -88,8 +88,8 @@ export const Component: CorrectComponentType<ModalContextProps> = (
         isAnimating: state.isAnimating,
         shouldTrapFocus: restProps.shouldTrapFocus,
       }),
-      ({ isOpen, isAnimating }) => {
-        if (isOpen && !isAnimating)
+      ({ isOpen, isAnimating, shouldTrapFocus }) => {
+        if (isOpen && !isAnimating && shouldTrapFocus)
           return disableBodyScroll(element, {
             allowTouchMove: (el: EventTarget) => {
               if (el instanceof HTMLElement) {

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.30
+
+### Patch Changes
+
+- Disable scroll only if we're trapping the user's focus
+
 ## 1.0.29
 
 ### Patch Changes

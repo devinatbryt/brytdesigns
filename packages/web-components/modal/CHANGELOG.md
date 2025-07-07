@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-modal
 
+## 1.0.12
+
+### Patch Changes
+
+- Disable scroll only if we're trapping the user's focus
+
 ## 1.0.11
 
 ### Patch Changes

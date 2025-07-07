@@ -94,9 +94,10 @@ export const Component: CorrectComponentType<DrawerContextProps> = (
       () => ({
         isOpen: state.isOpen,
         isAnimating: state.isAnimating,
+        shouldTrapFocus: props.shouldTrapFocus,
       }),
-      ({ isOpen, isAnimating }) => {
-        if (isOpen && !isAnimating)
+      ({ isOpen, isAnimating, shouldTrapFocus }) => {
+        if (isOpen && !isAnimating && shouldTrapFocus)
           return disableBodyScroll(element, {
             allowTouchMove: (el: EventTarget) => {
               if (el instanceof HTMLElement) {
