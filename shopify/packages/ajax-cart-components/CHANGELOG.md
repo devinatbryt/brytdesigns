@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.1.31
+
+### Patch Changes
+
+- @brytdesigns/shopify-ajax-cart@1.0.31
+
 ## 1.1.30
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-ajax-cart",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "Reactive state management solution for the Ajax Cart API library",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

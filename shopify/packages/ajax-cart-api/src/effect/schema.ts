@@ -39,12 +39,12 @@ export const BaseAttributesArray = Schema.transform(
 );
 
 const BasePrivateAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
-  decode: Record.filter((value, key) => key.startsWith("_")),
+  decode: Record.filter((_, key) => key.startsWith("_")),
   encode: identity,
 });
 
 const BasePublicAttributes = Schema.transform(BaseAttributes, BaseAttributes, {
-  decode: Record.filter((value, key) => !key.startsWith("_")),
+  decode: Record.filter((_, key) => !key.startsWith("_")),
   encode: identity,
 });
 
@@ -135,11 +135,11 @@ export const CurrencyCode = Schema.String;
 
 export type Image = Schema.Schema.Type<typeof Image>;
 export const Image = Schema.Struct({
-  aspect_ratio: Schema.Number,
-  alt: Schema.String,
-  height: Schema.Number,
-  url: Schema.String,
-  width: Schema.Number,
+  aspect_ratio: Schema.NullOr(Schema.Number),
+  alt: Schema.NullOr(Schema.String),
+  height: Schema.NullOr(Schema.Number),
+  url: Schema.NullOr(Schema.String),
+  width: Schema.NullOr(Schema.Number),
 });
 
 export type OptionWithValue = Schema.Schema.Type<typeof OptionWithValue>;
@@ -270,7 +270,7 @@ const BaseLineItem = Schema.Struct({
   final_line_price: Schema.Number,
   final_price: Schema.Number,
   url: Schema.String,
-  featured_image: Schema.optional(Image),
+  featured_image: Image,
   image: Schema.String,
   handle: Schema.String,
   requires_shipping: Schema.Boolean,
