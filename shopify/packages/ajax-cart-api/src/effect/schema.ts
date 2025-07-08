@@ -271,7 +271,7 @@ const BaseLineItem = Schema.Struct({
   final_price: Schema.Number,
   url: Schema.String,
   featured_image: Image,
-  image: Schema.String,
+  image: Schema.NullOr(Schema.String),
   handle: Schema.String,
   requires_shipping: Schema.Boolean,
   product_type: Schema.NullOr(Schema.String),
