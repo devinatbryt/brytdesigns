@@ -103,17 +103,19 @@ const AjaxCart = mergeProps(Cart.query, {
   subscribe,
 });
 
-const oldFetch = window.fetch;
+const existingFetch = window.fetch;
 
-// Override any mutation based fetch calls to the cart to ensure our cart state is always up to date.
-window.fetch = async function (...args: Parameters<typeof fetch>) {
+window.fetch = async function (
+  ...args: Parameters<typeof fetch>
+): Promise<Response> {
   let [input, options] = args;
   let route: string;
+
+  // Determine route string
   if (input instanceof Request) route = input.url;
   else if (input instanceof URL) route = input.toString();
   else if (typeof input === "string") route = input;
   else route = "";
-  if (!route.startsWith("/cart/")) return oldFetch(...args);
 
   if (input instanceof Request && !options) {
     options = {
@@ -121,15 +123,22 @@ window.fetch = async function (...args: Parameters<typeof fetch>) {
     };
   }
 
-  if (
+  const shouldTrack =
+    route.startsWith("/cart/") &&
     options &&
     options.headers &&
-    "x-sdk-variant" in options.headers &&
-    options.headers["x-sdk-variant"] === "brytdesigns"
-  )
-    return oldFetch(...args);
-  Cart.cancel();
-  return oldFetch(...args).finally(() => Cart.invalidate());
+    //@ts-expect-error
+    options.headers["x-sdk-variant"] &&
+    //@ts-expect-error
+    options.headers["x-sdk-variant"] === "brytdesigns";
+
+  if (shouldTrack) Cart.cancel();
+
+  const result = existingFetch.apply(this, args);
+
+  return result.finally(() => {
+    if (shouldTrack) Cart.invalidate();
+  });
 };
 
 declare global {

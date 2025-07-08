@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.29
+
+### Patch Changes
+
+- Different attempt at patching global fetch
+
 ## 1.0.28
 
 ### Patch Changes
