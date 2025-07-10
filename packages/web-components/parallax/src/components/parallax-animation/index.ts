@@ -1,5 +1,12 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
-import { onCleanup, createEffect } from "solid-js";
+import {
+  onCleanup,
+  createEffect,
+  createMemo,
+  splitProps,
+  mergeProps,
+} from "solid-js";
+import { createStore } from "solid-js/store";
 import {
   motionValue,
   transformValue,
@@ -10,27 +17,42 @@ import {
 } from "motion";
 
 import { useParallaxStickyLayer } from "../../hooks/index.js";
+import { getActiveBreakpoints, getLastTruthyIndex } from "../../utils.js";
 
-type ParallaxContainerProps = {
-  range: number[];
-  y: Array<string | number> | null;
-  x: Array<string | number> | null;
-  scale: Array<string | number> | null;
-  rotate: Array<string | number> | null;
-  opacity: Array<string | number> | null;
-  backgroundColor: string[] | null;
-  borderRadius: Array<string | number> | null;
-  top: Array<string | number> | null;
-  left: Array<string | number> | null;
-  right: Array<string | number> | null;
-  bottom: Array<string | number> | null;
-  width: Array<string | number> | null;
-  height: Array<string | number> | null;
+type AnimatableArray = Array<string | number> | null;
+
+type Props = {
+  breakpoints: string[];
+  range: number[] | number[][];
+  y: AnimatableArray | AnimatableArray[];
+  x: AnimatableArray | AnimatableArray[];
+  scale: AnimatableArray | AnimatableArray[];
+  rotate: AnimatableArray | AnimatableArray[];
+  opacity: AnimatableArray | AnimatableArray[];
+  backgroundColor: AnimatableArray | AnimatableArray[];
+  borderRadius: AnimatableArray | AnimatableArray[];
 };
+
+type ActiveProps = {
+  range: number[];
+  y: AnimatableArray;
+  x: AnimatableArray;
+  scale: AnimatableArray;
+  rotate: AnimatableArray;
+  opacity: AnimatableArray;
+  backgroundColor: AnimatableArray;
+  borderRadius: AnimatableArray;
+};
+
+function keysFromObject<T extends object>(object: T): (keyof T)[] {
+  return Object.keys(object) as (keyof T)[];
+}
 
 export const Name = `parallax-animation`;
 
 export const PROPS = {
+  breakpoints: [""],
+  range: [0, 1],
   y: null,
   x: null,
   scale: null,
@@ -39,12 +61,6 @@ export const PROPS = {
   color: null,
   backgroundColor: null,
   borderRadius: null,
-  top: null,
-  left: null,
-  bottom: null,
-  right: null,
-  width: null,
-  height: null,
 };
 
 const PROP_DEFAULTS = {
@@ -56,22 +72,35 @@ const PROP_DEFAULTS = {
   color: null,
   backgroundColor: null,
   borderRadius: null,
-  top: null,
-  left: null,
-  bottom: null,
-  right: null,
-  width: null,
-  height: null,
 };
 
 const KEYS = Object.keys(PROPS);
 
-export const Component: CorrectComponentType<ParallaxContainerProps> = (
-  props,
-  { element },
-) => {
-  const [progress, { animate }] = useParallaxStickyLayer(element);
+const isNestedAnimatableArray = (
+  values: AnimatableArray | AnimatableArray[],
+): values is AnimatableArray[] => {
+  return (
+    Array.isArray(values) && (Array.isArray(values[0]) || values[0] === null)
+  );
+};
 
+const isAnimatableArray = (
+  values: AnimatableArray | AnimatableArray[],
+): values is AnimatableArray => {
+  return Array.isArray(values) && !Array.isArray(values[0]);
+};
+
+const flattenAnimatableArray = (
+  value: AnimatableArray | AnimatableArray[],
+  index: number = 0,
+) => {
+  if (isNestedAnimatableArray(value)) {
+    return value[index]!;
+  }
+  return value;
+};
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (
     Object.keys(props).some(
       (key) => KEYS.includes(key) && !Array.isArray(Reflect.get(props, key)),
@@ -98,6 +127,66 @@ export const Component: CorrectComponentType<ParallaxContainerProps> = (
       `\nparallax-animate: Please fix the following issues:\n${messages.join("\n")}`,
     );
 
+  const [progress, { animate }] = useParallaxStickyLayer(element);
+
+  const [activeBreakpoints, setActiveBreakpoints] = createStore<boolean[]>(
+    getActiveBreakpoints(props.breakpoints),
+  );
+  const activeBreakpointIndex = createMemo(() =>
+    getLastTruthyIndex(activeBreakpoints),
+  );
+
+  const [_, importantProps] = splitProps(props, ["breakpoints"]);
+  const animateableProps = mergeProps(importantProps, {});
+
+  const activeProps = createMemo<ActiveProps>(() => {
+    const index = activeBreakpointIndex();
+
+    if (index === -1) {
+      const { breakpoints, ...active } = PROPS;
+      return active;
+    }
+
+    const keys = keysFromObject(animateableProps);
+
+    const active = keys.reduce((active, key) => {
+      const value = animateableProps[key];
+      if (isNestedAnimatableArray(value)) {
+        const flattenedValue = flattenAnimatableArray(value, index);
+        return {
+          ...active,
+          [key]: flattenedValue,
+        };
+      }
+      return {
+        ...active,
+        [key]: value,
+      };
+    }, {} as ActiveProps);
+
+    return active;
+  });
+
+  createEffect(() => {
+    const breakpoints = props.breakpoints;
+    const controller = new AbortController();
+
+    for (let i = 0; i < breakpoints.length; i++) {
+      const query = breakpoints[i];
+      if (!query) continue;
+      const mediaQuery = window.matchMedia(query);
+      mediaQuery.addEventListener(
+        "change",
+        (e) => setActiveBreakpoints(i, e.matches),
+        { signal: controller.signal },
+      );
+    }
+
+    return onCleanup(() => {
+      controller.abort();
+    });
+  });
+
   element.style.willChange = "transform";
   if (
     window.getComputedStyle(element).getPropertyValue("display") === "inline"
@@ -106,10 +195,8 @@ export const Component: CorrectComponentType<ParallaxContainerProps> = (
   }
 
   createEffect(() => {
-    // Subscribe to all changes
-    Object.values(props);
-    const range = props.range;
-
+    const active = activeProps();
+    const { range, ...props } = active;
     const valueSubscribers: VoidFunction[] = [];
 
     const progressValue = Object.keys(PROP_DEFAULTS).reduce(

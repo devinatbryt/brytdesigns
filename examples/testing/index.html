@@ -8,7 +8,16 @@
   </head>
   <body>
     <div id="app">
-      <keen-slider> </keen-slider>
+      <parallax-container max-pages="10">
+        <parallax-sticky-layer start="1" end="10">
+          <parallax-animation
+            breakpoints='["", "(width < 400px)"]'
+            range="[0,1]"
+            x='[null,["0%", "100%"]]'
+            opacity="[0,1]"
+          ></parallax-animation>
+        </parallax-sticky-layer>
+      </parallax-container>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

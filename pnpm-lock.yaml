@@ -29,6 +29,9 @@ importers:
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../../packages/web-components/keen-slider
+      '@brytdesigns/web-component-parallax':
+        specifier: workspace:*
+        version: link:../../packages/web-components/parallax
       typescript:
         specifier: ~5.8.3
         version: 5.8.3

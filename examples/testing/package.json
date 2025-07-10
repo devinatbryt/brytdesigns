@@ -1,7 +1,7 @@
 {
   "name": "@example/testing",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,7 @@
   "devDependencies": {
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
-    "@brytdesigns/web-component-keen-slider": "workspace:*"
+    "@brytdesigns/web-component-keen-slider": "workspace:*",
+    "@brytdesigns/web-component-parallax": "workspace:*"
   }
 }

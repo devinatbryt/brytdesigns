@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.1.0
+
+### Minor Changes
+
+- Parallax web component now supports media selectors!
+
 ## 1.0.4
 
 ### Patch Changes

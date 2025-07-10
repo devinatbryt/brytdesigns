@@ -28,10 +28,7 @@ customShadowlessElement(
 
 customShadowlessElement(
   ParallaxAnimation.Name,
-  {
-    range: [0, 1],
-    ...ParallaxAnimation.PROPS,
-  },
+  ParallaxAnimation.PROPS,
   correctElementType(ParallaxAnimation.Component),
 );
 
