@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, on, onCleanup, splitProps } from "solid-js";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock-upgrade";

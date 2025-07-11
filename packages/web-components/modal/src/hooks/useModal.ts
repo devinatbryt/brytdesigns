@@ -14,14 +14,15 @@ import {
   onCleanup,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import {
-  toHyphenated,
-  getContextFromProvider,
-} from "@brytdesigns/web-component-utils";
 
 import type { AnimationPlaybackControlsWithThen } from "motion";
 import { abortablePromise } from "@brytdesigns/web-component-core/promise";
 import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
+import {
+  toHyphenated,
+  getContextFromProvider,
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
 
 type StoreContext = {
   animationQueue: AnimationPlaybackControlsWithThen[];
@@ -132,6 +133,11 @@ export const useModal = (element: HTMLElement & ICustomElement) => {
 
   return useModalContext(context);
 };
+
+export const withModalElementContext = createWithElementContext<
+  typeof ModalContextState,
+  ModalContext
+>(ModalContextState);
 
 export const getModalContext = (element: Element) => {
   const context = getContextFromProvider<ModalContext>(

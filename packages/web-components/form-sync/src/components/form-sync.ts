@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, createMemo, on, onCleanup } from "solid-js";
 
@@ -9,13 +9,15 @@ type FormSyncProps = {
   formId: string;
 };
 
-export const FormSync: CorrectComponentType<FormSyncProps> = (
+export const Name = `form-sync`;
+
+export const Component: CorrectComponentType<FormSyncProps> = (
   props,
-  { element }
+  { element },
 ) => {
   if (!props.name && !props.formId) return;
   const form = createMemo(() =>
-    element.querySelector<HTMLFormElement>(`#${props.formId}`)
+    element.querySelector<HTMLFormElement>(`#${props.formId}`),
   );
   const UPDATE = createMemo(() => `form.update.${props.name}`);
   const RESET = createMemo(() => `form.reset.${props.name}`);
@@ -27,7 +29,7 @@ export const FormSync: CorrectComponentType<FormSyncProps> = (
           relatedTarget: form,
           changedTarget: event.target,
         },
-      })
+      }),
     );
   };
 
@@ -39,7 +41,7 @@ export const FormSync: CorrectComponentType<FormSyncProps> = (
             relatedForm: form,
             resetForm: event.target,
           },
-        })
+        }),
       );
     });
   };
@@ -76,6 +78,6 @@ export const FormSync: CorrectComponentType<FormSyncProps> = (
       onCleanup(() => {
         controller.abort("Resetting event listeners");
       });
-    })
+    }),
   );
 };

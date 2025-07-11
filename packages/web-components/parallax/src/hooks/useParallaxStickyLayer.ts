@@ -1,5 +1,4 @@
 import { onCleanup, createEffect, splitProps, mergeProps } from "solid-js";
-import { getContextFromProvider } from "@brytdesigns/web-component-utils";
 import {
   type ICustomElement,
   createContext,
@@ -16,6 +15,11 @@ import {
 } from "motion";
 import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
 import { abortablePromise } from "@brytdesigns/web-component-core/promise";
+import {
+  getContextFromProvider,
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
+
 import { useParallax } from "./useParallax";
 import { normalizeTuple, isInRange } from "../utils";
 
@@ -161,6 +165,11 @@ export const useParallaxStickyLayer = (
 
   return useParallaxStickyLayerContext(context);
 };
+
+export const withParallaxStickyLayerContext = createWithElementContext<
+  typeof ParallaxStickyLayerContextState,
+  ParallaxStickyLayerContext
+>(ParallaxStickyLayerContextState);
 
 export const getParallaxStickyLayerContext = (element: Element) => {
   const context = getContextFromProvider<ParallaxStickyLayerContext>(

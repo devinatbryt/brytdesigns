@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 import { provideParallaxContext } from "../../hooks/index.js";
 
 type ParallaxContainerProps = {

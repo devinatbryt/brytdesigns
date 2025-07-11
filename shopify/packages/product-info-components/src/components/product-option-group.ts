@@ -1,18 +1,18 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, on, onCleanup } from "solid-js";
 
 import { useProductOptions } from "../hooks/index.js";
 
-type ProductOptionGroupProps = {
+type Props = {
   position: number;
   name: string;
   inputType: "radio" | "select";
 };
 
-export const ProductOptionGroup: CorrectComponentType<
-  ProductOptionGroupProps
-> = (props, { element }) => {
+export const Name = `product-option-group`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const [context, methods] = useProductOptions(element);
 
   createEffect(

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.2.0
+
+### Minor Changes
+
+- Moved over dependency to core and introduced new primitive for using context element's state.
+
 ## 1.1.32
 
 ### Patch Changes

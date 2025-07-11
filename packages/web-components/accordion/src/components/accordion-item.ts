@@ -1,20 +1,19 @@
-import { type CorrectComponentType } from "@brytdesigns/web-component-utils";
+import { type CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { provideAccordionItemContext } from "../hooks/index.js";
 
-type AccordionItemProps = {
+type Props = {
   index: number;
   isExpanded: boolean;
   ariaExpanded: boolean;
 };
 
-export const AccordionItem: CorrectComponentType<AccordionItemProps> = (
-  props,
-  { element },
-) => {
+export const Name = `accordion-item`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (element.parentElement?.tagName !== "ACCORDION-CONTEXT")
     return console.warn(
-      "accordion-item must be an immediate child of accordion-context",
+      `${Name}: must be an immediate child of accordion-context`,
       element,
     );
 

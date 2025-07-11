@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 
 import {
   AccordionContext,
@@ -11,27 +11,27 @@ import {
 } from "./components/index.js";
 
 customShadowlessElement(
-  "accordion-context",
+  AccordionContext.Name,
   { activeIndex: -1, isAnimating: false },
-  correctElementType(AccordionContext),
+  correctElementType(AccordionContext.Component),
 );
 
 customShadowlessElement(
-  "accordion-item",
+  AccordionItem.Name,
   { index: 0, isExpanded: false, ariaExpanded: false },
-  correctElementType(AccordionItem),
+  correctElementType(AccordionItem.Component),
 );
 
 customShadowlessElement(
-  "accordion-trigger",
+  AccordionTrigger.Name,
   { preventDefault: true },
-  correctElementType(AccordionTrigger),
+  correctElementType(AccordionTrigger.Component),
 );
 
 customShadowlessElement(
-  "accordion-content",
+  AccordionContent.Name,
   { shouldScrollIntoView: false },
-  correctElementType(AccordionContent),
+  correctElementType(AccordionContent.Component),
 );
 
 export * from "./hooks/index.js";

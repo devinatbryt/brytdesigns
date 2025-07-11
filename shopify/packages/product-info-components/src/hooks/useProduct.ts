@@ -5,7 +5,10 @@ import {
   consume,
 } from "component-register";
 import { mergeProps, splitProps, untrack } from "solid-js";
-import { getContextFromProvider } from "@brytdesigns/web-component-utils";
+import {
+  getContextFromProvider,
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
 
 import type { Product } from "../types";
 
@@ -31,7 +34,7 @@ function initializeProductContext(props: CreateContextOptions) {
     )
       return;
     const newVariant = product.variants.find(
-      (variant) => variant.id.toString() === variantId.toString()
+      (variant) => variant.id.toString() === variantId.toString(),
     );
 
     if (
@@ -54,7 +57,7 @@ function initializeProductContext(props: CreateContextOptions) {
           product: newState,
         },
         bubbles: true,
-      })
+      }),
     );
   }
 
@@ -72,7 +75,7 @@ const ProductContextState = createContext(initializeProductContext);
 
 export const provideProductContext = (
   initialState: Omit<CreateContextOptions, "root">,
-  element: WalkableNode
+  element: WalkableNode,
 ): ProductContext => {
   const props = mergeProps(initialState, { root: element });
   return provide(ProductContextState, props, element);
@@ -87,7 +90,7 @@ export const useProduct = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "ProductInfoContext not found! Please ensure to wrap your custom element with product-info element."
+      "ProductInfoContext not found! Please ensure to wrap your custom element with product-info element.",
     );
   }
 
@@ -97,7 +100,12 @@ export const useProduct = (element: HTMLElement & ICustomElement) => {
 export const getProductContext = (element: Element) => {
   const context = getContextFromProvider<ProductContext>(
     ProductContextState,
-    element
+    element,
   );
   return useProductContext(context);
 };
+
+export const withProductElementContext = createWithElementContext<
+  typeof ProductContextState,
+  ProductContext
+>(ProductContextState);

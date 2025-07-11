@@ -17,7 +17,8 @@ import { createStore } from "solid-js/store";
 import {
   toHyphenated,
   getContextFromProvider,
-} from "@brytdesigns/web-component-utils";
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
 
 type StoreContext = {
   animationQueue: Promise<unknown>[];
@@ -120,6 +121,11 @@ export const useAccordion = (element: HTMLElement & ICustomElement) => {
 
   return useAccordionContext(context);
 };
+
+export const withAccordionElementContext = createWithElementContext<
+  typeof AccordionContextState,
+  AccordionContext
+>(AccordionContextState);
 
 export const getAccordionContext = (element: Element) => {
   const context = getContextFromProvider<AccordionContext>(

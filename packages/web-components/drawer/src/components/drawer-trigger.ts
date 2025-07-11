@@ -1,4 +1,4 @@
-import { type CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 import type { Action } from "../consts";
 
 import { createEffect, onCleanup } from "solid-js";

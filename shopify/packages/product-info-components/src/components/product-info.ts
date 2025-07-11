@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, createMemo, observable } from "solid-js";
 
@@ -6,22 +6,21 @@ import { provideProductContext } from "../hooks/index.js";
 
 import type { Product } from "../types.js";
 
-type ProductInfoProps = {
+type Props = {
   product?: Product;
   isProductPage?: boolean;
 };
 
-export const ProductInfo: CorrectComponentType<ProductInfoProps> = (
-  props,
-  { element },
-) => {
+export const Name = `product-info`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (!props.product)
-    return console.warn("product-info: product attribute is required");
+    return console.warn(`${Name}: product attribute is required`);
   if (!props.product.variants)
-    return console.warn("product-info: product attribute needs variants array");
+    return console.warn(`${Name}: product attribute needs variants array`);
   if (!props.product.selected_or_first_available_variant)
     return console.warn(
-      "product-info: product attribute needs selected or first available variant object",
+      `${Name}: product attribute needs selected or first available variant object`,
     );
   provideProductContext(props as any, element);
 

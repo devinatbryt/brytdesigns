@@ -1,6 +1,6 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
-import { Show, createMemo, For, type Accessor, createEffect } from "solid-js";
+import { Show, createMemo, For, type Accessor } from "solid-js";
 import html from "solid-js/html";
 
 import { useFullPropertyPath, useCartValue } from "../hooks/index.js";

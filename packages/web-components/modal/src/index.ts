@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 
 import {
   ModalTrigger,
@@ -42,4 +42,8 @@ customShadowlessElement(
   correctElementType(ModalPanel.Component),
 );
 
-export { useModal, getModalContext } from "./hooks/index.js";
+export {
+  useModal,
+  getModalContext,
+  withModalElementContext,
+} from "./hooks/index.js";

@@ -107,9 +107,9 @@ importers:
 
   packages/web-components/accordion:
     dependencies:
-      '@brytdesigns/web-component-utils':
+      '@brytdesigns/web-component-core':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../core
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -160,9 +160,6 @@ importers:
       '@brytdesigns/web-component-core':
         specifier: workspace:*
         version: link:../core
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       body-scroll-lock-upgrade:
         specifier: ^1.1.0
         version: 1.1.0
@@ -191,9 +188,9 @@ importers:
 
   packages/web-components/form-sync:
     dependencies:
-      '@brytdesigns/web-component-utils':
+      '@brytdesigns/web-component-core':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../core
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -347,9 +344,6 @@ importers:
       '@brytdesigns/web-component-core':
         specifier: workspace:*
         version: link:../core
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       body-scroll-lock-upgrade:
         specifier: ^1.1.0
         version: 1.1.0
@@ -381,9 +375,6 @@ importers:
       '@brytdesigns/web-component-core':
         specifier: workspace:*
         version: link:../core
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -487,9 +478,9 @@ importers:
       '@brytdesigns/shopify-ajax-cart':
         specifier: workspace:*
         version: link:../ajax-cart
-      '@brytdesigns/web-component-utils':
+      '@brytdesigns/web-component-core':
         specifier: workspace:*
-        version: link:../../../packages/web-components/utils
+        version: link:../../../packages/web-components/core
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -611,9 +602,9 @@ importers:
 
   shopify/packages/product-info-components:
     dependencies:
-      '@brytdesigns/web-component-utils':
+      '@brytdesigns/web-component-core':
         specifier: workspace:*
-        version: link:../../../packages/web-components/utils
+        version: link:../../../packages/web-components/core
       component-register:
         specifier: ^0.8.7
         version: 0.8.7

@@ -5,6 +5,7 @@ import {
   type ICustomElement,
 } from "component-register";
 import { splitProps } from "solid-js";
+import { createWithElementContext } from "@brytdesigns/web-component-core/utils";
 
 type WalkableNode = Parameters<typeof provide>[2];
 export type Status = "default" | "loading" | "success" | "error";
@@ -39,7 +40,7 @@ export const provideListenerStatusContext = (options: {
 };
 
 export const useListenerStatusContext = (
-  context: ListenerStatusContextType
+  context: ListenerStatusContextType,
 ) => {
   return context;
 };
@@ -49,9 +50,14 @@ export const useListenerStatus = (element: HTMLElement & ICustomElement) => {
 
   if (!context) {
     throw console.error(
-      "CartListenerContext not found! Please ensure to wrap your custom element with cart-data-listener element."
+      "CartListenerContext not found! Please ensure to wrap your custom element with cart-data-listener element.",
     );
   }
 
   return useListenerStatusContext(context);
 };
+
+export const withListenerElementStatus = createWithElementContext<
+  typeof ListenerStatusContext,
+  ListenerStatusContextType
+>(ListenerStatusContext);

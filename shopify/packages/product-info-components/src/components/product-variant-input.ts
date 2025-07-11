@@ -1,17 +1,17 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, onCleanup } from "solid-js";
 
 import { useProduct, useProductOptions } from "../hooks/index.js";
 
-type ProductVariantInputProps = {
+type Props = {
   target: string | null;
   preventDefault?: boolean;
 };
 
-export const ProductVariantInput: CorrectComponentType<
-  ProductVariantInputProps
-> = (props, { element }) => {
+export const Name = `product-variant-input`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const [productContext, productContextMethods] = useProduct(element);
   const [_, optionsMethods] = useProductOptions(element);
 
@@ -53,8 +53,7 @@ export const ProductVariantInput: CorrectComponentType<
       target = element.querySelector<HTMLInputElement>(props.target);
     if (!target)
       target = element.querySelector<HTMLInputElement>("input[name='id']");
-    if (!target)
-      return console.warn("product-variant-input: target input not found");
+    if (!target) return console.warn(`${Name}: target input not found`);
 
     const variantId =
       productContext?.product?.selected_or_first_available_variant?.id;

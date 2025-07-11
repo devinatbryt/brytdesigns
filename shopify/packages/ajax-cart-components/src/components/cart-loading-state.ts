@@ -1,9 +1,10 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { Show, createMemo } from "solid-js";
 
 import { getTemplateContent } from "../utils/index.js";
 import html from "solid-js/html";
+
 import AjaxCart from "@brytdesigns/shopify-ajax-cart";
 
 type Status = (typeof AjaxCart)["status"];
@@ -41,14 +42,14 @@ export const Component: CorrectComponentType<CartLoadingStateProps> = (
   return html`
     <${Show} when=${() => cart}>
       ${() => {
-      const state = cartState();
-      if (!state) return null;
-      if (!templates[state]) return null;
-      const children = Array.from(
-        templates[state].cloneNode(true).childNodes,
-      );
-      return children;
-    }}
+        const state = cartState();
+        if (!state) return null;
+        if (!templates[state]) return null;
+        const children = Array.from(
+          templates[state].cloneNode(true).childNodes,
+        );
+        return children;
+      }}
     <//>
   `;
 };

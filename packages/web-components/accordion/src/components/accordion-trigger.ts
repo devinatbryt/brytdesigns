@@ -1,17 +1,16 @@
-import { type CorrectComponentType } from "@brytdesigns/web-component-utils";
+import { type CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, onCleanup } from "solid-js";
 
 import { useAccordionItem } from "../hooks/index.js";
 
-type AccordionTriggerProps = {
+type Props = {
   preventDefault: boolean;
 };
 
-export const AccordionTrigger: CorrectComponentType<AccordionTriggerProps> = (
-  props,
-  { element },
-) => {
+export const Name = `accordion-trigger`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const [state, methods] = useAccordionItem(element);
 
   createEffect(() => {

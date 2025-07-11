@@ -1,1 +1,1 @@
-export * from "./form-sync.js";
+export * as FormSync from "./form-sync.js";

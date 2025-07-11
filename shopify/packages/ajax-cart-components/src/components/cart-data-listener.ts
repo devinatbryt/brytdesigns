@@ -1,6 +1,6 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
-import { createEffect, createUniqueId, on, onCleanup } from "solid-js";
+import { createEffect, on, onCleanup } from "solid-js";
 import debounce from "lodash.debounce";
 
 import {

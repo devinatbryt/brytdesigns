@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 import { getTemplateContent, type Format } from "../utils/index.js";
 
 import { Show, For, type Accessor } from "solid-js";

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-accordion
 
+## 1.1.0
+
+### Minor Changes
+
+- Moved over dependency to core and introduced new primitive for using context element's state.
+
 ## 1.0.10
 
 ### Patch Changes

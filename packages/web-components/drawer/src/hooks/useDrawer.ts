@@ -14,15 +14,15 @@ import {
   onCleanup,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import {
-  toHyphenated,
-  getContextFromProvider,
-} from "@brytdesigns/web-component-utils";
 
 import type { AnimationPlaybackControlsWithThen } from "motion";
 import { abortablePromise } from "@brytdesigns/web-component-core/promise";
 import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
-import { createWithElementContext } from "@brytdesigns/web-component-core/utils";
+import {
+  createWithElementContext,
+  toHyphenated,
+  getContextFromProvider,
+} from "@brytdesigns/web-component-core/utils";
 
 type StoreContext = {
   animationQueue: AnimationPlaybackControlsWithThen[];

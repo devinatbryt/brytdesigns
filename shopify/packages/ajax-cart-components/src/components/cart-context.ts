@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import { createEffect, on } from "solid-js";
 import { provideAjaxCartContext } from "../hooks/useAjaxCart.js";

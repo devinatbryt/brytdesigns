@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 
 import {
   ProductInfo,
@@ -12,45 +12,45 @@ import {
 } from "./components/index.js";
 
 customShadowlessElement(
-  "product-info",
+  ProductInfo.Name,
   {
     product: undefined,
     isProductPage: false,
   },
-  correctElementType(ProductInfo),
+  correctElementType(ProductInfo.Component),
 );
 
 customShadowlessElement(
-  "product-options",
+  ProductOptions.Name,
   {
     selectedOptions: [],
   },
-  correctElementType(ProductOptions),
+  correctElementType(ProductOptions.Component),
 );
 
 customShadowlessElement(
-  "product-option-group",
+  ProductOptionGroup.Name,
   {
     position: 0,
     name: "",
     inputType: "radio",
   },
-  correctElementType(ProductOptionGroup),
+  correctElementType(ProductOptionGroup.Component),
 );
 
 customShadowlessElement(
-  "product-variant-input",
+  ProductVariantInput.Name,
   {
     target: "",
     preventDefault: true,
   },
-  correctElementType(ProductVariantInput),
+  correctElementType(ProductVariantInput.Component),
 );
 
 customShadowlessElement(
-  "product-variant-render",
+  ProductVariantRender.Name,
   {},
-  correctElementType(ProductVariantRender),
+  correctElementType(ProductVariantRender.Component),
 );
 
 export {
@@ -58,4 +58,6 @@ export {
   useProductOptions,
   getProductContext,
   getProductOptionsContext,
+  withProductElementContext,
+  withProductOptionsElementContext,
 } from "./hooks/index.js";

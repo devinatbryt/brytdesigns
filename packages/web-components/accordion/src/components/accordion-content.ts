@@ -1,19 +1,15 @@
-import { type CorrectComponentType } from "@brytdesigns/web-component-utils";
+import { type CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 import type { ICustomElement } from "component-register";
-import { animate, type AnimationPlaybackControlsWithThen } from "motion";
+import { animate } from "motion";
 import { createEffect, on, onCleanup } from "solid-js";
+
+import { controlsToPromise } from "@brytdesigns/web-component-core/animation";
 
 import { useAccordion, useAccordionItem } from "../hooks/index.js";
 
-type AccordionContentProps = {
+type Props = {
   shouldScrollIntoView: boolean;
 };
-
-async function controlPromise(controls: AnimationPlaybackControlsWithThen) {
-  return new Promise((resolve) => {
-    controls.then(() => resolve(null));
-  });
-}
 
 const hideElement = (element: ICustomElement) => {
   element.style.cssText = `
@@ -50,10 +46,9 @@ const getPaddingBottom = (element: ICustomElement & HTMLElement) => {
   return paddingY;
 };
 
-export const AccordionContent: CorrectComponentType<AccordionContentProps> = (
-  props,
-  { element },
-) => {
+export const Name = `accordion-content`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const [state] = useAccordionItem(element);
   const [_, accordionMethods] = useAccordion(element);
 
@@ -132,7 +127,7 @@ export const AccordionContent: CorrectComponentType<AccordionContentProps> = (
       (isExpanded) => {
         if (!isExpanded) {
           const animation = collapse(element);
-          accordionMethods.updateAnimationQueue(controlPromise(animation));
+          accordionMethods.updateAnimationQueue(controlsToPromise(animation));
           return onCleanup(() => animation.complete());
         }
 
@@ -142,7 +137,7 @@ export const AccordionContent: CorrectComponentType<AccordionContentProps> = (
         }
 
         const animation = expand(element);
-        accordionMethods.updateAnimationQueue(controlPromise(animation));
+        accordionMethods.updateAnimationQueue(controlsToPromise(animation));
         return onCleanup(() => animation.complete());
       },
     ),

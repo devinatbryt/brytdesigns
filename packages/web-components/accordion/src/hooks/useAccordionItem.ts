@@ -8,7 +8,8 @@ import { batch, createEffect, mergeProps, splitProps, untrack } from "solid-js";
 import {
   toHyphenated,
   getContextFromProvider,
-} from "@brytdesigns/web-component-utils";
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
 import { useAccordion } from "./useAccordion.js";
 
 type CreateContextOptions = {
@@ -23,7 +24,7 @@ type WalkableNode = Parameters<typeof provide>[2];
 type AccordionItemContext = ReturnType<typeof initializeAccordionItemContext>;
 
 function initializeAccordionItemContext(props: CreateContextOptions) {
-  const [element, privateProps, stateProps] = splitProps(
+  const [element, _, stateProps] = splitProps(
     props,
     ["root"],
     ["ariaExpanded"],
@@ -133,6 +134,11 @@ export const useAccordionItem = (element: HTMLElement & ICustomElement) => {
 
   return useAccordionItemContext(context);
 };
+
+export const withAccordionItemElementContext = createWithElementContext<
+  typeof AccordionItemContextState,
+  AccordionItemContext
+>(AccordionItemContextState);
 
 export const getAccordionItemContext = (element: Element) => {
   const context = getContextFromProvider<AccordionItemContext>(

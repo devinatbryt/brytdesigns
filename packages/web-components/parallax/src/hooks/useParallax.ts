@@ -6,7 +6,10 @@ import {
   batch,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import { getContextFromProvider } from "@brytdesigns/web-component-utils";
+import {
+  getContextFromProvider,
+  createWithElementContext,
+} from "@brytdesigns/web-component-core/utils";
 import {
   type ICustomElement,
   createContext,
@@ -104,6 +107,11 @@ export const useParallax = (element: HTMLElement & ICustomElement) => {
 
   return useParallaxContext(context);
 };
+
+export const withParallaxElementContext = createWithElementContext<
+  typeof ParallaxContextState,
+  ParallaxContext
+>(ParallaxContextState);
 
 export const getParallaxContext = (element: Element) => {
   const context = getContextFromProvider<ParallaxContext>(

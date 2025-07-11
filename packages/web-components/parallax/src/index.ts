@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 
 import {
   ParallaxContainer,
@@ -37,4 +37,6 @@ export {
   getParallaxContext,
   useParallaxStickyLayer,
   getParallaxStickyLayerContext,
+  withParallaxElementContext,
+  withParallaxStickyLayerContext,
 } from "./hooks/index.js";

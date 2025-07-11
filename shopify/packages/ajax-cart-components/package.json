@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-ajax-cart-components",
-  "version": "1.1.32",
+  "version": "1.2.0",
   "description": "Headless web components for the Ajax Cart Library",
   "main": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
@@ -21,7 +21,7 @@
   "keywords": [],
   "dependencies": {
     "@brytdesigns/shopify-ajax-cart": "workspace:*",
-    "@brytdesigns/web-component-utils": "workspace:*",
+    "@brytdesigns/web-component-core": "workspace:*",
     "component-register": "^0.8.7",
     "lodash.debounce": "^4.0.8",
     "solid-js": "^1.9.7"

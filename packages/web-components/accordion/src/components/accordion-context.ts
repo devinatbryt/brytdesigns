@@ -1,22 +1,21 @@
 import {
   toHyphenated,
   type CorrectComponentType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 
 import {
   provideAccordionContext,
   useAccordionContext,
 } from "../hooks/index.js";
 
-type AccordionContextProps = {
+type Props = {
   activeIndex: number;
   isAnimating: boolean;
 };
 
-export const AccordionContext: CorrectComponentType<AccordionContextProps> = (
-  props,
-  { element },
-) => {
+export const Name = `accordion-context`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const context = provideAccordionContext(props, element);
   const [_, methods] = useAccordionContext(context);
   const children = Array.from(element.children) as HTMLElement[];

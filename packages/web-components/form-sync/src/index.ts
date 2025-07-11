@@ -1,14 +1,14 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 import { FormSync } from "./components/index.js";
 
 customShadowlessElement(
-  "form-sync",
+  FormSync.Name,
   {
     name: "",
     formId: "",
   },
-  correctElementType(FormSync)
+  correctElementType(FormSync.Component),
 );
