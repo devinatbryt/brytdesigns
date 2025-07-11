@@ -18,34 +18,46 @@ export function createWithElementContext<
   ContextState = null,
 >(context: Context) {
   return function <D extends any>(
-    selector: string | Accessor<string>,
+    target: string | Accessor<string> | Accessor<() => Element>,
     dependencies: Accessor<D> = () => null as D,
     cb: (context: ContextState, dependencies: D) => void | (() => void),
   ) {
     createEffect(
       on(
         () => {
-          const s: string =
-            typeof selector === "string" ? selector : selector();
+          const t = typeof target === "string" ? target : target();
           return {
-            selector: s,
+            target: t,
             dependencies: dependencies(),
           };
         },
-        ({ selector, dependencies }) => {
+        ({ target: _target, dependencies }) => {
           const controller = new AbortController();
           invokeOnLoaded(
             () => {
-              let target: Element | null = null;
+              let target: Element | null =
+                _target instanceof Element ? _target : null;
               try {
-                target = document.querySelector(selector);
+                if (typeof _target === "string")
+                  target = document.querySelector(_target);
+                else if (typeof _target === "function") target = _target();
               } catch (e) {
                 e;
               }
-              if (!target)
+              if (!target && typeof _target === "string")
                 return console.warn(`Target element not found!`, {
-                  target: selector,
+                  target: _target,
                 });
+              else if (!target)
+                return console.warn(`Target element not found!`);
+
+              target.addEventListener(
+                "bryt-designs:element-destroyed",
+                () => {
+                  controller.abort("Context element destroyed");
+                },
+                { once: true },
+              );
 
               createRoot((dispose) => {
                 const c = getContextFromProvider(context, target);
@@ -66,7 +78,7 @@ export function createWithElementContext<
 
           // abort controller when dependencies change
           onCleanup(() => {
-            controller.abort();
+            controller.abort("Dependencies changed!");
           });
         },
       ),

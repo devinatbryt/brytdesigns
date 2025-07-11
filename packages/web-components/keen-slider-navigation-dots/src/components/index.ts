@@ -1,1 +1,1 @@
-export * from "./keen-slider-navigation-dots.js";
+export * as KeenSliderNavigationDots from "./keen-slider-navigation-dots.js";

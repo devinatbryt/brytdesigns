@@ -1,6 +1,5 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { jsDelivrImportsPlugin } from "@repo/js-delivr-imports-plugin";
 import { generateDtsBundle } from "dts-bundle-generator";
 import { defineConfig } from "tsup";
 

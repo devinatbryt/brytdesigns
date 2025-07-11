@@ -1,7 +1,12 @@
 import "./style.css";
-// import "@brytdesigns/web-component-keen-slider";
-// import "@brytdesigns/web-component-keen-slider/styles.css";
-import "@brytdesigns/web-component-parallax";
+import "@brytdesigns/web-component-keen-slider";
+import "@brytdesigns/web-component-keen-slider/styles.css";
+import "@brytdesigns/web-component-keen-slider-auto-switch";
+import "@brytdesigns/web-component-keen-slider-navigation-arrows";
+import "@brytdesigns/web-component-keen-slider-navigation-dots";
+import "@brytdesigns/web-component-keen-slider-scrollbar";
+import "@brytdesigns/web-component-keen-slider-scrollbar/styles.css";
+// import "@brytdesigns/web-component-parallax";
 import "@brytdesigns/web-component-drawer";
 
 // Ensure drawer trigger can access the drawer context even if it's added later

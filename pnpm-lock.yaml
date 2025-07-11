@@ -32,6 +32,18 @@ importers:
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../../packages/web-components/keen-slider
+      '@brytdesigns/web-component-keen-slider-auto-switch':
+        specifier: workspace:*
+        version: link:../../packages/web-components/keen-slider-auto-switch
+      '@brytdesigns/web-component-keen-slider-navigation-arrows':
+        specifier: workspace:*
+        version: link:../../packages/web-components/keen-slider-navigation-arrows
+      '@brytdesigns/web-component-keen-slider-navigation-dots':
+        specifier: workspace:*
+        version: link:../../packages/web-components/keen-slider-navigation-dots
+      '@brytdesigns/web-component-keen-slider-scrollbar':
+        specifier: workspace:*
+        version: link:../../packages/web-components/keen-slider-scrollbar
       '@brytdesigns/web-component-parallax':
         specifier: workspace:*
         version: link:../../packages/web-components/parallax
@@ -210,9 +222,9 @@ importers:
 
   packages/web-components/keen-slider:
     dependencies:
-      '@brytdesigns/web-component-utils':
+      '@brytdesigns/web-component-core':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../core
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -235,12 +247,12 @@ importers:
 
   packages/web-components/keen-slider-auto-switch:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../keen-slider
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -260,12 +272,12 @@ importers:
 
   packages/web-components/keen-slider-navigation-arrows:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../keen-slider
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -285,12 +297,12 @@ importers:
 
   packages/web-components/keen-slider-navigation-dots:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../keen-slider
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       component-register:
         specifier: ^0.8.7
         version: 0.8.7
@@ -310,12 +322,12 @@ importers:
 
   packages/web-components/keen-slider-scrollbar:
     dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../keen-slider
-      '@brytdesigns/web-component-utils':
-        specifier: workspace:*
-        version: link:../utils
       '@neodrag/vanilla':
         specifier: ^2.3.0
         version: 2.3.0

@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 import { KeenSliderAutoSwitch } from "./components/index.js";
 
 customShadowlessElement(

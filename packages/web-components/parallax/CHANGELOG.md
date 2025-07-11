@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.1.2
+
 ## 1.2.1
 
 ### Patch Changes

@@ -14,9 +14,11 @@ import {
   splitProps,
 } from "solid-js";
 import {
+  createWithElementContext,
   getContextFromProvider,
   invokeOnLoaded,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
+
 import KeenSlider, {
   type KeenSliderInstance,
   type KeenSliderOptions,
@@ -70,6 +72,7 @@ function initializeKeenSliderContext(props: CreateContextOptions) {
 
     onCleanup(() => {
       slider.destroy();
+      privateProps.root.setAttribute("data-initialized", "false");
       if (m) m.disconnect();
     });
 
@@ -188,3 +191,8 @@ export function addPlugin({ target, plugin, controller }: AddPluginOptions) {
     },
   );
 }
+
+export const withKeenSliderElementContext = createWithElementContext<
+  typeof KeenSliderContextState,
+  KeenSliderContext
+>(KeenSliderContextState);

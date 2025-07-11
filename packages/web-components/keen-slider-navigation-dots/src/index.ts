@@ -1,16 +1,16 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 import { KeenSliderNavigationDots } from "./components/index.js";
 import { initializeClasses } from "./utils.js";
 
 customShadowlessElement(
-  "keen-slider-navigation-dots",
+  KeenSliderNavigationDots.Name,
   {
     target: "",
   },
-  correctElementType(KeenSliderNavigationDots),
+  correctElementType(KeenSliderNavigationDots.Component),
   //@ts-ignore
-  initializeClasses
+  initializeClasses,
 );

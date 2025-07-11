@@ -1,16 +1,9 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import html from "solid-js/html";
+import { createEffect, createSignal, on, onCleanup, Show } from "solid-js";
 import {
-  createEffect,
-  createMemo,
-  createSignal,
-  on,
-  onCleanup,
-  Show,
-} from "solid-js";
-import {
-  addPlugin,
+  withKeenSliderElementContext,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
@@ -37,23 +30,6 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     return console.warn(
       `${Name}: Needs a proper target in order to properly extend a keen slider.`,
     );
-
-  const target = createMemo(() => {
-    let targetEl: HTMLElement | null = element;
-    if (props.target) targetEl = document.querySelector(props.target);
-    if (!targetEl)
-      return console.warn(
-        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
-      );
-    if (targetEl.tagName !== "KEEN-SLIDER")
-      targetEl = targetEl.querySelector("keen-slider");
-    if (!targetEl)
-      return console.warn(
-        `${Name}: Could not find the target element. Make sure it exists and is a keen-slider element.`,
-      );
-
-    return targetEl;
-  });
 
   const [slider, setSlider] = createSignal<KeenSliderInstance>();
   const leftArrowTmpl = element.querySelector<HTMLTemplateElement>(
@@ -117,37 +93,25 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     }),
   );
 
-  createEffect(() => {
-    const t = target();
-    if (!t) return;
-    if (props.debug)
-      console.log(`${Name}: Target found, adding plugin`, t, element);
-
-    const controller = new AbortController();
-
-    function plugin(slider: KeenSliderInstance) {
-      if (props.debug)
-        console.log(
-          `${Name}: Keen slider navigation arrows plugin added`,
-          slider,
-          element,
-        );
-      setSlider(slider);
-    }
-
-    addPlugin({
-      target: t,
-      plugin,
-      controller,
-    });
-
-    return onCleanup(() => {
-      if (props.debug)
-        console.log(`${Name}: Something changed, cleaning up`, element);
-      controller.abort();
-      setSlider(undefined);
-    });
-  });
+  withKeenSliderElementContext(
+    () => {
+      const selector = props.target;
+      return () => {
+        let targetEl: Element | null = element;
+        if (props.target) targetEl = document.querySelector(selector);
+        if (targetEl?.tagName !== "KEEN-SLIDER")
+          targetEl = targetEl!.querySelector("keen-slider");
+        return targetEl!;
+      };
+    },
+    () => null,
+    ([_, { addPlugin }]) => {
+      addPlugin((slider) => {
+        setSlider(slider);
+        slider.on("destroyed", () => setSlider());
+      });
+    },
+  );
 
   function handlePrev(event: Event) {
     event.preventDefault();
@@ -166,6 +130,8 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     if (!s) return;
     s.next();
   }
+
+  element.replaceChildren(...[]);
 
   return html`
     <button

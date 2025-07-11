@@ -1,4 +1,4 @@
-import type { CorrectComponentType } from "@brytdesigns/web-component-utils";
+import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 
 import html from "solid-js/html";
 import {
@@ -11,9 +11,10 @@ import {
   Show,
   For,
   type Accessor,
+  batch,
 } from "solid-js";
 import {
-  addPlugin,
+  withKeenSliderElementContext,
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 
@@ -25,33 +26,17 @@ import {
   srOnly,
 } from "../utils.js";
 
-type KeenSliderNavigationDotsContextProps = {
+type Props = {
   target: string;
 };
 
-export const KeenSliderNavigationDots: CorrectComponentType<
-  KeenSliderNavigationDotsContextProps
-> = (props, { element }) => {
+export const Name = `keen-slider-navigation-dots`;
+
+export const Component: CorrectComponentType<Props> = (props, { element }) => {
   if (!props.target)
     return console.warn(
-      "keen-slider-navigation-dots: Needs a proper target in order to properly extend a keen slider.",
+      `${Name}: Needs a proper target in order to properly extend a keen slider.`,
     );
-
-  const target = createMemo(() => {
-    let targetEl: HTMLElement | null = element;
-    if (props.target) targetEl = document.querySelector(props.target);
-    if (!targetEl)
-      return console.warn(
-        "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element.",
-      );
-    if (targetEl.tagName !== "KEEN-SLIDER")
-      targetEl = targetEl.querySelector("keen-slider");
-    if (!targetEl)
-      return console.warn(
-        "keen-slider-navigation-dots: Could not find the target element. Make sure it exists and is a keen-slider element.",
-      );
-    return targetEl;
-  });
 
   const [slider, setSlider] = createSignal<KeenSliderInstance>();
 
@@ -96,30 +81,35 @@ export const KeenSliderNavigationDots: CorrectComponentType<
     }),
   );
 
-  createEffect(() => {
-    const t = target();
-    if (!t) return;
+  withKeenSliderElementContext(
+    () => {
+      const selector = props.target;
+      return () => {
+        let targetEl: Element | null = element;
+        if (props.target) targetEl = document.querySelector(selector);
+        if (targetEl?.tagName !== "KEEN-SLIDER")
+          targetEl = targetEl!.querySelector("keen-slider");
+        return targetEl!;
+      };
+    },
+    () => null,
+    ([_, { addPlugin }]) => {
+      addPlugin((slider) => {
+        setSlider(slider);
 
-    const controller = new AbortController();
+        slider.on("created", function (slider) {
+          setMaxIdx(slider.track.details.maxIdx);
+        });
 
-    function plugin(slider: KeenSliderInstance) {
-      setSlider(slider);
-      slider.on("created", function (slider) {
-        setMaxIdx(slider.track.details.maxIdx);
+        slider.on("destroyed", () =>
+          batch(() => {
+            setMaxIdx(0);
+            setSlider();
+          }),
+        );
       });
-    }
-
-    addPlugin({
-      target: t,
-      plugin,
-      controller,
-    });
-
-    return onCleanup(() => {
-      controller.abort();
-      setSlider(undefined);
-    });
-  });
+    },
+  );
 
   createEffect(
     on(maxSlides, (maxSlides) => {

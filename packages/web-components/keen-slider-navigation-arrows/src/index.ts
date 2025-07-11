@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 import { KeenSliderNavigationArrows } from "./components/index.js";
 import { initializeClasses } from "./utils.js";
 

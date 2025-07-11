@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-auto-switch",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Keen slider auto switch plugin web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
@@ -24,7 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@brytdesigns/web-component-keen-slider": "workspace:*",
-    "@brytdesigns/web-component-utils": "workspace:*",
+    "@brytdesigns/web-component-core": "workspace:*",
     "component-register": "^0.8.7",
     "solid-element": "^1.9.1",
     "solid-js": "^1.9.7"

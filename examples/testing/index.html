@@ -19,6 +19,40 @@
       <!--   </parallax-sticky-layer> -->
       <!-- </parallax-container> -->
 
+      <div id="wow">
+        <keen-slider-auto-switch
+          duration="2000"
+          target="#wow"
+        ></keen-slider-auto-switch>
+        <keen-slider
+          config='{ "loop": true }'
+          class="keen-slider"
+          refresh-on-children-change="true"
+        >
+          <div class="keen-slider__slide">
+            <h1>Slide 1</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 2</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 3</h1>
+          </div>
+        </keen-slider>
+        <keen-slider-navigation-arrows target="#wow">
+          <template prev-arrow>
+            <p>Prev</p>
+          </template>
+          <template next-arrow>
+            <p>Next</p>
+          </template>
+        </keen-slider-navigation-arrows>
+        <keen-slider-navigation-dots
+          target="#wow"
+        ></keen-slider-navigation-dots>
+        <keen-slider-scrollbar target="#wow"></keen-slider-scrollbar>
+      </div>
+
       <drawer-trigger target="#testDrawer" on="click" action="open">
         <button>Click me now!</button>
       </drawer-trigger>

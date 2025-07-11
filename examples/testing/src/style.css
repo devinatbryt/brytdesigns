@@ -12,3 +12,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.keen-dots {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.keen-dot__button {
+  min-width: 16px;
+  min-height: 16px;
+  aspect-ratio: 1/1;
+}

@@ -1,7 +1,7 @@
 {
   "name": "@example/testing",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,10 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.0",
     "@brytdesigns/web-component-keen-slider": "workspace:*",
+    "@brytdesigns/web-component-keen-slider-auto-switch": "workspace:*",
+    "@brytdesigns/web-component-keen-slider-navigation-arrows": "workspace:*",
+    "@brytdesigns/web-component-keen-slider-navigation-dots": "workspace:*",
+    "@brytdesigns/web-component-keen-slider-scrollbar": "workspace:*",
     "@brytdesigns/web-component-parallax": "workspace:*",
     "@brytdesigns/web-component-drawer": "workspace:*"
   }

@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.1.2
+
+### Patch Changes
+
+- Minor bug fix with context cleanup and upgraded keen slider components to new core library
+
 ## 1.1.1
 
 ### Patch Changes

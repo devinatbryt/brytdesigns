@@ -1,1 +1,1 @@
-export * from "./keen-slider.js";
+export * as KeenSlider from "./keen-slider.js";

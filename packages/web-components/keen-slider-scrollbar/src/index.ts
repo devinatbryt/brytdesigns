@@ -1,15 +1,15 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
-import { KeenSliderScrollbar } from "./components/keen-slider-scrollbar.js";
+} from "@brytdesigns/web-component-core/utils";
+import { KeenSliderScrollbar } from "./components/index.js";
 
 customShadowlessElement(
-  "keen-slider-scrollbar",
+  KeenSliderScrollbar.Name,
   {
     target: "",
     isHidden: true,
     isVertical: false,
   },
-  correctElementType(KeenSliderScrollbar)
+  correctElementType(KeenSliderScrollbar.Component),
 );

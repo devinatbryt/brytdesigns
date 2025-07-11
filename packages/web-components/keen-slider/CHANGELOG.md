@@ -1,5 +1,16 @@
 # @brytdesigns/web-component-keen-slider
 
+## 1.1.0
+
+### Minor Changes
+
+- Minor bug fix with context cleanup and upgraded keen slider components to new core library
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.1.2
+
 ## 1.0.14
 
 ### Patch Changes

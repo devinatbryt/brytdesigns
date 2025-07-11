@@ -1,7 +1,7 @@
 import {
   customShadowlessElement,
   correctElementType,
-} from "@brytdesigns/web-component-utils";
+} from "@brytdesigns/web-component-core/utils";
 import { KeenSlider } from "./components/index.js";
 import { initializeSliderClasses } from "./utils.js";
 
@@ -15,16 +15,17 @@ export {
   useKeenSlider,
   addPlugin,
   getKeenSliderContext,
+  withKeenSliderElementContext,
 } from "./hooks/index.js";
 
 customShadowlessElement(
-  "keen-slider",
+  KeenSlider.Name,
   {
     // @ts-ignore
     config: {},
     centerSlides: false,
     refreshOnChildrenChange: false,
   },
-  correctElementType(KeenSlider),
+  correctElementType(KeenSlider.Component),
   initializeSliderClasses,
 );

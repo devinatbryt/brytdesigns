@@ -1,1 +1,1 @@
-export * from "./keen-slider-scrollbar.js";
+export * as KeenSliderScrollbar from "./keen-slider-scrollbar.js";

@@ -7,7 +7,7 @@ import {
   noShadowDOM,
   compose,
 } from "component-register";
-import { createRoot, createSignal } from "solid-js";
+import { createRoot, createSignal, onCleanup } from "solid-js";
 import { insert } from "solid-js/web";
 
 export type ComponentType<T> = mComponentType<T>;
@@ -97,6 +97,17 @@ export function customElement<T extends object>(
   return compose(register(tagName, props), withSolid, ...rest)(Component);
 }
 
+function isConstructable(fn: unknown): fn is new (...args: any[]) => any {
+  if (typeof fn !== "function") return false;
+
+  try {
+    Reflect.construct(String, [], fn as Function);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function customShadowlessElement<T extends object>(
   tagName: string,
   props: T,
@@ -108,7 +119,16 @@ export function customShadowlessElement<T extends object>(
     withNoShadowDOM,
     withSolid,
     ...rest,
-  )(Component);
+  )((...args) => {
+    onCleanup(() => {
+      const [_, { element }] = args;
+      element.dispatchEvent(new CustomEvent("bryt-designs:element-destroyed"));
+    });
+    if (isConstructable(Component)) {
+      return new Component(...args);
+    }
+    return Component(...args);
+  });
 }
 
 export const correctElementType = <T>(
