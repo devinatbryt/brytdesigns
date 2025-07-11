@@ -35,7 +35,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     ([_, { addPlugin }], { duration, totalSlides }) => {
       const animation = { duration, easing: (t: number) => t };
       const removePlugin = addPlugin((s) => {
-        s.update({ drag: false, loop: true });
+        s.update({ ...s.options, drag: false, loop: true });
         s.on("created", () => {
           s.moveToIdx(totalSlides, true, animation);
         });

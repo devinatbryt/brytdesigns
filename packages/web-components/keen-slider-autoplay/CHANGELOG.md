@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-autoplay
 
+## 1.0.1
+
+### Patch Changes
+
+- Minor bug fix
+
 ## 1.0.0
 
 ### Major Changes
