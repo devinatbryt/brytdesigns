@@ -8,16 +8,27 @@
   </head>
   <body>
     <div id="app">
-      <!-- <parallax-container max-pages="2"> -->
-      <!--   <parallax-sticky-layer start="1" end="2"> -->
-      <!--     <parallax-animation -->
-      <!--       breakpoints='["", "(width < 400px)"]' -->
-      <!--       range="[0,1]" -->
-      <!--       x='[null,["0%", "100%"]]' -->
-      <!--       opacity="[0,1]" -->
-      <!--     ></parallax-animation> -->
-      <!--   </parallax-sticky-layer> -->
-      <!-- </parallax-container> -->
+      <parallax-container max-pages="2">
+        <parallax-sticky-layer start="1" end="2">
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <parallax-animation
+              breakpoints='["", "(width < 400px)"]'
+              range="[0,1]"
+              x='[null,["0%", "100%"]]'
+              opacity="[0,1]"
+              class="parallax-animation-test"
+            ></parallax-animation>
+          </div>
+        </parallax-sticky-layer>
+      </parallax-container>
 
       <div id="wow">
         <keen-slider-auto-switch
@@ -51,6 +62,41 @@
           target="#wow"
         ></keen-slider-navigation-dots>
         <keen-slider-scrollbar target="#wow"></keen-slider-scrollbar>
+      </div>
+
+      <div id="wow2">
+        <keen-slider-autoplay
+          duration="2000"
+          target="#wow2"
+          total-slides="1"
+        ></keen-slider-autoplay>
+        <keen-slider
+          config='{ "loop": true }'
+          class="keen-slider"
+          refresh-on-children-change="true"
+        >
+          <div class="keen-slider__slide">
+            <h1>Slide 1</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 2</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 3</h1>
+          </div>
+        </keen-slider>
+        <keen-slider-navigation-arrows target="#wow2">
+          <template prev-arrow>
+            <p>Prev</p>
+          </template>
+          <template next-arrow>
+            <p>Next</p>
+          </template>
+        </keen-slider-navigation-arrows>
+        <keen-slider-navigation-dots
+          target="#wow2"
+        ></keen-slider-navigation-dots>
+        <keen-slider-scrollbar target="#wow2"></keen-slider-scrollbar>
       </div>
 
       <drawer-trigger target="#testDrawer" on="click" action="open">

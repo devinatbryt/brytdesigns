@@ -106,10 +106,11 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     },
     () => null,
     ([_, { addPlugin }]) => {
-      addPlugin((slider) => {
+      const removePlugin = addPlugin((slider) => {
         setSlider(slider);
         slider.on("destroyed", () => setSlider());
       });
+      onCleanup(removePlugin);
     },
   );
 

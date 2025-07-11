@@ -24,3 +24,10 @@
   min-height: 16px;
   aspect-ratio: 1/1;
 }
+
+.parallax-animation-test {
+  width: 25%;
+  aspect-ratio: 1;
+  background-color: lightgreen;
+  border-radius: 10000rem;
+}

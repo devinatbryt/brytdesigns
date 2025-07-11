@@ -1,7 +1,7 @@
 {
-  "name": "@brytdesigns/web-component-keen-slider-navigation-arrows",
-  "version": "1.1.1",
-  "description": "Keen slider navigation arrows web component",
+  "name": "@brytdesigns/web-component-keen-slider-autoplay",
+  "version": "1.0.0",
+  "description": "Keen slider autoplay plugin web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",

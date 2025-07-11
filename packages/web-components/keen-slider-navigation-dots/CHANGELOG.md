@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.1.1
+
+### Patch Changes
+
+- New keen slider plugin & ensure plugin is removed whenever dependencies change
+
 ## 1.1.0
 
 ### Minor Changes

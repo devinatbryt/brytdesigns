@@ -35,6 +35,9 @@ importers:
       '@brytdesigns/web-component-keen-slider-auto-switch':
         specifier: workspace:*
         version: link:../../packages/web-components/keen-slider-auto-switch
+      '@brytdesigns/web-component-keen-slider-autoplay':
+        specifier: workspace:*
+        version: link:../../packages/web-components/keen-slider-autoplay
       '@brytdesigns/web-component-keen-slider-navigation-arrows':
         specifier: workspace:*
         version: link:../../packages/web-components/keen-slider-navigation-arrows
@@ -269,6 +272,31 @@ importers:
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.6)(typescript@5.8.3)(yaml@2.7.0)
+
+  packages/web-components/keen-slider-autoplay:
+    dependencies:
+      '@brytdesigns/web-component-core':
+        specifier: workspace:*
+        version: link:../core
+      '@brytdesigns/web-component-keen-slider':
+        specifier: workspace:*
+        version: link:../keen-slider
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
+      solid-element:
+        specifier: ^1.9.1
+        version: 1.9.1(solid-js@1.9.7)
+      solid-js:
+        specifier: ^1.9.7
+        version: 1.9.7
+    devDependencies:
+      dts-bundle-generator:
+        specifier: ^9.5.1
+        version: 9.5.1
+      tsup:
+        specifier: ^8.4.0
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.6)(typescript@5.8.3)(yaml@2.7.0)
 
   packages/web-components/keen-slider-navigation-arrows:
     dependencies:

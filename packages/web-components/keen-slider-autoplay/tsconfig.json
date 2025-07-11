@@ -1,0 +1,29 @@
+{
+  "include": [
+    "../keen-slider-autoplay/src"
+  ],
+  "exclude": [
+    "../keen-slider-autoplay/dist",
+    "../keen-slider-autoplay/node_modules",
+    "../keen-slider-autoplay/.turbo"
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "preserve",
+    "noEmit": true,
+    "lib": [
+      "es2022",
+      "DOM"
+    ]
+  }
+}

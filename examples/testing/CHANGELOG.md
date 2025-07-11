@@ -1,5 +1,11 @@
 # @example/testing
 
+## 0.1.3
+
+### Patch Changes
+
+- New keen slider plugin & ensure plugin is removed whenever dependencies change
+
 ## 0.1.2
 
 ### Patch Changes

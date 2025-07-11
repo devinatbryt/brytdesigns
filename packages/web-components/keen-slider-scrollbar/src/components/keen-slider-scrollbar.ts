@@ -142,12 +142,9 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   createEffect(
     on(maxSlides, (maxSlides) => {
       const s = slider();
+      element.style.setProperty(`--${Name}--total-slides`, `${maxSlides}`);
       if (!s) return;
       if (!maxSlides) return;
-      element.style.setProperty(
-        "--keen-slider-scrollbar--total-slides",
-        `${maxSlides}`,
-      );
 
       function updateDetails(slider: KeenSliderInstance) {
         setMaxIdx(slider.track.details.maxIdx);
@@ -207,8 +204,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         function handleClick(e: Event) {
           const bp = e.target as HTMLElement | null;
           if (!bp) return;
-          if (!bp.classList.contains("keen-slider-scrollbar__breakpoint"))
-            return;
+          if (!bp.classList.contains(`${Name}__breakpoint`)) return;
           setCurrentIdx(parseInt(bp.getAttribute("data-index") || "0"));
           updateSliderPosition(bp, slider!);
         }
@@ -242,7 +238,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
     },
     () => null,
     ([_, { addPlugin }]) => {
-      addPlugin((slider) => {
+      const removePlugin = addPlugin((slider) => {
         setSlider(slider);
 
         slider.on("created", function (slider) {
@@ -253,9 +249,12 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
           batch(() => {
             setMaxIdx(0);
             setSlider();
+            setThumb(null);
           }),
         );
       });
+
+      onCleanup(removePlugin);
     },
   );
 
@@ -289,16 +288,16 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   return html`
     <${Show} when=${() => maxSlides() > 1}>
       <div
-        class="keen-slider-scrollbar__thumb"
+        class="${Name}__thumb"
         ref=${(el: HTMLElement) => setThumb(el)}
       ></div>
       <ul
-        class="keen-slider-scrollbar__breakpoints"
+        class="${Name}__breakpoints"
         ref=${(el: HTMLElement) => (breakpointsContainer = el)}
       >
         <${For} each=${() => Array(maxSlides()).fill(0)}>
           ${(_: number, idx: Accessor<number>) => html`
-            <li class="keen-slider-scrollbar__breakpoint" data-index=${idx}>
+            <li class="${Name}__breakpoint" data-index=${idx}>
               <button type="button" style=${srOnly}>
                 <span style=${srOnly}> Breakpoint ${idx} </span>
               </button>

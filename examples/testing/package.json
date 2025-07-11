@@ -1,7 +1,7 @@
 {
   "name": "@example/testing",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,7 @@
     "vite": "^7.0.0",
     "@brytdesigns/web-component-keen-slider": "workspace:*",
     "@brytdesigns/web-component-keen-slider-auto-switch": "workspace:*",
+    "@brytdesigns/web-component-keen-slider-autoplay": "workspace:*",
     "@brytdesigns/web-component-keen-slider-navigation-arrows": "workspace:*",
     "@brytdesigns/web-component-keen-slider-navigation-dots": "workspace:*",
     "@brytdesigns/web-component-keen-slider-scrollbar": "workspace:*",
