@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-modal
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

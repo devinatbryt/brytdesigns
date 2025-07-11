@@ -106,6 +106,15 @@ export default defineConfig([
     outDir: `${outDir}/esm/animation`,
     external: [],
   },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/utils/index.ts"],
+    outDir: `${outDir}/esm/utils`,
+    external: [],
+  },
   // {
   //   ...commonConfig,
   //   format: "esm",

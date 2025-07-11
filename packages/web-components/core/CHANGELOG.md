@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.1.1
+
+### Patch Changes
+
+- Include utils in build output
+
 ## 1.1.0
 
 ### Minor Changes
