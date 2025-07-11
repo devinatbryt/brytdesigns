@@ -8,16 +8,27 @@
   </head>
   <body>
     <div id="app">
-      <parallax-container max-pages="10">
-        <parallax-sticky-layer start="1" end="10">
-          <parallax-animation
-            breakpoints='["", "(width < 400px)"]'
-            range="[0,1]"
-            x='[null,["0%", "100%"]]'
-            opacity="[0,1]"
-          ></parallax-animation>
-        </parallax-sticky-layer>
-      </parallax-container>
+      <!-- <parallax-container max-pages="2"> -->
+      <!--   <parallax-sticky-layer start="1" end="2"> -->
+      <!--     <parallax-animation -->
+      <!--       breakpoints='["", "(width < 400px)"]' -->
+      <!--       range="[0,1]" -->
+      <!--       x='[null,["0%", "100%"]]' -->
+      <!--       opacity="[0,1]" -->
+      <!--     ></parallax-animation> -->
+      <!--   </parallax-sticky-layer> -->
+      <!-- </parallax-container> -->
+
+      <drawer-trigger target="#testDrawer" on="click" action="open">
+        <button>Click me now!</button>
+      </drawer-trigger>
+      <button id="drawerButton">Wait to click me!</button>
+      <drawer-context id="testDrawer">
+        <drawer-backdrop></drawer-backdrop>
+        <drawer-content>
+          <h1>Wow!</h1>
+        </drawer-content>
+      </drawer-context>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

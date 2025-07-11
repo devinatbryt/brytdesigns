@@ -26,6 +26,9 @@ importers:
 
   examples/testing:
     devDependencies:
+      '@brytdesigns/web-component-drawer':
+        specifier: workspace:*
+        version: link:../../packages/web-components/drawer
       '@brytdesigns/web-component-keen-slider':
         specifier: workspace:*
         version: link:../../packages/web-components/keen-slider
@@ -129,6 +132,9 @@ importers:
 
   packages/web-components/core:
     dependencies:
+      component-register:
+        specifier: ^0.8.7
+        version: 0.8.7
       focus-trap:
         specifier: ^7.6.4
         version: 7.6.4

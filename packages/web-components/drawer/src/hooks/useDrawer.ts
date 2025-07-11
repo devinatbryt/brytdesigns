@@ -22,6 +22,7 @@ import {
 import type { AnimationPlaybackControlsWithThen } from "motion";
 import { abortablePromise } from "@brytdesigns/web-component-core/promise";
 import { awaitAllAnimations } from "@brytdesigns/web-component-core/animation";
+import { createWithElementContext } from "@brytdesigns/web-component-core/utils";
 
 type StoreContext = {
   animationQueue: AnimationPlaybackControlsWithThen[];
@@ -128,6 +129,11 @@ export const useDrawer = (element: HTMLElement & ICustomElement) => {
 
   return useDrawerContext(context);
 };
+
+export const withDrawerElementContext = createWithElementContext<
+  typeof DrawerContextState,
+  DrawerContext
+>(DrawerContextState);
 
 export const getDrawerContext = (element: Element) => {
   const context = getContextFromProvider<DrawerContext>(

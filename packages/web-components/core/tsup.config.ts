@@ -43,6 +43,11 @@ export default defineConfig([
           filePath: path.resolve("./src/animation/index.ts"),
         },
       ]);
+      const [utilsDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/utils/index.ts"),
+        },
+      ]);
 
       await Promise.all([
         fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts),
@@ -57,6 +62,10 @@ export default defineConfig([
         fs.writeFile(
           path.resolve(outDir, "main", "promise", "index.d.ts"),
           promiseDts,
+        ),
+        fs.writeFile(
+          path.resolve(outDir, "main", "utils", "index.d.ts"),
+          utilsDts,
         ),
       ]);
     },

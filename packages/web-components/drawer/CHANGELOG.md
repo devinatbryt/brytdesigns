@@ -1,5 +1,13 @@
 # @brytdesigns/web-component-drawer
 
+## 1.0.31
+
+### Patch Changes
+
+- Created a utility hoc that ensures a reactive context is created after the DOM has loaded.
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.1.0
+
 ## 1.0.30
 
 ### Patch Changes

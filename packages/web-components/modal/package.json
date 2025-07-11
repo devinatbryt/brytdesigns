@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-modal",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Headless modal web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

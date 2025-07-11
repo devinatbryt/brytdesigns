@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.1.0
+
+### Minor Changes
+
+- Created a utility hoc that ensures a reactive context is created after the DOM has loaded.
+
 ## 1.0.2
 
 ### Patch Changes

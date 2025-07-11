@@ -41,4 +41,8 @@ customShadowlessElement(
   correctElementType(DrawerContent.Component),
 );
 
-export { useDrawer, getDrawerContext } from "./hooks/index.js";
+export {
+  useDrawer,
+  withDrawerElementContext,
+  getDrawerContext,
+} from "./hooks/index.js";
