@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.1.2
+
+### Patch Changes
+
+- New lazy images component, fixed how scrollbar and navigation dots calculate the max amount of slides.
+
 ## 1.1.1
 
 ### Patch Changes

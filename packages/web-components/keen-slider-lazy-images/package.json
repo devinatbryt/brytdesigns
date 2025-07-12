@@ -1,7 +1,7 @@
 {
-  "name": "@brytdesigns/web-component-keen-slider-scrollbar",
-  "version": "1.1.2",
-  "description": "Keen slider scrollbar web component",
+  "name": "@brytdesigns/web-component-keen-slider-lazy-images",
+  "version": "1.0.0",
+  "description": "Keen slider plugin for lazy loading images",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",
   "types": "./dist/main/index.d.ts",
@@ -10,8 +10,7 @@
     ".": {
       "types": "./dist/main/index.d.ts",
       "module": "./dist/main/index.js"
-    },
-    "./styles.css": "./dist/styles.css"
+    }
   },
   "scripts": {
     "build": "tsup --clean",
@@ -24,12 +23,9 @@
   "author": "Bryt Designs",
   "license": "ISC",
   "dependencies": {
-    "@brytdesigns/web-component-core": "workspace:*",
     "@brytdesigns/web-component-keen-slider": "workspace:*",
-    "@neodrag/vanilla": "^2.3.0",
+    "@brytdesigns/web-component-core": "workspace:*",
     "component-register": "^0.8.7",
-    "motion": "^12.18.1",
-    "popmotion": "^11.0.5",
     "solid-element": "^1.9.1",
     "solid-js": "^1.9.7"
   },

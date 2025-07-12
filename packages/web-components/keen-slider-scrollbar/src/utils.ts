@@ -64,18 +64,14 @@ export function findClosestBreakpoint(
 }
 
 export function getMaxSlides(slider: KeenSliderInstance) {
-  const perView = (slider.options?.slides as any)?.perView || 1;
-  if (perView === "auto") {
-    const maxIdx = slider?.track?.details?.maxIdx || 1;
-    const perScroll = (slider.options?.slides as any)?.perScroll || 1;
-    const result = Math.ceil((slider.slides.length - maxIdx) / perScroll) + 1;
-    return result;
-  }
+  const maxIdx = slider?.track?.details?.maxIdx || 1;
   const perScroll = (slider.options?.slides as any)?.perScroll || 1;
-  const result = Math.ceil((slider.slides.length - perView) / perScroll) + 1;
-  if (perScroll === 1 && perView === 1) return slider.slides.length;
 
-  return result;
+  if (!Number.isFinite(maxIdx)) {
+    return Math.ceil(slider.slides.length / perScroll);
+  }
+
+  return Math.ceil(maxIdx / perScroll) + 1;
 }
 
 export function getRelativeBreakpoint(

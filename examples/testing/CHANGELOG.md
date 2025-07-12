@@ -1,5 +1,11 @@
 # @example/testing
 
+## 0.1.4
+
+### Patch Changes
+
+- New lazy images component, fixed how scrollbar and navigation dots calculate the max amount of slides.
+
 ## 0.1.3
 
 ### Patch Changes

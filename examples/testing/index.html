@@ -31,12 +31,12 @@
       </parallax-container>
 
       <div id="wow">
-        <keen-slider-auto-switch
-          duration="2000"
-          target="#wow"
-        ></keen-slider-auto-switch>
+        <!-- <keen-slider-auto-switch -->
+        <!--   duration="2000" -->
+        <!--   target="#wow" -->
+        <!-- ></keen-slider-auto-switch> -->
         <keen-slider
-          config='{ "loop": true }'
+          config='{ "loop": false, "slides": { "perView": 1.5 } }'
           class="keen-slider"
           refresh-on-children-change="true"
         >
@@ -48,6 +48,12 @@
           </div>
           <div class="keen-slider__slide">
             <h1>Slide 3</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 4</h1>
+          </div>
+          <div class="keen-slider__slide">
+            <h1>Slide 5</h1>
           </div>
         </keen-slider>
         <keen-slider-navigation-arrows target="#wow">
@@ -65,24 +71,116 @@
       </div>
 
       <div id="wow2">
-        <keen-slider-autoplay
-          duration="2000"
-          target="#wow2"
-          total-slides="1"
-        ></keen-slider-autoplay>
+        <!-- <keen-slider-autoplay -->
+        <!--   duration="2000" -->
+        <!--   target="#wow2" -->
+        <!--   total-slides="1" -->
+        <!-- ></keen-slider-autoplay> -->
         <keen-slider
-          config='{ "loop": true }'
+          config='{
+            "mode": "free-snap",
+            "loop": true,
+            "slides": {
+                "perView": "auto",
+                "spacing": 16,
+                "perScroll": 2
+            },
+            "breakpoints": {
+                "(max-width: 1023px)": {
+                    "mode": "free-snap",
+                    "loop": false,
+                    "slides": {
+                        "perView": 1,
+                        "spacing": 16
+                    }
+                }
+            }
+        }'
           class="keen-slider"
-          refresh-on-children-change="true"
         >
-          <div class="keen-slider__slide">
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
             <h1>Slide 1</h1>
           </div>
-          <div class="keen-slider__slide">
+          <div
+            class="keen-slider__slide"
+            style="min-width: 400px; max-width: 400px"
+          >
             <h1>Slide 2</h1>
           </div>
-          <div class="keen-slider__slide">
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
             <h1>Slide 3</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 400px; max-width: 400px"
+          >
+            <h1>Slide 4</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 5</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 400px; max-width: 400px"
+          >
+            <h1>Slide 6</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 7</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 8</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 9</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 10</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 11</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 12</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 13</h1>
+          </div>
+          <div
+            class="keen-slider__slide"
+            style="min-width: 200px; max-width: 200px"
+          >
+            <h1>Slide 14</h1>
           </div>
         </keen-slider>
         <keen-slider-navigation-arrows target="#wow2">

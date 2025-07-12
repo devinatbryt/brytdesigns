@@ -17,7 +17,6 @@ import {
   type KeenSliderInstance,
 } from "@brytdesigns/web-component-keen-slider";
 import { Draggable } from "@neodrag/vanilla";
-import { animate } from "popmotion";
 
 import {
   getRelativeBreakpoint,
@@ -27,6 +26,7 @@ import {
   constrain,
   srOnly,
 } from "../utils.js";
+import { motionValue, transformValue, animate } from "motion";
 
 type Props = {
   target: string;
@@ -45,7 +45,13 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const [slider, setSlider] = createSignal<KeenSliderInstance>();
 
   const [thumb, setThumb] = createSignal<HTMLElement | null>(null);
-  const [position, setPosition] = createSignal({ x: 0, y: 0 });
+  const positionX = motionValue(0);
+  const positionY = motionValue(0);
+  const position = transformValue(() => ({
+    x: positionX.get(),
+    y: positionY.get(),
+  }));
+  // const [position, setPosition] = createSignal({ x: 0, y: 0 });
   const [maxIdx, setMaxIdx] = createSignal(
     slider()?.track?.details?.maxIdx || 0,
   );
@@ -69,13 +75,18 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         axis: props.isVertical ? "y" : "x",
         bounds: "parent",
         gpuAcceleration: true,
-        position: position(),
+        position: {
+          x: positionX.get(),
+          y: positionY.get(),
+        },
         transform({ offsetX, offsetY }) {
           if (props.isVertical) return `translate3d(-50%, ${offsetY}px, 0)`;
           return `translate3d(${offsetX}px, -50%, 0)`;
         },
-        onDrag: ({ offsetX, offsetY }) =>
-          setPosition((p) => ({ ...p, x: offsetX, y: offsetY })),
+        onDrag: ({ offsetX, offsetY }) => {
+          positionY.set(offsetY);
+          positionX.set(offsetX);
+        },
         onDragEnd: (position) => {
           if (!breakpointsContainer) return;
           const s = slider();
@@ -95,13 +106,13 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         ignoreMultitouch: true,
       });
 
-      createEffect(
-        on(position, (position) => {
-          instance.updateOptions({
-            position,
-          });
-        }),
-      );
+      const unsub = position.on("change", (latest) => {
+        instance.updateOptions({
+          position: latest,
+        });
+      });
+
+      onCleanup(unsub);
 
       return instance;
     }),
@@ -157,7 +168,8 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         const t = thumb();
         if (!t) return;
         const p = calculateMidpointPositionFromBP(bp, element, t);
-        setPosition(p);
+        positionY.set(p.y);
+        positionX.set(p.x);
         setMaxIdx(slider.track.details.maxIdx);
       }
 
@@ -259,20 +271,8 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   );
 
   function animateScrollbarPosition(p: { x: number; y: number }) {
-    animate({
-      from: position().x,
-      to: p.x,
-      onUpdate(latest) {
-        return setPosition((p) => ({ ...p, x: latest }));
-      },
-    });
-    animate({
-      from: position().y,
-      to: p.y,
-      onUpdate(latest) {
-        return setPosition((p) => ({ ...p, y: latest }));
-      },
-    });
+    animate(positionX, p.x, { type: "tween" });
+    animate(positionY, p.y, { type: "tween" });
   }
 
   function updateSliderPosition(bp: Element, slider: KeenSliderInstance) {

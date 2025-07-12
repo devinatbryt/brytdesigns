@@ -1,0 +1,29 @@
+{
+  "include": [
+    "../keen-slider-lazy-images/src"
+  ],
+  "exclude": [
+    "../keen-slider-lazy-images/dist",
+    "../keen-slider-lazy-images/node_modules",
+    "../keen-slider-lazy-images/.turbo"
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "preserve",
+    "noEmit": true,
+    "lib": [
+      "es2022",
+      "DOM"
+    ]
+  }
+}

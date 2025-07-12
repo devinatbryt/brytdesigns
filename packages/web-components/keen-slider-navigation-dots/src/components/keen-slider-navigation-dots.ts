@@ -64,19 +64,12 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         setCurrentSlide(getSlideIndex(slider));
       }
 
-      function handleSlideDestroy() {
-        setCurrentSlide(0);
-        setMaxIdx(0);
-      }
-
       slider.on("detailsChanged", handleDetailsChange);
       slider.on("slideChanged", handleSlideChange);
-      slider.on("destroyed", handleSlideDestroy);
 
       return onCleanup(() => {
         slider.on("detailsChanged", handleDetailsChange, true);
         slider.on("slideChanged", handleSlideChange, true);
-        slider.on("destroyed", handleSlideDestroy, true);
       });
     }),
   );
@@ -103,6 +96,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
 
         slider.on("destroyed", () =>
           batch(() => {
+            setCurrentSlide(0);
             setMaxIdx(0);
             setSlider();
           }),
@@ -123,12 +117,10 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
   const isSelected = createSelector(currentSlide);
 
   function getSlideIndex(s: KeenSliderInstance, idx?: number) {
-    const i = typeof idx === "number" ? idx : s.track.details.rel;
-    return constrain(
-      i * ((s?.options?.slides as any)?.perScroll || 1),
-      0,
-      s.track.details.maxIdx,
-    );
+    const perScroll = (s.options?.slides as any)?.perScroll || 1;
+    return typeof idx === "number"
+      ? idx * perScroll
+      : Math.floor(s.track.details.rel / perScroll);
   }
 
   return html`
