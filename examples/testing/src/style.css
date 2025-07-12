@@ -31,3 +31,13 @@
   background-color: lightgreen;
   border-radius: 10000rem;
 }
+
+.keen-slider__slider--sm {
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.keen-slider__slider--md {
+  min-width: 400px;
+  max-width: 400px;
+}

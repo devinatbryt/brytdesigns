@@ -1,5 +1,11 @@
 # @example/testing
 
+## 0.1.5
+
+### Patch Changes
+
+- Fixed issues with web component when resizing
+
 ## 0.1.4
 
 ### Patch Changes

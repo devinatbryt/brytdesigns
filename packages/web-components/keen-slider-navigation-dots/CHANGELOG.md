@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.1.3
+
+### Patch Changes
+
+- Fixed issues with web component when resizing
+
 ## 1.1.2
 
 ### Patch Changes

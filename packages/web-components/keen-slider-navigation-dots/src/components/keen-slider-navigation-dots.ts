@@ -58,9 +58,11 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
 
       function handleDetailsChange(slider: KeenSliderInstance) {
         setMaxIdx(slider.track.details.maxIdx);
+        setCurrentSlide(getSlideIndex(slider));
       }
 
       function handleSlideChange(slider: KeenSliderInstance) {
+        setMaxIdx(slider.track.details.maxIdx);
         setCurrentSlide(getSlideIndex(slider));
       }
 
