@@ -519,18 +519,18 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       '@effect/platform':
-        specifier: 0.82.4
-        version: 0.82.4(effect@3.15.2)
+        specifier: 0.88.0
+        version: 0.88.0(effect@3.16.13)
       effect:
-        specifier: 3.15.2
-        version: 3.15.2
+        specifier: 3.16.13
+        version: 3.16.13
       lz-string:
         specifier: ^1.5.0
         version: 1.5.0
     devDependencies:
       '@effect/vitest':
         specifier: ^0.19.0
-        version: 0.19.10(effect@3.15.2)(vitest@3.1.4(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))
+        version: 0.19.10(effect@3.16.13)(vitest@3.1.4(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))
       dts-bundle-generator:
         specifier: ^9.5.1
         version: 9.5.1
@@ -606,18 +606,18 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       '@effect/platform':
-        specifier: 0.82.4
-        version: 0.82.4(effect@3.15.2)
+        specifier: 0.88.0
+        version: 0.88.0(effect@3.16.13)
       '@shopify/storefront-api-client':
         specifier: ^1.0.6
         version: 1.0.6
       effect:
-        specifier: 3.15.2
-        version: 3.15.2
+        specifier: 3.16.13
+        version: 3.16.13
     devDependencies:
       '@effect/vitest':
         specifier: ^0.19.0
-        version: 0.19.2(effect@3.15.2)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))
+        version: 0.19.2(effect@3.16.13)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))
       '@graphql-codegen/cli':
         specifier: ^5.0.5
         version: 5.0.5(@types/node@22.13.8)(enquirer@2.4.1)(graphql@16.10.0)(typescript@5.8.3)
@@ -693,8 +693,8 @@ importers:
   shopify/utils:
     dependencies:
       effect:
-        specifier: 3.15.2
-        version: 3.15.2
+        specifier: 3.16.13
+        version: 3.16.13
     devDependencies:
       '@repo/js-delivr-imports-plugin':
         specifier: workspace:*
@@ -964,10 +964,10 @@ packages:
     resolution: {integrity: sha512-UJnjoFsmxfKUdNYdWgOB0mWUypuLvAfQPH1+pyvRJs6euowbFkFC6P13w1l8mJyi3vxYMxc9kld5jZEGRQs6bw==}
     engines: {node: '>=18'}
 
-  '@effect/platform@0.82.4':
-    resolution: {integrity: sha512-og5DIzx4wz7nIXd/loDfenXvV3c/NT+NDG+YJsi3g6a5Xb6xwrNJuX97sDaV2LJ29G3LroeVJCmYUmfdf/h5Vg==}
+  '@effect/platform@0.88.0':
+    resolution: {integrity: sha512-ObTXedf/DshoKtM2ygEcoP7Kj9rop0KeDvLriQE2HD4Fgo1pxjgbOivkCbSq03MErpNE2/lMYTY6Si6bo4qMqQ==}
     peerDependencies:
-      effect: ^3.15.2
+      effect: ^3.16.13
 
   '@effect/vitest@0.19.10':
     resolution: {integrity: sha512-eV+Vu/3mqqpzAzo2Cb5/ZpBnUwIeDMOy4vAGCUv5bRzKq4HiTK23yYCEB9g5G+ZkPyQ63oOSO/7GHxS5f1sNtg==}
@@ -2572,8 +2572,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect@3.15.2:
-    resolution: {integrity: sha512-0JNwvfs4Wwbo3f6IOydBFlp+zxuO8Iny2UAWNW3+FNn9x8FJf7q67QnQagUZgPl/BLl/xuPLVksrmNyIrJ8k/Q==}
+  effect@3.16.13:
+    resolution: {integrity: sha512-xJDgOhD7+3qIY1d8PGfkaPZMfmdJuSp2XAQgc9dVF8pSl1FJL6WK4ZUpMh177R+GH8XgPloT8dlZsEYUYDo1Ag==}
 
   electron-to-chromium@1.5.109:
     resolution: {integrity: sha512-AidaH9JETVRr9DIPGfp1kAarm/W6hRJTPuCnkF+2MqhF4KaAgRIcBc8nvjk+YMXZhwfISof/7WG29eS4iGxQLQ==}
@@ -2734,8 +2734,8 @@ packages:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
-  find-my-way-ts@0.1.5:
-    resolution: {integrity: sha512-4GOTMrpGQVzsCH2ruUn2vmwzV/02zF4q+ybhCIrw/Rkt3L8KWcycdC6aJMctJzwN4fXD4SD5F/4B9Sksh5rE0A==}
+  find-my-way-ts@0.1.6:
+    resolution: {integrity: sha512-a85L9ZoXtNAey3Y6Z+eBWW658kO/MwR7zIafkIUPUMf3isZG0NCs2pjW2wtjxAKuJPxMAsHUIP4ZPGv0o5gyTA==}
 
   find-up@4.1.0:
     resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
@@ -4845,21 +4845,21 @@ snapshots:
 
   '@csstools/css-tokenizer@3.0.3': {}
 
-  '@effect/platform@0.82.4(effect@3.15.2)':
+  '@effect/platform@0.88.0(effect@3.16.13)':
     dependencies:
-      effect: 3.15.2
-      find-my-way-ts: 0.1.5
+      effect: 3.16.13
+      find-my-way-ts: 0.1.6
       msgpackr: 1.11.4
       multipasta: 0.2.5
 
-  '@effect/vitest@0.19.10(effect@3.15.2)(vitest@3.1.4(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))':
+  '@effect/vitest@0.19.10(effect@3.16.13)(vitest@3.1.4(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
-      effect: 3.15.2
+      effect: 3.16.13
       vitest: 3.1.4(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0)
 
-  '@effect/vitest@0.19.2(effect@3.15.2)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))':
+  '@effect/vitest@0.19.2(effect@3.16.13)(vitest@3.0.7(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
-      effect: 3.15.2
+      effect: 3.16.13
       vitest: 3.0.7(@types/node@22.13.8)(jiti@2.4.2)(jsdom@25.0.1)(terser@5.39.0)(yaml@2.7.0)
 
   '@envelop/core@5.1.1':
@@ -6405,7 +6405,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect@3.15.2:
+  effect@3.16.13:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
@@ -6623,7 +6623,7 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  find-my-way-ts@0.1.5: {}
+  find-my-way-ts@0.1.6: {}
 
   find-up@4.1.0:
     dependencies:

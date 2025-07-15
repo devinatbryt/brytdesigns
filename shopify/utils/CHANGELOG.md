@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.14
+
+### Patch Changes
+
+- Updated effect versioning and fixed exports in package.json
+
 ## 1.2.13
 
 ### Patch Changes

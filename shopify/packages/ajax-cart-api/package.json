@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/shopify-ajax-cart-api",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "An AJAX cart that integrates with the AJAX Cart API",
   "scripts": {
     "build": "tsup --clean",
@@ -20,8 +20,8 @@
       "import": "./dist/main/index.js"
     },
     "./effect": {
-      "types": "./dist/main/effect/index.d.ts",
-      "import": "./dist/main/effect/index.js"
+      "types": "./dist/effect/index.d.ts",
+      "import": "./dist/effect/index.js"
     }
   },
   "type": "module",
@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "@brytdesigns/shopify-utils": "workspace:*",
-    "@effect/platform": "0.82.4",
-    "effect": "3.15.2",
+    "@effect/platform": "0.88.0",
+    "effect": "3.16.13",
     "lz-string": "^1.5.0"
   }
 }

@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated effect versioning and fixed exports in package.json
+- Updated dependencies
+  - @brytdesigns/shopify-utils@1.2.14
+
 ## 1.0.26
 
 ### Patch Changes
