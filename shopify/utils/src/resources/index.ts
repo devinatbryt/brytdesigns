@@ -13,7 +13,7 @@ export const formatResource = <
   const T extends Resource.ID,
   const R extends Resource.Type,
 >(
-  options: FormatResourceOptions<T, R>
+  options: FormatResourceOptions<T, R>,
 ) => Effect.runSync(Resource.format<T, R>(options));
 
 export type ID = Resource.ID;
