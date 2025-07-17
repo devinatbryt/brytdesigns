@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.16
+
+### Patch Changes
+
+- Minor bug fix
+
 ## 1.2.15
 
 ### Patch Changes

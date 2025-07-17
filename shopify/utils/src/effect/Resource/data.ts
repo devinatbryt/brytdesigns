@@ -30,7 +30,7 @@ export const format = <const T extends ID, const R extends Type>({
 
 export const parse = (input: string) =>
   Schema.decode(
-    Schema.transformOrFail(ID, GID, {
+    Schema.transformOrFail(GID, ID, {
       encode: (value, _, ast) =>
         ParseResult.fail(
           new ParseResult.Forbidden(
