@@ -525,7 +525,7 @@ export const LineItemChange = Schema.Struct({
   variant_title: Schema.String,
   vendor: Schema.String,
   product_type: Schema.String,
-  sku: Schema.String,
+  sku: Schema.NullOr(Schema.String),
   url: Schema.String,
   untranslated_product_title: Schema.String,
   untranslated_variant_title: Schema.String,
