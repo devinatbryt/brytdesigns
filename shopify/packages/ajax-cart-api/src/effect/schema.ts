@@ -516,7 +516,7 @@ export const LineItemChange = Schema.Struct({
   product_id: Schema.Number,
   variant_id: Schema.Number,
   id: Schema.String,
-  image: Schema.String,
+  image: Schema.NullOr(Schema.String),
   price: Schema.String,
   presentment_price: Schema.Number,
   quantity: Schema.Number,
