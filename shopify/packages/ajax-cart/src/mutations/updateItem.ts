@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/solid-query";
 import client from "../client.js";
 import API from "../api.js";
 import { Cart } from "../query/index.js";
+import { DEFAULT_HEADERS } from "../const.js";
 
 export type Input = Parameters<typeof API.change>[0];
 
@@ -26,7 +27,7 @@ const createIsItemCheck = (input: Input) => (item: CartItem, index: number) => {
 export const mutation = useMutation(
   () => ({
     mutationFn: async (item: Input) => {
-      const response = await API.change(item);
+      const response = await API.change(item, { headers: DEFAULT_HEADERS });
       if (response?.error || !response.data) {
         throw response?.error;
       }

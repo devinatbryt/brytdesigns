@@ -42,7 +42,10 @@ export const makeFactory =
     inputSchema: Schema.Schema<A, I, R>;
     outputSchema: Schema.Schema<B, J, S>;
   }) =>
-  (input?: Schema.Schema<A, I, R>["Encoded"]) =>
+  (
+    input?: Schema.Schema<A, I, R>["Encoded"],
+    options?: { headers?: Record<string, string> },
+  ) =>
     Effect.gen(function* () {
       const client = yield* HttpClient.HttpClient;
       const decodedInput = yield* Schema.decodeUnknown(inputSchema)(
@@ -58,6 +61,7 @@ export const makeFactory =
         request = yield* HttpClientRequest.post(url, {
           acceptJson: true,
           headers: {
+            ...(options?.headers || {}),
             "X-SDK-Variant": "brytdesigns",
             "X-SK-Variant-Source": "shopify-cart-ajax-api",
           },

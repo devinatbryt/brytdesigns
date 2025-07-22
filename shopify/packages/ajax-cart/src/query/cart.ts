@@ -5,6 +5,7 @@ import { validateCart } from "@brytdesigns/shopify-ajax-cart-api";
 
 import client from "../client.js";
 import API from "../api.js";
+import { DEFAULT_HEADERS } from "../const.js";
 
 export const KEY = "cart";
 export const invalidate = () => client.invalidateQueries({ queryKey: [KEY] });
@@ -17,7 +18,7 @@ export const query = useQuery(
   () => ({
     queryKey: [KEY],
     async queryFn({ signal }) {
-      const cart = await API.get({}, { signal });
+      const cart = await API.get({}, { signal, headers: DEFAULT_HEADERS });
       if (cart?.error || !cart?.data) {
         throw cart.error;
       }

@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.32
+
+### Patch Changes
+
+- Minor api adjustments to allow for request specific headers
+
 ## 1.0.31
 
 ### Patch Changes

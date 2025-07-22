@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/solid-query";
 import client from "../client.js";
 import API from "../api.js";
 import { Cart } from "../query/index.js";
+import { DEFAULT_HEADERS } from "../const.js";
 
 export type Input = {
   key: string;
@@ -29,21 +30,27 @@ export const mutation = useMutation(
           currentItem?.selling_plan_allocation?.selling_plan.id || undefined,
       } as const;
 
-      await API.change({
-        id: item.key,
-        quantity: 0,
-      });
-      const response = await API.add({
-        items: [
-          {
-            id: item.id,
-            ...tempValues,
-            properties: {
-              ...tempValues.properties,
+      await API.change(
+        {
+          id: item.key,
+          quantity: 0,
+        },
+        { headers: DEFAULT_HEADERS },
+      );
+      const response = await API.add(
+        {
+          items: [
+            {
+              id: item.id,
+              ...tempValues,
+              properties: {
+                ...tempValues.properties,
+              },
             },
-          },
-        ],
-      });
+          ],
+        },
+        { headers: DEFAULT_HEADERS },
+      );
       if (response?.error || !response.data) {
         throw response?.error;
       }

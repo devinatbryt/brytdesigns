@@ -3,19 +3,23 @@ import { useMutation } from "@tanstack/solid-query";
 import client from "../client.js";
 import API from "../api.js";
 import { Cart } from "../query/index.js";
+import { DEFAULT_HEADERS } from "../const.js";
 
 export type Input = string;
 
 export const mutation = useMutation(
   () => ({
     mutationFn: async (items: Input[]) => {
-      const response = await API.update({
-        updates: items.reduce(
-          (updates, key) =>
-            ({ ...updates, [key]: 0 }) as Record<string, number>,
-          {},
-        ),
-      });
+      const response = await API.update(
+        {
+          updates: items.reduce(
+            (updates, key) =>
+              ({ ...updates, [key]: 0 }) as Record<string, number>,
+            {},
+          ),
+        },
+        { headers: DEFAULT_HEADERS },
+      );
       if (response?.error || !response.data) {
         throw response?.error;
       }

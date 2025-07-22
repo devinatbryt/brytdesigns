@@ -19,6 +19,7 @@ import {
   getCartDiscountCodes,
   uniq,
 } from "./utils.js";
+import { DEFAULT_HEADERS, LIBRARY_SOURCE_KEY } from "./const.js";
 
 const AjaxCart = mergeProps(Cart.query, {
   addItems: AddItems.mutation.mutateAsync,
@@ -124,15 +125,16 @@ window.fetch = async function (...args: Parameters<typeof fetch>) {
     };
   }
 
+  const request = new Request(...args);
+
   if (
-    options &&
-    options.headers &&
-    "x-sdk-variant" in options.headers &&
-    options.headers["x-sdk-variant"] === "brytdesigns"
+    request.headers.has(LIBRARY_SOURCE_KEY) &&
+    request.headers.get(LIBRARY_SOURCE_KEY) ===
+      DEFAULT_HEADERS[LIBRARY_SOURCE_KEY]
   )
-    return oldFetch(...args);
+    return oldFetch(request);
   Cart.cancel();
-  return oldFetch(...args).finally(() => Cart.invalidate());
+  return oldFetch(request).finally(() => Cart.invalidate());
 };
 
 declare global {

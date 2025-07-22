@@ -18,6 +18,7 @@ export namespace createAjaxCartClient {
 
   export type RequestOptions = {
     signal?: AbortSignal;
+    headers?: Record<string, string>;
   };
 }
 
@@ -48,7 +49,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
       options?: createAjaxCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
-        API.add(input).pipe(
+        API.add(input, options).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
           Effect.provide(ajaxLayer),
           Effect.catchAll((error) => {
@@ -90,7 +91,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
       options?: createAjaxCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
-        API.change(input).pipe(
+        API.change(input, options).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
           Effect.provide(ajaxLayer),
           Effect.catchAll((error) => {
@@ -132,7 +133,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
       options?: createAjaxCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
-        API.clear(input).pipe(
+        API.clear(input, options).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
           Effect.provide(ajaxLayer),
           Effect.catchAll((error) => {
@@ -175,7 +176,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
       options?: createAjaxCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
-        API.get(input).pipe(
+        API.get(input, options).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
           Effect.provide(ajaxLayer),
           Effect.catchAll((error) => {
@@ -218,7 +219,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
       options?: createAjaxCartClient.RequestOptions,
     ) =>
       Effect.runPromise(
-        API.update(input).pipe(
+        API.update(input, options).pipe(
           Logger.withMinimumLogLevel(minimumLogLevel),
           Effect.provide(ajaxLayer),
           Effect.catchAll((error) => {
