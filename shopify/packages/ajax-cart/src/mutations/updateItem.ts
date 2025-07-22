@@ -12,10 +12,10 @@ type CartItem = NonNullable<
 >["items"][number];
 
 const createIsItemCheck = (input: Input) => (item: CartItem, index: number) => {
-  if ("id" in input && input.id === `${item.id}`) {
+  if ("id" in input && input.id.includes(":") && input.id === item.key) {
     return true;
   }
-  if ("key" in input && input.key === item.key) {
+  if ("id" in input && input.id === `${item.id}`) {
     return true;
   }
   if ("line" in input && input.line === index + 1) {

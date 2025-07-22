@@ -1,5 +1,23 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.41
+
+### Patch Changes
+
+- Removed unecessary logging
+
+## 1.0.40
+
+### Patch Changes
+
+- Minor bug fix
+
+## 1.0.39
+
+### Patch Changes
+
+- Logging to fix a bug
+
 ## 1.0.38
 
 ### Patch Changes
