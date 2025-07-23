@@ -34,6 +34,7 @@ customShadowlessElement(
   {
     format: "",
     arrayPath: "items",
+    reverse: false,
   },
   correctElementType(CartDataArray.Component),
 );
@@ -45,6 +46,7 @@ customShadowlessElement(
     arrayPath: "items",
     target: "",
     wrapInnerChild: true,
+    reverse: false,
   },
   correctElementType(CartDataArrayInjection.Component),
 );
