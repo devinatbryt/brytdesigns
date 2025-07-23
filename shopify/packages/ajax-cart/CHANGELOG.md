@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart
 
+## 1.0.42
+
+### Patch Changes
+
+- Weird shopify change behaviour with item_count. Will just invalidate cart for now.
+
 ## 1.0.41
 
 ### Patch Changes

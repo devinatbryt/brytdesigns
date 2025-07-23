@@ -71,14 +71,17 @@ export const mutation = useMutation(
 
       return { previousCart };
     },
-    onError(_, __, context) {
-      if (context?.previousCart) Cart.set(() => context.previousCart);
+    // onError(_, __, context) {
+    //   if (context?.previousCart) Cart.set(() => context.previousCart);
+    //   Cart.invalidate();
+    // },
+    // onSuccess(cart) {
+    //   if (!cart) return Cart.invalidate();
+    //   Cart.set(() => cart);
+    // },
+    onSettled() {
       Cart.invalidate();
     },
-    onSuccess(cart) {
-      if (!cart) return Cart.invalidate();
-      Cart.set(() => cart);
-    },
   }),
-  () => client,
+  () => client
 );
