@@ -14,6 +14,7 @@ import html from "solid-js/html";
 type CartDataArrayProps = {
   arrayPath: ValidAjaxPath;
   format?: Format;
+  reverse?: boolean;
 };
 
 export const Name = "cart-data-array";
@@ -54,6 +55,10 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     if (!Array.isArray(v)) {
       console.warn(`${Name}: value is not an array at path ${fullPath()}`);
       return null;
+    }
+
+    if (props.reverse) {
+      return v.reverse();
     }
 
     return v;

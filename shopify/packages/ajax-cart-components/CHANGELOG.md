@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.2.12
+
+### Patch Changes
+
+- Allow reversal of array like objects
+
 ## 1.2.11
 
 ### Patch Changes

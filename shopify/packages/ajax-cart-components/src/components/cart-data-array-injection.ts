@@ -19,6 +19,7 @@ type CartDataArrayProps = {
   wrapInnerChild: boolean;
   target: string;
   format?: Format;
+  reverse?: boolean;
 };
 
 export const Name = "cart-data-array-injection";
@@ -59,6 +60,10 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     if (!Array.isArray(v)) {
       console.warn(`${Name}: value is not an array at path ${fullPath()}`);
       return null;
+    }
+
+    if (props.reverse) {
+      return v.reverse();
     }
 
     return v;
