@@ -2,6 +2,7 @@ import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils
 import { getTemplateContent, type Format } from "../utils/index.js";
 
 import { createEffect, on, createMemo, mapArray } from "solid-js";
+import { produce } from "solid-js/store";
 
 import {
   type ValidAjaxPath,
@@ -49,7 +50,7 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     path: fullPath,
   });
 
-  const arrayValue = () => {
+  const arrayValue = createMemo(() => {
     const v = value();
 
     if (!v) {
@@ -63,11 +64,11 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     }
 
     if (props.reverse) {
-      return v.reverse();
+      return v.toReversed();
     }
 
     return v;
-  };
+  });
 
   const children = createMemo(
     mapArray(arrayValue, (_, idx) => {

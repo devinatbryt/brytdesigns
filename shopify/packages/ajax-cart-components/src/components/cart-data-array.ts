@@ -1,7 +1,7 @@
 import type { CorrectComponentType } from "@brytdesigns/web-component-core/utils";
 import { getTemplateContent, type Format } from "../utils/index.js";
 
-import { Show, For, type Accessor } from "solid-js";
+import { Show, For, type Accessor, createMemo } from "solid-js";
 
 import {
   type ValidAjaxPath,
@@ -44,7 +44,7 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     path: fullPath,
   });
 
-  const arrayValue = () => {
+  const arrayValue = createMemo(() => {
     const v = value();
 
     if (!v) {
@@ -58,11 +58,11 @@ export const Component: CorrectComponentType<CartDataArrayProps> = (
     }
 
     if (props.reverse) {
-      return v.reverse();
+      return v.toReversed();
     }
 
     return v;
-  };
+  });
 
   element.replaceChildren(...[]);
 

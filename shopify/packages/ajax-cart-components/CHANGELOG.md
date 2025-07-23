@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.2.14
+
+### Patch Changes
+
+- Minor reactivity bug fix
+
 ## 1.2.13
 
 ### Patch Changes
