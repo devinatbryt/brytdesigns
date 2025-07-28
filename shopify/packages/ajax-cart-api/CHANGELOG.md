@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.36
+
+### Patch Changes
+
+- Remove platform-browser
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-client@1.0.1
+
 ## 1.0.35
 
 ### Patch Changes

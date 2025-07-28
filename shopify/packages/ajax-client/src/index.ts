@@ -4,7 +4,7 @@ import * as Function from "effect/Function";
 import * as HttpClient from "@effect/platform/HttpClient";
 import * as HttpClientResponse from "@effect/platform/HttpClientResponse";
 import * as HttpClientRequest from "@effect/platform/HttpClientRequest";
-import * as BrowserHttpClient from "@effect/platform-browser/BrowserHttpClient";
+import * as FetchHttpClient from "@effect/platform/FetchHttpClient";
 
 import { Ajax } from "@brytdesigns/shopify-utils/effect";
 
@@ -20,7 +20,7 @@ const ProductInputSchema = Schema.extend(
   }),
 );
 
-export const Default = BrowserHttpClient.layerXMLHttpRequest;
+export const Default = FetchHttpClient.layer;
 
 const METHOD = {
   GET: "get",
