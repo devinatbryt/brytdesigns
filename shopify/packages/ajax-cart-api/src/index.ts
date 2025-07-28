@@ -45,7 +45,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
         API.add(input, {
           ...(options || {}),
           headers: {
-            "X-SK-Variant-Source": "shopify-ajax-cart-api",
+            "X-SDK-Variant-Source": "shopify-ajax-cart-api",
             ...(options?.headers || {}),
           },
         }).pipe(
@@ -64,7 +64,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
         API.change(input, {
           ...(options || {}),
           headers: {
-            "X-SK-Variant-Source": "shopify-ajax-cart-api",
+            "X-SDK-Variant-Source": "shopify-ajax-cart-api",
             ...(options?.headers || {}),
           },
         }).pipe(
@@ -83,7 +83,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
         API.clear(input, {
           ...(options || {}),
           headers: {
-            "X-SK-Variant-Source": "shopify-ajax-cart-api",
+            "X-SDK-Variant-Source": "shopify-ajax-cart-api",
             ...(options?.headers || {}),
           },
         }).pipe(
@@ -102,7 +102,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
         API.get(input, {
           ...(options || {}),
           headers: {
-            "X-SK-Variant-Source": "shopify-ajax-cart-api",
+            "X-SDK-Variant-Source": "shopify-ajax-cart-api",
             ...(options?.headers || {}),
           },
         }).pipe(
@@ -122,7 +122,7 @@ export const createAjaxCartApi = ({ debug = false }) => {
         API.update(input, {
           ...(options || {}),
           headers: {
-            "X-SK-Variant-Source": "shopify-ajax-cart-api",
+            "X-SDK-Variant-Source": "shopify-ajax-cart-api",
             ...(options?.headers || {}),
           },
         }).pipe(
