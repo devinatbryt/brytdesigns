@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.3
+
+### Patch Changes
+
+- account for layout shift on mobile screen size
+
 ## 1.2.2
 
 ### Patch Changes
