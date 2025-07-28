@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-utils
 
+## 1.2.17
+
+### Patch Changes
+
+- Effect version upgrade, separated ajax client into it's own package and updated utils package
+
 ## 1.2.16
 
 ### Patch Changes

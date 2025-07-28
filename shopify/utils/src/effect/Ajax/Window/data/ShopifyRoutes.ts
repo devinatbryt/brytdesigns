@@ -10,6 +10,8 @@ export const Defaults: IShopifyRoutes = {
   account_register_url: "/account/register",
   account_url: "/account",
   all_products_collection_url: "/collections/all",
+  product_url: "/products/:handle",
+  products_url: "/products",
   cart_add_url: "/cart/add.js",
   cart_change_url: "/cart/change.js",
   cart_clear_url: "/cart/clear.js",

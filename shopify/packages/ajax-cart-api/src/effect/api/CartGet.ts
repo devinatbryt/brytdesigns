@@ -1,12 +1,11 @@
 import { CartOutput, CartGetInput } from "../schema.js";
 
-import * as AjaxRequest from "../services/AjaxRequest.js";
+import * as AjaxClient from "@brytdesigns/shopify-ajax-client";
 
 export type GetInput = CartGetInput;
 
-export const make = AjaxRequest.makeFactory({
+export const make = AjaxClient.makeFactory({
   routeName: "cart_url",
-  method: "get",
   inputSchema: CartGetInput,
   outputSchema: CartOutput,
 });

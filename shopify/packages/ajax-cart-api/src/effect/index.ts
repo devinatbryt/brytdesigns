@@ -28,5 +28,3 @@ export namespace update {
   export type Input = CartUpdate.UpdateInput;
 }
 export const update = CartUpdate.make;
-
-export * from "./errors.js";

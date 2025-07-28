@@ -4,41 +4,71 @@ import * as Function from "effect/Function";
 import * as HttpClient from "@effect/platform/HttpClient";
 import * as HttpClientResponse from "@effect/platform/HttpClientResponse";
 import * as HttpClientRequest from "@effect/platform/HttpClientRequest";
-import * as FetchHttpClient from "@effect/platform/FetchHttpClient";
+import * as BrowserHttpClient from "@effect/platform-browser/BrowserHttpClient";
 
 import { Ajax } from "@brytdesigns/shopify-utils/effect";
 
-import * as LoggerUtils from "../logger/LoggerUtils.js";
-import { type CartError, InvalidAjaxMethodError } from "../errors.js";
-import { AjaxClientResponse } from "../data/index.js";
+import * as LoggerUtils from "./LoggerUtils.js";
+import { type CartError, InvalidAjaxMethodError } from "./errors.js";
+import * as AjaxClientResponse from "./AjaxClientResponse.js";
 
 const BaseOutputSchema = Schema.Struct({});
+const ProductInputSchema = Schema.extend(
+  Ajax.Sections.Input,
+  Schema.Struct({
+    handle: Schema.String,
+  }),
+);
 
-export const Default = FetchHttpClient.layer;
+export const Default = BrowserHttpClient.layerXMLHttpRequest;
+
+const METHOD = {
+  GET: "get",
+  POST: "post",
+};
+
+const METHODS_BY_URL = {
+  products_url: METHOD.GET,
+  product_url: METHOD.GET,
+  predictive_search_url: METHOD.GET,
+  product_recommendations_url: METHOD.GET,
+  cart_add_url: METHOD.POST,
+  cart_update_url: METHOD.POST,
+  cart_url: METHOD.GET,
+  cart_change_url: METHOD.POST,
+  cart_clear_url: METHOD.POST,
+};
+
+type ValidAjaxRoutes = keyof Pick<
+  Ajax.Window.ShopifyRoutes.ShopifyRoutes,
+  | "product_url"
+  | "products_url"
+  | "predictive_search_url"
+  | "product_recommendations_url"
+  | "cart_add_url"
+  | "cart_update_url"
+  | "cart_url"
+  | "cart_change_url"
+  | "cart_clear_url"
+>;
 
 export const makeFactory =
   <
-    A extends typeof Ajax.Sections.Input.Type,
+    RouteName extends ValidAjaxRoutes,
+    A extends RouteName extends "product_url"
+      ? typeof ProductInputSchema.Type
+      : typeof Ajax.Sections.Input.Type,
     I,
     R,
     B extends typeof BaseOutputSchema.Type,
     J,
     S,
   >({
-    inputSchema,
     routeName,
-    method,
+    inputSchema,
     outputSchema,
   }: {
-    method: keyof Pick<typeof HttpClientRequest, "post" | "get">;
-    routeName: keyof Pick<
-      Ajax.Window.ShopifyRoutes.ShopifyRoutes,
-      | "cart_add_url"
-      | "cart_update_url"
-      | "cart_url"
-      | "cart_change_url"
-      | "cart_clear_url"
-    >;
+    routeName: RouteName;
     inputSchema: Schema.Schema<A, I, R>;
     outputSchema: Schema.Schema<B, J, S>;
   }) =>
@@ -52,8 +82,17 @@ export const makeFactory =
         input || {},
       );
       const routes = Ajax.Window.ShopifyRoutes.make();
-      const route = routes[routeName];
+
+      let route: string;
+
+      if (routeName === "product_url" && "handle" in decodedInput) {
+        route = routes[routeName].replace(":handle", decodedInput.handle);
+      } else {
+        route = routes[routeName];
+      }
+
       const url = `${window.location.origin}${route}`;
+      const method = METHODS_BY_URL[routeName];
 
       let request: HttpClientRequest.HttpClientRequest;
 
@@ -61,14 +100,19 @@ export const makeFactory =
         request = yield* HttpClientRequest.post(url, {
           acceptJson: true,
           headers: {
-            ...(options?.headers || {}),
             "X-SDK-Variant": "brytdesigns",
-            "X-SK-Variant-Source": "shopify-cart-ajax-api",
+            "X-SK-Variant-Source": "shopify-ajax-client",
+            ...(options?.headers || {}),
           },
         }).pipe(HttpClientRequest.bodyJson(decodedInput));
       } else if (method === "get") {
         request = HttpClientRequest.get(url, {
           acceptJson: true,
+          headers: {
+            "X-SDK-Variant": "brytdesigns",
+            "X-SK-Variant-Source": "shopify-ajax-client",
+            ...(options?.headers || {}),
+          },
         }).pipe(HttpClientRequest.setUrlParams(decodedInput));
       } else {
         return yield* Effect.fail(new InvalidAjaxMethodError());
@@ -112,8 +156,6 @@ export const makeFactory =
           output: clientResponse,
         });
 
-        yield* Effect.logInfo("Request");
-
         return clientResponse;
       }
 
@@ -143,4 +185,32 @@ export const makeFactory =
       LoggerUtils.withNamespacedLogSpan(
         routeName.replace("_url", "").replace("_", ":"),
       ),
+      Effect.catchAll((error) => {
+        if (
+          error._tag === "ParseError" ||
+          error._tag === "RequestError" ||
+          error._tag === "ResponseError" ||
+          error._tag === "@brytdesigns/ajax-client/InvalidAjaxMethodError"
+        ) {
+          return Effect.fail(
+            new Error(error.message, {
+              cause: error.cause,
+            }),
+          );
+        }
+        if (error._tag === "HttpBodyError") {
+          const reason = error.reason;
+          if (reason._tag === "JsonError") {
+            return Effect.fail(new Error("Failed to parse JSON response"));
+          }
+          if (reason._tag === "SchemaError") {
+            return Effect.fail(
+              new Error(reason.error.message, {
+                cause: reason.error.cause,
+              }),
+            );
+          }
+        }
+        return Effect.fail(new Error(error.toString()));
+      }),
     );

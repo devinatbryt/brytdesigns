@@ -1,12 +1,11 @@
 import { CartOutput, CartClearInput } from "../schema.js";
 
-import * as AjaxRequest from "../services/AjaxRequest.js";
+import * as AjaxClient from "@brytdesigns/shopify-ajax-client";
 
 export type ClearInput = CartClearInput;
 
-export const make = AjaxRequest.makeFactory({
+export const make = AjaxClient.makeFactory({
   routeName: "cart_clear_url",
-  method: "post",
   inputSchema: CartClearInput,
   outputSchema: CartOutput,
 });

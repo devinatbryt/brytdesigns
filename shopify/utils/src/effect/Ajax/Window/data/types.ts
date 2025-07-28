@@ -6,6 +6,8 @@ export interface IShopifyRoutes {
   readonly account_register_url: string;
   readonly account_url: string;
   readonly all_products_collection_url: string;
+  readonly product_url: string;
+  readonly products_url: string;
   readonly cart_add_url: string;
   readonly cart_change_url: string;
   readonly cart_clear_url: string;

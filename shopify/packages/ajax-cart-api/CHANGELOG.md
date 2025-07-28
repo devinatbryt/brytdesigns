@@ -1,5 +1,14 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.34
+
+### Patch Changes
+
+- Effect version upgrade, separated ajax client into it's own package and updated utils package
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-client@1.0.0
+  - @brytdesigns/shopify-utils@1.2.17
+
 ## 1.0.32
 
 ### Patch Changes

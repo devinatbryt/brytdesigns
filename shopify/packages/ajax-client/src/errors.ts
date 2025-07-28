@@ -5,19 +5,19 @@ import * as Data from "effect/Data";
  *
  */
 export class CartError extends Data.TaggedError(
-  "@brytdesigns/hybrid-cart-client/CartError",
+  "@brytdesigns/ajax-client/CartError",
 )<{
   status: number;
   message: string;
   description: string;
-}> { }
+}> {}
 
 /**
  * @internal
  *
  */
 export class InvalidAjaxMethodError extends Data.TaggedError(
-  "@brytdesigns/hybrid-cart-client/InvalidAjaxMethodError",
+  "@brytdesigns/ajax-client/InvalidAjaxMethodError",
 )<{
   message: string;
 }> {
