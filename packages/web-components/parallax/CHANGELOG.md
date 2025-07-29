@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.4
+
+### Patch Changes
+
+- Jitter on reverse scroll
+
 ## 1.2.3
 
 ### Patch Changes
