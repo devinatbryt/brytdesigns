@@ -1,5 +1,11 @@
 # @brytdesigns/shopify-ajax-client
 
+## 1.0.2
+
+### Patch Changes
+
+- Minor bug fixes and new library for handling predictive search.
+
 ## 1.0.1
 
 ### Patch Changes

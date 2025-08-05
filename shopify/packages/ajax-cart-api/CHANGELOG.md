@@ -1,5 +1,13 @@
 # @brytdesigns/shopify-ajax-cart-api
 
+## 1.0.37
+
+### Patch Changes
+
+- Minor bug fixes and new library for handling predictive search.
+- Updated dependencies
+  - @brytdesigns/shopify-ajax-client@1.0.2
+
 ## 1.0.36
 
 ### Patch Changes

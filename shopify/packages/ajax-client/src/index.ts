@@ -101,7 +101,7 @@ export const makeFactory =
           acceptJson: true,
           headers: {
             "X-SDK-Variant": "brytdesigns",
-            "X-SK-Variant-Source": "shopify-ajax-client",
+            "X-SDK-Variant-Source": "shopify-ajax-client",
             ...(options?.headers || {}),
           },
         }).pipe(HttpClientRequest.bodyJson(decodedInput));

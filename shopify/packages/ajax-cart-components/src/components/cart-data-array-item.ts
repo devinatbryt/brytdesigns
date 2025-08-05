@@ -18,10 +18,12 @@ export const Component: CorrectComponentType<CartDataArrayItemProps> = (
 ) => {
   if (!props.itemIndex)
     return console.warn(`${Name}: No path attribute provided.`);
+
   const mergedProps = {
     element,
     path: () => props.itemIndex,
   };
+
   const fullPath = useFullPropertyPath(mergedProps);
   provideFullPropertyPathContext({
     element,

@@ -1,5 +1,12 @@
 # @brytdesigns/shopify-ajax-cart-components
 
+## 1.2.19
+
+### Patch Changes
+
+- Minor bug fixes and new library for handling predictive search.
+  - @brytdesigns/shopify-ajax-cart@1.0.46
+
 ## 1.2.18
 
 ### Patch Changes

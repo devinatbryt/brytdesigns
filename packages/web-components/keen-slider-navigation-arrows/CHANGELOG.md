@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-arrows
 
+## 1.1.2
+
+### Patch Changes
+
+- Minor bug fixes and new library for handling predictive search.
+
 ## 1.1.1
 
 ### Patch Changes

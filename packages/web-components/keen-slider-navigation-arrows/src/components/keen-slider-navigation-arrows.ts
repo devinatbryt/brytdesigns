@@ -110,6 +110,7 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
         setSlider(slider);
         slider.on("destroyed", () => setSlider());
       });
+
       onCleanup(removePlugin);
     },
   );
