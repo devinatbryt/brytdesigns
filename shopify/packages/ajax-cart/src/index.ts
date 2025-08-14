@@ -62,7 +62,7 @@ const AjaxCart = mergeProps(Cart.query, {
   updateItem: UpdateItem.mutation.mutateAsync,
   async updateItems(input: UpdateItem.Input[]) {
     const results = await Promise.allSettled(
-      input.map((i) => UpdateItem.mutation.mutateAsync(i)),
+      input.map((i) => UpdateItem.mutation.mutateAsync(i))
     );
     return {
       rejected: results.filter((r) => r.status === "rejected"),
@@ -80,13 +80,13 @@ const AjaxCart = mergeProps(Cart.query, {
   removeDiscounts(input: UpdateDiscounts.Input[]) {
     const codes = getCartDiscountCodes();
     return UpdateDiscounts.mutation.mutateAsync(
-      codes.filter((code) => !input.includes(code)),
+      codes.filter((code) => !input.includes(code))
     );
   },
   removeDiscount(input: UpdateDiscounts.Input) {
     const codes = getCartDiscountCodes();
     return UpdateDiscounts.mutation.mutateAsync(
-      codes.filter((code) => code !== input),
+      codes.filter((code) => code !== input)
     );
   },
   replaceItem(input: ReplaceItem.Input) {
@@ -94,7 +94,7 @@ const AjaxCart = mergeProps(Cart.query, {
   },
   async replaceItems(input: ReplaceItem.Input[]) {
     const results = await Promise.allSettled(
-      input.map((i) => ReplaceItem.mutation.mutateAsync(i)),
+      input.map((i) => ReplaceItem.mutation.mutateAsync(i))
     );
     return {
       rejected: results.filter((r) => r.status === "rejected"),
@@ -110,9 +110,6 @@ const oldFetch = window.fetch;
 window.fetch = async function (...args: Parameters<typeof fetch>) {
   let [input, options] = args;
   let route: string;
-  if (window.BrytDesigns.debug) {
-    console.log("Fetch", ...args);
-  }
   if (input instanceof Request) route = input.url;
   else if (input instanceof URL) route = input.toString();
   else if (typeof input === "string") route = input;
