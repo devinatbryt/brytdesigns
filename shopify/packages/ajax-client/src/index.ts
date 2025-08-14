@@ -17,7 +17,7 @@ const ProductInputSchema = Schema.extend(
   Ajax.Sections.Input,
   Schema.Struct({
     handle: Schema.String,
-  }),
+  })
 );
 
 export const Default = FetchHttpClient.layer;
@@ -52,6 +52,24 @@ type ValidAjaxRoutes = keyof Pick<
   | "cart_clear_url"
 >;
 
+/**
+ * A factory function that creates an Effect to make AJAX requests to Shopify routes.
+ *
+ * @template RouteName - The type of Shopify route to make the request to.
+ * @template A - The type of input data for the request.
+ * @template I - The type of input data after decoding.
+ * @template R - The type of input data after decoding, but with additional information.
+ * @template B - The type of output data expected from the request.
+ * @template J - The type of output data after decoding.
+ * @template S - The type of output data after decoding, but with additional information.
+ *
+ * @param {object} params - The parameters for creating the factory function.
+ * @param {RouteName} params.routeName - The name of the Shopify route to make the request to.
+ * @param {Schema<A, I, R>} params.inputSchema - The schema for validating and decoding the input data.
+ * @param {Schema<B, J, S>} params.outputSchema - The schema for validating and decoding the output data.
+ *
+ * - A function that takes input data and options, and returns an Effect to make the AJAX request.
+ */
 export const makeFactory =
   <
     RouteName extends ValidAjaxRoutes,
@@ -74,12 +92,12 @@ export const makeFactory =
   }) =>
   (
     input?: Schema.Schema<A, I, R>["Encoded"],
-    options?: { headers?: Record<string, string> },
+    options?: { headers?: Record<string, string> }
   ) =>
     Effect.gen(function* () {
       const client = yield* HttpClient.HttpClient;
       const decodedInput = yield* Schema.decodeUnknown(inputSchema)(
-        input || {},
+        input || {}
       );
       const routes = Ajax.Window.ShopifyRoutes.make();
 
@@ -136,13 +154,13 @@ export const makeFactory =
           Schema.extend(
             Schema.Struct({
               sections: Ajax.Sections.makeResponseSchema(decodedInput.sections),
-            }),
-          ),
+            })
+          )
         );
 
         const json = yield* Function.pipe(
           response,
-          HttpClientResponse.schemaBodyJson(output),
+          HttpClientResponse.schemaBodyJson(output)
         );
 
         const clientResponse = AjaxClientResponse.make({
@@ -163,7 +181,7 @@ export const makeFactory =
 
       const json = yield* Function.pipe(
         response,
-        HttpClientResponse.schemaBodyJson(output),
+        HttpClientResponse.schemaBodyJson(output)
       );
 
       const clientResponse = AjaxClientResponse.make({
@@ -183,7 +201,7 @@ export const makeFactory =
     }).pipe(
       Effect.scoped,
       LoggerUtils.withNamespacedLogSpan(
-        routeName.replace("_url", "").replace("_", ":"),
+        routeName.replace("_url", "").replace("_", ":")
       ),
       Effect.catchAll((error) => {
         if (
@@ -195,7 +213,7 @@ export const makeFactory =
           return Effect.fail(
             new Error(error.message, {
               cause: error.cause,
-            }),
+            })
           );
         }
         if (error._tag === "HttpBodyError") {
@@ -207,10 +225,10 @@ export const makeFactory =
             return Effect.fail(
               new Error(reason.error.message, {
                 cause: reason.error.cause,
-              }),
+              })
             );
           }
         }
         return Effect.fail(new Error(error.toString()));
-      }),
+      })
     );
