@@ -12,7 +12,7 @@ export type AddInput = CartAddInput;
  * @param inputSchema - The schema for the input parameters of the cart add API.
  * @param outputSchema - The schema for the output response of the cart add API.
  *
- * @returns A runnable effect that returns a promise which adhears to the outputSchema.
+ * @returns A runnable effect that returns a promise which adhears to the CartAddOutput schema.
  *
  * @example
  * ```typescript

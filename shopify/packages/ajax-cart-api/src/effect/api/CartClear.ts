@@ -12,7 +12,7 @@ export type ClearInput = CartClearInput;
  * @param inputSchema - The input schema for the clear cart API request.
  * @param outputSchema - The output schema for the clear cart API request.
  *
- * @returns A runnable effect that returns a promise which adhears to the outputSchema.
+ * @returns A runnable effect that returns a promise which adhears to the CartClearOutput schema.
  *
  * @example
  * ```typescript

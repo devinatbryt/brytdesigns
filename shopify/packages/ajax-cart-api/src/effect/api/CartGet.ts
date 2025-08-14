@@ -12,7 +12,7 @@ export type GetInput = CartGetInput;
  * @param inputSchema - The input schema for the cart retrieval request.
  * @param outputSchema - The output schema for the cart retrieval response.
  *
- * @returns A runnable effect that returns a promise which adhears to the outputSchema.
+ * @returns A runnable effect that returns a promise which adhears to the CartGetOutput schema.
  *
  * @example
  * ```typescript
