@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.7
+
+### Patch Changes
+
+- Use svh over px values
+
 ## 1.2.6
 
 ### Patch Changes
