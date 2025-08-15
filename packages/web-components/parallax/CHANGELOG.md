@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.8
+
+### Patch Changes
+
+- use dvh over svh
+
 ## 1.2.7
 
 ### Patch Changes

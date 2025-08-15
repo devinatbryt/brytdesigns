@@ -42,7 +42,7 @@ function initializeParallaxContext(props: CreateContextOptions) {
   createEffect(() => {
     const pages = _state.maxPages;
 
-    _internal.root.style.height = `${pages * 100}lvh`;
+    _internal.root.style.height = `${pages * 100}vh`;
     _internal.root.style.width = `100%`;
     _internal.root.style.position = "relative";
     if (!_internal.root.style.display) {
