@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.5
+
+### Patch Changes
+
+- Attempt at fixing weird display issues
+
 ## 1.2.4
 
 ### Patch Changes

@@ -4,6 +4,7 @@ import {
   splitProps,
   mergeProps,
   batch,
+  createSignal,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import {
@@ -36,11 +37,18 @@ function initializeParallaxContext(props: CreateContextOptions) {
     offset: [-1, -1],
     scrollLength: -1,
   });
+  const [windowHeight, setWindowHeight] = createSignal(window.innerHeight);
+
+  window.addEventListener("resize", () => {});
 
   createEffect(() => {
     const pages = _state.maxPages;
+    _internal.root.style.height = `${windowHeight() * pages}px`;
+  });
 
-    _internal.root.style.height = `${pages * 100}vh`;
+  createEffect(() => {
+    const controller = new AbortController();
+
     _internal.root.style.width = `100%`;
     _internal.root.style.position = "relative";
     if (!_internal.root.style.display) {
@@ -66,7 +74,14 @@ function initializeParallaxContext(props: CreateContextOptions) {
       },
     );
 
+    window.addEventListener(
+      "resize",
+      () => setWindowHeight(window.innerHeight),
+      { passive: true, signal: controller.signal },
+    );
+
     onCleanup(() => {
+      controller.abort();
       if (remove) {
         remove();
       }
@@ -79,6 +94,9 @@ function initializeParallaxContext(props: CreateContextOptions) {
     scrollYProgress,
     scrollY,
     info,
+    get windowHeight() {
+      return windowHeight();
+    },
   });
 }
 
