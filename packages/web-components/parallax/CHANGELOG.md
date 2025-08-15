@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.6
+
+### Patch Changes
+
+- Attempt to use outerHeight instead
+
 ## 1.2.5
 
 ### Patch Changes

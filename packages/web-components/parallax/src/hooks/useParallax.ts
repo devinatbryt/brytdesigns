@@ -37,7 +37,7 @@ function initializeParallaxContext(props: CreateContextOptions) {
     offset: [-1, -1],
     scrollLength: -1,
   });
-  const [windowHeight, setWindowHeight] = createSignal(window.innerHeight);
+  const [windowHeight, setWindowHeight] = createSignal(window.outerHeight);
 
   window.addEventListener("resize", () => {});
 
