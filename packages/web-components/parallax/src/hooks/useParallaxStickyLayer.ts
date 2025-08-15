@@ -62,10 +62,10 @@ function initializeParallaxStickyLayerContext(props: CreateContextOptions) {
     transform: transform.get(),
   }));
 
-  _internal.root.style.top = "0";
-  _internal.root.style.right = "0";
-  _internal.root.style.bottom = "0";
-  _internal.root.style.left = "0";
+  _internal.root.style.top = "0px";
+  _internal.root.style.right = "0px";
+  // _internal.root.style.bottom = "0px";
+  _internal.root.style.left = "0px";
   _internal.root.style.height = `100dvh`;
   _internal.root.style.overflowX = "hidden";
   _internal.root.style.maxWidth = "100%";
