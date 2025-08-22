@@ -22,7 +22,6 @@ import {
   addVisibleStyles,
   addHiddenStyles,
   getMaxSlides,
-  constrain,
   srOnly,
 } from "../utils.js";
 
@@ -45,12 +44,10 @@ export const Component: CorrectComponentType<Props> = (props, { element }) => {
 
   const maxSlides = createMemo(
     on(maxIdx, (maxIdx) => {
-      console.log(maxIdx);
       if (!maxIdx) return 0;
       const s = slider();
       if (!s) return 0;
       const maxSlides = getMaxSlides(s);
-      console.log(maxSlides, s, maxIdx);
       return maxSlides;
     }),
   );

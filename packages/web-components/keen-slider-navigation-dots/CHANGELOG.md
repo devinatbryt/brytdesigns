@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-keen-slider-navigation-dots
 
+## 1.1.5
+
+### Patch Changes
+
+- Removed debug logging
+
 ## 1.1.4
 
 ### Patch Changes
