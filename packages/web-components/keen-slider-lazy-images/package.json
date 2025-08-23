@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-lazy-images",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Keen slider plugin for lazy loading images",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

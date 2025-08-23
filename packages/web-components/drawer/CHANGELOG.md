@@ -1,5 +1,12 @@
 # @brytdesigns/web-component-drawer
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @brytdesigns/web-component-core@1.1.3
+
 ## 1.1.3
 
 ### Patch Changes

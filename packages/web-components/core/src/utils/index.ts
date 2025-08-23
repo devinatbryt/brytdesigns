@@ -5,3 +5,4 @@ export * from "./getContextFromProvider.js";
 export * from "./checkLoaded.js";
 export * from "./invokeOnLoaded.js";
 export * from "./createWithElementContext.js";
+export * from "./formatValue.js";

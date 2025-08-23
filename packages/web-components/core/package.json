@@ -26,6 +26,10 @@
     "./utils": {
       "types": "./dist/main/utils/index.d.ts",
       "module": "./dist/main/utils/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/main/hooks/index.d.ts",
+      "module": "./dist/main/hooks/index.js"
     }
   },
   "scripts": {

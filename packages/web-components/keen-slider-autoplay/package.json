@@ -1,6 +1,6 @@
 {
   "name": "@brytdesigns/web-component-keen-slider-autoplay",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keen slider autoplay plugin web component",
   "main": "./dist/main/index.js",
   "module": "./dist/main/index.js",

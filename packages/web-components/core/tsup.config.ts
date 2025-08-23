@@ -48,6 +48,12 @@ export default defineConfig([
         },
       ]);
 
+      const [hooksDts] = generateDtsBundle([
+        {
+          filePath: path.resolve("./src/hooks/index.ts"),
+        },
+      ]);
+
       await Promise.all([
         fs.writeFile(path.resolve(outDir, "main", "index.d.ts"), indexDts),
         fs.writeFile(
@@ -65,6 +71,10 @@ export default defineConfig([
         fs.writeFile(
           path.resolve(outDir, "main", "utils", "index.d.ts"),
           utilsDts,
+        ),
+        fs.writeFile(
+          path.resolve(outDir, "main", "hooks", "index.d.ts"),
+          hooksDts,
         ),
       ]);
     },
@@ -112,6 +122,15 @@ export default defineConfig([
     splitting: false,
     entry: ["src/utils/index.ts"],
     outDir: `${outDir}/esm/utils`,
+    external: [],
+  },
+  {
+    ...commonConfig,
+    format: "esm",
+    bundle: true,
+    splitting: false,
+    entry: ["src/hooks/index.ts"],
+    outDir: `${outDir}/esm/hooks`,
     external: [],
   },
   // {
