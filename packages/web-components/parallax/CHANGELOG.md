@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.13
+
+### Patch Changes
+
+- Removed unused util function
+
 ## 1.2.12
 
 ### Patch Changes

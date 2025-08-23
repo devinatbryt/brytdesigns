@@ -84,12 +84,6 @@ const isNestedAnimatableArray = (
   );
 };
 
-const isAnimatableArray = (
-  values: AnimatableArray | AnimatableArray[],
-): values is AnimatableArray => {
-  return Array.isArray(values) && !Array.isArray(values[0]);
-};
-
 const flattenAnimatableArray = (
   value: AnimatableArray | AnimatableArray[],
   index: number = 0,
