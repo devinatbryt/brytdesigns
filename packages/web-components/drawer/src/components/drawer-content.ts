@@ -54,16 +54,22 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
   function enter(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    let position = style.getPropertyValue("--drawer--position") as Position;
+    let position = style.getPropertyValue(`--${Name}--position`) as Position;
     if (!position) position = POSITION.LEFT;
 
     let transform: Record<string, string[]> = {
-      x: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+      x: [
+        `var(--drawer-content--slide-from)`,
+        `var(--drawer-content--slide-to)`,
+      ],
     };
 
     if (position === POSITION.TOP || position === POSITION.BOTTOM) {
       transform = {
-        y: ["var(--drawer--slide-from)", "var(--drawer--slide-to)"],
+        y: [
+          `var(--drawer-content--slide-from)`,
+          `var(--drawer-content--slide-to)`,
+        ],
       };
     }
 
@@ -79,16 +85,16 @@ export const Component: CorrectComponentType<DrawerContentProps> = (
   function exit(element: HTMLElement) {
     const style = window.getComputedStyle(element);
     const transition = getTransitionConfig(style);
-    let position = style.getPropertyValue("--drawer--position") as Position;
+    let position = style.getPropertyValue(`--drawer--position`) as Position;
     if (!position) position = POSITION.LEFT;
 
     let transform: Record<string, string[]> = {
-      x: ["var(--drawer--slide-to)", "var(--drawer--slide-from)"],
+      x: [`var(--drawer--slide-to)`, `var(--drawer--slide-from)`],
     };
 
     if (position === POSITION.TOP || position === POSITION.BOTTOM) {
       transform = {
-        y: ["var(--drawer--slide-to)", "var(--drawer--slide-from)"],
+        y: [`var(--drawer--slide-to)`, `var(--drawer--slide-from)`],
       };
     }
 

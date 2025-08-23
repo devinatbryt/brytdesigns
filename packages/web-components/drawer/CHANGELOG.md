@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-drawer
 
+## 1.1.3
+
+### Patch Changes
+
+- Minor typo updates
+
 ## 1.1.2
 
 ### Patch Changes
