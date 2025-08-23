@@ -1,5 +1,11 @@
 # @brytdesigns/web-component-core
 
+## 1.1.3
+
+### Patch Changes
+
+- Created a new util that returns a list of hooks for accessing path based values
+
 ## 1.1.2
 
 ### Patch Changes
