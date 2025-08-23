@@ -1,5 +1,17 @@
 # @brytdesigns/web-component-parallax
 
+## 1.2.11
+
+### Patch Changes
+
+- Force push new version
+
+## 1.2.10
+
+### Patch Changes
+
+- Attempt at fixing bugs
+
 ## 1.2.9
 
 ### Patch Changes

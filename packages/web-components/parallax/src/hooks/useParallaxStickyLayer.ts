@@ -52,8 +52,8 @@ function initializeParallaxStickyLayerContext(props: CreateContextOptions) {
     const isBelowRange = belowRange.get();
     const isAboveRange = aboveRange.get();
     if (isInRange) return "none";
-    if (isBelowRange) return `translate(0px, ${(_internal.start - 1) * 100}%)`;
-    if (isAboveRange) return `translate(0px, ${(_internal.end - 1) * 100}%)`;
+    if (isBelowRange) return `translate(0px, ${(_internal.start - 1) * 100}vh)`;
+    if (isAboveRange) return `translate(0px, ${(_internal.end - 1) * 100}vh)`;
   });
   const animations = motionValue<AnimationPlaybackControlsWithThen[]>([]);
 
@@ -64,7 +64,7 @@ function initializeParallaxStickyLayerContext(props: CreateContextOptions) {
 
   _internal.root.style.top = "0px";
   _internal.root.style.right = "0px";
-  // _internal.root.style.bottom = "0px";
+  _internal.root.style.bottom = "0px";
   _internal.root.style.left = "0px";
   _internal.root.style.height = `100dvh`;
   _internal.root.style.overflowX = "hidden";
